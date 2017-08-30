@@ -14,6 +14,7 @@
 		B03013B81F56CA5E00C9F61F /* CIComponentAppearance.swift in Headers */ = {isa = PBXBuildFile; fileRef = B03013B41F568D9500C9F61F /* CIComponentAppearance.swift */; };
 		B03013B91F56CA5E00C9F61F /* UIApp+Theme.swift in Headers */ = {isa = PBXBuildFile; fileRef = B03013B61F56A6A600C9F61F /* UIApp+Theme.swift */; };
 		B03013BA1F56CB5600C9F61F /* UIColor+CIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03013AF1F565C9700C9F61F /* UIColor+CIKit.swift */; };
+		B03FB7B31F57053F008A356C /* CIComponentKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B0E30BF81F55480C00DBD08C /* CIComponentKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B0E30BFD1F55480C00DBD08C /* CIComponentKit.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E30BFB1F55480C00DBD08C /* CIComponentKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0E30C0F1F55520200DBD08C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E30C0E1F55520200DBD08C /* AppDelegate.swift */; };
 		B0E30C111F55520200DBD08C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E30C101F55520200DBD08C /* ViewController.swift */; };
@@ -26,6 +27,29 @@
 		B0E30C231F555F5500DBD08C /* UIView+Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E30C221F555F5500DBD08C /* UIView+Toast.swift */; };
 		B0E30C241F555FA100DBD08C /* UIView+Toast.swift in Headers */ = {isa = PBXBuildFile; fileRef = B0E30C221F555F5500DBD08C /* UIView+Toast.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B03FB7AD1F5702D0008A356C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B0E30BEF1F55480C00DBD08C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B0E30BF71F55480C00DBD08C;
+			remoteInfo = CIComponentKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B03FB7B21F57052F008A356C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B03FB7B31F57053F008A356C /* CIComponentKit.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B03013AF1F565C9700C9F61F /* UIColor+CIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+CIKit.swift"; sourceTree = "<group>"; };
@@ -171,10 +195,12 @@
 				B0E30C081F55520200DBD08C /* Sources */,
 				B0E30C091F55520200DBD08C /* Frameworks */,
 				B0E30C0A1F55520200DBD08C /* Resources */,
+				B03FB7B21F57052F008A356C /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B03FB7AE1F5702D0008A356C /* PBXTargetDependency */,
 			);
 			name = CIComponentKitDemo;
 			productName = CIComponentKitDemo;
@@ -267,6 +293,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B03FB7AE1F5702D0008A356C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B0E30BF71F55480C00DBD08C /* CIComponentKit */;
+			targetProxy = B03FB7AD1F5702D0008A356C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B0E30C121F55520200DBD08C /* Main.storyboard */ = {
