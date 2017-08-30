@@ -22,15 +22,32 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
         self.view.backgroundColor = UIColor.black
         
-        CILoaingHUD.show("welcome to cicomponentkit", blurStyle: .extraLight, layoutStyle: .top)
+        CILoadingHUD.show("welcome to cicomponentkit", blurStyle: .extraLight, layoutStyle: .top)
         
 //        CILoaingHUD.show("ManoBoo", layoutStyle: .top)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        CILoadingHUD.default.hide()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
+        var theme = CIComponentKitTheme.originTheme
+        theme.tintColor = UIColor.ci.random()
+        theme.navigationBarLeftColor = UIColor.ci.random()
+        theme.renderTheme()
+        
+    }
+    
+    
 
 }
 

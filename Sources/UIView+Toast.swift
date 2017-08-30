@@ -16,14 +16,14 @@ public extension CIComponentKit where Base: UIView {
     }
 
     func showLoading(_ title: String?) -> Swift.Void {
-        CILoaingHUD.show(title)
+        CILoadingHUD.show(title)
     }
 }
 
 public typealias CILoadingHUDClousure =  ((Bool) -> Swift.Void)
 
 ///MARK: - CILoadingHUD
-public class CILoaingHUD: UIView {
+public class CILoadingHUD: UIView {
 
     //MARK: Property
     
@@ -55,7 +55,7 @@ public class CILoaingHUD: UIView {
 
     
     //MARK: - init && deinit
-    public static let `default` = CILoaingHUD.init("加载中", blurStyle: .light, layoutStyle: .top)
+    public static let `default` = CILoadingHUD.init("加载中", blurStyle: .light, layoutStyle: .top)
     
     public init(_ title: String?, blurStyle: UIBlurEffectStyle = .extraLight,layoutStyle: CILoadingLayoutStyle = .left) {
         super.init(frame: .zero)
@@ -71,7 +71,7 @@ public class CILoaingHUD: UIView {
         let contentView = backgroundView.contentView
         
         titleLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
-        titleLabel.textColor = CILoaingHUD.appearance().tintColor
+        titleLabel.textColor = self.tintColor
         contentView.addSubview(titleLabel)
         
     }
@@ -84,6 +84,12 @@ public class CILoaingHUD: UIView {
     var backgroundView = UIVisualEffectView()
     var titleLabel = UILabel()
     var animationImgView = UIImageView()
+    
+    
+    public override func tintColorDidChange() {
+        print("----")
+        titleLabel.textColor = self.tintColor
+    }
     
     func resizeLayout() -> Swift.Void {
     
@@ -135,15 +141,15 @@ public class CILoaingHUD: UIView {
     //MARK: - show && hide
     
     public func show(_ title: String?, blurStyle: UIBlurEffectStyle = .dark,layoutStyle: CILoadingLayoutStyle = .left,delay: TimeInterval? = 0.0) {
-        let hud = CILoaingHUD.init(title, blurStyle: blurStyle, layoutStyle: layoutStyle)
+        let hud = CILoadingHUD.init(title, blurStyle: blurStyle, layoutStyle: layoutStyle)
         hud.layout()
     }
     
     public class func show(_ title: String?, blurStyle: UIBlurEffectStyle = .dark,layoutStyle: CILoadingLayoutStyle = .left,delay: TimeInterval? = 0.0) {
-        CILoaingHUD.default.title = title
-        CILoaingHUD.default.blurStyle = blurStyle
-        CILoaingHUD.default.layoutStyle = layoutStyle
-        CILoaingHUD.default.layout()
+        CILoadingHUD.default.title = title
+        CILoadingHUD.default.blurStyle = blurStyle
+        CILoadingHUD.default.layoutStyle = layoutStyle
+        CILoadingHUD.default.layout()
     }
     
     public func hide(_ complete: CILoadingHUDClousure = {_ in }) {
@@ -152,6 +158,6 @@ public class CILoaingHUD: UIView {
     }
     
     public class func hide(_ complete: CILoadingHUDClousure = {_ in }) {
-        CILoaingHUD.default.hide(complete)
+        CILoadingHUD.default.hide(complete)
     }
 }

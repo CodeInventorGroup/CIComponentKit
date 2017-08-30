@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B03013B11F56615700C9F61F /* UIColor+CIKit.swift in Headers */ = {isa = PBXBuildFile; fileRef = B03013AF1F565C9700C9F61F /* UIColor+CIKit.swift */; settings = {ATTRIBUTES = (Public, ); }; };
+		B03013B31F56816800C9F61F /* UIViewController+CIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03013B21F56816800C9F61F /* UIViewController+CIKit.swift */; };
+		B03013B51F568D9500C9F61F /* CIComponentAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03013B41F568D9500C9F61F /* CIComponentAppearance.swift */; };
+		B03013B71F56A6A600C9F61F /* UIApp+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03013B61F56A6A600C9F61F /* UIApp+Theme.swift */; };
+		B03013B81F56CA5E00C9F61F /* CIComponentAppearance.swift in Headers */ = {isa = PBXBuildFile; fileRef = B03013B41F568D9500C9F61F /* CIComponentAppearance.swift */; };
+		B03013B91F56CA5E00C9F61F /* UIApp+Theme.swift in Headers */ = {isa = PBXBuildFile; fileRef = B03013B61F56A6A600C9F61F /* UIApp+Theme.swift */; };
+		B03013BA1F56CB5600C9F61F /* UIColor+CIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03013AF1F565C9700C9F61F /* UIColor+CIKit.swift */; };
 		B0E30BFD1F55480C00DBD08C /* CIComponentKit.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E30BFB1F55480C00DBD08C /* CIComponentKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0E30C0F1F55520200DBD08C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E30C0E1F55520200DBD08C /* AppDelegate.swift */; };
 		B0E30C111F55520200DBD08C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E30C101F55520200DBD08C /* ViewController.swift */; };
@@ -21,6 +28,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B03013AF1F565C9700C9F61F /* UIColor+CIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+CIKit.swift"; sourceTree = "<group>"; };
+		B03013B21F56816800C9F61F /* UIViewController+CIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+CIKit.swift"; sourceTree = "<group>"; };
+		B03013B41F568D9500C9F61F /* CIComponentAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIComponentAppearance.swift; sourceTree = "<group>"; };
+		B03013B61F56A6A600C9F61F /* UIApp+Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApp+Theme.swift"; sourceTree = "<group>"; };
 		B0E30BF81F55480C00DBD08C /* CIComponentKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CIComponentKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0E30BFB1F55480C00DBD08C /* CIComponentKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIComponentKit.h; sourceTree = "<group>"; };
 		B0E30BFC1F55480C00DBD08C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -54,9 +65,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B03013AE1F565C7A00C9F61F /* ExtensionTools */ = {
+			isa = PBXGroup;
+			children = (
+				B03013AF1F565C9700C9F61F /* UIColor+CIKit.swift */,
+				B03013B41F568D9500C9F61F /* CIComponentAppearance.swift */,
+				B03013B61F56A6A600C9F61F /* UIApp+Theme.swift */,
+			);
+			path = ExtensionTools;
+			sourceTree = "<group>";
+		};
 		B0E30BEE1F55480C00DBD08C = {
 			isa = PBXGroup;
 			children = (
+				B03013AE1F565C7A00C9F61F /* ExtensionTools */,
 				B0E30C051F554F4800DBD08C /* Sources */,
 				B0E30BFA1F55480C00DBD08C /* CIComponentKit */,
 				B0E30C0D1F55520200DBD08C /* CIComponentKitDemo */,
@@ -87,6 +109,7 @@
 			children = (
 				B0E30C1E1F5553DA00DBD08C /* CIComponentKit.swift */,
 				B0E30C221F555F5500DBD08C /* UIView+Toast.swift */,
+				B03013B21F56816800C9F61F /* UIViewController+CIKit.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -114,6 +137,9 @@
 				B0E30BFD1F55480C00DBD08C /* CIComponentKit.h in Headers */,
 				B0E30C201F55542A00DBD08C /* CIComponentKit.swift in Headers */,
 				B0E30C241F555FA100DBD08C /* UIView+Toast.swift in Headers */,
+				B03013B11F56615700C9F61F /* UIColor+CIKit.swift in Headers */,
+				B03013B81F56CA5E00C9F61F /* CIComponentAppearance.swift in Headers */,
+				B03013B91F56CA5E00C9F61F /* UIApp+Theme.swift in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,8 +248,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B03013BA1F56CB5600C9F61F /* UIColor+CIKit.swift in Sources */,
+				B03013B51F568D9500C9F61F /* CIComponentAppearance.swift in Sources */,
 				B0E30C231F555F5500DBD08C /* UIView+Toast.swift in Sources */,
 				B0E30C1F1F5553DA00DBD08C /* CIComponentKit.swift in Sources */,
+				B03013B71F56A6A600C9F61F /* UIApp+Theme.swift in Sources */,
+				B03013B31F56816800C9F61F /* UIViewController+CIKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +475,7 @@
 				B0E30C021F55480C00DBD08C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B0E30C1B1F55520300DBD08C /* Build configuration list for PBXNativeTarget "CIComponentKitDemo" */ = {
 			isa = XCConfigurationList;
@@ -453,6 +484,7 @@
 				B0E30C1D1F55520300DBD08C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

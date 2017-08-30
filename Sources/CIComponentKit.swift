@@ -31,3 +31,5 @@ extension CIComponentKitProtocol {
 
 
 extension UIView: CIComponentKitProtocol {}
+extension UIViewController: CIComponentKitProtocol {}
+extension UIColor: CIComponentKitProtocol {}
