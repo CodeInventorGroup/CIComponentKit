@@ -44,13 +44,13 @@ class ViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         
-        self.view.backgroundColor = UIColor.ci.random()
+        self.view.backgroundColor = UIColor.ci.random
         
-        CILoadingHUD.appearance().tintColor = UIColor.ci.random()
+        CILoadingHUD.appearance().tintColor = UIColor.ci.random
         
         var theme = CIComponentKitTheme.originTheme
-//        theme.tintColor = UIColor.ci.random()
-        theme.navigationBarLeftColor = UIColor.ci.random()
+        theme.textColor = UIColor.ci.random
+        theme.navigationBarLeftColor = UIColor.ci.random
         theme.renderTheme()
         
     }

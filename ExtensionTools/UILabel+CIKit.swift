@@ -9,8 +9,8 @@
 import UIKit
 
 extension UILabel: CIComponentAppearance {
-    
     func didToggleTheme() {
+        self.textColor = CIComponentKitTheme.currentTheme.textColor
         print("\(self.self) didToggleTheme")
     }
     func willToggleTheme() {

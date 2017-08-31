@@ -19,7 +19,7 @@ public extension UIColor {
         }
         
         //MARK: Random Color
-        public static func random() -> UIColor {
+        public static var random: UIColor {
             let red = Int(arc4random_uniform(255))
             let green = Int(arc4random_uniform(255))
             let blue = Int(arc4random_uniform(255))

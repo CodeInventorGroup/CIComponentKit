@@ -23,7 +23,7 @@ public final class CIComponentKit<Base> {
         // receive the notification of togglling theme
         if base is CIComponentAppearance {
             
-            NotificationCenter.default.addObserver(self, selector: #selector(CIComponentAppearance.didToggleTheme), name: Notification.Name.ci.themeToggle, object: nil)
+            NotificationCenter.default.addObserver(base, selector: #selector(CIComponentAppearance.didToggleTheme), name: Notification.Name.ci.themeToggle, object: nil)
         }
     }
     
