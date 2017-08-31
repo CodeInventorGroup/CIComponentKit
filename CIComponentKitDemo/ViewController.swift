@@ -22,9 +22,13 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
         self.view.backgroundColor = UIColor.black
         
+        print(self.view.tintColor)
         CILoadingHUD.show("welcome to cicomponentkit", blurStyle: .extraLight, layoutStyle: .top)
-        
-//        CILoaingHUD.show("ManoBoo", layoutStyle: .top)
+    
+        let label = UILabel().ci.appearance
+        label.frame = CGRect.init(x: 0, y: 100, width: 220, height: 44)
+        label.text = "welcome to cicomponentkit~"
+        self.view.addSubview(label)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -42,8 +46,10 @@ class ViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.ci.random()
         
+        CILoadingHUD.appearance().tintColor = UIColor.ci.random()
+        
         var theme = CIComponentKitTheme.originTheme
-        theme.tintColor = UIColor.ci.random()
+//        theme.tintColor = UIColor.ci.random()
         theme.navigationBarLeftColor = UIColor.ci.random()
         theme.renderTheme()
         

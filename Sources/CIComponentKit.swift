@@ -15,9 +15,20 @@ public protocol CIComponentKitProtocol {
 }
 
 public final class CIComponentKit<Base> {
-    public let base: Base
+    let base: Base
+    
     public init(_ base: Base) {
         self.base = base
+    
+        // receive the notification of togglling theme
+        if base is CIComponentAppearance {
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(CIComponentAppearance.didToggleTheme), name: Notification.Name.ci.themeToggle, object: nil)
+        }
+    }
+    
+    deinit {
+        
     }
 }
 
@@ -32,4 +43,3 @@ extension CIComponentKitProtocol {
 
 extension UIView: CIComponentKitProtocol {}
 extension UIViewController: CIComponentKitProtocol {}
-extension UIColor: CIComponentKitProtocol {}

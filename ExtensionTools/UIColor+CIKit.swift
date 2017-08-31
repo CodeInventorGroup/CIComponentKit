@@ -23,7 +23,6 @@ public extension UIColor {
             let red = Int(arc4random_uniform(255))
             let green = Int(arc4random_uniform(255))
             let blue = Int(arc4random_uniform(255))
-            print("red \(red) green \(green) blue \(blue)")
             
             return CIComponentColor.rgb(red: red, green: green, blue: blue)
         }
@@ -41,6 +40,7 @@ public extension UIColor {
             return UIColor(red : CGFloat(red) / 255.0, green : CGFloat(green) / 255.0, blue : CGFloat(red) / 255.0, alpha: alpha)
         }
         
+        //MARK: srbg color
         public static func sRgb(red: Int, green: Int, blue: Int) -> UIColor {
             return CIComponentColor.sRgb(red: red, green: green, blue: blue, alpha: 1.0)
         }

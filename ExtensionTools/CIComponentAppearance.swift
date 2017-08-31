@@ -8,18 +8,23 @@
 
 import UIKit
 
-class CIComponentAppearance<UIViewAppearance: UIAppearance> {
-    
-    class var appearance: UIViewAppearance {
-        get {
-            return UIViewAppearance.appearance()
-        }
-    }
-    
-    
-    class func switchThemeColor() -> Swift.Void {
-        
-    }
-    
+//class CIComponentAppearance<UIViewAppearance: UIAppearance> {
+//    
+//    class var appearance: UIViewAppearance {
+//        get {
+//            return UIViewAppearance.appearance()
+//        }
+//    }
+//    
+//    
+//    class func switchThemeColor() -> Swift.Void {
+//        
+//    }
+//}
+
+@objc protocol CIComponentAppearance {
+   
+    func willToggleTheme() -> Swift.Void
+    func didToggleTheme() -> Swift.Void
     
 }

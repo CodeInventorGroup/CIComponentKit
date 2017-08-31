@@ -8,7 +8,13 @@
 
 import UIKit
 
-let CIComponentKitThemeToggleNotifier = NSNotification.Name.init("CIComponentKitThemeNotifier")
+extension Notification.Name {
+    struct ci {
+        
+        // 切换通知时发出这个通知，post notification when togglling theme
+        static let themeToggle = NSNotification.Name.init("CIComponentKitThemeNotifier")
+    }
+}
 
 public struct CIComponentKitTheme {
     
@@ -54,13 +60,15 @@ public struct CIComponentKitTheme {
     public var textColor = UIColor.black
     
     // alert | toast | loading | UITabbarButtonItem
-    public var tintColor = UIColor.ci.hex(hex: 0x5CC9F5)
+    public var tintColor = UIColor.init(red: 0, green: 0.478431, blue: 1.0, alpha: 1.0)
     
     public var confirmColor = UIColor.ci.hex(hex: 0x5CC9F5)
     
     public var cancelColor = UIColor.ci.rgb(red: 175, green: 174, blue: 169)
     
     public var navigationBarLeftColor = UIColor.ci.rgb(red: 209, green: 211, blue: 138)
+    
+    public var navigationBarRightColor = UIColor.init(red: 0, green: 0.478431, blue: 1.0, alpha: 1.0)
     
 }
 
@@ -91,22 +99,21 @@ public extension CIComponentKitTheme {
     public func renderTheme(_ animation: CIComponentKitThemeTransition = .None) {
         
         // post a notification
-        NotificationCenter.default.post(name: CIComponentKitThemeToggleNotifier, object: self, userInfo: nil)
+        NotificationCenter.default.post(name: Notification.Name.ci.themeToggle, object: self, userInfo: nil)
         
         CIComponentKitTheme.currentTheme = self
         if let currentViewController = UIApplication.shared.keyWindow?.rootViewController?.ci.visibleViewController() {
             print("----------------toggle theme------------------")
             print("---------- theme identifier: \(self.identifier) ----")
             
+            UIApplication.shared.keyWindow?.tintColor = self.tintColor
             currentViewController.navigationController?.navigationBar.tintColor = self.tintColor
             currentViewController.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSForegroundColorAttributeName: navigationBarLeftColor], for: .normal)
             
         }
         
-        CILoadingHUD.appearance().tintColor = self.tintColor
-        
-        CIComponentAppearance<UIView>.appearance.tintColor = self.tintColor
-        CIComponentAppearance<UINavigationBar>.appearance.barTintColor = self.navigationBarLeftColor
+        UIView.appearance().tintColor = self.tintColor
+        UINavigationBar.appearance().barTintColor = self.navigationBarLeftColor
 
     }
     

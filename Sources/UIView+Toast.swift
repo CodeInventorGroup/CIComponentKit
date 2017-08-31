@@ -8,6 +8,12 @@
 
 import UIKit
 
+extension UIView {
+    var internalCenter: CGPoint {
+        return CGPoint.init(x: self.bounds.width * 0.5, y: self.bounds.height * 0.5)
+    }
+}
+
 
 public extension CIComponentKit where Base: UIView {
 
@@ -38,6 +44,14 @@ public class CILoadingHUD: UIView {
         case style4
         case style5
     }
+    
+    // CILoadingStyle.original  原生的加载指示器
+    lazy var activityView: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView.init(activityIndicatorStyle: .gray)
+        activity.color = CILoadingHUD.appearance().tintColor
+        return activity
+    }()
+    
     var loadingStyle: CILoadingStyle = .original
     
     public enum CILoadingLayoutStyle {
@@ -71,10 +85,15 @@ public class CILoadingHUD: UIView {
         let contentView = backgroundView.contentView
         
         titleLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
-        titleLabel.textColor = self.tintColor
+        titleLabel.tintColor = CILoadingHUD.appearance().tintColor
         contentView.addSubview(titleLabel)
         
+        activityView.startAnimating()
+        animationImgView.contentMode = .center
+        animationImgView.addSubview(activityView)
+        contentView.addSubview(animationImgView)
     }
+    
 
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -87,8 +106,8 @@ public class CILoadingHUD: UIView {
     
     
     public override func tintColorDidChange() {
-        print("----")
         titleLabel.textColor = self.tintColor
+        activityView.color = self.tintColor
     }
     
     func resizeLayout() -> Swift.Void {
@@ -103,8 +122,11 @@ public class CILoadingHUD: UIView {
         
         switch layoutStyle {
         case .top:
-            animationImgView.center.x = 0.5
+            animationImgView.center.x = backgroundView.bounds.width * 0.5
             animationImgView.frame.origin.y = 20
+            if loadingStyle == .original {
+                activityView.center = animationImgView.internalCenter
+            }
             
             titleLabel.center.x = backgroundView.center.x
             titleLabel.frame.origin.y = animationImgView.frame.maxY + 30
@@ -131,7 +153,7 @@ public class CILoadingHUD: UIView {
         }
         
         // default layout
-        self.frame = CGRect.init(origin: .zero, size: CGSize.init(width: keyWindow.bounds.width - 80, height: 200))
+        self.frame = CGRect.init(origin: .zero, size: CGSize.init(width: keyWindow.bounds.width - 80, height: 160))
         self.center = keyWindow.center
         keyWindow.addSubview(self)
         
