@@ -23,9 +23,10 @@ class ViewController: UIViewController {
         
         print(self.view.tintColor)
         CILoadingHUD.show("点击屏幕切换主题", blurStyle: .light, layoutStyle: .top)
-    
+        
         for index in 0...10 {
-            let label = UILabel().ci.appearance
+            
+            let label = UILabel.ci.appearance
             label.frame = CGRect.init(x: 0, y: 100 + 44 * CGFloat(index), width: view.bounds.width, height: 44.0)
             label.text = "welcome to cicomponentkit~ \(index)"
             self.view.addSubview(label)
@@ -53,6 +54,7 @@ class ViewController: UIViewController {
         theme.config.textColor = UIColor.ci.random
         theme.config.tintColor = UIColor.ci.random
         theme.config.navigationBarLeftColor = UIColor.ci.random
+        theme.config.navigationItemTitleColor = UIColor.ci.random
         
         theme.renderTheme()
         

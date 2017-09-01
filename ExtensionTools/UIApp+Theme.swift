@@ -95,7 +95,10 @@ public extension CIComponentKitTheme {
             
             UIApplication.shared.keyWindow?.tintColor = config.tintColor
             currentViewController.navigationController?.navigationBar.tintColor = config.tintColor
-            currentViewController.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSForegroundColorAttributeName: config.navigationBarLeftColor], for: .normal)
+            currentViewController.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSForegroundColorAttributeName: config.navigationBarLeftColor], for: .
+                normal)
+            
+            currentViewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: config.navigationItemTitleColor, NSFontAttributeName: UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(36)))]
             
         }
         

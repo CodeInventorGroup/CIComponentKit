@@ -20,13 +20,17 @@ public class CIComponentKitThemeConfig {
     
         // theme's main color
          public var mainColor = UIColor.green
-        
+    
+        // view.backgroundColor
+         public var backgroundColor = UIColor.ci.rgb(red: 255, green: 255, blue: 255)
+    
         // UILabel | UIButton
          public var textColor = UIColor.black
         
         // alert | toast | loading | UITabbarButtonItem
          public var tintColor = UIColor.init(red: 0, green: 0.478431, blue: 1.0, alpha: 1.0)
-        
+    
+        // alertView、alertViewController confirm button color
          public var confirmColor = UIColor.ci.hex(hex: 0x5CC9F5)
         
          public var cancelColor = UIColor.ci.rgb(red: 175, green: 174, blue: 169)
@@ -34,6 +38,9 @@ public class CIComponentKitThemeConfig {
          public var navigationBarLeftColor = UIColor.ci.rgb(red: 209, green: 211, blue: 138)
         
          public var navigationBarRightColor = UIColor.init(red: 0, green: 0.478431, blue: 1.0, alpha: 1.0)
+    
+        //
+         public var navigationItemTitleColor = UIColor.black
     
     
     //MARK: - fonts -------------------------------------------------------------------------------------

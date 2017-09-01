@@ -19,12 +19,6 @@ public final class CIComponentKit<Base> {
     
     public init(_ base: Base) {
         self.base = base
-    
-        // receive the notification of togglling theme
-        if base is CIComponentAppearance {
-            NotificationCenter.default.addObserver(base, selector: #selector(CIComponentAppearance.willToggleTheme), name: Notification.Name.ci.themeWillToggle, object: nil)
-            NotificationCenter.default.addObserver(base, selector: #selector(CIComponentAppearance.didToggleTheme), name: Notification.Name.ci.themeDidToggle, object: nil)
-        }
     }
     
     deinit {
@@ -44,9 +38,3 @@ extension CIComponentKitProtocol {
 extension UIView: CIComponentKitProtocol {}
 extension UIViewController: CIComponentKitProtocol {}
 
-
-extension CIComponentKit where Base: UIView {
-    public var appearance: Base {
-        return self.base
-    }
-}
