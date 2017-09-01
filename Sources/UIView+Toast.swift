@@ -105,10 +105,6 @@ public class CILoadingHUD: UIView {
     var animationImgView = UIImageView()
     
     
-    public override func tintColorDidChange() {
-        titleLabel.textColor = self.tintColor
-        activityView.color = self.tintColor
-    }
     
     func resizeLayout() -> Swift.Void {
     
@@ -176,10 +172,21 @@ public class CILoadingHUD: UIView {
     
     public func hide(_ complete: CILoadingHUDClousure = {_ in }) {
         self.removeFromSuperview()
-        print("remove .......")
     }
     
     public class func hide(_ complete: CILoadingHUDClousure = {_ in }) {
         CILoadingHUD.default.hide(complete)
     }
 }
+
+
+
+// MARK: - extentsion for CILoadingHUD
+//extension CILoadingHUD: CIComponentAppearance {
+//    func didToggleTheme() {
+//        print("CILoadingHUD didToggleTheme")
+//    }
+//    func willToggleTheme() {
+//        
+//    }
+//}

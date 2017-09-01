@@ -10,17 +10,17 @@ import UIKit
 
 public extension CIComponentKit where Base: UIViewController {
     
-    func visibleViewController() -> UIViewController? {
+    var visibleViewController: UIViewController? {
         
         if let presentVC = base.presentedViewController {
-            return presentVC.ci.visibleViewController()
+            return presentVC.ci.visibleViewController
         }
         
         if base is UITabBarController  {
-            return (base as! UITabBarController).selectedViewController?.ci.visibleViewController()
+            return (base as! UITabBarController).selectedViewController?.ci.visibleViewController
         }
         if base is UINavigationController {
-            return (base as! UINavigationController).visibleViewController?.ci.visibleViewController()
+            return (base as! UINavigationController).visibleViewController?.ci.visibleViewController
         }
         
         if base.isViewLoaded && (base.view.window != nil) {

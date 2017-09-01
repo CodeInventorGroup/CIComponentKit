@@ -11,8 +11,11 @@ import UIKit
 extension Notification.Name {
     struct ci {
         
-        // 切换通知时发出这个通知，post notification when togglling theme
-        static let themeToggle = NSNotification.Name.init("CIComponentKitThemeNotifier")
+        // 切换通知时发出这个通知，post notification when switching theme
+        static let themeWillToggle = NSNotification.Name.init("CIComponentKitThemeWillToggleNotifier")
+        
+        // 切换主题完成之后，post notification When the switching theme is complete
+        static let themeDidToggle = NSNotification.Name.init("CIComponentKitThemeDidToggleNotifier")
     }
 }
 
@@ -53,23 +56,8 @@ public struct CIComponentKitTheme {
         }
     }
     
-    // theme's id
-    public var identifier = "Default"
-    
-    // UILabel | UIButton
-    public var textColor = UIColor.black
-    
-    // alert | toast | loading | UITabbarButtonItem
-    public var tintColor = UIColor.init(red: 0, green: 0.478431, blue: 1.0, alpha: 1.0)
-    
-    public var confirmColor = UIColor.ci.hex(hex: 0x5CC9F5)
-    
-    public var cancelColor = UIColor.ci.rgb(red: 175, green: 174, blue: 169)
-    
-    public var navigationBarLeftColor = UIColor.ci.rgb(red: 209, green: 211, blue: 138)
-    
-    public var navigationBarRightColor = UIColor.init(red: 0, green: 0.478431, blue: 1.0, alpha: 1.0)
-    
+    public var config = CIComponentKitThemeConfig()
+
 }
 
 
@@ -99,22 +87,23 @@ public extension CIComponentKitTheme {
     public func renderTheme(_ animation: CIComponentKitThemeTransition = .None) {
         
         // post a notification
-        NotificationCenter.default.post(name: Notification.Name.ci.themeToggle, object: self, userInfo: nil)
+        NotificationCenter.default.post(name: Notification.Name.ci.themeWillToggle, object: self, userInfo: nil)
         
         CIComponentKitTheme.currentTheme = self
-        if let currentViewController = UIApplication.shared.keyWindow?.rootViewController?.ci.visibleViewController() {
-            print("----------------toggle theme------------------")
-            print("---------- theme identifier: \(self.identifier) ----")
+        if let currentViewController = UIApplication.shared.keyWindow?.rootViewController?.ci.visibleViewController {
+            print("----------------toggle theme, identifier: \(config.identifier)------------------")
             
-            UIApplication.shared.keyWindow?.tintColor = self.tintColor
-            currentViewController.navigationController?.navigationBar.tintColor = self.tintColor
-            currentViewController.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSForegroundColorAttributeName: navigationBarLeftColor], for: .normal)
+            UIApplication.shared.keyWindow?.tintColor = config.tintColor
+            currentViewController.navigationController?.navigationBar.tintColor = config.tintColor
+            currentViewController.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSForegroundColorAttributeName: config.navigationBarLeftColor], for: .normal)
             
         }
         
-        UIView.appearance().tintColor = self.tintColor
-        UINavigationBar.appearance().barTintColor = self.navigationBarLeftColor
-
+//        UIView.appearance().tintColor = self.tintColor
+//        UINavigationBar.appearance().barTintColor = self.navigationBarLeftColor
+        
+        
+        NotificationCenter.default.post(name: Notification.Name.ci.themeDidToggle, object: self, userInfo: nil)
     }
     
     

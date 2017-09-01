@@ -25,10 +25,12 @@ class ViewController: UIViewController {
         print(self.view.tintColor)
         CILoadingHUD.show("welcome to cicomponentkit", blurStyle: .extraLight, layoutStyle: .top)
     
-        let label = UILabel().ci.appearance
-        label.frame = CGRect.init(x: 0, y: 100, width: 220, height: 44)
-        label.text = "welcome to cicomponentkit~"
-        self.view.addSubview(label)
+        for index in 0...10 {
+            let label = UILabel().ci.appearance
+            label.frame = CGRect.init(x: 0, y: 100 + 44 * index, width: 250, height: 44)
+            label.text = "welcome to cicomponentkit~ \(index)"
+            self.view.addSubview(label)
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -48,9 +50,13 @@ class ViewController: UIViewController {
         
         CILoadingHUD.appearance().tintColor = UIColor.ci.random
         
-        var theme = CIComponentKitTheme.originTheme
-        theme.textColor = UIColor.ci.random
-        theme.navigationBarLeftColor = UIColor.ci.random
+        let theme = CIComponentKitTheme.originTheme
+        
+        
+        theme.config.textColor = UIColor.ci.random
+        theme.config.tintColor = UIColor.ci.random
+        theme.config.navigationBarLeftColor = UIColor.ci.random
+        
         theme.renderTheme()
         
     }
