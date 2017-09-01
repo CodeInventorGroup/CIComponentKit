@@ -26,10 +26,8 @@ extension UILabel: CIComponentAppearance {
         if self.textColor != CIComponentKitTheme.currentTheme.config.textColor {
             self.textColor = CIComponentKitTheme.currentTheme.config.textColor
         }
-        if self.font == CIComponentKitTheme.currentTheme.config.defaultFont {
-            self.font = UIFont.systemFont(ofSize: UIFont.systemFontSize + 2.0)
-        }else {
-            self.font = UIFont.ci.systemFont
+        if self.font != CIComponentKitTheme.currentTheme.config.defaultFont {
+            self.font = CIComponentKitTheme.currentTheme.config.defaultFont
         }
         
         //        print("\(self) didToggleTheme")

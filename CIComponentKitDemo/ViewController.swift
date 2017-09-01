@@ -20,14 +20,13 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.view.backgroundColor = UIColor.black
         
         print(self.view.tintColor)
-        CILoadingHUD.show("welcome to cicomponentkit", blurStyle: .extraLight, layoutStyle: .top)
+        CILoadingHUD.show("点击屏幕切换主题", blurStyle: .light, layoutStyle: .top)
     
         for index in 0...10 {
             let label = UILabel().ci.appearance
-            label.frame = CGRect.init(x: 0, y: 100 + 44 * index, width: 250, height: 44)
+            label.frame = CGRect.init(x: 0, y: 100 + 44 * CGFloat(index), width: view.bounds.width, height: 44.0)
             label.text = "welcome to cicomponentkit~ \(index)"
             self.view.addSubview(label)
         }
@@ -46,13 +45,11 @@ class ViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         
-        self.view.backgroundColor = UIColor.ci.random
-        
-        CILoadingHUD.appearance().tintColor = UIColor.ci.random
+//        CILoadingHUD.appearance().tintColor = UIColor.ci.random
         
         let theme = CIComponentKitTheme.originTheme
         
-        
+        theme.config.defaultFont = UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(44)))
         theme.config.textColor = UIColor.ci.random
         theme.config.tintColor = UIColor.ci.random
         theme.config.navigationBarLeftColor = UIColor.ci.random
