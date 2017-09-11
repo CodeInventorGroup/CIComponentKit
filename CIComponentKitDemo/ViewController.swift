@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
         
         print(self.view.tintColor)
-        CILoadingHUD.show("点击屏幕切换主题", blurStyle: .light, layoutStyle: .top)
+        CILoadingHUD.show("拼命加载中", blurStyle: .dark, layoutStyle: .left)
         
         for index in 0...3 {
             
@@ -38,9 +38,8 @@ class ViewController: UIViewController {
         }
         
         let theme = CIComponentKitTheme.originTheme
-        
-        theme.config.defaultFont = UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(44)))
         theme.config.textColor = UIColor.ci.random
+        theme.config.mainColor = UIColor.ci.hex(hex: 0xF7F6F6)
         theme.config.tintColor = UIColor.ci.random
         theme.config.navigationBarLeftColor = UIColor.ci.random
         theme.config.navigationItemTitleColor = UIColor.ci.random

@@ -8,13 +8,6 @@
 
 import UIKit
 
-extension UIView {
-    var internalCenter: CGPoint {
-        return CGPoint.init(x: self.bounds.width * 0.5, y: self.bounds.height * 0.5)
-    }
-}
-
-
 public extension CIComponentKit where Base: UIView {
 
     func allInfomation() -> Swift.Void {
@@ -36,21 +29,15 @@ public class CILoadingHUD: UIView {
     // default blurEffect = .extraLight 默认模糊效果
     var blurStyle: UIBlurEffectStyle = .extraLight
     
+    // loading's style
     public enum CILoadingStyle {
-        case original
+        case original   // 系统自带的 UIActivityIndicatorView 指示器
         case style1
         case style2
         case style3
         case style4
         case style5
     }
-    
-    // CILoadingStyle.original  原生的加载指示器
-    lazy var activityView: UIActivityIndicatorView = {
-        let activity = UIActivityIndicatorView.init(activityIndicatorStyle: .gray)
-        activity.color = CILoadingHUD.appearance().tintColor
-        return activity
-    }()
     
     var loadingStyle: CILoadingStyle = .original
     
@@ -62,16 +49,32 @@ public class CILoadingHUD: UIView {
     }
     var layoutStyle: CILoadingLayoutStyle = .top
 
+    
+    // loading弹出时的动画
+    public enum CILoadingAnimation {
+        case none
+        case spring
+        case curveEaseInOut
+    }
+    var showAnimation:CILoadingAnimation = .none
+    var hideAnimation:CILoadingAnimation = .none
+    
     // tip's title  提示文字
     var title: String? = "加载中~"
     
+    // tip's infomation
     var attributeTitle: NSMutableString? = NSMutableString(string: "")
 
     
     //MARK: - init && deinit
     public static let `default` = CILoadingHUD.init("加载中", blurStyle: .light, layoutStyle: .top)
     
-    public init(_ title: String?, blurStyle: UIBlurEffectStyle = .extraLight,layoutStyle: CILoadingLayoutStyle = .left) {
+    public init(_ title: String?,
+                blurStyle: UIBlurEffectStyle = .extraLight,
+                layoutStyle: CILoadingLayoutStyle = .left,
+                loadingStyle: CILoadingStyle? = .original,
+                showAnimation: CILoadingAnimation? = .none,
+                hideAnimation: CILoadingAnimation? = .none) {
         super.init(frame: .zero)
         self.layer.cornerRadius = 3.0
         self.layer.masksToBounds = true
@@ -88,7 +91,6 @@ public class CILoadingHUD: UIView {
         titleLabel.tintColor = CILoadingHUD.appearance().tintColor
         contentView.addSubview(titleLabel)
         
-        activityView.startAnimating()
         animationImgView.contentMode = .center
         animationImgView.addSubview(activityView)
         contentView.addSubview(animationImgView)
@@ -103,6 +105,12 @@ public class CILoadingHUD: UIView {
     var backgroundView = UIVisualEffectView()
     var titleLabel = UILabel()
     var animationImgView = UIImageView()
+    // CILoadingStyle.original  原生的加载指示器
+    lazy var activityView: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView.init(activityIndicatorStyle: .gray)
+        activity.color = CILoadingHUD.appearance().tintColor
+        return activity
+    }()
     
     
     
@@ -118,31 +126,42 @@ public class CILoadingHUD: UIView {
         
         switch layoutStyle {
         case .top:
-            animationImgView.center.x = backgroundView.bounds.width * 0.5
-            animationImgView.frame.origin.y = 20
-            if loadingStyle == .original {
-                activityView.center = animationImgView.internalCenter
-            }
-            
-            titleLabel.center.x = backgroundView.center.x
-            titleLabel.frame.origin.y = animationImgView.frame.maxY + 30
+            animationImgView.y(20)
+                .centerX(backgroundView.ci.internalCenterX)
+            titleLabel.y(animationImgView.frame.maxY + 30)
+                .centerX(backgroundView.center.x)
             break
         case .right:
+            titleLabel.x(20)
+            animationImgView.y()
             break
         case .bottom:
             break
             
         default:
-            
+            animationImgView.x(20)
+                .centerY(backgroundView.ci.internalCenterY)
+            titleLabel.x(animationImgView.frame.maxX+20)
+                .centerY(backgroundView.ci.internalCenterY)
             break
         }
+        
+        if loadingStyle == .original {
+            activityView.center = animationImgView.ci.internalCenter
+            activityView.startAnimating()
+            if blurStyle == .dark {
+                activityView.color = UIColor.white
+                titleLabel.textColor(UIColor.white)
+            }
+        }
+        
         
     }
     
     /// 计算Loading布局 calculate loading hud's layout
     ///
     /// - Returns: Void
-    func layout() -> Swift.Void {
+    func render() -> Swift.Void {
         
         guard let keyWindow = UIApplication.shared.keyWindow else {
             return
@@ -152,22 +171,28 @@ public class CILoadingHUD: UIView {
         self.frame = CGRect.init(origin: .zero, size: CGSize.init(width: keyWindow.bounds.width - 80, height: 160))
         self.center = keyWindow.center
         keyWindow.addSubview(self)
-        
+    
         resizeLayout()
     }
     
     //MARK: - show && hide
     
-    public func show(_ title: String?, blurStyle: UIBlurEffectStyle = .dark,layoutStyle: CILoadingLayoutStyle = .left,delay: TimeInterval? = 0.0) {
+    public func show(_ title: String?,
+                     blurStyle: UIBlurEffectStyle = .dark,
+                     layoutStyle: CILoadingLayoutStyle = .left,
+                     delay: TimeInterval? = 0.0) {
         let hud = CILoadingHUD.init(title, blurStyle: blurStyle, layoutStyle: layoutStyle)
-        hud.layout()
+        hud.render()
     }
     
-    public class func show(_ title: String?, blurStyle: UIBlurEffectStyle = .dark,layoutStyle: CILoadingLayoutStyle = .left,delay: TimeInterval? = 0.0) {
+    public class func show(_ title: String?,
+                           blurStyle: UIBlurEffectStyle = .dark,
+                           layoutStyle: CILoadingLayoutStyle = .left,
+                           delay: TimeInterval? = 0.0) {
         CILoadingHUD.default.title = title
         CILoadingHUD.default.blurStyle = blurStyle
         CILoadingHUD.default.layoutStyle = layoutStyle
-        CILoadingHUD.default.layout()
+        CILoadingHUD.default.render()
     }
     
     public func hide(_ complete: CILoadingHUDClousure = {_ in }) {
@@ -179,14 +204,3 @@ public class CILoadingHUD: UIView {
     }
 }
 
-
-
-// MARK: - extentsion for CILoadingHUD
-//extension CILoadingHUD: CIComponentAppearance {
-//    func didToggleTheme() {
-//        print("CILoadingHUD didToggleTheme")
-//    }
-//    func willToggleTheme() {
-//        
-//    }
-//}
