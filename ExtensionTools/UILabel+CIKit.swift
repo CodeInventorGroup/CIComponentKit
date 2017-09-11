@@ -57,6 +57,8 @@ extension CILabel: CIComponentAppearance {
     }
 }
 
+
+/// CILabel 自定义UILabel
 public class CILabel: UILabel {
     
     convenience init() {
@@ -79,7 +81,109 @@ public class CILabel: UILabel {
     }
     
     deinit {
-        print("\(CILabel.self) deinit")
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    public override func drawText(in rect: CGRect) {
+        return super.drawText(in: UIEdgeInsetsInsetRect(rect, contentEdgeInset))
+    }
+    
+    //MARK: - 扩展属性
+    
+        // - 文字距离上下左右的边距
+    public var contentEdgeInset: UIEdgeInsets = .zero {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
+    
+    private var tempBackgroundColor: UIColor?
+    private lazy var longPressGesture: UILongPressGestureRecognizer = {
+        let g = UILongPressGestureRecognizer.init(target: self, action: #selector(handleLongPressEvent(_:)))
+        self.addGestureRecognizer(g)
+        return g
+    }()
+        // - 提供长按操作时的高亮背景颜色
+    public var highlightedBackgroundColor: UIColor = CIComponentKitThemeCurrentConfig.highlightedBackgroundColor {
+        didSet {
+            tempBackgroundColor = backgroundColor
+        }
+    }
+    
+    
+    public override var isHighlighted: Bool {
+        didSet {
+            super.isHighlighted = isHighlighted
+            backgroundColor = isHighlighted ? highlightedBackgroundColor : tempBackgroundColor
+        }
+    }
+    
+    public override var canBecomeFirstResponder: Bool {
+        return longPressAction == .copy
+    }
+    
+    public override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if longPressAction == .copy {
+            return action == #selector(copyEvent)
+        }
+        return false
+    }
+    
+    public enum LongPressAction {
+        case none
+        case copy
+        case Touch3D
+    }
+
+    public var longPressAction: LongPressAction = .none {
+        didSet {
+            if longPressAction == .copy {
+                isUserInteractionEnabled = true
+                longPressGesture.isEnabled = true
+                NotificationCenter.default.addObserver(self, selector: #selector(handleMenuHideEvent(_:)), name: .UIMenuControllerWillHideMenu, object: nil)
+                
+            }else {
+                self.isUserInteractionEnabled = false
+                longPressGesture.isEnabled = false
+                NotificationCenter.default.removeObserver(self, name: .UIMenuControllerWillHideMenu, object: nil)
+                
+            }
+        }
+    }
+    
+    
+    //MARK: - Event
+    
+    func copyEvent() -> Swift.Void {
+        if (self.text != nil) {
+            let board = UIPasteboard.general
+            board.string = self.text
+        }
+    }
+    
+    func handleLongPressEvent(_ longPressGesture: UILongPressGestureRecognizer) -> Swift.Void {
+        if longPressAction != .copy {
+            return
+        }
+        if longPressGesture.state == .began {
+            print(self.becomeFirstResponder())
+            let menuController = UIMenuController.shared
+            menuController.menuItems = [UIMenuItem.init(title: "复制", action: #selector(copyEvent))]
+            menuController.setTargetRect(self.frame, in: self.superview!)
+            menuController.setMenuVisible(true, animated: true)
+            
+            tempBackgroundColor = backgroundColor
+            isHighlighted = true
+        }
+    }
+    
+    func handleMenuHideEvent(_ notifier: NSNotification) -> Swift.Void {
+        if longPressAction != .copy {
+            return
+        }
+        if isHighlighted {
+            self.isHighlighted = false
+        }
     }
 }

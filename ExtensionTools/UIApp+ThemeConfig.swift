@@ -9,6 +9,9 @@
 import UIKit
 import Foundation
 
+// 该属性可以获取当前主题的颜色配置
+public let CIComponentKitThemeCurrentConfig = CIComponentKitTheme.currentTheme.config
+
 // ThemeColorList    一份默认的主题配置
 public class CIComponentKitThemeConfig {
     
@@ -19,7 +22,7 @@ public class CIComponentKitThemeConfig {
     //MARK: - colors -------------------------------------------------------------------------------------
     
         // theme's main color
-         public var mainColor = UIColor.green
+         public var mainColor = UIColor.ci.hex(hex: 0xF7F6F6)
     
         // view.backgroundColor
          public var backgroundColor = UIColor.ci.rgb(red: 255, green: 255, blue: 255)
@@ -41,6 +44,10 @@ public class CIComponentKitThemeConfig {
     
         //
          public var navigationItemTitleColor = UIColor.black
+    
+    
+         public var highlightedBackgroundColor = UIColor.ci.hex(hex: 0xF7F6F6, alpha: 0.8)
+    
     
     
     //MARK: - fonts -------------------------------------------------------------------------------------

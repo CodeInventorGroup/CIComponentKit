@@ -24,13 +24,23 @@ class ViewController: UIViewController {
         print(self.view.tintColor)
         CILoadingHUD.show("点击屏幕切换主题", blurStyle: .light, layoutStyle: .top)
         
-        for index in 0...10 {
+        for index in 0...3 {
             
             let label = UILabel.ci.appearance
-            label.frame = CGRect.init(x: 0, y: 100 + 44 * CGFloat(index), width: view.bounds.width, height: 44.0)
+            label.longPressAction = .copy
+            label.frame = CGRect.init(x: 0, y: 100 + 66 * CGFloat(index), width: view.bounds.width, height: 66)
             label.text = "welcome to cicomponentkit~ \(index)"
             self.view.addSubview(label)
         }
+        
+        let theme = CIComponentKitTheme.originTheme
+        
+        theme.config.defaultFont = UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(44)))
+        theme.config.textColor = UIColor.ci.random
+        theme.config.tintColor = UIColor.ci.random
+        theme.config.navigationBarLeftColor = UIColor.ci.random
+        theme.config.navigationItemTitleColor = UIColor.ci.random
+        theme.renderTheme()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -48,15 +58,15 @@ class ViewController: UIViewController {
         
 //        CILoadingHUD.appearance().tintColor = UIColor.ci.random
         
-        let theme = CIComponentKitTheme.originTheme
-        
-        theme.config.defaultFont = UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(44)))
-        theme.config.textColor = UIColor.ci.random
-        theme.config.tintColor = UIColor.ci.random
-        theme.config.navigationBarLeftColor = UIColor.ci.random
-        theme.config.navigationItemTitleColor = UIColor.ci.random
-        
-        theme.renderTheme()
+//        let theme = CIComponentKitTheme.originTheme
+//        
+//        theme.config.defaultFont = UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(44)))
+//        theme.config.textColor = UIColor.ci.random
+//        theme.config.tintColor = UIColor.ci.random
+//        theme.config.navigationBarLeftColor = UIColor.ci.random
+//        theme.config.navigationItemTitleColor = UIColor.ci.random
+//        
+//        theme.renderTheme()
         
     }
     
