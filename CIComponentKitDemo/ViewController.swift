@@ -28,8 +28,12 @@ class ViewController: UIViewController {
             
             let label = UILabel.ci.appearance
             label.longPressAction = .copy
-            label.frame = CGRect.init(x: 0, y: 100 + 66 * CGFloat(index), width: view.bounds.width, height: 66)
-            label.text = "welcome to cicomponentkit~ \(index)"
+            let rect = CGRect.init(x: 0, y: 100 + 66 * CGFloat(index), width: view.bounds.width, height: 66)
+            label.frame(rect)
+                .line()
+                .text("welcome to cicomponentkit~ \(index)")
+                .textAlignment(.center)
+                .textColor(CIComponentKitThemeCurrentConfig.textColor)
             self.view.addSubview(label)
         }
         

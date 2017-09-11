@@ -19,16 +19,6 @@ import UIKit
 
 
 
-
-
-//extension CIComponentKit where Base: UILabel {
-//    
-//    // 为了让用户的修改最少即可动态换主题，又减少操作，采取了折中方法
-//    public var appearance: CILabel {
-//        return CILabel()
-//    }
-//}
-
 // 为了让用户用最少的修改即可动态换主题，又减少操作，采取了折中方法
 public extension UILabel {
     struct ci {
@@ -42,11 +32,11 @@ public extension UILabel {
 extension CILabel: CIComponentAppearance {
     
     func didToggleTheme() {
-        if self.textColor != CIComponentKitTheme.currentTheme.config.textColor {
-            self.textColor = CIComponentKitTheme.currentTheme.config.textColor
+        if self.textColor != CIComponentKitThemeCurrentConfig.textColor {
+            self.textColor = CIComponentKitThemeCurrentConfig.textColor
         }
-        if self.font != CIComponentKitTheme.currentTheme.config.defaultFont {
-            self.font = CIComponentKitTheme.currentTheme.config.defaultFont
+        if self.font != CIComponentKitThemeCurrentConfig.defaultFont {
+            self.font = CIComponentKitThemeCurrentConfig.defaultFont
         }
         
         
@@ -58,7 +48,8 @@ extension CILabel: CIComponentAppearance {
 }
 
 
-/// CILabel 自定义UILabel
+/********************************************* CILabel begin ******************************/
+/// CILabel 自定义UILabel,支持 长按复制
 public class CILabel: UILabel {
     
     convenience init() {
@@ -133,7 +124,7 @@ public class CILabel: UILabel {
     public enum LongPressAction {
         case none
         case copy
-        case Touch3D
+        case Touch3D // building
     }
 
     public var longPressAction: LongPressAction = .none {
@@ -147,11 +138,9 @@ public class CILabel: UILabel {
                 self.isUserInteractionEnabled = false
                 longPressGesture.isEnabled = false
                 NotificationCenter.default.removeObserver(self, name: .UIMenuControllerWillHideMenu, object: nil)
-                
             }
         }
     }
-    
     
     //MARK: - Event
     
@@ -183,7 +172,52 @@ public class CILabel: UILabel {
             return
         }
         if isHighlighted {
-            self.isHighlighted = false
+            isHighlighted = false
         }
     }
 }
+
+/********************************************* CILabel end ******************************/
+
+
+
+/********************************************* extension UILabel begin ******************************/
+
+
+extension UILabel {
+    
+    @discardableResult
+    public func frame(_ rect: CGRect) -> Self {
+        self.frame = rect
+        return self
+    }
+    
+    // numberOfLines
+    @discardableResult
+    public func line(_ lineNumbers: Int = 0) -> Self {
+        self.numberOfLines = lineNumbers
+        return self
+    }
+    
+    // text
+    @discardableResult
+    public func text(_ string : String = "") -> Self {
+        self.text = string
+        return self
+    }
+    
+    @discardableResult
+    public func textColor(_ color: UIColor = CIComponentKitThemeCurrentConfig.textColor) -> Self {
+        self.textColor = color
+        return self
+    }
+    
+    @discardableResult
+    public func textAlignment(_ textAlignment: NSTextAlignment = .left) -> Self {
+        self.textAlignment = textAlignment
+        return self
+    }
+    
+}
+
+/********************************************* extension UILabel end ******************************/
