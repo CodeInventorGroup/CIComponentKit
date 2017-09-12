@@ -1,5 +1,5 @@
 //
-//  UIColor+Theme.swift
+//  CICTheme.swift
 //  CIComponentKit
 //
 //  Created by ManoBoo on 2017/8/30.
@@ -19,17 +19,10 @@ extension Notification.Name {
     }
 }
 
-public struct CIComponentKitTheme {
-    
-    public init() {
-    }
+public class CIComponentKitTheme {
     
     // 当前主题
-    public static var currentTheme = CIComponentKitTheme() {
-        didSet {
-//            CILoadingHUD.default.show("Toggle theme...", blurStyle: .light, layoutStyle: .top)
-        }
-    }
+    public static var currentTheme = CIComponentKitTheme()
     
     // system colors
     public static var originTheme = CIComponentKitTheme()
@@ -89,21 +82,34 @@ public extension CIComponentKitTheme {
         // post a notification
         NotificationCenter.default.post(name: Notification.Name.ci.themeWillToggle, object: self, userInfo: nil)
         
-        CIComponentKitTheme.currentTheme = self
+        CIComponentKitThemeCurrentConfig = config
+        
         if let currentViewController = UIApplication.shared.keyWindow?.rootViewController?.ci.visibleViewController {
+            print("*********************************************************************************")
             print("----------------toggle theme, identifier: \(config.identifier)------------------")
+            print("*********************************************************************************")
+            
+            currentViewController.beginAppearanceTransition(true, animated: true)
             
             UIApplication.shared.keyWindow?.tintColor = config.tintColor
             currentViewController.navigationController?.navigationBar.tintColor = config.tintColor
             currentViewController.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSForegroundColorAttributeName: config.navigationBarLeftColor], for: .
                 normal)
             
-            currentViewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: config.navigationItemTitleColor, NSFontAttributeName: UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(36)))]
+            if let navigationController = currentViewController.navigationController {
+                let navigationBarSize = navigationController.navigationBar.bounds.size
+                currentViewController.navigationController?.navigationBar.setBackgroundImage(UIImage.image(color: config.navigationBarBackgroundColor, size: navigationBarSize), for: .default)
+                currentViewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: config.navigationItemTitleColor, NSFontAttributeName: UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(24)))]
+            }
             
+            
+            currentViewController.endAppearanceTransition()
         }
         
-//        UIView.appearance().tintColor = self.tintColor
-//        UINavigationBar.appearance().barTintColor = self.navigationBarLeftColor
+        
+        UIView.appearance().tintColor = config.tintColor
+        UIWindow.appearance().backgroundColor = config.windowColor
+        UINavigationBar.appearance().barTintColor = config.navigationBarLeftColor
         
         
         NotificationCenter.default.post(name: Notification.Name.ci.themeDidToggle, object: self, userInfo: nil)

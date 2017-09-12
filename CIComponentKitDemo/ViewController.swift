@@ -10,19 +10,14 @@ import UIKit
 import CIComponentKit
 
 class ViewController: UIViewController {
-
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+         return .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.view.ci.allInfomation()
-    }
-
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        print(self.view.tintColor)
-        CILoadingHUD.show("拼命加载中", blurStyle: .dark, layoutStyle: .left)
         
         for index in 0...3 {
             
@@ -34,16 +29,43 @@ class ViewController: UIViewController {
                 .text("welcome to cicomponentkit~ \(index)")
                 .textAlignment(.center)
                 .textColor(CIComponentKitThemeCurrentConfig.textColor)
+                .backgroundColor(UIColor.ci.random)
             self.view.addSubview(label)
         }
         
-        let theme = CIComponentKitTheme.originTheme
-        theme.config.textColor = UIColor.ci.random
-        theme.config.mainColor = UIColor.ci.hex(hex: 0xF7F6F6)
-        theme.config.tintColor = UIColor.ci.random
-        theme.config.navigationBarLeftColor = UIColor.ci.random
-        theme.config.navigationItemTitleColor = UIColor.ci.random
-        theme.renderTheme()
+        let toggleThemeBtn = UIButton()
+        toggleThemeBtn.y(view.bounds.maxY-64)
+            .height(64)
+            .x()
+            .width(view.ci.width)
+            .backgroundColor(.green)
+        toggleThemeBtn.setTitle("Toggle theme", for: .normal)
+        toggleThemeBtn.addTarget(self, action: #selector(changeTheme), for: .touchUpInside)
+        view.addSubview(toggleThemeBtn)
+        
+        let jumpBtn = UIButton()
+        jumpBtn.x()
+            .y(toggleThemeBtn.frame.minY - 64)
+            .height(64)
+            .width(view.ci.width)
+            .backgroundColor(UIColor.ci.hex(hex: 0x4AF2A1))
+        jumpBtn.setTitle("JUMP TO CICUIViewController", for: .normal)
+        jumpBtn.addTarget(self, action: #selector(jump), for: .touchUpInside)
+        view.addSubview(jumpBtn)
+
+        
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        CILoadingHUD.show("拼命加载中", blurStyle: .light, layoutStyle: .left)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        CILoadingHUD.hide()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -51,29 +73,26 @@ class ViewController: UIViewController {
         
         CILoadingHUD.default.hide()
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func jump() -> Swift.Void {
+        let vc = CICUIViewController()
+        vc.title = "CICUIViewController"
+        vc.view.backgroundColor(CIComponentKitThemeCurrentConfig.mainColor)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func changeTheme() -> Swift.Void {
+        CILoadingHUD.appearance().tintColor = UIColor.ci.random
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        
-//        CILoadingHUD.appearance().tintColor = UIColor.ci.random
-        
-//        let theme = CIComponentKitTheme.originTheme
-//        
-//        theme.config.defaultFont = UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(44)))
-//        theme.config.textColor = UIColor.ci.random
-//        theme.config.tintColor = UIColor.ci.random
-//        theme.config.navigationBarLeftColor = UIColor.ci.random
-//        theme.config.navigationItemTitleColor = UIColor.ci.random
-//        
-//        theme.renderTheme()
-        
+        let theme = CIComponentKitTheme.originTheme
+        theme.config.textColor = UIColor.ci.random
+        theme.config.mainColor = UIColor.ci.hex(hex: 0xF7F6F6)
+        theme.config.tintColor = UIColor.ci.random
+        theme.config.navigationBarLeftColor = UIColor.ci.random
+        theme.config.navigationItemTitleColor = UIColor.ci.random
+        theme.config.navigationBarBackgroundColor = UIColor.ci.hex(hex: 0x4AF2A1)
+        theme.renderTheme()
     }
-    
-    
 
 }
 

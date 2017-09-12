@@ -1,5 +1,5 @@
 //
-//  CIComponentAppearance.swift
+//  CICAppearance.swift
 //  CIComponentKit
 //
 //  Created by ManoBoo on 2017/8/30.
@@ -42,7 +42,7 @@ import UIKit
 
 // 如果想要自定义控件支持主题替换,请遵循CIComponentKitAppearance协议
 /// custom component callback when current theme  (will toggle) / (toggled)
-@objc protocol CIComponentAppearance {
+@objc protocol CICAppearance {
 
     
     /// 主题即将切换

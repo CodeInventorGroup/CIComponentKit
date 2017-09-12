@@ -91,4 +91,21 @@ extension UIView {
         return self
     }
     
+    @discardableResult
+    public func frame(_ rect: CGRect) -> Self {
+        self.frame = rect
+        return self
+    }
+    
+    @discardableResult
+    public func backgroundColor(_ color: UIColor = .clear) -> Self {
+        self.backgroundColor = color
+        return self
+    }
+    
+    @discardableResult
+    public func userInteractionEnabled(_ isUserInteractionEnabled: Bool = true ) -> Self {
+        self.isUserInteractionEnabled = isUserInteractionEnabled
+        return self
+    }
 }

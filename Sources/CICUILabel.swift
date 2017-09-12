@@ -29,7 +29,7 @@ public extension UILabel {
 }
 
 // 为调用了 ci.appearance 方法的UILabel实例 添加 CIComponentAppearance 协议支持
-extension CILabel: CIComponentAppearance {
+extension CILabel: CICAppearance {
     
     func didToggleTheme() {
         if self.textColor != CIComponentKitThemeCurrentConfig.textColor {
@@ -38,8 +38,6 @@ extension CILabel: CIComponentAppearance {
         if self.font != CIComponentKitThemeCurrentConfig.defaultFont {
             self.font = CIComponentKitThemeCurrentConfig.defaultFont
         }
-        
-        
     }
     
     func willToggleTheme() {
@@ -67,8 +65,8 @@ public class CILabel: UILabel {
 
     func initMethod() -> Swift.Void {
         // receive the notification of togglling theme
-        NotificationCenter.default.addObserver(self, selector: #selector(CIComponentAppearance.willToggleTheme), name: Notification.Name.ci.themeWillToggle, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(CIComponentAppearance.didToggleTheme), name: Notification.Name.ci.themeDidToggle, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CICAppearance.willToggleTheme), name: Notification.Name.ci.themeWillToggle, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CICAppearance.didToggleTheme), name: Notification.Name.ci.themeDidToggle, object: nil)
     }
     
     deinit {
@@ -186,12 +184,6 @@ public class CILabel: UILabel {
 
 extension UILabel {
     
-    @discardableResult
-    public func frame(_ rect: CGRect) -> Self {
-        self.frame = rect
-        return self
-    }
-    
     // numberOfLines
     @discardableResult
     public func line(_ lineNumbers: Int = 0) -> Self {
@@ -201,7 +193,7 @@ extension UILabel {
     
     // text
     @discardableResult
-    public func text(_ string : String = "") -> Self {
+    public func text(_ string : String? = nil) -> Self {
         self.text = string
         return self
     }

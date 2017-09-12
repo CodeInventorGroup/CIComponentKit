@@ -26,6 +26,10 @@ public extension UIColor {
             
             return CIComponentColor.rgb(red: red, green: green, blue: blue)
         }
+        
+        public static var clear: UIColor {
+            return UIColor(red: 1, green: 1, blue: 1, alpha: 0.0)
+        }
     
         //MARK: RGB Color
         public static func rgb(red : Int, green : Int, blue : Int) -> UIColor {
