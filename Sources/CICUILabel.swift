@@ -198,6 +198,14 @@ extension UILabel {
         return self
     }
     
+    // font
+    @discardableResult
+    public func font(_ font : UIFont = UIFont.ci.systemFont) -> Self {
+        self.font = font
+        return self
+    }
+    
+    // textColor
     @discardableResult
     public func textColor(_ color: UIColor = CIComponentKitThemeCurrentConfig.textColor) -> Self {
         self.textColor = color

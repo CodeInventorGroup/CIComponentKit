@@ -23,28 +23,31 @@ class ViewController: UIViewController {
             label.frame(rect)
                 .line()
                 .text("welcome to cicomponentkit~ \(index)")
+                .font(UIFont.preferredFont(forTextStyle: .body))
                 .textAlignment(.center)
                 .textColor(CIComponentKitThemeCurrentConfig.textColor)
-                .backgroundColor(UIColor.ci.hex(hex: index%2 == 0 ? 0xf2f2f2 : 0xA3A3A3))
+                .backgroundColor(UIColor.ci.hex(hex: index%2 == 0 ? 0xf2f2f2 : 0xC0C0C0))
+            label.adjustsFontForContentSizeCategory = true
             self.view.addSubview(label)
         }
         
         let toggleThemeBtn = UIButton()
         toggleThemeBtn.y(view.bounds.maxY-64)
             .height(64)
-            .x()
             .width(view.ci.width)
             .backgroundColor(.green)
+        toggleThemeBtn.titleLabel?.font(UIFont.preferredFont(forTextStyle: .headline))
         toggleThemeBtn.setTitle("Toggle theme", for: .normal)
         toggleThemeBtn.addTarget(self, action: #selector(changeTheme), for: .touchUpInside)
         view.addSubview(toggleThemeBtn)
         
         let jumpBtn = UIButton()
-        jumpBtn.x()
+        jumpBtn
             .y(toggleThemeBtn.frame.minY - 64)
             .height(64)
             .width(view.ci.width)
-            .backgroundColor(UIColor.ci.hex(hex: 0x4AF2A1))
+            .backgroundColor(UIColor.ci.hex(hex: 0x61dd72))
+        jumpBtn.titleLabel?.font(UIFont.preferredFont(forTextStyle: .headline))
         jumpBtn.setTitle("JUMP TO CICUIViewController", for: .normal)
         jumpBtn.addTarget(self, action: #selector(jump), for: .touchUpInside)
         view.addSubview(jumpBtn)
@@ -78,7 +81,7 @@ class ViewController: UIViewController {
     }
     
     func changeTheme() -> Swift.Void {
-        CILoadingHUD.appearance().tintColor = UIColor.ci.random
+        CILoadingHUD.appearance().tintColor = UIColor.ci.hex(hex: 0xC0C0C0)
         
         let theme = CIComponentKitTheme.originTheme
         theme.config.textColor = UIColor.ci.hex(hex: 0xe2e2e2)
