@@ -49,8 +49,11 @@ public class CIComponentKitTheme {
         }
     }
     
+    /// 主题的详细配置
     public var config = CIComponentKitThemeConfig()
-
+    
+    
+    let blurView = UIVisualEffectView.init(effect: UIBlurEffect.init(style: .light))
 }
 
 
@@ -68,6 +71,7 @@ public extension CIComponentKitTheme {
     // the transition of toggling theme , 切换主题的过度动画
     public enum CIComponentKitThemeTransition {
         case None
+        case blur(UIBlurEffectStyle)
         case progress(() -> ())
     }
     
@@ -77,10 +81,28 @@ public extension CIComponentKitTheme {
     }
     
     
+    
+    public func showAnimation(_ animation: CIComponentKitThemeTransition) {
+        switch animation {
+        case .blur(let style):
+            blurView.effect = UIBlurEffect.init(style: style)
+            blurView.isHidden = false
+            break
+        default:
+            break
+        }
+    }
+    
+    public func hideAnimation(_ animation: CIComponentKitThemeTransition) {
+        
+    }
+    
     public func renderTheme(_ animation: CIComponentKitThemeTransition = .None) {
         
         // post a notification
         NotificationCenter.default.post(name: Notification.Name.ci.themeWillToggle, object: self, userInfo: nil)
+        
+        showAnimation(animation)
         
         CIComponentKitThemeCurrentConfig = config
         
@@ -97,7 +119,8 @@ public extension CIComponentKitTheme {
                 normal)
             
             if let navigationController = currentViewController.navigationController {
-                let navigationBarSize = navigationController.navigationBar.bounds.size
+                var navigationBarSize = navigationController.navigationBar.bounds.size
+                navigationBarSize.height += 20
                 currentViewController.navigationController?.navigationBar.setBackgroundImage(UIImage.image(color: config.navigationBarBackgroundColor, size: navigationBarSize), for: .default)
                 currentViewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: config.navigationItemTitleColor, NSFontAttributeName: UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(24)))]
             }
@@ -113,6 +136,8 @@ public extension CIComponentKitTheme {
         
         
         NotificationCenter.default.post(name: Notification.Name.ci.themeDidToggle, object: self, userInfo: nil)
+        
+        hideAnimation(animation)
     }
     
     

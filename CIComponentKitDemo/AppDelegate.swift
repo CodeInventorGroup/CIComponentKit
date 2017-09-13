@@ -17,7 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { 
+            let theme = CIComponentKitTheme.originTheme
+            theme.config.textColor = UIColor.ci.hex(hex: 0xe2e2e2)
+            theme.config.mainColor = UIColor.ci.hex(hex: 0xF7F6F6)
+            theme.config.tintColor = UIColor.ci.hex(hex: 0xfcfcfc)
+            theme.config.navigationBarLeftColor = UIColor.ci.hex(hex: 0xe2e2e2)
+            theme.config.navigationItemTitleColor = UIColor.ci.hex(hex: 0xfcfcfc)
+            theme.config.navigationBarBackgroundColor = UIColor.ci.hex(hex: 0x47c1ff)
+            theme.renderTheme()
+        }
         
         return true
     }

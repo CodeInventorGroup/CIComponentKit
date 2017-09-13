@@ -11,10 +11,6 @@ import CIComponentKit
 
 class ViewController: UIViewController {
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-         return .lightContent
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -29,7 +25,7 @@ class ViewController: UIViewController {
                 .text("welcome to cicomponentkit~ \(index)")
                 .textAlignment(.center)
                 .textColor(CIComponentKitThemeCurrentConfig.textColor)
-                .backgroundColor(UIColor.ci.random)
+                .backgroundColor(UIColor.ci.hex(hex: index%2 == 0 ? 0xf2f2f2 : 0xA3A3A3))
             self.view.addSubview(label)
         }
         
@@ -53,7 +49,7 @@ class ViewController: UIViewController {
         jumpBtn.addTarget(self, action: #selector(jump), for: .touchUpInside)
         view.addSubview(jumpBtn)
 
-        
+        changeTheme()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -83,14 +79,14 @@ class ViewController: UIViewController {
     
     func changeTheme() -> Swift.Void {
         CILoadingHUD.appearance().tintColor = UIColor.ci.random
-
+        
         let theme = CIComponentKitTheme.originTheme
-        theme.config.textColor = UIColor.ci.random
+        theme.config.textColor = UIColor.ci.hex(hex: 0xe2e2e2)
         theme.config.mainColor = UIColor.ci.hex(hex: 0xF7F6F6)
-        theme.config.tintColor = UIColor.ci.random
-        theme.config.navigationBarLeftColor = UIColor.ci.random
-        theme.config.navigationItemTitleColor = UIColor.ci.random
-        theme.config.navigationBarBackgroundColor = UIColor.ci.hex(hex: 0x4AF2A1)
+        theme.config.tintColor = UIColor.ci.hex(hex: 0xfcfcfc)
+        theme.config.navigationBarLeftColor = UIColor.ci.hex(hex: 0xe2e2e2)
+        theme.config.navigationItemTitleColor = UIColor.ci.hex(hex: 0xfcfcfc)
+        theme.config.navigationBarBackgroundColor = UIColor.ci.hex(hex: 0x26d6a4)
         theme.renderTheme()
     }
 

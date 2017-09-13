@@ -236,7 +236,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0830;
-				ORGANIZATIONNAME = codeinventor;
+				ORGANIZATIONNAME = club.codeinventor;
 				TargetAttributes = {
 					B0E30BF71F55480C00DBD08C = {
 						CreatedOnToolsVersion = 8.3.3;
