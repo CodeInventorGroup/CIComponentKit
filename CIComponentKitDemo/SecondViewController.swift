@@ -18,6 +18,11 @@ class SecondViewController: CICUIViewController, UITableViewDelegate, UITableVie
 
         buildUI()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setToolbarHidden(true, animated: true)
+    }
 
     func buildUI() -> Swift.Void {
         view.addSubview(tableView.frame(CGRect.init(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)))
