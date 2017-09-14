@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B016F4E11F6A2DC700BE4CD3 /* DemonstrationResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B016F4E01F6A2DC700BE4CD3 /* DemonstrationResources.swift */; };
 		B01C7E191F67E03A0001C6AF /* CICUImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01C7E181F67E03A0001C6AF /* CICUImage.swift */; };
 		B03013B11F56615700C9F61F /* CICUIColor.swift in Headers */ = {isa = PBXBuildFile; fileRef = B03013AF1F565C9700C9F61F /* CICUIColor.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 		B03013B31F56816800C9F61F /* CICUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03013B21F56816800C9F61F /* CICUIViewController.swift */; };
@@ -60,6 +61,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B016F4E01F6A2DC700BE4CD3 /* DemonstrationResources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemonstrationResources.swift; sourceTree = "<group>"; };
 		B01C7E181F67E03A0001C6AF /* CICUImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICUImage.swift; sourceTree = "<group>"; };
 		B03013AF1F565C9700C9F61F /* CICUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICUIColor.swift; sourceTree = "<group>"; };
 		B03013B21F56816800C9F61F /* CICUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICUIViewController.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 		B0E30C0D1F55520200DBD08C /* CIComponentKitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				B016F4E01F6A2DC700BE4CD3 /* DemonstrationResources.swift */,
 				B0E30C0E1F55520200DBD08C /* AppDelegate.swift */,
 				B0E30C101F55520200DBD08C /* ViewController.swift */,
 				B0E30C121F55520200DBD08C /* Main.storyboard */,
@@ -314,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0E30C111F55520200DBD08C /* ViewController.swift in Sources */,
+				B016F4E11F6A2DC700BE4CD3 /* DemonstrationResources.swift in Sources */,
 				B0E30C0F1F55520200DBD08C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
