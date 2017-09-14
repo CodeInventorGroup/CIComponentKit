@@ -31,7 +31,7 @@ public extension UILabel {
 // 为调用了 ci.appearance 方法的UILabel实例 添加 CIComponentAppearance 协议支持
 extension CILabel: CICAppearance {
     
-    func didToggleTheme() {
+    public func didToggleTheme() {
         if self.textColor != CIComponentKitThemeCurrentConfig.textColor {
             self.textColor = CIComponentKitThemeCurrentConfig.textColor
         }
@@ -40,7 +40,7 @@ extension CILabel: CICAppearance {
         }
     }
     
-    func willToggleTheme() {
+    public func willToggleTheme() {
         
     }
 }
@@ -186,7 +186,7 @@ extension UILabel {
     
     // numberOfLines
     @discardableResult
-    public func line(_ lineNumbers: Int = 0) -> Self {
+    public func line(_ lineNumbers: Int = 1) -> Self {
         self.numberOfLines = lineNumbers
         return self
     }

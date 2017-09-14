@@ -41,7 +41,7 @@ public extension UIViewController {
     }
 }
 
-public class CICUIViewController: UIViewController, CICAppearance {
+open class CICUIViewController: UIViewController, CICAppearance {
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         NotificationCenter.default.addObserver(self, selector: #selector(CICAppearance.willToggleTheme), name: NSNotification.Name.ci.themeWillToggle, object: nil)
@@ -58,11 +58,11 @@ public class CICUIViewController: UIViewController, CICAppearance {
     }
     
     //MARK: - 主题支持
-    func willToggleTheme() {
+    open func willToggleTheme() {
         print("CICUIViewController willToggleTheme")
     }
     
-    func didToggleTheme() {
+    open func didToggleTheme() {
         print("CICUIViewController didToggleTheme")
     }
 }

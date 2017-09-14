@@ -74,6 +74,12 @@ extension UIView {
     }
     
     @discardableResult
+    public func size(_ size: CGSize) -> Self {
+        self.frame.size = size
+        return self
+    }
+    
+    @discardableResult
     public func center(_ center: CGPoint = .zero) -> Self {
         self.center = center
         return self
