@@ -15,22 +15,33 @@ public extension CIComponentKit where Base: UIView {
     }
 
     func showLoading(_ title: String?) -> Swift.Void {
-        CILoadingHUD.show(title)
+        CICHUD.show(title)
     }
 }
 
-public typealias CILoadingHUDClousure =  ((Bool) -> Swift.Void)
+/// - DdefaultConfig
+var CICHUDRect = {CGRect.init(origin: .zero, size: CGSize.init(width: UIScreen.main.bounds.width - 80, height: 160))}()
 
-///MARK: - CILoadingHUD
-public class CILoadingHUD: UIView {
+
+public typealias CICHUDClousure =  ((Bool) -> Swift.Void)
+
+///MARK: - CICHUD
+public class CICHUD: UIView {
 
     //MARK: Property
+    
+    public enum Style {
+        case loading
+        case toast
+    }
+    
+    var style: Style = .loading
     
     // default blurEffect = .extraLight 默认模糊效果
     var blurStyle: UIBlurEffectStyle = .extraLight
     
     // loading's style
-    public enum CILoadingStyle {
+    public enum CICHUDLoadingStyle {
         case original   // 系统自带的 UIActivityIndicatorView 指示器
         case style1
         case style2
@@ -39,25 +50,25 @@ public class CILoadingHUD: UIView {
         case style5
     }
     
-    var loadingStyle: CILoadingStyle = .original
+    var loadingStyle: CICHUDLoadingStyle = .original
     
-    public enum CILoadingLayoutStyle {
+    public enum CICHUDLayoutStyle {
         case left // title is left
         case top
         case right
         case bottom
     }
-    var layoutStyle: CILoadingLayoutStyle = .top
+    var layoutStyle: CICHUDLayoutStyle = .top
 
     
     // loading弹出时的动画
-    public enum CILoadingAnimation {
+    public enum CICHUDAnimation {
         case none
         case spring
         case curveEaseInOut
     }
-    var showAnimation:CILoadingAnimation = .none
-    var hideAnimation:CILoadingAnimation = .none
+    var showAnimation:CICHUDAnimation = .none
+    var hideAnimation:CICHUDAnimation = .none
     
     // tip's title  提示文字
     var title: String? = "加载中~"
@@ -67,20 +78,26 @@ public class CILoadingHUD: UIView {
 
     
     //MARK: - init && deinit
-    public static let `default` = CILoadingHUD.init("加载中", blurStyle: .light, layoutStyle: .top)
+    public static let `default` = CICHUD.init("加载中", blurStyle: .light, layoutStyle: .top)
     
     public init(_ title: String?,
+                style: CICHUD.Style = .loading,
                 blurStyle: UIBlurEffectStyle = .extraLight,
-                layoutStyle: CILoadingLayoutStyle = .left,
-                loadingStyle: CILoadingStyle? = .original,
-                showAnimation: CILoadingAnimation? = .none,
-                hideAnimation: CILoadingAnimation? = .none) {
+                layoutStyle: CICHUDLayoutStyle = .left,
+                loadingStyle: CICHUDLoadingStyle = .original,
+                showAnimation: CICHUDAnimation = .none,
+                hideAnimation: CICHUDAnimation = .none) {
         super.init(frame: .zero)
         self.layer.cornerRadius = 3.0
         self.layer.masksToBounds = true
+        
         self.title = title
-        self.layoutStyle = layoutStyle
+        self.style = style
         self.blurStyle = blurStyle
+        self.layoutStyle = layoutStyle
+        self.loadingStyle = loadingStyle
+        self.showAnimation = showAnimation
+        self.hideAnimation = hideAnimation
         
         backgroundView.effect = UIBlurEffect.init(style: blurStyle)
         self.addSubview(backgroundView)
@@ -88,12 +105,14 @@ public class CILoadingHUD: UIView {
         let contentView = backgroundView.contentView
         
         titleLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
-        titleLabel.tintColor = CILoadingHUD.appearance().tintColor
+        titleLabel.tintColor = CICHUD.appearance().tintColor
         contentView.addSubview(titleLabel)
         
         animationImgView.contentMode = .center
         animationImgView.addSubview(activityView)
         contentView.addSubview(animationImgView)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(renderAfterUIDeviceOrientationDidChange(notification:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
 
@@ -108,18 +127,33 @@ public class CILoadingHUD: UIView {
     // CILoadingStyle.original  原生的加载指示器
     lazy var activityView: UIActivityIndicatorView = {
         let activity = UIActivityIndicatorView.init(activityIndicatorStyle: .gray)
-        activity.color = CILoadingHUD.appearance().tintColor
+        activity.color = CICHUD.appearance().tintColor
         return activity
     }()
     
+    func renderAfterUIDeviceOrientationDidChange(notification: Notification) -> Swift.Void {
+        if style == .loading {
+            self.frame = CICHUDRect
+        }else {
+            self.frame = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width - 180, height: 100)
+        }
+        
+        UIView.animate(withDuration: 0.35) { [unowned self] in
+            if let superView = self.superview {
+                self.center(superView.ci.internalCenter)
+            }
+        }
+    }
     
     
     func resizeLayout() -> Swift.Void {
     
         backgroundView.effect = UIBlurEffect.init(style: blurStyle)
-        backgroundView.frame = self.bounds
+        backgroundView.frame(self.bounds)
         
-        animationImgView.frame.size = CGSize.init(width: 64, height: 64)
+        animationImgView.size(CGSize.init(width: 64, height: 64))
+        
+        activityView.isHidden = (style == .toast)
         
         titleLabel.text = title
         titleLabel.sizeToFit()
@@ -145,7 +179,12 @@ public class CILoadingHUD: UIView {
                 .centerY(backgroundView.ci.internalCenterY)
             break
         }
-        
+        if style == .toast && animationImgView.image == nil {
+            animationImgView.isHidden = true
+            titleLabel.center(self.ci.internalCenter)
+        }else {
+            animationImgView.isHidden = false
+        }
         if loadingStyle == .original {
             activityView.center = animationImgView.ci.internalCenter
             activityView.startAnimating()
@@ -163,15 +202,6 @@ public class CILoadingHUD: UIView {
     /// - Returns: Void
     func render() -> Swift.Void {
         
-        guard let keyWindow = UIApplication.shared.keyWindow else {
-            return
-        }
-        
-        // default layout
-        self.frame = CGRect.init(origin: .zero, size: CGSize.init(width: keyWindow.bounds.width - 80, height: 160))
-        self.center = keyWindow.center
-        keyWindow.addSubview(self)
-    
         resizeLayout()
     }
     
@@ -179,28 +209,60 @@ public class CILoadingHUD: UIView {
     
     public func show(_ title: String?,
                      blurStyle: UIBlurEffectStyle = .dark,
-                     layoutStyle: CILoadingLayoutStyle = .left,
+                     layoutStyle: CICHUDLayoutStyle = .left,
                      delay: TimeInterval? = 0.0) {
-        let hud = CILoadingHUD.init(title, blurStyle: blurStyle, layoutStyle: layoutStyle)
+        let hud = CICHUD.init(title, blurStyle: blurStyle, layoutStyle: layoutStyle)
         hud.render()
     }
     
     public class func show(_ title: String?,
                            blurStyle: UIBlurEffectStyle = .dark,
-                           layoutStyle: CILoadingLayoutStyle = .left,
+                           layoutStyle: CICHUDLayoutStyle = .left,
                            delay: TimeInterval? = 0.0) {
-        CILoadingHUD.default.title = title
-        CILoadingHUD.default.blurStyle = blurStyle
-        CILoadingHUD.default.layoutStyle = layoutStyle
-        CILoadingHUD.default.render()
+        CICHUD.default.title = title
+        CICHUD.default.blurStyle = blurStyle
+        CICHUD.default.layoutStyle = layoutStyle
+        CICHUD.default.frame(CICHUDRect)
+        if let keyWindow = UIApplication.shared.keyWindow {
+            // default layout
+            CICHUD.default.center(keyWindow.center)
+            keyWindow.addSubview(CICHUD.default)
+        }
+        CICHUD.default.render()
     }
     
-    public func hide(_ complete: CILoadingHUDClousure = {_ in }) {
+    public class func toast(_ title: String?,
+                            blurStyle: UIBlurEffectStyle = .dark,
+                            layoutStyle: CICHUDLayoutStyle = .left,
+                            delay: TimeInterval? = 0.0, duration: TimeInterval = 1.25) {
+        
+        CICHUD.default.style = .toast
+        CICHUD.default.title = title
+        CICHUD.default.blurStyle = blurStyle
+        CICHUD.default.layoutStyle = layoutStyle
+        CICHUD.default.frame(CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width - 180, height: 100))
+        
+        
+        if let keyWindow = UIApplication.shared.keyWindow {
+            // default layout
+            CICHUD.default.center(keyWindow.center)
+            keyWindow.addSubview(CICHUD.default)
+        }
+        
+        CICHUD.default.render()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) { 
+            CICHUD.hide()
+        }
+    }
+
+    
+    public func hide(_ complete: CICHUDClousure = {_ in }) {
         self.removeFromSuperview()
     }
     
-    public class func hide(_ complete: CILoadingHUDClousure = {_ in }) {
-        CILoadingHUD.default.hide(complete)
+    public class func hide(_ complete: CICHUDClousure = {_ in }) {
+        CICHUD.default.hide(complete)
     }
 }
 

@@ -7,35 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B01C7E191F67E03A0001C6AF /* CICUImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01C7E181F67E03A0001C6AF /* CICUImage.swift */; };
-		B03013B11F56615700C9F61F /* CICUIColor.swift in Headers */ = {isa = PBXBuildFile; fileRef = B03013AF1F565C9700C9F61F /* CICUIColor.swift */; settings = {ATTRIBUTES = (Public, ); }; };
-		B03013B31F56816800C9F61F /* CICUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03013B21F56816800C9F61F /* CICUIViewController.swift */; };
-		B03013B51F568D9500C9F61F /* CICAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03013B41F568D9500C9F61F /* CICAppearance.swift */; };
-		B03013B71F56A6A600C9F61F /* CICTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03013B61F56A6A600C9F61F /* CICTheme.swift */; };
-		B03013B81F56CA5E00C9F61F /* CICAppearance.swift in Headers */ = {isa = PBXBuildFile; fileRef = B03013B41F568D9500C9F61F /* CICAppearance.swift */; settings = {ATTRIBUTES = (Public, ); }; };
-		B03013B91F56CA5E00C9F61F /* CICTheme.swift in Headers */ = {isa = PBXBuildFile; fileRef = B03013B61F56A6A600C9F61F /* CICTheme.swift */; settings = {ATTRIBUTES = (Public, ); }; };
-		B03013BA1F56CB5600C9F61F /* CICUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03013AF1F565C9700C9F61F /* CICUIColor.swift */; };
 		B03FB7B31F57053F008A356C /* CIComponentKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B0E30BF81F55480C00DBD08C /* CIComponentKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B06263621F6ACF4E00371DCB /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06263611F6ACF4E00371DCB /* SecondViewController.swift */; };
-		B06474621F66CCF90009A826 /* CICUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06474611F66CCF90009A826 /* CICUILabel.swift */; };
-		B06474641F66CD180009A826 /* CICUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06474631F66CD180009A826 /* CICUIView.swift */; };
-		B0A110581F593804006CA69A /* CICThemeConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A110571F593804006CA69A /* CICThemeConfig.swift */; };
-		B0A1105A1F593BD5006CA69A /* CICUIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A110591F593BD5006CA69A /* CICUIFont.swift */; };
-		B0A1105B1F59418D006CA69A /* CICThemeConfig.swift in Headers */ = {isa = PBXBuildFile; fileRef = B0A110571F593804006CA69A /* CICThemeConfig.swift */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0A1105D1F59419F006CA69A /* CICUIFont.swift in Headers */ = {isa = PBXBuildFile; fileRef = B0A110591F593BD5006CA69A /* CICUIFont.swift */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0A1105E1F59419F006CA69A /* CICUIViewController.swift in Headers */ = {isa = PBXBuildFile; fileRef = B03013B21F56816800C9F61F /* CICUIViewController.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0B631411F698BAB00712C1D /* DemonstrationResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B631401F698BAB00712C1D /* DemonstrationResources.swift */; };
+		B0CFA99B1F6BAE2A00FB61D4 /* CICUImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA98E1F6BAE2A00FB61D4 /* CICUImage.swift */; };
+		B0CFA99C1F6BAE2B00FB61D4 /* CICUIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA98F1F6BAE2A00FB61D4 /* CICUIFont.swift */; };
+		B0CFA99D1F6BAE2B00FB61D4 /* UIColor+CIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA9901F6BAE2A00FB61D4 /* UIColor+CIKit.swift */; };
+		B0CFA99E1F6BAE2B00FB61D4 /* CICUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA9921F6BAE2A00FB61D4 /* CICUILabel.swift */; };
+		B0CFA99F1F6BAE2B00FB61D4 /* CICUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA9931F6BAE2A00FB61D4 /* CICUIView.swift */; };
+		B0CFA9A01F6BAE2B00FB61D4 /* CICUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA9941F6BAE2A00FB61D4 /* CICUIViewController.swift */; };
+		B0CFA9A11F6BAE2B00FB61D4 /* CICHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA9951F6BAE2A00FB61D4 /* CICHUD.swift */; };
+		B0CFA9A21F6BAE2B00FB61D4 /* CICTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA9971F6BAE2A00FB61D4 /* CICTheme.swift */; };
+		B0CFA9A31F6BAE2B00FB61D4 /* CICThemeConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA9981F6BAE2A00FB61D4 /* CICThemeConfig.swift */; };
+		B0CFA9A41F6BAE2B00FB61D4 /* CICAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA9991F6BAE2A00FB61D4 /* CICAppearance.swift */; };
+		B0CFA9A51F6BAE2B00FB61D4 /* CIComponentKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA99A1F6BAE2A00FB61D4 /* CIComponentKit.swift */; };
+		B0CFA9A71F6BAF7400FB61D4 /* UILabel+CIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA9A61F6BAF7400FB61D4 /* UILabel+CIKit.swift */; };
+		B0CFA9A91F6BB73400FB61D4 /* UIView+CIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA9A81F6BB73400FB61D4 /* UIView+CIKit.swift */; };
+		B0CFA9AB1F6BBAEC00FB61D4 /* String+CIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA9AA1F6BBAEC00FB61D4 /* String+CIKit.swift */; };
+		B0CFA9AE1F6BDBD200FB61D4 /* UIDevice+CIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA9AD1F6BDBD200FB61D4 /* UIDevice+CIKit.swift */; };
+		B0CFA9B01F6BDE9300FB61D4 /* CIComponentKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA9AF1F6BDE9300FB61D4 /* CIComponentKitManager.swift */; };
 		B0E30BFD1F55480C00DBD08C /* CIComponentKit.h in Headers */ = {isa = PBXBuildFile; fileRef = B0E30BFB1F55480C00DBD08C /* CIComponentKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0E30C0F1F55520200DBD08C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E30C0E1F55520200DBD08C /* AppDelegate.swift */; };
 		B0E30C111F55520200DBD08C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E30C101F55520200DBD08C /* ViewController.swift */; };
 		B0E30C141F55520200DBD08C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0E30C121F55520200DBD08C /* Main.storyboard */; };
 		B0E30C161F55520200DBD08C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0E30C151F55520200DBD08C /* Assets.xcassets */; };
 		B0E30C191F55520200DBD08C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0E30C171F55520200DBD08C /* LaunchScreen.storyboard */; };
-		B0E30C1F1F5553DA00DBD08C /* CIComponentKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E30C1E1F5553DA00DBD08C /* CIComponentKit.swift */; };
-		B0E30C201F55542A00DBD08C /* CIComponentKit.swift in Headers */ = {isa = PBXBuildFile; fileRef = B0E30C1E1F5553DA00DBD08C /* CIComponentKit.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0E30C211F5555F000DBD08C /* CIComponentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0E30BF81F55480C00DBD08C /* CIComponentKit.framework */; };
-		B0E30C231F555F5500DBD08C /* CICUIToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E30C221F555F5500DBD08C /* CICUIToastView.swift */; };
-		B0E30C241F555FA100DBD08C /* CICUIToastView.swift in Headers */ = {isa = PBXBuildFile; fileRef = B0E30C221F555F5500DBD08C /* CICUIToastView.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,17 +59,24 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B01C7E181F67E03A0001C6AF /* CICUImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICUImage.swift; sourceTree = "<group>"; };
-		B03013AF1F565C9700C9F61F /* CICUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICUIColor.swift; sourceTree = "<group>"; };
-		B03013B21F56816800C9F61F /* CICUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICUIViewController.swift; sourceTree = "<group>"; };
-		B03013B41F568D9500C9F61F /* CICAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICAppearance.swift; sourceTree = "<group>"; };
-		B03013B61F56A6A600C9F61F /* CICTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICTheme.swift; sourceTree = "<group>"; };
 		B06263611F6ACF4E00371DCB /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		B06474611F66CCF90009A826 /* CICUILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICUILabel.swift; sourceTree = "<group>"; };
-		B06474631F66CD180009A826 /* CICUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICUIView.swift; sourceTree = "<group>"; };
-		B0A110571F593804006CA69A /* CICThemeConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICThemeConfig.swift; sourceTree = "<group>"; };
-		B0A110591F593BD5006CA69A /* CICUIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICUIFont.swift; sourceTree = "<group>"; };
 		B0B631401F698BAB00712C1D /* DemonstrationResources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemonstrationResources.swift; sourceTree = "<group>"; };
+		B0CFA98E1F6BAE2A00FB61D4 /* CICUImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICUImage.swift; sourceTree = "<group>"; };
+		B0CFA98F1F6BAE2A00FB61D4 /* CICUIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICUIFont.swift; sourceTree = "<group>"; };
+		B0CFA9901F6BAE2A00FB61D4 /* UIColor+CIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+CIKit.swift"; sourceTree = "<group>"; };
+		B0CFA9921F6BAE2A00FB61D4 /* CICUILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICUILabel.swift; sourceTree = "<group>"; };
+		B0CFA9931F6BAE2A00FB61D4 /* CICUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICUIView.swift; sourceTree = "<group>"; };
+		B0CFA9941F6BAE2A00FB61D4 /* CICUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICUIViewController.swift; sourceTree = "<group>"; };
+		B0CFA9951F6BAE2A00FB61D4 /* CICHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICHUD.swift; sourceTree = "<group>"; };
+		B0CFA9971F6BAE2A00FB61D4 /* CICTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICTheme.swift; sourceTree = "<group>"; };
+		B0CFA9981F6BAE2A00FB61D4 /* CICThemeConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICThemeConfig.swift; sourceTree = "<group>"; };
+		B0CFA9991F6BAE2A00FB61D4 /* CICAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICAppearance.swift; sourceTree = "<group>"; };
+		B0CFA99A1F6BAE2A00FB61D4 /* CIComponentKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIComponentKit.swift; sourceTree = "<group>"; };
+		B0CFA9A61F6BAF7400FB61D4 /* UILabel+CIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+CIKit.swift"; sourceTree = "<group>"; };
+		B0CFA9A81F6BB73400FB61D4 /* UIView+CIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+CIKit.swift"; sourceTree = "<group>"; };
+		B0CFA9AA1F6BBAEC00FB61D4 /* String+CIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+CIKit.swift"; sourceTree = "<group>"; };
+		B0CFA9AD1F6BDBD200FB61D4 /* UIDevice+CIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+CIKit.swift"; sourceTree = "<group>"; };
+		B0CFA9AF1F6BDE9300FB61D4 /* CIComponentKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIComponentKitManager.swift; sourceTree = "<group>"; };
 		B0E30BF81F55480C00DBD08C /* CIComponentKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CIComponentKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0E30BFB1F55480C00DBD08C /* CIComponentKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CIComponentKit.h; sourceTree = "<group>"; };
 		B0E30BFC1F55480C00DBD08C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -83,8 +87,6 @@
 		B0E30C151F55520200DBD08C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B0E30C181F55520200DBD08C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B0E30C1A1F55520300DBD08C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B0E30C1E1F5553DA00DBD08C /* CIComponentKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIComponentKit.swift; sourceTree = "<group>"; };
-		B0E30C221F555F5500DBD08C /* CICUIToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICUIToastView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,24 +108,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B03013AE1F565C7A00C9F61F /* ExtensionTools */ = {
+		B0CFA98D1F6BAE2A00FB61D4 /* CICExtensions */ = {
 			isa = PBXGroup;
 			children = (
-				B03013AF1F565C9700C9F61F /* CICUIColor.swift */,
-				B03013B41F568D9500C9F61F /* CICAppearance.swift */,
-				B03013B61F56A6A600C9F61F /* CICTheme.swift */,
-				B0A110571F593804006CA69A /* CICThemeConfig.swift */,
-				B0A110591F593BD5006CA69A /* CICUIFont.swift */,
-				B06474631F66CD180009A826 /* CICUIView.swift */,
-				B01C7E181F67E03A0001C6AF /* CICUImage.swift */,
+				B0CFA98E1F6BAE2A00FB61D4 /* CICUImage.swift */,
+				B0CFA98F1F6BAE2A00FB61D4 /* CICUIFont.swift */,
+				B0CFA9901F6BAE2A00FB61D4 /* UIColor+CIKit.swift */,
+				B0CFA9A61F6BAF7400FB61D4 /* UILabel+CIKit.swift */,
+				B0CFA9A81F6BB73400FB61D4 /* UIView+CIKit.swift */,
+				B0CFA9AA1F6BBAEC00FB61D4 /* String+CIKit.swift */,
+				B0CFA9AD1F6BDBD200FB61D4 /* UIDevice+CIKit.swift */,
 			);
-			path = ExtensionTools;
+			path = CICExtensions;
+			sourceTree = "<group>";
+		};
+		B0CFA9911F6BAE2A00FB61D4 /* CIComponentKit */ = {
+			isa = PBXGroup;
+			children = (
+				B0CFA9921F6BAE2A00FB61D4 /* CICUILabel.swift */,
+				B0CFA9931F6BAE2A00FB61D4 /* CICUIView.swift */,
+				B0CFA9941F6BAE2A00FB61D4 /* CICUIViewController.swift */,
+				B0CFA9951F6BAE2A00FB61D4 /* CICHUD.swift */,
+				B0CFA9AF1F6BDE9300FB61D4 /* CIComponentKitManager.swift */,
+			);
+			path = CIComponentKit;
+			sourceTree = "<group>";
+		};
+		B0CFA9961F6BAE2A00FB61D4 /* CICTheme */ = {
+			isa = PBXGroup;
+			children = (
+				B0CFA9971F6BAE2A00FB61D4 /* CICTheme.swift */,
+				B0CFA9981F6BAE2A00FB61D4 /* CICThemeConfig.swift */,
+				B0CFA9991F6BAE2A00FB61D4 /* CICAppearance.swift */,
+			);
+			path = CICTheme;
 			sourceTree = "<group>";
 		};
 		B0E30BEE1F55480C00DBD08C = {
 			isa = PBXGroup;
 			children = (
-				B03013AE1F565C7A00C9F61F /* ExtensionTools */,
 				B0E30C051F554F4800DBD08C /* Sources */,
 				B0E30BFA1F55480C00DBD08C /* CIComponentKit */,
 				B0E30C0D1F55520200DBD08C /* CIComponentKitDemo */,
@@ -152,10 +175,10 @@
 		B0E30C051F554F4800DBD08C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				B06474611F66CCF90009A826 /* CICUILabel.swift */,
-				B0E30C1E1F5553DA00DBD08C /* CIComponentKit.swift */,
-				B0E30C221F555F5500DBD08C /* CICUIToastView.swift */,
-				B03013B21F56816800C9F61F /* CICUIViewController.swift */,
+				B0CFA98D1F6BAE2A00FB61D4 /* CICExtensions */,
+				B0CFA9911F6BAE2A00FB61D4 /* CIComponentKit */,
+				B0CFA9961F6BAE2A00FB61D4 /* CICTheme */,
+				B0CFA99A1F6BAE2A00FB61D4 /* CIComponentKit.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -183,14 +206,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0E30BFD1F55480C00DBD08C /* CIComponentKit.h in Headers */,
-				B0E30C201F55542A00DBD08C /* CIComponentKit.swift in Headers */,
-				B0E30C241F555FA100DBD08C /* CICUIToastView.swift in Headers */,
-				B03013B91F56CA5E00C9F61F /* CICTheme.swift in Headers */,
-				B03013B81F56CA5E00C9F61F /* CICAppearance.swift in Headers */,
-				B0A1105B1F59418D006CA69A /* CICThemeConfig.swift in Headers */,
-				B0A1105D1F59419F006CA69A /* CICUIFont.swift in Headers */,
-				B0A1105E1F59419F006CA69A /* CICUIViewController.swift in Headers */,
-				B03013B11F56615700C9F61F /* CICUIColor.swift in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,17 +316,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0A1105A1F593BD5006CA69A /* CICUIFont.swift in Sources */,
-				B03013BA1F56CB5600C9F61F /* CICUIColor.swift in Sources */,
-				B03013B51F568D9500C9F61F /* CICAppearance.swift in Sources */,
-				B0E30C231F555F5500DBD08C /* CICUIToastView.swift in Sources */,
-				B06474641F66CD180009A826 /* CICUIView.swift in Sources */,
-				B01C7E191F67E03A0001C6AF /* CICUImage.swift in Sources */,
-				B0E30C1F1F5553DA00DBD08C /* CIComponentKit.swift in Sources */,
-				B0A110581F593804006CA69A /* CICThemeConfig.swift in Sources */,
-				B03013B71F56A6A600C9F61F /* CICTheme.swift in Sources */,
-				B06474621F66CCF90009A826 /* CICUILabel.swift in Sources */,
-				B03013B31F56816800C9F61F /* CICUIViewController.swift in Sources */,
+				B0CFA9A01F6BAE2B00FB61D4 /* CICUIViewController.swift in Sources */,
+				B0CFA9AB1F6BBAEC00FB61D4 /* String+CIKit.swift in Sources */,
+				B0CFA9A51F6BAE2B00FB61D4 /* CIComponentKit.swift in Sources */,
+				B0CFA99E1F6BAE2B00FB61D4 /* CICUILabel.swift in Sources */,
+				B0CFA99C1F6BAE2B00FB61D4 /* CICUIFont.swift in Sources */,
+				B0CFA9A21F6BAE2B00FB61D4 /* CICTheme.swift in Sources */,
+				B0CFA99F1F6BAE2B00FB61D4 /* CICUIView.swift in Sources */,
+				B0CFA9A11F6BAE2B00FB61D4 /* CICHUD.swift in Sources */,
+				B0CFA9B01F6BDE9300FB61D4 /* CIComponentKitManager.swift in Sources */,
+				B0CFA9A71F6BAF7400FB61D4 /* UILabel+CIKit.swift in Sources */,
+				B0CFA99B1F6BAE2A00FB61D4 /* CICUImage.swift in Sources */,
+				B0CFA9A41F6BAE2B00FB61D4 /* CICAppearance.swift in Sources */,
+				B0CFA99D1F6BAE2B00FB61D4 /* UIColor+CIKit.swift in Sources */,
+				B0CFA9A91F6BB73400FB61D4 /* UIView+CIKit.swift in Sources */,
+				B0CFA9A31F6BAE2B00FB61D4 /* CICThemeConfig.swift in Sources */,
+				B0CFA9AE1F6BDBD200FB61D4 /* UIDevice+CIKit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,6 +525,7 @@
 		B0E30C1C1F55520300DBD08C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 67442AUEW4;
 				INFOPLIST_FILE = CIComponentKitDemo/Info.plist;
@@ -518,6 +539,7 @@
 		B0E30C1D1F55520300DBD08C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 67442AUEW4;
 				INFOPLIST_FILE = CIComponentKitDemo/Info.plist;

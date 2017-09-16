@@ -46,9 +46,17 @@ extension CILabel: CICAppearance {
 }
 
 
-/********************************************* CILabel begin ******************************/
+/********************************************* CILabel ******************************/
 /// CILabel 自定义UILabel,支持 长按复制
 public class CILabel: UILabel {
+    
+    private var tempBackgroundColor: UIColor?
+    
+    private lazy var longPressGesture: UILongPressGestureRecognizer = {
+        let g = UILongPressGestureRecognizer.init(target: self, action: #selector(handleLongPressEvent(_:)))
+        self.addGestureRecognizer(g)
+        return g
+    }()
     
     convenience init() {
         self.init(frame: .zero)
@@ -86,13 +94,6 @@ public class CILabel: UILabel {
         }
     }
     
-    
-    private var tempBackgroundColor: UIColor?
-    private lazy var longPressGesture: UILongPressGestureRecognizer = {
-        let g = UILongPressGestureRecognizer.init(target: self, action: #selector(handleLongPressEvent(_:)))
-        self.addGestureRecognizer(g)
-        return g
-    }()
         // - 提供长按操作时的高亮背景颜色
     public var highlightedBackgroundColor: UIColor = CIComponentKitThemeCurrentConfig.highlightedBackgroundColor {
         didSet {
@@ -100,8 +101,7 @@ public class CILabel: UILabel {
         }
     }
     
-    
-    public override var isHighlighted: Bool {
+    override public var isHighlighted: Bool {
         didSet {
             super.isHighlighted = isHighlighted
             backgroundColor = isHighlighted ? highlightedBackgroundColor : tempBackgroundColor
@@ -119,12 +119,17 @@ public class CILabel: UILabel {
         return false
     }
     
+    /// - CICLabel长按的type
     public enum LongPressAction {
         case none
         case copy
         case Touch3D // building
     }
+    
+        // - copy完成之后的回调
+    public var copySuccessClousure: (() -> ())?
 
+        // - 长按操作
     public var longPressAction: LongPressAction = .none {
         didSet {
             if longPressAction == .copy {
@@ -140,12 +145,41 @@ public class CILabel: UILabel {
         }
     }
     
+        // - longPressAction == .copy 时,copy的范围
+    public var copyRange: NSRange? = nil
+    
+    override public var text: String? {
+        didSet {
+            super.text = text
+            if let lengh = text?.characters.count,copyRange == nil {
+                // 默认copy整个字符串
+                copyRange = NSMakeRange(0, lengh)
+            }
+        }
+    }
+    
+    public override var attributedText: NSAttributedString? {
+        didSet {
+            super.attributedText = attributedText
+            if let length = attributedText?.string.characters.count, copyRange == nil {
+                copyRange = NSMakeRange(0, length)
+            }
+        }
+    }
+    
     //MARK: - Event
     
     func copyEvent() -> Swift.Void {
-        if (self.text != nil) {
-            let board = UIPasteboard.general
-            board.string = self.text
+        guard let string = (self.attributedText?.string ?? self.text), string.isEmpty == false else{
+            print("\(self) copy text should not be nil ")
+            return
+        }
+        if let copyRange = copyRange {
+            let str = ((string as NSString).substring(with: copyRange)) as String
+            UIPasteboard.general.string = str
+            if copySuccessClousure != nil {
+                copySuccessClousure!()
+            }
         }
     }
     
@@ -154,7 +188,7 @@ public class CILabel: UILabel {
             return
         }
         if longPressGesture.state == .began {
-            print(self.becomeFirstResponder())
+            self.becomeFirstResponder()
             let menuController = UIMenuController.shared
             menuController.menuItems = [UIMenuItem.init(title: "复制", action: #selector(copyEvent))]
             menuController.setTargetRect(self.frame, in: self.superview!)
@@ -175,49 +209,31 @@ public class CILabel: UILabel {
     }
 }
 
-/********************************************* CILabel end ******************************/
 
-
-
-/********************************************* extension UILabel begin ******************************/
-
-
-extension UILabel {
+extension CILabel {
     
-    // numberOfLines
     @discardableResult
-    public func line(_ lineNumbers: Int = 1) -> Self {
-        self.numberOfLines = lineNumbers
-        return self
-    }
-    
-    // text
-    @discardableResult
-    public func text(_ string : String? = nil) -> Self {
-        self.text = string
-        return self
-    }
-    
-    // font
-    @discardableResult
-    public func font(_ font : UIFont = UIFont.ci.systemFont) -> Self {
-        self.font = font
-        return self
-    }
-    
-    // textColor
-    @discardableResult
-    public func textColor(_ color: UIColor = CIComponentKitThemeCurrentConfig.textColor) -> Self {
-        self.textColor = color
+    public func contentEdgeInset(_ contentEdgeInset: UIEdgeInsets = .zero) -> Self {
+        self.contentEdgeInset = contentEdgeInset
         return self
     }
     
     @discardableResult
-    public func textAlignment(_ textAlignment: NSTextAlignment = .left) -> Self {
-        self.textAlignment = textAlignment
+    public func longPressAction(_ longPressAction: LongPressAction = .none) -> Self {
+        self.longPressAction = longPressAction
         return self
     }
     
+    @discardableResult
+    public func highlightedBackgroundColor(_ highlightedBackgroundColor: UIColor = CIComponentKitThemeCurrentConfig.highlightedBackgroundColor) -> Self {
+        self.highlightedBackgroundColor = highlightedBackgroundColor
+        return self
+    }
+    
+    @discardableResult
+    public func copyRange(_ copyRange: NSRange) -> Self {
+        self.copyRange = copyRange
+        return self
+    }
 }
 
-/********************************************* extension UILabel end ******************************/

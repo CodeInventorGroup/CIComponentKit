@@ -26,6 +26,11 @@ class ViewController: UIViewController {
             .textAlignment(.center)
             .textColor(CIComponentKitThemeCurrentConfig.textColor)
             .backgroundColor(UIColor.ci.hex(hex:  0xf2f2f2))
+            .longPressAction(.copy)
+            .copyRange(NSMakeRange(0, 5))
+        label.copySuccessClousure = {
+            CICHUD.toast("复制成功", blurStyle: .extraLight, layoutStyle: .top)
+        }
         label.adjustsFontForContentSizeCategory = true
         self.view.addSubview(label)
         
@@ -56,19 +61,19 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        CILoadingHUD.show("拼命加载中", blurStyle: .light, layoutStyle: .left)
+        CICHUD.show("拼命加载中", blurStyle: .extraLight, layoutStyle: .left)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        CILoadingHUD.hide()
+//        CICHUD.hide()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        CILoadingHUD.default.hide()
+        CICHUD.default.hide()
     }
     
     func jump() -> Swift.Void {
@@ -79,7 +84,7 @@ class ViewController: UIViewController {
     }
     
     func changeTheme() -> Swift.Void {
-        CILoadingHUD.appearance().tintColor = UIColor.ci.hex(hex: 0xC0C0C0)
+        CICHUD.appearance().tintColor = UIColor.ci.hex(hex: 0xC0C0C0)
         
         let theme = CIComponentKitTheme.originTheme
         theme.config.textColor = UIColor.ci.random
