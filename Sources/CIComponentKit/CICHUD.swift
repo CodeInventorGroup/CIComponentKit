@@ -112,7 +112,7 @@ public class CICHUD: UIView {
         animationImgView.addSubview(activityView)
         contentView.addSubview(animationImgView)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(renderAfterUIDeviceOrientationDidChange(notification:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(renderAfterUIDeviceOrientationDidChange(notification:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
 

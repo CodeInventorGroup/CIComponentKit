@@ -50,4 +50,40 @@ extension UILabel {
     
 }
 
+extension UILabel {
+    
+    @discardableResult
+    public func sizeTo(layout layoutValue: CICLayoutType) -> Self {
+        self.sizeToFit()
+        switch layoutValue {
+        case .x(let x):
+            self.x(x)
+            break
+        case .y(let y):
+            self.y(y)
+            break
+        case .width(let width):
+            self.width(width)
+            break
+        case .height(let height):
+            self.height(height)
+            break
+        case .maxWidth(let maxWidth):
+            if(self.cic.width > maxWidth) {
+                self.width(maxWidth)
+            }
+            break
+        case .maxHeight(let maxHeight):
+            if(self.cic.height > maxHeight) {
+                self.height(maxHeight)
+            }
+            break
+        default:
+            break
+        }
+        return self
+    }
+    
+}
+
 /********************************************* extension UILabel end ******************************/

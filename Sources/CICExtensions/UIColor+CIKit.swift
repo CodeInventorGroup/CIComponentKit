@@ -20,9 +20,9 @@ public extension UIColor {
         
         //MARK: Random Color
         public static var random: UIColor {
-            let red = Int(arc4random_uniform(255))
-            let green = Int(arc4random_uniform(255))
-            let blue = Int(arc4random_uniform(255))
+            let red = Int(arc4random_uniform(256))
+            let green = Int(arc4random_uniform(256))
+            let blue = Int(arc4random_uniform(256))
             
             return CIComponentColor.rgb(red: red, green: green, blue: blue)
         }

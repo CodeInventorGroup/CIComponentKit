@@ -15,7 +15,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        
         let label = UILabel.cic.appearance
         label.longPressAction = .copy
         let rect = CGRect.init(x: 0, y: 64, width: view.bounds.width, height: 200)
@@ -37,7 +36,7 @@ class ViewController: UIViewController {
         let toggleThemeBtn = UIButton()
         toggleThemeBtn.y(view.bounds.maxY-64)
             .height(64)
-            .width(view.cic.width)
+            .width(equalTo: view)
             .backgroundColor(UIColor.cic.hex(hex: 0x06e2c9))
         toggleThemeBtn.titleLabel?.font(UIFont.preferredFont(forTextStyle: .headline))
         toggleThemeBtn.setTitle("Toggle theme", for: .normal)
@@ -48,7 +47,7 @@ class ViewController: UIViewController {
         jumpBtn
             .y(toggleThemeBtn.frame.minY - 64)
             .height(64)
-            .width(view.cic.width)
+            .width(equalTo: view)
             .backgroundColor(UIColor.cic.hex(hex: 0x22a9e8))
         jumpBtn.titleLabel?.font(UIFont.preferredFont(forTextStyle: .headline))
         jumpBtn.setTitle("JUMP TO CICUIViewController", for: .normal)
@@ -62,12 +61,6 @@ class ViewController: UIViewController {
         super.viewWillAppear(animated)
         
         CICHUD.show("拼命加载中", blurStyle: .extraLight, layoutStyle: .left)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-//        CICHUD.hide()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

@@ -49,9 +49,25 @@ extension CIComponentKit where Base: UIView {
 
 extension UIView {
     
+    public enum CICLayoutType {
+        case x(CGFloat)
+        case y(CGFloat)
+        case width(CGFloat)
+        case maxWidth(CGFloat)
+        case height(CGFloat)
+        case maxHeight(CGFloat)
+        case none
+    }
+    
     @discardableResult
     public func x(_ originX: CGFloat = 0.0) -> Self {
         self.frame.origin.x = originX
+        return self
+    }
+    
+    @discardableResult
+    public func x(equalTo view: UIView) -> Self {
+        self.frame.origin.x = view.frame.origin.x
         return self
     }
     
@@ -62,8 +78,20 @@ extension UIView {
     }
     
     @discardableResult
+    public func y(equalTo view: UIView) -> Self {
+        self.frame.origin.y = view.frame.origin.y
+        return self
+    }
+    
+    @discardableResult
     public func width(_ width: CGFloat = 0.0) -> Self {
         self.frame.size.width = width
+        return self
+    }
+    
+    @discardableResult
+    public func width(equalTo view: UIView) -> Self {
+        self.frame.size.width = view.bounds.width
         return self
     }
     
@@ -74,6 +102,12 @@ extension UIView {
     }
     
     @discardableResult
+    public func height(equalTo view: UIView) -> Self {
+        self.frame.size.height = view.bounds.width
+        return self
+    }
+
+    @discardableResult
     public func size(_ size: CGSize) -> Self {
         self.frame.size = size
         return self
@@ -82,6 +116,12 @@ extension UIView {
     @discardableResult
     public func center(_ center: CGPoint = .zero) -> Self {
         self.center = center
+        return self
+    }
+    
+    @discardableResult
+    public func center(equalTo view: UIView) -> Self {
+        self.center = view.center
         return self
     }
     
