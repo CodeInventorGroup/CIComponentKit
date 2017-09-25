@@ -29,7 +29,7 @@ extension UILabel {
     
     /// font
     @discardableResult
-    public func font(_ font : UIFont = UIFont.ci.systemFont) -> Self {
+    public func font(_ font : UIFont = UIFont.cic.systemFont) -> Self {
         self.font = font
         return self
     }

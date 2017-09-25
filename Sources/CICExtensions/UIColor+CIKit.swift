@@ -9,9 +9,9 @@
 
 public extension UIColor {
     
-    struct ci {
+    struct cic {
         
-        private typealias CIComponentColor = ci
+        private typealias CIComponentColor = cic
         
         enum ColorFormatter {
             case hex(UInt32)

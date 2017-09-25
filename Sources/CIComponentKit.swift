@@ -11,7 +11,7 @@ import UIKit
 
 public protocol CIComponentKitProtocol {
     associatedtype type
-    var ci: type {get}
+    var cic: type {get}
 }
 
 public final class CIComponentKit<Base> {
@@ -27,7 +27,7 @@ public final class CIComponentKit<Base> {
 }
 
 extension CIComponentKitProtocol {
-    public var ci: CIComponentKit<Self> {
+    public var cic: CIComponentKit<Self> {
         get {
             return CIComponentKit(self)
         }

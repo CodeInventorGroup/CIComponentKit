@@ -9,7 +9,7 @@
 import UIKit
 
 extension Notification.Name {
-    struct ci {
+    struct cic {
         
         // 切换通知时发出这个通知，post notification when switching theme
         static let themeWillToggle = NSNotification.Name.init("CIComponentKitThemeWillToggleNotifier")
@@ -100,13 +100,13 @@ public extension CIComponentKitTheme {
     public func renderTheme(_ animation: CIComponentKitThemeTransition = .None) {
         
         // post a notification
-        NotificationCenter.default.post(name: Notification.Name.ci.themeWillToggle, object: self, userInfo: nil)
+        NotificationCenter.default.post(name: Notification.Name.cic.themeWillToggle, object: self, userInfo: nil)
         
         showAnimation(animation)
         
         CIComponentKitThemeCurrentConfig = config
         
-        if let currentViewController = UIApplication.shared.keyWindow?.rootViewController?.ci.visibleViewController {
+        if let currentViewController = UIApplication.shared.keyWindow?.rootViewController?.cic.visibleViewController {
             print("*********************************************************************************")
             print("----------------toggle theme, identifier: \(config.identifier)------------------")
             print("*********************************************************************************")
@@ -135,7 +135,7 @@ public extension CIComponentKitTheme {
         UINavigationBar.appearance().barTintColor = config.navigationBarLeftColor
         
         
-        NotificationCenter.default.post(name: Notification.Name.ci.themeDidToggle, object: self, userInfo: nil)
+        NotificationCenter.default.post(name: Notification.Name.cic.themeDidToggle, object: self, userInfo: nil)
         
         hideAnimation(animation)
     }

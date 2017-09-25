@@ -140,7 +140,7 @@ public class CICHUD: UIView {
         
         UIView.animate(withDuration: 0.35) { [unowned self] in
             if let superView = self.superview {
-                self.center(superView.ci.internalCenter)
+                self.center(superView.cic.internalCenter)
             }
         }
     }
@@ -161,7 +161,7 @@ public class CICHUD: UIView {
         switch layoutStyle {
         case .top:
             animationImgView.y(20)
-                .centerX(backgroundView.ci.internalCenterX)
+                .centerX(backgroundView.cic.internalCenterX)
             titleLabel.y(animationImgView.frame.maxY + 30)
                 .centerX(backgroundView.center.x)
             break
@@ -174,19 +174,19 @@ public class CICHUD: UIView {
             
         default:
             animationImgView.x(20)
-                .centerY(backgroundView.ci.internalCenterY)
+                .centerY(backgroundView.cic.internalCenterY)
             titleLabel.x(animationImgView.frame.maxX+20)
-                .centerY(backgroundView.ci.internalCenterY)
+                .centerY(backgroundView.cic.internalCenterY)
             break
         }
         if style == .toast && animationImgView.image == nil {
             animationImgView.isHidden = true
-            titleLabel.center(self.ci.internalCenter)
+            titleLabel.center(self.cic.internalCenter)
         }else {
             animationImgView.isHidden = false
         }
         if loadingStyle == .original {
-            activityView.center = animationImgView.ci.internalCenter
+            activityView.center = animationImgView.cic.internalCenter
             activityView.startAnimating()
             if blurStyle == .dark {
                 activityView.color = UIColor.white

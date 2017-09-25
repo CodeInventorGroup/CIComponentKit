@@ -16,7 +16,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         
-        let label = UILabel.ci.appearance
+        let label = UILabel.cic.appearance
         label.longPressAction = .copy
         let rect = CGRect.init(x: 0, y: 64, width: view.bounds.width, height: 200)
         label.frame(rect)
@@ -25,7 +25,7 @@ class ViewController: UIViewController {
             .font(UIFont.preferredFont(forTextStyle: .body))
             .textAlignment(.center)
             .textColor(CIComponentKitThemeCurrentConfig.textColor)
-            .backgroundColor(UIColor.ci.hex(hex:  0xf2f2f2))
+            .backgroundColor(UIColor.cic.hex(hex:  0xf2f2f2))
             .longPressAction(.copy)
             .copyRange(NSMakeRange(0, 5))
         label.copySuccessClousure = {
@@ -37,8 +37,8 @@ class ViewController: UIViewController {
         let toggleThemeBtn = UIButton()
         toggleThemeBtn.y(view.bounds.maxY-64)
             .height(64)
-            .width(view.ci.width)
-            .backgroundColor(UIColor.ci.hex(hex: 0x06e2c9))
+            .width(view.cic.width)
+            .backgroundColor(UIColor.cic.hex(hex: 0x06e2c9))
         toggleThemeBtn.titleLabel?.font(UIFont.preferredFont(forTextStyle: .headline))
         toggleThemeBtn.setTitle("Toggle theme", for: .normal)
         toggleThemeBtn.addTarget(self, action: #selector(changeTheme), for: .touchUpInside)
@@ -48,8 +48,8 @@ class ViewController: UIViewController {
         jumpBtn
             .y(toggleThemeBtn.frame.minY - 64)
             .height(64)
-            .width(view.ci.width)
-            .backgroundColor(UIColor.ci.hex(hex: 0x22a9e8))
+            .width(view.cic.width)
+            .backgroundColor(UIColor.cic.hex(hex: 0x22a9e8))
         jumpBtn.titleLabel?.font(UIFont.preferredFont(forTextStyle: .headline))
         jumpBtn.setTitle("JUMP TO CICUIViewController", for: .normal)
         jumpBtn.addTarget(self, action: #selector(jump), for: .touchUpInside)
@@ -84,15 +84,15 @@ class ViewController: UIViewController {
     }
     
     func changeTheme() -> Swift.Void {
-        CICHUD.appearance().tintColor = UIColor.ci.hex(hex: 0xC0C0C0)
+        CICHUD.appearance().tintColor = UIColor.cic.hex(hex: 0xC0C0C0)
         
         let theme = CIComponentKitTheme.originTheme
-        theme.config.textColor = UIColor.ci.random
-        theme.config.mainColor = UIColor.ci.hex(hex: 0xF7F6F6)
-        theme.config.tintColor = UIColor.ci.hex(hex: 0xfcfcfc)
-        theme.config.navigationBarLeftColor = UIColor.ci.hex(hex: 0xe2e2e2)
-        theme.config.navigationItemTitleColor = UIColor.ci.hex(hex: 0xfcfcfc)
-        theme.config.navigationBarBackgroundColor = UIColor.ci.hex(hex: 0x26d6a4)
+        theme.config.textColor = UIColor.cic.random
+        theme.config.mainColor = UIColor.cic.hex(hex: 0xF7F6F6)
+        theme.config.tintColor = UIColor.cic.hex(hex: 0xfcfcfc)
+        theme.config.navigationBarLeftColor = UIColor.cic.hex(hex: 0xe2e2e2)
+        theme.config.navigationItemTitleColor = UIColor.cic.hex(hex: 0xfcfcfc)
+        theme.config.navigationBarBackgroundColor = UIColor.cic.hex(hex: 0x26d6a4)
         theme.renderTheme()
     }
 

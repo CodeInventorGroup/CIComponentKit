@@ -10,7 +10,7 @@ import UIKit
 
 
 public extension UIFont {
-    struct ci {
+    struct cic {
         
         // 系统自带的字体
         public static var systemFont: UIFont {

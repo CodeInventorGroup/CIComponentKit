@@ -21,15 +21,15 @@ import UIKit
 
 // 为了让用户用最少的修改即可动态换主题，又减少操作，采取了折中方法
 public extension UILabel {
-    struct ci {
-        public static var appearance: CILabel {
-            return CILabel()
+    struct cic {
+        public static var appearance: CICLabel {
+            return CICLabel()
         }
     }
 }
 
 // 为调用了 ci.appearance 方法的UILabel实例 添加 CIComponentAppearance 协议支持
-extension CILabel: CICAppearance {
+extension CICLabel: CICAppearance {
     
     public func didToggleTheme() {
         if self.textColor != CIComponentKitThemeCurrentConfig.textColor {
@@ -48,7 +48,7 @@ extension CILabel: CICAppearance {
 
 /********************************************* CILabel ******************************/
 /// CILabel 自定义UILabel,支持 长按复制
-public class CILabel: UILabel {
+public class CICLabel: UILabel {
     
     private var tempBackgroundColor: UIColor?
     
@@ -73,8 +73,8 @@ public class CILabel: UILabel {
 
     func initMethod() -> Swift.Void {
         // receive the notification of togglling theme
-        NotificationCenter.default.addObserver(self, selector: #selector(CICAppearance.willToggleTheme), name: Notification.Name.ci.themeWillToggle, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(CICAppearance.didToggleTheme), name: Notification.Name.ci.themeDidToggle, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CICAppearance.willToggleTheme), name: Notification.Name.cic.themeWillToggle, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CICAppearance.didToggleTheme), name: Notification.Name.cic.themeDidToggle, object: nil)
     }
     
     deinit {
@@ -210,7 +210,8 @@ public class CILabel: UILabel {
 }
 
 
-extension CILabel {
+// MARK: - CILabel
+extension CICLabel {
     
     @discardableResult
     public func contentEdgeInset(_ contentEdgeInset: UIEdgeInsets = .zero) -> Self {

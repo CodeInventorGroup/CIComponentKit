@@ -25,7 +25,7 @@ extension CGFloat {
 
 extension UIImage {
     
-    class func image(color: UIColor = UIColor.ci.clear, size: CGSize, cornerRadius: CGFloat = 0.0) -> UIImage? {
+    class func image(color: UIColor = UIColor.cic.clear, size: CGSize, cornerRadius: CGFloat = 0.0) -> UIImage? {
         var image: UIImage? = nil
         
         if size.valid() {
