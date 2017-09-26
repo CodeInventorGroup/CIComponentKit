@@ -155,8 +155,7 @@ public class CICHUD: UIView {
         
         activityView.isHidden = (style == .toast)
         
-        titleLabel.text = title
-        titleLabel.sizeToFit()
+        titleLabel.text(title).textAlignment(.center).sizeTo(layout: .width(100))
         
         switch layoutStyle {
         case .top:

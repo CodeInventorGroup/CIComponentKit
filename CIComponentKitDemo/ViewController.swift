@@ -16,9 +16,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         let label = UILabel.cic.appearance
-        label.longPressAction = .copy
-        let rect = CGRect.init(x: 0, y: 64, width: view.bounds.width, height: 200)
-        label.frame(rect)
+        label.frame(CGRect.init(x: 0, y: 64, width: view.bounds.width, height: 200))
             .line(0)
             .text(String.LoremIpsum)
             .font(UIFont.preferredFont(forTextStyle: .body))
@@ -60,7 +58,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        CICHUD.show("拼命加载中", blurStyle: .extraLight, layoutStyle: .left)
+        CICHUD.show("拼命加载中", blurStyle: .light, layoutStyle: .left)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
