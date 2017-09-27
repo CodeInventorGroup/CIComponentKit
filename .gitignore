@@ -67,3 +67,5 @@ fastlane/screenshots
 fastlane/test_output
 /.DS_Store
 /ExtensionTools/.DS_Store
+.idea/CIKit.iml
+.idea/runConfigurations/CIComponentKitDemo.xml

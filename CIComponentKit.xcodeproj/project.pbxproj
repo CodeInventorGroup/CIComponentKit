@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B03977C51F7A08040004C256 /* AutoLayout+CIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03977C41F7A08040004C256 /* AutoLayout+CIKit.swift */; };
 		B03FB7B31F57053F008A356C /* CIComponentKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B0E30BF81F55480C00DBD08C /* CIComponentKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B06263621F6ACF4E00371DCB /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06263611F6ACF4E00371DCB /* SecondViewController.swift */; };
 		B0B631411F698BAB00712C1D /* DemonstrationResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B631401F698BAB00712C1D /* DemonstrationResources.swift */; };
@@ -59,6 +60,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B03977C41F7A08040004C256 /* AutoLayout+CIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AutoLayout+CIKit.swift"; sourceTree = "<group>"; };
 		B06263611F6ACF4E00371DCB /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		B0B631401F698BAB00712C1D /* DemonstrationResources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemonstrationResources.swift; sourceTree = "<group>"; };
 		B0CFA98E1F6BAE2A00FB61D4 /* CICUImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICUImage.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				B0CFA9A81F6BB73400FB61D4 /* UIView+CIKit.swift */,
 				B0CFA9AA1F6BBAEC00FB61D4 /* String+CIKit.swift */,
 				B0CFA9AD1F6BDBD200FB61D4 /* UIDevice+CIKit.swift */,
+				B03977C41F7A08040004C256 /* AutoLayout+CIKit.swift */,
 			);
 			path = CICExtensions;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				B0CFA99E1F6BAE2B00FB61D4 /* CICUILabel.swift in Sources */,
 				B0CFA99C1F6BAE2B00FB61D4 /* CICUIFont.swift in Sources */,
 				B0CFA9A21F6BAE2B00FB61D4 /* CICTheme.swift in Sources */,
+				B03977C51F7A08040004C256 /* AutoLayout+CIKit.swift in Sources */,
 				B0CFA99F1F6BAE2B00FB61D4 /* CICUIView.swift in Sources */,
 				B0CFA9A11F6BAE2B00FB61D4 /* CICHUD.swift in Sources */,
 				B0CFA9B01F6BDE9300FB61D4 /* CIComponentKitManager.swift in Sources */,
@@ -530,7 +534,7 @@
 				DEVELOPMENT_TEAM = 67442AUEW4;
 				INFOPLIST_FILE = CIComponentKitDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.codeinventor.group.CIComponentKitDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.manoboo.group.CIComponentKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -544,7 +548,7 @@
 				DEVELOPMENT_TEAM = 67442AUEW4;
 				INFOPLIST_FILE = CIComponentKitDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.codeinventor.group.CIComponentKitDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.manoboo.group.CIComponentKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

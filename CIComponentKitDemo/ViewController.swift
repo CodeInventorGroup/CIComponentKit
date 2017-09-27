@@ -26,7 +26,7 @@ class ViewController: UIViewController {
             .longPressAction(.copy)
             .copyRange(NSMakeRange(0, 5))
         label.copySuccessClousure = {
-            CICHUD.toast("复制成功", blurStyle: .extraLight, layoutStyle: .top)
+            CICHUD.toast("复制成功", blurStyle: .extraLight, layoutStyle: .top, delay: 0.0, duration: 5.0)
         }
         label.adjustsFontForContentSizeCategory = true
         self.view.addSubview(label)
@@ -58,7 +58,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        CICHUD.show("拼命加载中", blurStyle: .light, layoutStyle: .left)
+        CICHUD.show("拼命加载中", blurStyle: .extraLight, layoutStyle: .right)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
