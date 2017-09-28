@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
-                      CIComponentKit, a component kit made by ManoBoo & NEWWORLD
+                      CIComponentKit, a component kit made by ManoBoo & NEWWORLD, issue to us
                    DESC
 
   s.homepage     = "https://github.com/CodeInventorGroup/CIKit"
