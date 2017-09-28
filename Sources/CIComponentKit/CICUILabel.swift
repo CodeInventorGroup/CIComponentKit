@@ -11,7 +11,7 @@ import UIKit
 
 /********************************************* this is a demo ******************************
  
- let label = UILabel.ci.appearance
+ let label = UILabel.cic.appearance
  label.text = "welcome to cicomponentkti~ O(∩_∩)O~~"
  self.view.addSubview(label)
  

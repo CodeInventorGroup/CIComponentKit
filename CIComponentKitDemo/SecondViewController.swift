@@ -62,6 +62,8 @@ class SecondViewController: CICUIViewController, UITableViewDelegate, UITableVie
         theme.config.navigationItemTitleColor = UIColor.cic.hex(hex: 0xfcfcfc)
         theme.config.navigationBarBackgroundColor = UIColor.cic.hex(hex: 0x26d6a4)
         theme.renderTheme()
+        
+        CICHUD.toast("主题切换成功😄", blurStyle: .extraLight)
     }
     
     //MARK: - CIComponentKitThemeChange

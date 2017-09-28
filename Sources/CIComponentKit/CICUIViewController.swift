@@ -69,6 +69,12 @@ open class CICUIViewController: UIViewController, CICAppearance {
         print("CICUIViewController didToggleTheme")
     }
 
+    //MARK: - 屏幕旋转
+    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        
+    }
     
     //MARK: - 
     

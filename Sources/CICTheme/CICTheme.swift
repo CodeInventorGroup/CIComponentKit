@@ -83,18 +83,25 @@ public extension CIComponentKitTheme {
     
     
     public func showAnimation(_ animation: CIComponentKitThemeTransition) {
+        if blurView.superview == nil {
+            if let keyWindow = UIApplication.shared.keyWindow {
+                keyWindow.addSubview(blurView)
+                blurView.size(keyWindow.bounds.size)
+                blurView.center(keyWindow.cic.internalCenter)
+            }
+        }
         switch animation {
-        case .blur(let style):
-            blurView.effect = UIBlurEffect.init(style: style)
-            blurView.isHidden = false
-            break
-        default:
-            break
+            case .blur(let style):
+                blurView.effect = UIBlurEffect.init(style: style)
+                blurView.isHidden = false
+                break
+            default:
+                break
         }
     }
     
     public func hideAnimation(_ animation: CIComponentKitThemeTransition) {
-        
+        blurView.removeFromSuperview()
     }
     
     public func renderTheme(_ animation: CIComponentKitThemeTransition = .None) {

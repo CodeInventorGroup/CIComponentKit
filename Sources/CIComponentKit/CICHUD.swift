@@ -78,7 +78,7 @@ public class CICHUD: UIView {
 
     
     //MARK: - init && deinit
-    public static let `default` = CICHUD.init("加载中", blurStyle: .light, layoutStyle: .top)
+    public static let `default` = CICHUD.init("加载中", blurStyle: .light, layoutStyle: .left)
     
     public init(_ title: String?,
                 style: CICHUD.Style = .loading,
@@ -120,10 +120,11 @@ public class CICHUD: UIView {
         activityView.centerYAnchor.constraint(equalTo: animationImgView.centerYAnchor).isActive = true
         
         contentView.addSubview(animationImgView)
-        
-//        NotificationCenter.default.addObserver(self, selector: #selector(renderAfterUIDeviceOrientationDidChange(notification:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
+    deinit {
+        print("CICHUD deinit")
+    }
 
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -165,88 +166,69 @@ public class CICHUD: UIView {
         animationImgView.sizeAnchor(equalTo: CGSize(width: 64, height: 64))
         activityView.isHidden = (style == .toast)
         
-        titleLabel.text(title).textAlignment(.center)
-            .sizeTo(layout: .width(100))
-        titleLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
+        titleLabel.text(title).textAlignment(.center).sizeToFit()
+        titleLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
         titleLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 20).isActive = true
-        
-        let topConstraints = [animationImgView.topAnchor.constraint(equalTo: marginsGuide.topAnchor, constant: 20),
-                             animationImgView.centerXAnchor.constraint(equalTo: marginsGuide.centerXAnchor),
-                             titleLabel.topAnchor.constraint(equalTo: animationImgView.bottomAnchor, constant: 30),
-                             titleLabel.centerXAnchor.constraint(equalTo: marginsGuide.centerXAnchor)]
-        let rightConstraints = [titleLabel.leftAnchor.constraint(equalTo: backgroundView.leftAnchor, constant: 20),
-                               titleLabel.centerYAnchor.constraint(equalTo: marginsGuide.centerYAnchor),
-                               animationImgView.leftAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 20),
-                               animationImgView.centerYAnchor.constraint(equalTo: marginsGuide.centerYAnchor)]
-        let leftConstraints = [animationImgView.leftAnchor.constraint(equalTo: backgroundView.leftAnchor, constant: 20),
-                               animationImgView.centerYAnchor.constraint(equalTo: marginsGuide.centerYAnchor),
-                               titleLabel.leftAnchor.constraint(equalTo: animationImgView.rightAnchor, constant: 20),
-                               titleLabel.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor)]
-        let bottomConstraints = [titleLabel.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-                                 titleLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 20),
-                                 animationImgView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
-                                 animationImgView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor)]
-        
-        switch layoutStyle {
-            case .top:
-                NSLayoutConstraint.deactivate(rightConstraints)
-                NSLayoutConstraint.deactivate(bottomConstraints)
-                NSLayoutConstraint.deactivate(leftConstraints)
-                NSLayoutConstraint.activate(topConstraints)
-//                _ = rightConstraints.map{$0.isActive = false}
-//                _ = bottomConstraints.map{$0.isActive = false}
-//                _ = leftConstraints.map{$0.isActive = false}
-//                _ = topConstraints.map{$0.isActive = true}
-                break
-            case .right:
-                NSLayoutConstraint.deactivate(topConstraints)
-                NSLayoutConstraint.deactivate(leftConstraints)
-                NSLayoutConstraint.deactivate(bottomConstraints)
-                NSLayoutConstraint.activate(rightConstraints)
-//                _ = topConstraints.map{$0.isActive = false}
-//                _ = leftConstraints.map{$0.isActive = false}
-//                _ = bottomConstraints.map{$0.isActive = false}
-//                _ = rightConstraints.map{$0.isActive = true}
-                break
-            case .bottom:
-                NSLayoutConstraint.deactivate(topConstraints)
-                NSLayoutConstraint.deactivate(leftConstraints)
-                NSLayoutConstraint.deactivate(rightConstraints)
-                NSLayoutConstraint.activate(bottomConstraints)
-//                _ = topConstraints.map{$0.isActive = false}
-//                _ = leftConstraints.map{$0.isActive = false}
-//                _ = rightConstraints.map{$0.isActive = false}
-//                _ = bottomConstraints.map{$0.isActive = true}
-                break
-            default:
-                NSLayoutConstraint.deactivate(rightConstraints)
-                NSLayoutConstraint.deactivate(topConstraints)
-                NSLayoutConstraint.deactivate(bottomConstraints)
-                NSLayoutConstraint.activate(leftConstraints)
-//                _ = rightConstraints.map{$0.isActive = false}
-//                _ = topConstraints.map{$0.isActive = false}
-//                _ = bottomConstraints.map{$0.isActive = false}
-//                _ = leftConstraints.map{$0.isActive = true}
-                break
-        }
-        self.setNeedsUpdateConstraints()
-        
         if style == .toast && animationImgView.image == nil {
             animationImgView.isHidden = true
-//            titleLabel.center(self.cic.internalCenter)
+            titleLabel.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
+            titleLabel.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor).isActive = true
         }else {
             animationImgView.isHidden = false
-        }
-        if loadingStyle == .original {
-//            activityView.center = animationImgView.cic.internalCenter
-            activityView.startAnimating()
-            if blurStyle == .dark {
-                activityView.color = UIColor.white
-                titleLabel.textColor(UIColor.white)
+            titleLabel.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = false
+            titleLabel.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor).isActive = false
+            
+            let topConstraints = [animationImgView.topAnchor.constraint(equalTo: marginsGuide.topAnchor, constant: 20),
+                                  animationImgView.centerXAnchor.constraint(equalTo: marginsGuide.centerXAnchor),
+                                  titleLabel.topAnchor.constraint(equalTo: animationImgView.bottomAnchor, constant: 30),
+                                  titleLabel.centerXAnchor.constraint(equalTo: marginsGuide.centerXAnchor)]
+            let rightConstraints = [titleLabel.leftAnchor.constraint(equalTo: backgroundView.leftAnchor, constant: 20),
+                                    titleLabel.centerYAnchor.constraint(equalTo: marginsGuide.centerYAnchor),
+                                    animationImgView.leftAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 20),
+                                    animationImgView.centerYAnchor.constraint(equalTo: marginsGuide.centerYAnchor)]
+            let leftConstraints = [animationImgView.leftAnchor.constraint(equalTo: backgroundView.leftAnchor, constant: 20),
+                                   animationImgView.centerYAnchor.constraint(equalTo: marginsGuide.centerYAnchor),
+                                   titleLabel.leftAnchor.constraint(equalTo: animationImgView.rightAnchor, constant: 20),
+                                   titleLabel.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor)]
+            let bottomConstraints = [titleLabel.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+                                     titleLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 20),
+                                     animationImgView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
+                                     animationImgView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor)]
+            
+            switch layoutStyle {
+                case .top:
+                    NSLayoutConstraint.deactivate(rightConstraints)
+                    NSLayoutConstraint.deactivate(bottomConstraints)
+                    NSLayoutConstraint.deactivate(leftConstraints)
+                    NSLayoutConstraint.activate(topConstraints)
+                    break
+                case .right:
+                    NSLayoutConstraint.deactivate(topConstraints)
+                    NSLayoutConstraint.deactivate(leftConstraints)
+                    NSLayoutConstraint.deactivate(bottomConstraints)
+                    NSLayoutConstraint.activate(rightConstraints)
+                    break
+                case .bottom:
+                    NSLayoutConstraint.deactivate(topConstraints)
+                    NSLayoutConstraint.deactivate(leftConstraints)
+                    NSLayoutConstraint.deactivate(rightConstraints)
+                    NSLayoutConstraint.activate(bottomConstraints)
+                    break
+                default:
+                    NSLayoutConstraint.deactivate(rightConstraints)
+                    NSLayoutConstraint.deactivate(topConstraints)
+                    NSLayoutConstraint.deactivate(bottomConstraints)
+                    NSLayoutConstraint.activate(leftConstraints)
+                    break
+            }
+            if loadingStyle == .original {
+                activityView.startAnimating()
+                if blurStyle == .dark {
+                    activityView.color = UIColor.white
+                    titleLabel.textColor(UIColor.white)
+                }
             }
         }
-        
-        
     }
     
     /// 计算Loading布局 calculate loading hud's layout
@@ -256,10 +238,11 @@ public class CICHUD: UIView {
         if let superView = self.superview {
             self.centerXAnchor.constraint(equalTo: superView.centerXAnchor).isActive = true
             self.centerYAnchor.constraint(equalTo: superView.centerYAnchor).isActive = true
+
             let toastConstraints = [self.widthAnchor.constraint(equalTo: superView.widthAnchor, constant: -180),
-                                    self.heightAnchor.constraint(equalToConstant: 100)]
+                                    self.heightAnchor.constraint(equalToConstant: 80)]
             let loadingConstraints = [self.widthAnchor.constraint(equalTo: superView.widthAnchor, constant: -90),
-                                      self.heightAnchor.constraint(equalToConstant: 200)]
+                                      self.heightAnchor.constraint(equalToConstant: 160)]
             if style == .toast {
                 NSLayoutConstraint.deactivate(loadingConstraints)
                 NSLayoutConstraint.activate(toastConstraints)
@@ -267,6 +250,8 @@ public class CICHUD: UIView {
                 NSLayoutConstraint.deactivate(toastConstraints)
                 NSLayoutConstraint.activate(loadingConstraints)
             }
+            self.setNeedsUpdateConstraints()
+            self.layoutIfNeeded()
             resizeLayout()
         }
     }
@@ -292,7 +277,6 @@ public class CICHUD: UIView {
         CICHUD.default.layoutStyle = layoutStyle
         CICHUD.default.frame(CICHUDRect)
         if let keyWindow = UIApplication.shared.keyWindow {
-            // default layout
             keyWindow.addSubview(CICHUD.default)
             keyWindow.bringSubview(toFront: CICHUD.default)
         }
@@ -301,28 +285,21 @@ public class CICHUD: UIView {
     
     public class func toast(_ title: String?,
                             blurStyle: UIBlurEffectStyle = .dark,
-                            layoutStyle: CICHUDLayoutStyle = .left,
                             delay: TimeInterval? = 0.0, duration: TimeInterval = 1.25) {
-        CICHUD.default.removeFromSuperview()
-        CICHUD.default.style = .toast
-        CICHUD.default.title = title
-        CICHUD.default.blurStyle = blurStyle
-        CICHUD.default.layoutStyle = layoutStyle
+        
+        let hud = CICHUD.init("", blurStyle: .light, layoutStyle: .left)
+        hud.style = .toast
+        hud.title = title
+        hud.blurStyle = blurStyle
         
         if let keyWindow = UIApplication.shared.keyWindow {
-            // default layout
-            keyWindow.addSubview(CICHUD.default)
-            keyWindow.bringSubview(toFront: CICHUD.default)
-//            let toastConstraints = [CICHUD.default.leftAnchor.constraint(equalTo: keyWindow.leftAnchor, constant: 90),
-//                                    CICHUD.default.rightAnchor.constraint(equalTo: keyWindow.rightAnchor, constant: -90),
-//                                    CICHUD.default.heightAnchor.constraint(equalToConstant: 100),
-//                                    CICHUD.default.centerYAnchor.constraint(equalTo: keyWindow.centerYAnchor)]
-//            _ = toastConstraints.map{$0.isActive = true}
+            keyWindow.addSubview(hud)
+            keyWindow.bringSubview(toFront: hud)
         }
-        CICHUD.default.render()
+        hud.render()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + duration) { 
-            CICHUD.hide()
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            hud.hide()
         }
     }
 
