@@ -14,6 +14,7 @@ public extension CIComponentKit where Base: UIView {
         print(self.base)
     }
 
+    @available(iOS 9.0, *)
     func showLoading(_ title: String?) -> Swift.Void {
         CICHUD.show(title)
     }
@@ -26,6 +27,7 @@ var CICHUDRect = {CGRect.init(origin: .zero, size: CGSize.init(width: UIScreen.m
 public typealias CICHUDClousure =  ((Bool) -> Swift.Void)
 
 ///MARK: - CICHUD
+@available(iOS 9.0, *)
 public class CICHUD: UIView {
 
     //MARK: Property

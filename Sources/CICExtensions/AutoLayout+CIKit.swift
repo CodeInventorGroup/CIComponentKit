@@ -64,6 +64,7 @@ public enum CICLayoutAttribute {
     case notAnAttribute
 }
 
+@available(iOS 9.0, *)
 extension UIView {
     
     @discardableResult

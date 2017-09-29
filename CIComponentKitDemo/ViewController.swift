@@ -1,4 +1,4 @@
-//
+    //
 //  ViewController.swift
 //  CIComponentKitDemo
 //
@@ -26,9 +26,10 @@ class ViewController: UIViewController {
             .longPressAction(.copy)
             .copyRange(NSMakeRange(0, 5))
         label.copySuccessClousure = {
-            CICHUD.toast("复制成功", blurStyle: .extraLight)
+            if #available(iOS 9.0, *) {
+                CICHUD.toast("复制成功", blurStyle: .extraLight)
+            }
         }
-        label.adjustsFontForContentSizeCategory = true
         self.view.addSubview(label)
         
         let toggleThemeBtn = UIButton()
@@ -58,13 +59,16 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        CICHUD.show("正在加载~", blurStyle: .extraLight, layoutStyle: .left)
+        if #available(iOS 9.0, *) {
+             CICHUD.show("正在加载~", blurStyle: .extraLight, layoutStyle: .left)
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
-        CICHUD.default.hide()
+        if #available(iOS 9.0, *) {
+            CICHUD.default.hide()
+        }
     }
     
     func jump() -> Swift.Void {
@@ -75,7 +79,6 @@ class ViewController: UIViewController {
     }
     
     func changeTheme() -> Swift.Void {
-        CICHUD.appearance().tintColor = UIColor.cic.hex(hex: 0xC0C0C0)
         
         let theme = CIComponentKitTheme.originTheme
         theme.config.textColor = UIColor.cic.random
