@@ -10,7 +10,7 @@ Building...
 ### CocoaPods
 
 ```
-pod 'CIComponentKit', '~> 0.0.1'
+pod 'CIComponentKit'
 ```
 
 ### Carthage
