@@ -70,7 +70,7 @@ public class CICLabel: UILabel {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     func initMethod() -> Swift.Void {
         // receive the notification of togglling theme
         NotificationCenter.default.addObserver(self, selector: #selector(CICAppearance.willToggleTheme), name: Notification.Name.cic.themeWillToggle, object: nil)
@@ -87,14 +87,14 @@ public class CICLabel: UILabel {
     
     //MARK: - 扩展属性
     
-        // - 文字距离上下左右的边距
+    // - 文字距离上下左右的边距
     public var contentEdgeInset: UIEdgeInsets = .zero {
         didSet {
             setNeedsDisplay()
         }
     }
     
-        // - 提供长按操作时的高亮背景颜色
+    // - 提供长按操作时的高亮背景颜色
     public var highlightedBackgroundColor: UIColor = CIComponentKitThemeCurrentConfig.highlightedBackgroundColor {
         didSet {
             tempBackgroundColor = backgroundColor
@@ -126,10 +126,10 @@ public class CICLabel: UILabel {
         case Touch3D // building
     }
     
-        // - copy完成之后的回调
+    // - copy完成之后的回调
     public var copySuccessClousure: (() -> ())?
-
-        // - 长按操作
+    
+    // - 长按操作
     public var longPressAction: LongPressAction = .none {
         didSet {
             if longPressAction == .copy {
@@ -145,7 +145,7 @@ public class CICLabel: UILabel {
         }
     }
     
-        // - longPressAction == .copy 时,copy的范围
+    // - longPressAction == .copy 时,copy的范围
     public var copyRange: NSRange? = nil
     
     override public var text: String? {
@@ -169,7 +169,7 @@ public class CICLabel: UILabel {
     
     //MARK: - Event
     
-    func copyEvent() -> Swift.Void {
+    @objc func copyEvent() -> Swift.Void {
         guard let string = (self.attributedText?.string ?? self.text), string.isEmpty == false else{
             print("\(self) copy text should not be nil ")
             return
@@ -183,7 +183,7 @@ public class CICLabel: UILabel {
         }
     }
     
-    func handleLongPressEvent(_ longPressGesture: UILongPressGestureRecognizer) -> Swift.Void {
+    @objc func handleLongPressEvent(_ longPressGesture: UILongPressGestureRecognizer) -> Swift.Void {
         if longPressAction != .copy {
             return
         }
@@ -199,7 +199,7 @@ public class CICLabel: UILabel {
         }
     }
     
-    func handleMenuHideEvent(_ notifier: NSNotification) -> Swift.Void {
+    @objc func handleMenuHideEvent(_ notifier: NSNotification) -> Swift.Void {
         if longPressAction != .copy {
             return
         }

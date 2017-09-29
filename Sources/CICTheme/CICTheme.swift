@@ -123,14 +123,14 @@ public extension CIComponentKitTheme {
             
             UIApplication.shared.keyWindow?.tintColor = config.tintColor
             currentViewController.navigationController?.navigationBar.tintColor = config.tintColor
-            currentViewController.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSForegroundColorAttributeName: config.navigationBarLeftColor], for: .
+            currentViewController.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: config.navigationBarLeftColor], for: .
                 normal)
             
             if let navigationController = currentViewController.navigationController {
                 var navigationBarSize = navigationController.navigationBar.bounds.size
                 navigationBarSize.height += 20
                 currentViewController.navigationController?.navigationBar.setBackgroundImage(UIImage.image(color: config.navigationBarBackgroundColor, size: navigationBarSize), for: .default)
-                currentViewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: config.navigationItemTitleColor, NSFontAttributeName: UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(24)))]
+                currentViewController.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: config.navigationItemTitleColor, NSAttributedStringKey.font: UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(24)))]
             }
             
             

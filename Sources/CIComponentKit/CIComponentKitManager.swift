@@ -53,7 +53,7 @@ class CIComponentKitManager: NSObject {
     
     //MARK: - Event
     
-    func handleOrientationChangeNotification(_ notification: Notification) -> Swift.Void {
+    @objc func handleOrientationChangeNotification(_ notification: Notification) -> Swift.Void {
         
     }
 }

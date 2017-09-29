@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CIComponentKit"
-  s.version      = "0.0.4"
+  s.version      = "0.0.5"
   s.summary      = "CIComponentKit, a component kit made by ManoBoo & NEWWORLD"
 
   # This description is used to generate tags and improve search results.
