@@ -5,4 +5,4 @@ xcode_scheme: CIComponentKit
 xcode_sdk: iphonesimulator10.3
 
 script:
-    - xcodebuild clean build -sdk iphonesimulator10.3 -workspace CIComponentKit.xcodeproj -scheme CIComponentKit CODE_SIGNING_REQUIRED=NO
+    - xcodebuild clean build -project CIComponentKit.xcodeproj -scheme CIComponentKit CODE_SIGNING_REQUIRED=NO
