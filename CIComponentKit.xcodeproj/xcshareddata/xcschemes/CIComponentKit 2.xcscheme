@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0830"
+   LastUpgradeVersion = "0900"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B0E30C0B1F55520200DBD08C"
-               BuildableName = "CIComponentKitDemo.app"
-               BlueprintName = "CIComponentKitDemo"
+               BlueprintIdentifier = "B0E30BF71F55480C00DBD08C"
+               BuildableName = "CIComponentKit.framework"
+               BlueprintName = "CIComponentKit"
                ReferencedContainer = "container:CIComponentKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -44,16 +44,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B0E30C0B1F55520200DBD08C"
-            BuildableName = "CIComponentKitDemo.app"
-            BlueprintName = "CIComponentKitDemo"
+            BlueprintIdentifier = "B0E30BF71F55480C00DBD08C"
+            BuildableName = "CIComponentKit.framework"
+            BlueprintName = "CIComponentKit"
             ReferencedContainer = "container:CIComponentKit.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
