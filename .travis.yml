@@ -3,14 +3,6 @@ osx_image: xcode9
 xcode_project: CIComponentKit
 xcode_scheme: CIComponentKit
 xcode_sdk: iphonesimulator10.3
-before_install:
-  - xcodebuild -showsdks
-  - brew update
-  - brew outdated carthage || brew upgrade carthage
-before_script:
-  - carthage bootstrap
-before_deploy:
-  - carthage build --no-skip-current
-  - carthage archive $FRAMEWORK_NAME
+
 script:
     - xcodebuild clean build -sdk iphonesimulator10.3 -workspace CIComponentKit.xcodeproj -scheme CIComponentKit CODE_SIGNING_REQUIRED=NO
