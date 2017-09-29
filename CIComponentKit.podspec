@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CIComponentKit"
-  s.version      = "0.0.1"
+  s.version      = "0.0.4"
   s.summary      = "CIComponentKit, a component kit made by ManoBoo & NEWWORLD"
 
   # This description is used to generate tags and improve search results.
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
                       CIComponentKit, a component kit made by ManoBoo & NEWWORLD, issue to us
                    DESC
 
-  s.homepage     = "https://github.com/CodeInventorGroup/CIKit"
+  s.homepage     = "https://github.com/CodeInventorGroup/CIComponentKit"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -80,7 +80,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/CodeInventorGroup/CIKit.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/CodeInventorGroup/CIComponentKit.git", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -91,10 +91,10 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "Sources/*.{swift,h}"
+  s.source_files  = "Sources/CIComponentKit.swift", "Sources/**/*.swift"
   # s.exclude_files = "Classes/Exclude"
 
-  # s.public_header_files = "Classes/**/*.h"
+  # s.public_header_files = "CIComponentKit/CIComponentKit.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

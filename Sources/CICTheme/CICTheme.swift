@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 extension Notification.Name {
     struct cic {
