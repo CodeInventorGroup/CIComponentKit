@@ -1,0 +1,2 @@
+github "linkedin/LayoutKit"
+github "SnapKit/SnapKit" ~> 4.0.0

@@ -127,10 +127,11 @@ public extension CIComponentKitTheme {
                 normal)
             
             if let navigationController = currentViewController.navigationController {
-                var navigationBarSize = navigationController.navigationBar.bounds.size
-                navigationBarSize.height += 20
-                currentViewController.navigationController?.navigationBar.setBackgroundImage(UIImage.image(color: config.navigationBarBackgroundColor, size: navigationBarSize), for: .default)
-                currentViewController.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: config.navigationItemTitleColor, NSAttributedStringKey.font: UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(24)))]
+//                var navigationBarSize = navigationController.navigationBar.bounds.size
+//                navigationBarSize.height += 20
+//                currentViewController.navigationController?.navigationBar.setBackgroundImage(UIImage.image(color: config.navigationBarBackgroundColor, size: navigationBarSize), for: .default)
+                navigationController.navigationBar.barTintColor = CIComponentKitThemeCurrentConfig.navigationBarBackgroundColor
+                navigationController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: config.navigationItemTitleColor, NSAttributedStringKey.font: UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(24)))]
             }
             
             
@@ -140,7 +141,7 @@ public extension CIComponentKitTheme {
         
         UIView.appearance().tintColor = config.tintColor
         UIWindow.appearance().backgroundColor = config.windowColor
-        UINavigationBar.appearance().barTintColor = config.navigationBarLeftColor
+        UINavigationBar.appearance().barTintColor = config.navigationBarBackgroundColor
         
         
         NotificationCenter.default.post(name: Notification.Name.cic.themeDidToggle, object: self, userInfo: nil)

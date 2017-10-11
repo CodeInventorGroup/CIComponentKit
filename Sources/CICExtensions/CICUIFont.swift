@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 public extension UIFont {
     struct cic {
         
@@ -16,5 +15,10 @@ public extension UIFont {
         public static var systemFont: UIFont {
             return UIFont.systemFont(ofSize: UIFont.systemFontSize)
         }
+        
+        public static func preferred(_ style: UIFontTextStyle) -> UIFont {
+            return UIFont.preferredFont(forTextStyle: style)
+        }
     }
 }
+

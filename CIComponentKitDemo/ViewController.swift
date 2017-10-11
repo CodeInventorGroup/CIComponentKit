@@ -8,15 +8,23 @@
 
 import UIKit
 import CIComponentKit
+import LayoutKit
 
 class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         // Do any additional setup after loading the view, typically from a nib.
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+            self.navigationItem.largeTitleDisplayMode = .automatic
+        } else {
+            // Fallback on earlier versions
+        }
         
         let label = UILabel.cic.appearance
-        label.frame(CGRect.init(x: 0, y: 64, width: view.bounds.width, height: 200))
+        label.frame(CGRect.init(x: 0, y: 0, width: view.bounds.width, height: 200))
             .line(0)
             .text(String.LoremIpsum)
             .font(UIFont.preferredFont(forTextStyle: .body))
@@ -27,17 +35,26 @@ class ViewController: UIViewController {
             .copyRange(NSMakeRange(0, 5))
         label.copySuccessClousure = {
             if #available(iOS 9.0, *) {
-                CICHUD.toast("复制成功", blurStyle: .extraLight)
+//                CICHUD.networkFaild()
+                CICHUD.showNetWorkStatusChange()
+//                CICHUD.toast("复制成功", blurStyle: .extraLight)
             }
         }
         self.view.addSubview(label)
+        
+        let manobooProfile = ManoBooProfileLayout.init(imageName: "manoboo", name: "manoboo", headline: "i love you~")
+        let arrangment = manobooProfile.arrangement(origin: CGPoint.init(x: 0, y: label.frame.maxY), width: view.bounds.width, height: 100)
+        DispatchQueue.main.async {
+            arrangment.makeViews(in: self.view)
+        }
+        
         
         let toggleThemeBtn = UIButton()
         toggleThemeBtn.y(view.bounds.maxY-64)
             .height(64)
             .width(equalTo: view)
             .backgroundColor(UIColor.cic.hex(hex: 0x06e2c9))
-        toggleThemeBtn.titleLabel?.font(UIFont.preferredFont(forTextStyle: .headline))
+        toggleThemeBtn.titleLabel?.font(UIFont.cic.preferred(.body))
         toggleThemeBtn.setTitle("Toggle theme", for: .normal)
         toggleThemeBtn.addTarget(self, action: #selector(changeTheme), for: .touchUpInside)
         view.addSubview(toggleThemeBtn)
@@ -48,7 +65,7 @@ class ViewController: UIViewController {
             .height(64)
             .width(equalTo: view)
             .backgroundColor(UIColor.cic.hex(hex: 0x22a9e8))
-        jumpBtn.titleLabel?.font(UIFont.preferredFont(forTextStyle: .headline))
+        jumpBtn.titleLabel?.font(UIFont.cic.preferred(.headline))
         jumpBtn.setTitle("JUMP TO CICUIViewController", for: .normal)
         jumpBtn.addTarget(self, action: #selector(jump), for: .touchUpInside)
         view.addSubview(jumpBtn)
@@ -58,9 +75,14 @@ class ViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if #available(iOS 9.0, *) {
-             CICHUD.show("正在加载~", blurStyle: .extraLight, layoutStyle: .left)
+            //             CICHUD.show("正在加载~", blurStyle: .extraLight, layoutStyle: .left)
+//            CICHUD.networkFaild("manoboo 来袭~")
+            CICHUD.showNetWorkStatusChange()
         }
     }
     
@@ -68,27 +90,35 @@ class ViewController: UIViewController {
         super.viewDidDisappear(animated)
         if #available(iOS 9.0, *) {
             CICHUD.default.hide()
+//            CICHUD.hideNetworkStatus()
+            CICHUD.hideNetWorkStatusChange()
         }
     }
     
-    func jump() -> Swift.Void {
+    @objc func jump() -> Swift.Void {
         let vc = SecondViewController()
         vc.title = "CICUIViewController"
         vc.view.backgroundColor(CIComponentKitThemeCurrentConfig.mainColor)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func changeTheme() -> Swift.Void {
+    @objc func changeTheme() -> Swift.Void {
         
         let theme = CIComponentKitTheme.originTheme
         theme.config.textColor = UIColor.cic.random
-        theme.config.mainColor = UIColor.cic.hex(hex: 0xF7F6F6)
-        theme.config.tintColor = UIColor.cic.hex(hex: 0xfcfcfc)
+//        theme.config.mainColor = UIColor.cic.hex(hex: 0xF7F6F6)
+        theme.config.mainColor = UIColor.cic.random
+//        theme.config.tintColor = UIColor.cic.hex(hex: 0xfcfcfc)
+        theme.config.tintColor = UIColor.cic.random
         theme.config.navigationBarLeftColor = UIColor.cic.hex(hex: 0xe2e2e2)
-        theme.config.navigationItemTitleColor = UIColor.cic.hex(hex: 0xfcfcfc)
-        theme.config.navigationBarBackgroundColor = UIColor.cic.hex(hex: 0x26d6a4)
+        theme.config.navigationItemTitleColor = UIColor.cic.random
+        theme.config.navigationBarBackgroundColor = UIColor.cic.random
         theme.renderTheme()
     }
-
 }
+    
+    
+
+    
+    
 

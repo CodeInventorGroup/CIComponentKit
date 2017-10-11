@@ -8,6 +8,15 @@
 
 import UIKit
 
+extension CGFloat {
+    public static var screenHeight: CGFloat {
+        return UIScreen.main.bounds.height
+    }
+    public static var screenWidth: CGFloat {
+        return UIScreen.main.bounds.width
+    }
+}
+
 public enum CICLayoutAttribute {
     
     case left(Any, CGFloat)
@@ -93,3 +102,4 @@ extension NSLayoutConstraint {
         return [leftConstraint, topConstraint, widthConstraint, heightConstraint]
     }
 }
+

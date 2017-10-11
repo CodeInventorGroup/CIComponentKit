@@ -59,10 +59,9 @@ class SecondViewController: CICUIViewController, UITableViewDelegate, UITableVie
         theme.config.mainColor = UIColor.cic.hex(hex: 0xF7F6F6)
         theme.config.tintColor = UIColor.cic.hex(hex: 0xfcfcfc)
         theme.config.navigationBarLeftColor = UIColor.cic.hex(hex: 0xe2e2e2)
-        theme.config.navigationItemTitleColor = UIColor.cic.hex(hex: 0xfcfcfc)
-        theme.config.navigationBarBackgroundColor = UIColor.cic.hex(hex: 0x26d6a4)
+        theme.config.navigationItemTitleColor = UIColor.cic.random
+        theme.config.navigationBarBackgroundColor = UIColor.cic.random
         theme.renderTheme()
-        
         if #available(iOS 9.0, *) {
             CICHUD.toast("主题切换成功😄", blurStyle: .extraLight)
         }

@@ -118,9 +118,6 @@ public class CICHUD: UIView {
         animationImgView.addSubview(activityView)
         
         activityView.translatesAutoresizingMaskIntoConstraints = false
-        activityView.centerXAnchor.constraint(equalTo: animationImgView.centerXAnchor).isActive = true
-        activityView.centerYAnchor.constraint(equalTo: animationImgView.centerYAnchor).isActive = true
-        
         contentView.addSubview(animationImgView)
     }
     
@@ -161,9 +158,9 @@ public class CICHUD: UIView {
         let marginsGuide = self.layoutMarginsGuide
         
         backgroundView.effect = UIBlurEffect.init(style: blurStyle)
-        backgroundView.leftAnchor.constraint(equalTo: marginsGuide.leftAnchor).isActive = true
-        backgroundView.topAnchor.constraint(equalTo: marginsGuide.topAnchor).isActive = true
-        backgroundView.sizeAnchor(equalTo: marginsGuide)
+        backgroundView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        backgroundView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        backgroundView.sizeAnchor(equalTo: self)
     
         animationImgView.sizeAnchor(equalTo: CGSize(width: 64, height: 64))
         activityView.isHidden = (style == .toast)
@@ -177,8 +174,8 @@ public class CICHUD: UIView {
             titleLabel.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor).isActive = true
         }else {
             animationImgView.isHidden = false
-            titleLabel.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = false
-            titleLabel.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor).isActive = false
+            activityView.centerXAnchor.constraint(equalTo: animationImgView.centerXAnchor).isActive = true
+            activityView.centerYAnchor.constraint(equalTo: animationImgView.centerYAnchor).isActive = true
             
             let topConstraints = [animationImgView.topAnchor.constraint(equalTo: marginsGuide.topAnchor, constant: 20),
                                   animationImgView.centerXAnchor.constraint(equalTo: marginsGuide.centerXAnchor),
@@ -196,30 +193,29 @@ public class CICHUD: UIView {
                                      titleLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 20),
                                      animationImgView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
                                      animationImgView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor)]
-            
             switch layoutStyle {
                 case .top:
-                    NSLayoutConstraint.deactivate(rightConstraints)
-                    NSLayoutConstraint.deactivate(bottomConstraints)
-                    NSLayoutConstraint.deactivate(leftConstraints)
+//                    NSLayoutConstraint.deactivate(rightConstraints)
+//                    NSLayoutConstraint.deactivate(bottomConstraints)
+//                    NSLayoutConstraint.deactivate(leftConstraints)
                     NSLayoutConstraint.activate(topConstraints)
                     break
                 case .right:
-                    NSLayoutConstraint.deactivate(topConstraints)
-                    NSLayoutConstraint.deactivate(leftConstraints)
-                    NSLayoutConstraint.deactivate(bottomConstraints)
+//                    NSLayoutConstraint.deactivate(topConstraints)
+//                    NSLayoutConstraint.deactivate(leftConstraints)
+//                    NSLayoutConstraint.deactivate(bottomConstraints)
                     NSLayoutConstraint.activate(rightConstraints)
                     break
                 case .bottom:
-                    NSLayoutConstraint.deactivate(topConstraints)
-                    NSLayoutConstraint.deactivate(leftConstraints)
-                    NSLayoutConstraint.deactivate(rightConstraints)
+//                    NSLayoutConstraint.deactivate(topConstraints)
+//                    NSLayoutConstraint.deactivate(leftConstraints)
+//                    NSLayoutConstraint.deactivate(rightConstraints)
                     NSLayoutConstraint.activate(bottomConstraints)
                     break
                 default:
-                    NSLayoutConstraint.deactivate(rightConstraints)
-                    NSLayoutConstraint.deactivate(topConstraints)
-                    NSLayoutConstraint.deactivate(bottomConstraints)
+//                    NSLayoutConstraint.deactivate(rightConstraints)
+//                    NSLayoutConstraint.deactivate(topConstraints)
+//                    NSLayoutConstraint.deactivate(bottomConstraints)
                     NSLayoutConstraint.activate(leftConstraints)
                     break
             }
@@ -237,21 +233,7 @@ public class CICHUD: UIView {
     ///
     /// - Returns: Void
     func render() -> Swift.Void {
-        if let superView = self.superview {
-            self.centerXAnchor.constraint(equalTo: superView.centerXAnchor).isActive = true
-            self.centerYAnchor.constraint(equalTo: superView.centerYAnchor).isActive = true
-
-            let toastConstraints = [self.widthAnchor.constraint(equalTo: superView.widthAnchor, constant: -180),
-                                    self.heightAnchor.constraint(equalToConstant: 80)]
-            let loadingConstraints = [self.widthAnchor.constraint(equalTo: superView.widthAnchor, constant: -90),
-                                      self.heightAnchor.constraint(equalToConstant: 160)]
-            if style == .toast {
-                NSLayoutConstraint.deactivate(loadingConstraints)
-                NSLayoutConstraint.activate(toastConstraints)
-            }else {
-                NSLayoutConstraint.deactivate(toastConstraints)
-                NSLayoutConstraint.activate(loadingConstraints)
-            }
+        if let _ = self.superview {
             self.setNeedsUpdateConstraints()
             self.layoutIfNeeded()
             resizeLayout()
@@ -277,10 +259,15 @@ public class CICHUD: UIView {
         CICHUD.default.title = title
         CICHUD.default.blurStyle = blurStyle
         CICHUD.default.layoutStyle = layoutStyle
-        CICHUD.default.frame(CICHUDRect)
         if let keyWindow = UIApplication.shared.keyWindow {
             keyWindow.addSubview(CICHUD.default)
             keyWindow.bringSubview(toFront: CICHUD.default)
+            NSLayoutConstraint.deactivate(CICHUD.default.constraints)
+            let loadingConstraints = [CICHUD.default.widthAnchor.constraint(equalTo: keyWindow.widthAnchor, constant: -90),
+                                      CICHUD.default.heightAnchor.constraint(equalToConstant: 160),
+                                      CICHUD.default.centerXAnchor.constraint(equalTo: keyWindow.centerXAnchor),
+                                      CICHUD.default.centerYAnchor.constraint(equalTo: keyWindow.centerYAnchor)]
+            NSLayoutConstraint.activate(loadingConstraints)
         }
         CICHUD.default.render()
     }
@@ -297,6 +284,11 @@ public class CICHUD: UIView {
         if let keyWindow = UIApplication.shared.keyWindow {
             keyWindow.addSubview(hud)
             keyWindow.bringSubview(toFront: hud)
+            let toastConstraints = [hud.widthAnchor.constraint(equalTo: keyWindow.widthAnchor, constant: -180),
+                                    hud.heightAnchor.constraint(equalToConstant: 80),
+                                    hud.centerXAnchor.constraint(equalTo: keyWindow.centerXAnchor),
+                                    hud.centerYAnchor.constraint(equalTo: keyWindow.centerYAnchor)]
+            NSLayoutConstraint.activate(toastConstraints)
         }
         hud.render()
         
