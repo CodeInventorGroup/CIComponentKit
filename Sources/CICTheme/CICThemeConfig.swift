@@ -45,7 +45,9 @@ public class CIComponentKitThemeConfig {
         // alertView、alertViewController cancel button color
          public var cancelColor = UIColor.cic.rgb(red: 175, green: 174, blue: 169)
     
-        //
+        // UIAlertController - message 's color
+         public var alertMessageColor = UIColor.cic.hex(hex: 0x7A7A7A)
+    
          public var navigationBarBackgroundColor = UIColor.cic.rgb(red: 209, green: 211, blue: 138)
     
          public var navigationBarLeftColor = UIColor.cic.rgb(red: 209, green: 211, blue: 138)

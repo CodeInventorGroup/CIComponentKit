@@ -11,6 +11,7 @@
 		B006A2641F8E0176002B701E /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B006A2621F8E0160002B701E /* SnapKit.framework */; };
 		B03977C51F7A08040004C256 /* AutoLayout+CIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03977C41F7A08040004C256 /* AutoLayout+CIKit.swift */; };
 		B03FB7B31F57053F008A356C /* CIComponentKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B0E30BF81F55480C00DBD08C /* CIComponentKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B05A7AD91F8F4A3C00C3BC04 /* CICHUD+Guide.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05A7AD81F8F4A3C00C3BC04 /* CICHUD+Guide.swift */; };
 		B06263621F6ACF4E00371DCB /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06263611F6ACF4E00371DCB /* SecondViewController.swift */; };
 		B0B631411F698BAB00712C1D /* DemonstrationResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B631401F698BAB00712C1D /* DemonstrationResources.swift */; };
 		B0CFA4AB1F8CD3D600A2B7A9 /* LayoutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CFA4AA1F8CD3D600A2B7A9 /* LayoutKit.framework */; };
@@ -67,6 +68,7 @@
 /* Begin PBXFileReference section */
 		B006A2621F8E0160002B701E /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		B03977C41F7A08040004C256 /* AutoLayout+CIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AutoLayout+CIKit.swift"; sourceTree = "<group>"; };
+		B05A7AD81F8F4A3C00C3BC04 /* CICHUD+Guide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CICHUD+Guide.swift"; sourceTree = "<group>"; };
 		B06263611F6ACF4E00371DCB /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		B0B631401F698BAB00712C1D /* DemonstrationResources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemonstrationResources.swift; sourceTree = "<group>"; };
 		B0CFA4AA1F8CD3D600A2B7A9 /* LayoutKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LayoutKit.framework; path = Carthage/Build/iOS/LayoutKit.framework; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				B0CFA9951F6BAE2A00FB61D4 /* CICHUD.swift */,
 				B0ED57D11F7F4808001D1DCD /* CICHUD+Network.swift */,
 				B0CFA9AF1F6BDE9300FB61D4 /* CIComponentKitManager.swift */,
+				B05A7AD81F8F4A3C00C3BC04 /* CICHUD+Guide.swift */,
 			);
 			path = CIComponentKit;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				B0CFA9A11F6BAE2B00FB61D4 /* CICHUD.swift in Sources */,
 				B0CFA9B01F6BDE9300FB61D4 /* CIComponentKitManager.swift in Sources */,
 				B0CFA9A71F6BAF7400FB61D4 /* UILabel+CIKit.swift in Sources */,
+				B05A7AD91F8F4A3C00C3BC04 /* CICHUD+Guide.swift in Sources */,
 				B0CFA99B1F6BAE2A00FB61D4 /* CICUImage.swift in Sources */,
 				B0CFA9A41F6BAE2B00FB61D4 /* CICAppearance.swift in Sources */,
 				B0CFA99D1F6BAE2B00FB61D4 /* UIColor+CIKit.swift in Sources */,
