@@ -34,21 +34,10 @@ class ViewController: UIViewController {
             .longPressAction(.copy)
             .copyRange(NSMakeRange(0, 5))
         label.copySuccessClousure = {
-            if #available(iOS 9.0, *) {
-//                CICHUD.networkFaild()
                 CICHUD.showNetWorkStatusChange()
-//                CICHUD.toast("复制成功", blurStyle: .extraLight)
-            }
         }
         self.view.addSubview(label)
-        
-        let manobooProfile = ManoBooProfileLayout.init(imageName: "manoboo", name: "manoboo", headline: "i love you~")
-        let arrangment = manobooProfile.arrangement(origin: CGPoint.init(x: 0, y: label.frame.maxY), width: view.bounds.width, height: 100)
-        DispatchQueue.main.async {
-            arrangment.makeViews(in: self.view)
-        }
-        
-        
+
         let toggleThemeBtn = UIButton()
         toggleThemeBtn.y(view.bounds.maxY-64)
             .height(64)
@@ -79,20 +68,13 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if #available(iOS 9.0, *) {
-            //             CICHUD.show("正在加载~", blurStyle: .extraLight, layoutStyle: .left)
-//            CICHUD.networkFaild("manoboo 来袭~")
-            CICHUD.showNetWorkStatusChange()
-        }
+         CICHUD.show("正在加载~", blurStyle: .extraLight, layoutStyle: .left)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        if #available(iOS 9.0, *) {
-            CICHUD.default.hide()
-//            CICHUD.hideNetworkStatus()
-            CICHUD.hideNetWorkStatusChange()
-        }
+        CICHUD.default.hide()
+        CICHUD.hideNetWorkStatusChange()
     }
     
     @objc func jump() -> Swift.Void {

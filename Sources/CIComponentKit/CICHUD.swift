@@ -14,20 +14,19 @@ public extension CIComponentKit where Base: UIView {
         print(self.base)
     }
 
-    @available(iOS 9.0, *)
     func showLoading(_ title: String?) -> Swift.Void {
         CICHUD.show(title)
     }
 }
 
 /// - DdefaultConfig
-var CICHUDRect = {CGRect.init(origin: .zero, size: CGSize.init(width: UIScreen.main.bounds.width - 80, height: 160))}()
+var CICHUDLoadingRect = {CGRect.init(origin: .zero, size: CGSize.init(width: CGFloat.screenWidth - 80, height: 160))}()
+var CICHUDToastRect = {CGRect.init(origin: .zero, size: CGSize.init(width: CGFloat.screenWidth - 180, height: 60))}()
 
 
 public typealias CICHUDClousure =  ((Bool) -> Swift.Void)
 
 ///MARK: - CICHUD
-@available(iOS 9.0, *)
 public class CICHUD: UIView {
 
     //MARK: Property
@@ -90,7 +89,6 @@ public class CICHUD: UIView {
                 showAnimation: CICHUDAnimation = .none,
                 hideAnimation: CICHUDAnimation = .none) {
         super.init(frame: .zero)
-        self.translatesAutoresizingMaskIntoConstraints = false
         self.layer.cornerRadius = 3.0
         self.layer.masksToBounds = true
         
@@ -109,15 +107,12 @@ public class CICHUD: UIView {
         let contentView = backgroundView.contentView
         
         titleLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.tintColor = CICHUD.appearance().tintColor
         contentView.addSubview(titleLabel)
         
         animationImgView.contentMode = .center
-        animationImgView.translatesAutoresizingMaskIntoConstraints = false
         animationImgView.addSubview(activityView)
         
-        activityView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(animationImgView)
     }
     
@@ -141,11 +136,6 @@ public class CICHUD: UIView {
     }()
     
     func renderAfterUIDeviceOrientationDidChange(notification: Notification) -> Swift.Void {
-        if style == .loading {
-            self.frame = CICHUDRect
-        }else {
-            self.frame = CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width - 180, height: 100)
-        }
         
         UIView.animate(withDuration: 0.35) { [unowned self] in
             if let superView = self.superview {
@@ -155,68 +145,46 @@ public class CICHUD: UIView {
     }
     
     func resizeLayout() -> Swift.Void {
-        let marginsGuide = self.layoutMarginsGuide
+//        let marginsGuide = self.layoutMarginsGuide
         
         backgroundView.effect = UIBlurEffect.init(style: blurStyle)
-        backgroundView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        backgroundView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        backgroundView.sizeAnchor(equalTo: self)
-    
-        animationImgView.sizeAnchor(equalTo: CGSize(width: 64, height: 64))
+        backgroundView.frame(self.bounds)
+        
+        animationImgView.size(CGSize(width: 64, height: 64))
         activityView.isHidden = (style == .toast)
         
         titleLabel.text(title).textAlignment(.center).sizeToFit()
-        titleLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
-        titleLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 20).isActive = true
-        if style == .toast && animationImgView.image == nil {
+        if style == .toast {
             animationImgView.isHidden = true
-            titleLabel.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
-            titleLabel.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor).isActive = true
+            titleLabel.centerX(backgroundView.cic.internalCenterX)
+                .centerY(backgroundView.cic.internalCenterY)
         }else {
             animationImgView.isHidden = false
-            activityView.centerXAnchor.constraint(equalTo: animationImgView.centerXAnchor).isActive = true
-            activityView.centerYAnchor.constraint(equalTo: animationImgView.centerYAnchor).isActive = true
-            
-            let topConstraints = [animationImgView.topAnchor.constraint(equalTo: marginsGuide.topAnchor, constant: 20),
-                                  animationImgView.centerXAnchor.constraint(equalTo: marginsGuide.centerXAnchor),
-                                  titleLabel.topAnchor.constraint(equalTo: animationImgView.bottomAnchor, constant: 30),
-                                  titleLabel.centerXAnchor.constraint(equalTo: marginsGuide.centerXAnchor)]
-            let rightConstraints = [titleLabel.leftAnchor.constraint(equalTo: backgroundView.leftAnchor, constant: 20),
-                                    titleLabel.centerYAnchor.constraint(equalTo: marginsGuide.centerYAnchor),
-                                    animationImgView.leftAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 20),
-                                    animationImgView.centerYAnchor.constraint(equalTo: marginsGuide.centerYAnchor)]
-            let leftConstraints = [animationImgView.leftAnchor.constraint(equalTo: backgroundView.leftAnchor, constant: 20),
-                                   animationImgView.centerYAnchor.constraint(equalTo: marginsGuide.centerYAnchor),
-                                   titleLabel.leftAnchor.constraint(equalTo: animationImgView.rightAnchor, constant: 20),
-                                   titleLabel.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor)]
-            let bottomConstraints = [titleLabel.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-                                     titleLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 20),
-                                     animationImgView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
-                                     animationImgView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor)]
+            activityView.centerX(animationImgView.cic.internalCenterX)
+                .centerY(animationImgView.cic.internalCenterY)
+
             switch layoutStyle {
                 case .top:
-//                    NSLayoutConstraint.deactivate(rightConstraints)
-//                    NSLayoutConstraint.deactivate(bottomConstraints)
-//                    NSLayoutConstraint.deactivate(leftConstraints)
-                    NSLayoutConstraint.activate(topConstraints)
+                    animationImgView.y(20).centerX(self.cic.internalCenterX)
+                    titleLabel.y(animationImgView.frame.maxY + 30)
+                        .centerX(self.cic.internalCenterX)
                     break
                 case .right:
-//                    NSLayoutConstraint.deactivate(topConstraints)
-//                    NSLayoutConstraint.deactivate(leftConstraints)
-//                    NSLayoutConstraint.deactivate(bottomConstraints)
-                    NSLayoutConstraint.activate(rightConstraints)
+                    titleLabel.x(backgroundView.cic.x + 20)
+                        .centerY(self.cic.internalCenterY)
+                    animationImgView.x(titleLabel.frame.maxX + 20)
+                        .centerY(self.cic.internalCenterY)
                     break
                 case .bottom:
-//                    NSLayoutConstraint.deactivate(topConstraints)
-//                    NSLayoutConstraint.deactivate(leftConstraints)
-//                    NSLayoutConstraint.deactivate(rightConstraints)
-                    NSLayoutConstraint.activate(bottomConstraints)
+                    titleLabel.y(20).centerX(backgroundView.cic.internalCenterX)
+                    animationImgView.y(titleLabel.frame.maxY + 30)
+                        .centerX(backgroundView.cic.internalCenterX)
                     break
                 default:
-//                    NSLayoutConstraint.deactivate(rightConstraints)
-//                    NSLayoutConstraint.deactivate(topConstraints)
-//                    NSLayoutConstraint.deactivate(bottomConstraints)
-                    NSLayoutConstraint.activate(leftConstraints)
+                    animationImgView.x(backgroundView.cic.x + 20)
+                        .centerY(backgroundView.cic.internalCenterY)
+                    titleLabel.x(animationImgView.frame.maxX + 20)
+                        .centerY(backgroundView.cic.internalCenterY)
                     break
             }
             if loadingStyle == .original {
@@ -234,8 +202,6 @@ public class CICHUD: UIView {
     /// - Returns: Void
     func render() -> Swift.Void {
         if let _ = self.superview {
-            self.setNeedsUpdateConstraints()
-            self.layoutIfNeeded()
             resizeLayout()
         }
     }
@@ -260,14 +226,9 @@ public class CICHUD: UIView {
         CICHUD.default.blurStyle = blurStyle
         CICHUD.default.layoutStyle = layoutStyle
         if let keyWindow = UIApplication.shared.keyWindow {
+            CICHUD.default.frame(CICHUDLoadingRect).center(keyWindow.cic.internalCenter)
             keyWindow.addSubview(CICHUD.default)
             keyWindow.bringSubview(toFront: CICHUD.default)
-            NSLayoutConstraint.deactivate(CICHUD.default.constraints)
-            let loadingConstraints = [CICHUD.default.widthAnchor.constraint(equalTo: keyWindow.widthAnchor, constant: -90),
-                                      CICHUD.default.heightAnchor.constraint(equalToConstant: 160),
-                                      CICHUD.default.centerXAnchor.constraint(equalTo: keyWindow.centerXAnchor),
-                                      CICHUD.default.centerYAnchor.constraint(equalTo: keyWindow.centerYAnchor)]
-            NSLayoutConstraint.activate(loadingConstraints)
         }
         CICHUD.default.render()
     }
@@ -284,11 +245,7 @@ public class CICHUD: UIView {
         if let keyWindow = UIApplication.shared.keyWindow {
             keyWindow.addSubview(hud)
             keyWindow.bringSubview(toFront: hud)
-            let toastConstraints = [hud.widthAnchor.constraint(equalTo: keyWindow.widthAnchor, constant: -180),
-                                    hud.heightAnchor.constraint(equalToConstant: 80),
-                                    hud.centerXAnchor.constraint(equalTo: keyWindow.centerXAnchor),
-                                    hud.centerYAnchor.constraint(equalTo: keyWindow.centerYAnchor)]
-            NSLayoutConstraint.activate(toastConstraints)
+            hud.frame(CICHUDToastRect).center(keyWindow.cic.internalCenter)
         }
         hud.render()
         

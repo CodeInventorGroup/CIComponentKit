@@ -142,6 +142,7 @@ public extension CIComponentKitTheme {
         UIView.appearance().tintColor = config.tintColor
         UIWindow.appearance().backgroundColor = config.windowColor
         UINavigationBar.appearance().barTintColor = config.navigationBarBackgroundColor
+        UIActivityIndicatorView.appearance().color = config.activityIndicatorColor
         
         
         NotificationCenter.default.post(name: Notification.Name.cic.themeDidToggle, object: self, userInfo: nil)
