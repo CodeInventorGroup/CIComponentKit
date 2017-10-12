@@ -20,9 +20,10 @@ public extension CIComponentKit where Base: UIView {
 }
 
 /// - DdefaultConfig
-var CICHUDLoadingRect = {CGRect.init(origin: .zero, size: CGSize.init(width: CGFloat.screenWidth - 80, height: 160))}()
+var CICHUDLoadingRect = {CGRect.init(origin: .zero, size: CGSize.init(width: CGFloat.screenWidth - 100, height: 120))}()
 var CICHUDToastRect = {CGRect.init(origin: .zero, size: CGSize.init(width: CGFloat.screenWidth - 180, height: 60))}()
-
+var CICHUDInsets = UIEdgeInsetsMake(20, 20, 20, 20)
+var CICHUDAutoResize = false   // 是否自适应大小
 
 public typealias CICHUDClousure =  ((Bool) -> Swift.Void)
 
@@ -165,28 +166,43 @@ public class CICHUD: UIView {
 
             switch layoutStyle {
                 case .top:
-                    animationImgView.y(20).centerX(self.cic.internalCenterX)
+                    animationImgView.y(CICHUDInsets.top).centerX(self.cic.internalCenterX)
                     titleLabel.y(animationImgView.frame.maxY + 30)
                         .centerX(self.cic.internalCenterX)
                     break
                 case .right:
-                    titleLabel.x(backgroundView.cic.x + 20)
+                    titleLabel.x(backgroundView.cic.x + CICHUDInsets.left)
                         .centerY(self.cic.internalCenterY)
                     animationImgView.x(titleLabel.frame.maxX + 20)
                         .centerY(self.cic.internalCenterY)
                     break
                 case .bottom:
-                    titleLabel.y(20).centerX(backgroundView.cic.internalCenterX)
+                    titleLabel.y(CICHUDInsets.top)
+                        .centerX(backgroundView.cic.internalCenterX)
                     animationImgView.y(titleLabel.frame.maxY + 30)
                         .centerX(backgroundView.cic.internalCenterX)
                     break
                 default:
-                    animationImgView.x(backgroundView.cic.x + 20)
+                    animationImgView.x(CICHUDInsets.left)
                         .centerY(backgroundView.cic.internalCenterY)
                     titleLabel.x(animationImgView.frame.maxX + 20)
                         .centerY(backgroundView.cic.internalCenterY)
                     break
             }
+
+            if CICHUDAutoResize {
+                self.width((animationImgView.frame.maxX < titleLabel.frame.maxX ? animationImgView.cic.width : titleLabel.cic.width) + 2 * CICHUDInsets.right)
+                self.height((animationImgView.frame.maxY < titleLabel.frame.maxY ? animationImgView.cic.height : titleLabel.cic.height) + 2 * CICHUDInsets.bottom)
+                backgroundView.frame(self.bounds)
+                if layoutStyle == .top || layoutStyle == .bottom {
+                    titleLabel.centerX(backgroundView.cic.internalCenterX)
+                    animationImgView.centerX(backgroundView.cic.internalCenterX)
+                }else {
+                    titleLabel.centerY(backgroundView.cic.internalCenterY)
+                    animationImgView.centerY(backgroundView.cic.internalCenterY)
+                }
+            }
+            
             if loadingStyle == .original {
                 activityView.startAnimating()
                 if blurStyle == .dark {
@@ -226,11 +242,13 @@ public class CICHUD: UIView {
         CICHUD.default.blurStyle = blurStyle
         CICHUD.default.layoutStyle = layoutStyle
         if let keyWindow = UIApplication.shared.keyWindow {
-            CICHUD.default.frame(CICHUDLoadingRect).center(keyWindow.cic.internalCenter)
+            CICHUD.default.frame(CICHUDLoadingRect)
             keyWindow.addSubview(CICHUD.default)
             keyWindow.bringSubview(toFront: CICHUD.default)
+            CICHUD.default.render()
+            CICHUD.default.center(keyWindow.cic.internalCenter)
         }
-        CICHUD.default.render()
+        
     }
     
     public class func toast(_ title: String?,
@@ -246,9 +264,9 @@ public class CICHUD: UIView {
             keyWindow.addSubview(hud)
             keyWindow.bringSubview(toFront: hud)
             hud.frame(CICHUDToastRect).center(keyWindow.cic.internalCenter)
+            hud.render()
+            hud.center(keyWindow.cic.internalCenter)
         }
-        hud.render()
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
             hud.hide()
         }

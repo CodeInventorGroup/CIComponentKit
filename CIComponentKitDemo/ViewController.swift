@@ -68,7 +68,7 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-         CICHUD.show("正在加载~", blurStyle: .extraLight, layoutStyle: .left)
+         CICHUD.show("正在加载~", blurStyle: .extraLight, layoutStyle: .right)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
