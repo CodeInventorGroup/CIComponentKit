@@ -15,5 +15,5 @@ before_deploy:
   - carthage archive $FRAMEWORK_NAME
   
 script:
-	  - carthage update --platform ios
-    - xcodebuild clean build -project CIComponentKit.xcodeproj -scheme CIComponentKit CODE_SIGNING_REQUIRED=NO
+	- carthage update --platform ios
+  - xcodebuild clean build -project CIComponentKit.xcodeproj -scheme CIComponentKit CODE_SIGNING_REQUIRED=NO
