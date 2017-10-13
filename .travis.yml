@@ -5,4 +5,5 @@ xcode_scheme: CIComponentKit
 xcode_sdk: iphonesimulator10.3
 
 script:
+	- carthage update
     - xcodebuild clean build -project CIComponentKit.xcodeproj -scheme CIComponentKit CODE_SIGNING_REQUIRED=NO

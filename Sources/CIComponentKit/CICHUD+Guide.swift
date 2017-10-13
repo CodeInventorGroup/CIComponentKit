@@ -28,7 +28,8 @@ extension CICHUD {
         /// 是否需要黑色蒙板
         public var isDisplayBlackMask = false {
             didSet {
-                backgroungView.backgroundColor(UIColor.cic.hex(hex: 0x000000, alpha: isDisplayBlackMask ? 0.8 : 0))
+                backgroungView.alpha = isDisplayBlackMask ? 0.6 : 0
+//                backgroungView.backgroundColor(UIColor.cic.hex(hex: 0x000000, alpha: isDisplayBlackMask ? 0.8 : 0))
             }
         }
         

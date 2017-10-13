@@ -66,44 +66,17 @@ class ViewController: UIViewController {
         super.viewWillAppear(animated)
     }
     
-    class DrawDemo: UIView {
-        
-        let shape = CAShapeLayer.init()
-        
-        override func draw(_ rect: CGRect) {
-            super.draw(rect)
-            let center = CGPoint.init(x: rect.width/2, y: rect.height/2)
-            let path = UIBezierPath.init(arcCenter: center, radius: 50, startAngle: 0.0, endAngle: CGFloat.pi * 2.0, clockwise: false)
-            
-            shape.strokeColor = UIColor.cic.hex(hex: 0xC0C0C0).cgColor
-            shape.fillColor = UIColor.clear.cgColor
-            shape.strokeStart = 0
-            shape.strokeEnd = 0.75
-            shape.path = path.cgPath
-            shape.lineWidth = 6
-            shape.lineJoin = kCALineJoinRound
-            shape.lineCap = kCALineCapRound
-            self.layer.addSublayer(shape)
-        }
-        
-        func startAnimation() {
-            self.backgroundColor = UIColor.clear
-            let animation1 = CABasicAnimation.init()
-            animation1.keyPath = "transform.rotation.z"
-            animation1.toValue = 2 * CFloat.pi
-            animation1.duration = 1.0
-            animation1.repeatCount = HUGE
-            self.layer.add(animation1, forKey: "sss")
-        }
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 //        CICHUD.show("正在加载~", blurStyle: .extraLight, layoutStyle: .right)
         
-        let loading = DrawDemo.init(frame: CGRect.init(x: 50, y: 300, width: 120, height: 120))
+        let loading = CICActivityView.init(frame: CGRect.init(x: 50, y: 300, width: 40, height: 40))
         loading.startAnimation()
         view.addSubview(loading)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            loading.stopAnimation()
+        }
+        
         
         let title = """
                         ManoBoo & NEWWORLD
