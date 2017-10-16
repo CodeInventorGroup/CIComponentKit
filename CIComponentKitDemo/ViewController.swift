@@ -70,11 +70,14 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
 //        CICHUD.show("正在加载~", blurStyle: .extraLight, layoutStyle: .right)
         
-        let loading = CICActivityView.init(frame: CGRect.init(x: 50, y: 300, width: 40, height: 40))
-        loading.startAnimation()
-        view.addSubview(loading)
+//        let loading = CICActivityView.init(frame: CGRect.init(x: 50, y: 300, width: 40, height: 40))
+//        loading.startAnimation()
+//        view.addSubview(loading)
+        
+        CICHUD.showActivityView()
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            loading.stopAnimation()
+            CICHUD.hideActivityView()
         }
         
         

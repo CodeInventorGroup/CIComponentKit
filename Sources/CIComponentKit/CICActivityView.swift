@@ -4,11 +4,13 @@
 //
 //  Created by ManoBoo on 2017/10/14.
 //  Copyright © 2017年 club.codeinventor. All rights reserved.
-//
+//  苹果大部分App中的指示器都是这个style
 
 import UIKit
 
 public class CICActivityView: UIView {
+    
+    static let `default` = CICActivityView.init(frame: .zero)
     
     var strokeColor = UIColor.cic.hex(hex: 0x808080).cgColor
     var fillColor = UIColor.clear {
@@ -16,8 +18,18 @@ public class CICActivityView: UIView {
             self.backgroundColor = fillColor
         }
     }
-    var isHideWhenStopped = true
     
+    static let hud: UIVisualEffectView = {
+        let hud = UIVisualEffectView.init(effect: UIBlurEffect.init(style: .extraLight))
+            .backgroundColor(.white)
+        hud.layer.cornerRadius = 8.0
+        hud.layer.masksToBounds = true
+        hud.contentView.addSubview(CICActivityView.default)
+        return hud
+    }()
+    
+    /// 动画停止是是否隐藏,和系统UIActivityView保持一致
+    var isHideWhenStopped = true
     
     let shape = CAShapeLayer.init()
     
@@ -55,3 +67,24 @@ public class CICActivityView: UIView {
         self.isHidden = isHideWhenStopped
     }
 }
+
+extension CICHUD {
+    
+    /// 类似于MBProgressHUB 一样的加载框
+    public class func showActivityView(superView: UIView? = UIApplication.shared.keyWindow) {
+        guard let superView = superView else {
+            return
+        }
+        CICActivityView.hud.removeFromSuperview()
+        let hud = CICActivityView.hud.size(CGSize(width: 100, height: 100))
+            .center(superView.cic.internalCenter)
+        CICActivityView.default.frame(CGRect.init(x: 0, y: 0, width: 60, height: 60)).center(hud.cic.internalCenter)
+        superView.addSubview(hud)
+        CICActivityView.default.startAnimation()
+    }
+    
+    public class func hideActivityView() {
+        CICActivityView.hud.removeFromSuperview()
+    }
+}
+
