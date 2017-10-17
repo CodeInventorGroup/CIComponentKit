@@ -1,5 +1,5 @@
-# CIKit [](https://travis-ci.org/CodeInventorGroup/CIComponentKit.svg?branch=master)
-CIComponentKit
+# CIKit ![](https://travis-ci.org/CodeInventorGroup/CIComponentKit.svg?branch=master)
+CIComponentKit 
 
 Building...
 
