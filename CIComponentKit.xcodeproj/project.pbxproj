@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B006A2631F8E0160002B701E /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B006A2621F8E0160002B701E /* SnapKit.framework */; };
-		B006A2641F8E0176002B701E /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B006A2621F8E0160002B701E /* SnapKit.framework */; };
 		B01003B31F912CD800847A50 /* UIControl+CIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01003B21F912CD800847A50 /* UIControl+CIKit.swift */; };
 		B01003B51F912F5F00847A50 /* CICActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01003B41F912F5F00847A50 /* CICActivityView.swift */; };
 		B03977C51F7A08040004C256 /* AutoLayout+CIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03977C41F7A08040004C256 /* AutoLayout+CIKit.swift */; };
@@ -17,7 +15,7 @@
 		B06263621F6ACF4E00371DCB /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06263611F6ACF4E00371DCB /* SecondViewController.swift */; };
 		B0B631411F698BAB00712C1D /* DemonstrationResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B631401F698BAB00712C1D /* DemonstrationResources.swift */; };
 		B0CFA4AB1F8CD3D600A2B7A9 /* LayoutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CFA4AA1F8CD3D600A2B7A9 /* LayoutKit.framework */; };
-		B0CFA4BC1F8CD8FE00A2B7A9 /* LayoutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CFA4AA1F8CD3D600A2B7A9 /* LayoutKit.framework */; };
+		B0CFA4BC1F8CD8FE00A2B7A9 /* LayoutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CFA4AA1F8CD3D600A2B7A9 /* LayoutKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B0CFA99B1F6BAE2A00FB61D4 /* CICUImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA98E1F6BAE2A00FB61D4 /* CICUImage.swift */; };
 		B0CFA99C1F6BAE2B00FB61D4 /* CICUIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA98F1F6BAE2A00FB61D4 /* CICUIFont.swift */; };
 		B0CFA99D1F6BAE2B00FB61D4 /* UIColor+CIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA9901F6BAE2A00FB61D4 /* UIColor+CIKit.swift */; };
@@ -110,7 +108,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B006A2641F8E0176002B701E /* SnapKit.framework in Frameworks */,
 				B0CFA4AB1F8CD3D600A2B7A9 /* LayoutKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -119,7 +116,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B006A2631F8E0160002B701E /* SnapKit.framework in Frameworks */,
 				B0CFA4BC1F8CD8FE00A2B7A9 /* LayoutKit.framework in Frameworks */,
 				B0E30C211F5555F000DBD08C /* CIComponentKit.framework in Frameworks */,
 			);
@@ -356,7 +352,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/LayoutKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 			);
 			outputPaths = (
 				"",
@@ -372,7 +367,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/LayoutKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 			);
 			outputPaths = (
 			);
