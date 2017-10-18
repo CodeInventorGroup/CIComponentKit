@@ -1,8 +1,5 @@
-language: swift
+language: objective-c
 osx_image: xcode9
-xcode_project: CIComponentKit
-xcode_scheme: CIComponentKit
-xcode_sdk: iphonesimulator10.3
 
 before_install:
   - xcodebuild -showsdks
@@ -16,8 +13,10 @@ before_deploy:
 
 script:
   - carthage update --platform ios
-  - xcodebuild clean build -project CIComponentKit.xcodeproj -scheme CIComponentKit CODE_SIGNING_REQUIRED=NO test
+  - xcodebuild clean build -project CIComponentKit.xcodeproj -scheme CIComponentKit CODE_SIGNING_REQUIRED=NO -destination 'platform=iOS Simulator,name=iPhone 6,OS=8.1' \
+    -destination 'platform=iOS Simulator,name=iPhone 6 Plus,OS=8.1' \
+    -destination 'platform=iOS Simulator,name=iPhone 7,OS=11.0' \
+    -destination 'platform=iOS Simulator,name=iPhone 7 Plus,OS=11.0'
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -J 'CIComponentKit'
-
