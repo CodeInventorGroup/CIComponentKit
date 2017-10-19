@@ -112,7 +112,7 @@ extension CICHUD {
                 })
                 let destinationY = guide.contentView.cic.y
                 guide.contentView.y(guide.cic.height)
-                UIView.animate(withDuration: 0.35, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseInOut, animations: {
+                UIView.animate(withDuration: 0.35, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.4, options: .curveEaseInOut, animations: {
                     guide.contentView.y(destinationY)
                 }, completion: { (_) in
                     
