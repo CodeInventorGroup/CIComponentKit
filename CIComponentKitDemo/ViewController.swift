@@ -35,6 +35,7 @@ class ViewController: UIViewController {
             .copyRange(NSMakeRange(0, 5))
         label.copySuccessClousure = {
                 CICHUD.showNetWorkStatusChange()
+                CICHUD.showAlert(content: "主题更换成功")
         }
         self.view.addSubview(label)
 

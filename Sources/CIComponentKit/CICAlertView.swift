@@ -89,15 +89,21 @@ public class CICAlertViewLayout: SizeLayout<UIView> {
 }
 
 extension CICHUD {
-    public class func showAlert(_ content: String = "") {
+    public class func showAlert(_ title: String = "提示",
+                                content: String = "",
+                                cancelAction: @escaping CICAlertViewLayout.CICAlertViewAction = {_ in },
+                                confirmAction: @escaping CICAlertViewLayout.CICAlertViewAction = {_ in}) {
         if let keyWindow = UIApplication.shared.keyWindow {
         
             let actionTitles = ["取消", "确定"]
             let actions: [CICAlertViewLayout.CICAlertViewAction] = [{ (control) in
                     print("cancel")
+                    cancelAction(control)
                     let maskLayout = SizeLayout<UIView>.init(viewReuseId: "alert_blackMask")
                     maskLayout.arrangement().makeViews(in: keyWindow)
-                }, { _ in
+                
+                }, { control in
+                    confirmAction(control)
                     print("confirm")
                 }]
             let actionStyles = [CIComponentKitThemeCurrentConfig.cancelColor, CIComponentKitThemeCurrentConfig.confirmColor]
