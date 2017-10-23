@@ -12,6 +12,7 @@
 		B02CA9A71F98C8CD005764FF /* CICAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02CA9A61F98C8CD005764FF /* CICAlertView.swift */; };
 		B03977C51F7A08040004C256 /* AutoLayout+CIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03977C41F7A08040004C256 /* AutoLayout+CIKit.swift */; };
 		B03FB7B31F57053F008A356C /* CIComponentKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B0E30BF81F55480C00DBD08C /* CIComponentKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B058645A1F9DED2700235A2A /* Array+CIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05864591F9DED2700235A2A /* Array+CIKit.swift */; };
 		B05A7AD91F8F4A3C00C3BC04 /* CICHUD+Guide.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05A7AD81F8F4A3C00C3BC04 /* CICHUD+Guide.swift */; };
 		B06263621F6ACF4E00371DCB /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06263611F6ACF4E00371DCB /* SecondViewController.swift */; };
 		B0B631411F698BAB00712C1D /* DemonstrationResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B631401F698BAB00712C1D /* DemonstrationResources.swift */; };
@@ -72,6 +73,7 @@
 		B01003B41F912F5F00847A50 /* CICActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CICActivityView.swift; sourceTree = "<group>"; };
 		B02CA9A61F98C8CD005764FF /* CICAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CICAlertView.swift; sourceTree = "<group>"; };
 		B03977C41F7A08040004C256 /* AutoLayout+CIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AutoLayout+CIKit.swift"; sourceTree = "<group>"; };
+		B05864591F9DED2700235A2A /* Array+CIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+CIKit.swift"; sourceTree = "<group>"; };
 		B05A7AD81F8F4A3C00C3BC04 /* CICHUD+Guide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CICHUD+Guide.swift"; sourceTree = "<group>"; };
 		B06263611F6ACF4E00371DCB /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		B0B631401F698BAB00712C1D /* DemonstrationResources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemonstrationResources.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				B0CFA9AD1F6BDBD200FB61D4 /* UIDevice+CIKit.swift */,
 				B03977C41F7A08040004C256 /* AutoLayout+CIKit.swift */,
 				B01003B21F912CD800847A50 /* UIControl+CIKit.swift */,
+				B05864591F9DED2700235A2A /* Array+CIKit.swift */,
 			);
 			path = CICExtensions;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				B05A7AD91F8F4A3C00C3BC04 /* CICHUD+Guide.swift in Sources */,
 				B0CFA99B1F6BAE2A00FB61D4 /* CICUImage.swift in Sources */,
 				B02CA9A71F98C8CD005764FF /* CICAlertView.swift in Sources */,
+				B058645A1F9DED2700235A2A /* Array+CIKit.swift in Sources */,
 				B0CFA9A41F6BAE2B00FB61D4 /* CICAppearance.swift in Sources */,
 				B0CFA99D1F6BAE2B00FB61D4 /* UIColor+CIKit.swift in Sources */,
 				B0CFA9A91F6BB73400FB61D4 /* UIView+CIKit.swift in Sources */,

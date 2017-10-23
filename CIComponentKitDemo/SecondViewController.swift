@@ -56,14 +56,15 @@ class SecondViewController: CICUIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let theme = CIComponentKitTheme.originTheme
         theme.config.textColor = UIColor.cic.random
-        theme.config.mainColor = UIColor.cic.hex(hex: 0xF7F6F6)
+        theme.config.mainColor = UIColor.cic.random
+        theme.config.alertMessageColor = UIColor.cic.random
         theme.config.tintColor = UIColor.cic.hex(hex: 0xfcfcfc)
         theme.config.navigationBarLeftColor = UIColor.cic.hex(hex: 0xe2e2e2)
         theme.config.navigationItemTitleColor = UIColor.cic.random
         theme.config.navigationBarBackgroundColor = UIColor.cic.random
         theme.renderTheme()
         
-        CICHUD.showAlert()
+        CICHUD.showAlert(String.LoremIpsum)
 //        CICHUD.toast("主题切换成功😄", blurStyle: .extraLight)
     }
     

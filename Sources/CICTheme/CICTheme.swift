@@ -17,6 +17,9 @@ extension Notification.Name {
         
         // 切换主题完成之后，post notification When the switching theme is complete
         static let themeDidToggle = NSNotification.Name.init("CIComponentKitThemeDidToggleNotifier")
+        
+        // 屏幕发生旋转时发出通知
+        static let screenDidRotated = NSNotification.Name.init("CIComponentKitThemeDidScreenRotated")
     }
 }
 
