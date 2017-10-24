@@ -10,6 +10,9 @@ import UIKit
 import LayoutKit
 
 public class CICAlertViewLayout: SizeLayout<UIView> {
+    deinit {
+        print("CICAlertViewLayout deinit")
+    }
     
     public typealias CICAlertViewAction = ((UIControl) -> ())
     
@@ -68,7 +71,7 @@ public class CICAlertViewLayout: SizeLayout<UIView> {
             })
             layouts.append(actionStackLayout)
         }
-        // UIEdgeInsetsMake(10, 15, 6, 15)
+        
         let backgroundLayout = InsetLayout<UIView>.init(insets: .zero,
                                                                    viewReuseId: "background",
                                                                    sublayout: StackLayout<UIView>.init(axis: .vertical,
@@ -81,7 +84,7 @@ public class CICAlertViewLayout: SizeLayout<UIView> {
             background.backgroundColor(CIComponentKitThemeCurrentConfig.mainColor)
         }
         
-        super.init(minWidth: 100, maxWidth: CGFloat.screenWidth - 40, minHeight: 100, maxHeight: CGFloat.screenHeight - 100, alignment: Alignment.center, viewReuseId: "CICAlert_", sublayout: backgroundLayout) { (view) in
+        super.init(minWidth: 250, maxWidth: CGFloat.screenWidth - 40, minHeight: 100, maxHeight: CGFloat.screenHeight - 100, alignment: Alignment.center, viewReuseId: "CICAlert_", sublayout: backgroundLayout) { (view) in
             view.layer.cornerRadius = 8.0
             view.layer.masksToBounds = true
         }
@@ -99,12 +102,12 @@ extension CICHUD {
             let actions: [CICAlertViewLayout.CICAlertViewAction] = [{ (control) in
                     print("cancel")
                     cancelAction(control)
-                    let maskLayout = SizeLayout<UIView>.init(viewReuseId: "alert_blackMask")
-                    maskLayout.arrangement().makeViews(in: keyWindow)
+                    SizeLayout<UIView>.init(viewReuseId: "alert_blackMask").arrangement().makeViews(in: keyWindow)
                 
                 }, { control in
-                    confirmAction(control)
                     print("confirm")
+                    confirmAction(control)
+                    SizeLayout<UIView>.init(viewReuseId: "alert_blackMask").arrangement().makeViews(in: keyWindow)
                 }]
             let actionStyles = [CIComponentKitThemeCurrentConfig.cancelColor, CIComponentKitThemeCurrentConfig.confirmColor]
             
@@ -119,6 +122,7 @@ extension CICHUD {
             
             blackMaskLayout.arrangement().makeViews(in: keyWindow)
         }
+        
     }
 }
 

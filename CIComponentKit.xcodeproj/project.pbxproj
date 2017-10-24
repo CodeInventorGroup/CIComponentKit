@@ -13,9 +13,12 @@
 		B03977C51F7A08040004C256 /* AutoLayout+CIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03977C41F7A08040004C256 /* AutoLayout+CIKit.swift */; };
 		B03FB7B31F57053F008A356C /* CIComponentKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B0E30BF81F55480C00DBD08C /* CIComponentKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B058645A1F9DED2700235A2A /* Array+CIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05864591F9DED2700235A2A /* Array+CIKit.swift */; };
+		B058645F1F9EF1A100235A2A /* CIComponentKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B058645E1F9EF1A100235A2A /* CIComponentKitResources.bundle */; };
+		B05864611F9EFE1000235A2A /* CICNotifierView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05864601F9EFE1000235A2A /* CICNotifierView.swift */; };
 		B05A7AD91F8F4A3C00C3BC04 /* CICHUD+Guide.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05A7AD81F8F4A3C00C3BC04 /* CICHUD+Guide.swift */; };
 		B06263621F6ACF4E00371DCB /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06263611F6ACF4E00371DCB /* SecondViewController.swift */; };
 		B0B631411F698BAB00712C1D /* DemonstrationResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B631401F698BAB00712C1D /* DemonstrationResources.swift */; };
+		B0B80B8A1F9F4170000E13F7 /* CIComponentKitResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B80B891F9F4170000E13F7 /* CIComponentKitResources.swift */; };
 		B0CFA4AB1F8CD3D600A2B7A9 /* LayoutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CFA4AA1F8CD3D600A2B7A9 /* LayoutKit.framework */; };
 		B0CFA4BC1F8CD8FE00A2B7A9 /* LayoutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CFA4AA1F8CD3D600A2B7A9 /* LayoutKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B0CFA99B1F6BAE2A00FB61D4 /* CICUImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA98E1F6BAE2A00FB61D4 /* CICUImage.swift */; };
@@ -74,9 +77,12 @@
 		B02CA9A61F98C8CD005764FF /* CICAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CICAlertView.swift; sourceTree = "<group>"; };
 		B03977C41F7A08040004C256 /* AutoLayout+CIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AutoLayout+CIKit.swift"; sourceTree = "<group>"; };
 		B05864591F9DED2700235A2A /* Array+CIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+CIKit.swift"; sourceTree = "<group>"; };
+		B058645E1F9EF1A100235A2A /* CIComponentKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CIComponentKitResources.bundle; sourceTree = "<group>"; };
+		B05864601F9EFE1000235A2A /* CICNotifierView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CICNotifierView.swift; sourceTree = "<group>"; };
 		B05A7AD81F8F4A3C00C3BC04 /* CICHUD+Guide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CICHUD+Guide.swift"; sourceTree = "<group>"; };
 		B06263611F6ACF4E00371DCB /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		B0B631401F698BAB00712C1D /* DemonstrationResources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemonstrationResources.swift; sourceTree = "<group>"; };
+		B0B80B891F9F4170000E13F7 /* CIComponentKitResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIComponentKitResources.swift; sourceTree = "<group>"; };
 		B0CFA4AA1F8CD3D600A2B7A9 /* LayoutKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LayoutKit.framework; path = Carthage/Build/iOS/LayoutKit.framework; sourceTree = "<group>"; };
 		B0CFA98E1F6BAE2A00FB61D4 /* CICUImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICUImage.swift; sourceTree = "<group>"; };
 		B0CFA98F1F6BAE2A00FB61D4 /* CICUIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICUIFont.swift; sourceTree = "<group>"; };
@@ -137,6 +143,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B058645B1F9EEF3A00235A2A /* CICResources */ = {
+			isa = PBXGroup;
+			children = (
+				B058645E1F9EF1A100235A2A /* CIComponentKitResources.bundle */,
+				B0B80B891F9F4170000E13F7 /* CIComponentKitResources.swift */,
+			);
+			path = CICResources;
+			sourceTree = "<group>";
+		};
 		B0CFA98D1F6BAE2A00FB61D4 /* CICExtensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +181,7 @@
 				B0CFA9AF1F6BDE9300FB61D4 /* CIComponentKitManager.swift */,
 				B01003B41F912F5F00847A50 /* CICActivityView.swift */,
 				B02CA9A61F98C8CD005764FF /* CICAlertView.swift */,
+				B05864601F9EFE1000235A2A /* CICNotifierView.swift */,
 			);
 			path = CIComponentKit;
 			sourceTree = "<group>";
@@ -212,6 +228,7 @@
 		B0E30C051F554F4800DBD08C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				B058645B1F9EEF3A00235A2A /* CICResources */,
 				B0CFA98D1F6BAE2A00FB61D4 /* CICExtensions */,
 				B0CFA9911F6BAE2A00FB61D4 /* CIComponentKit */,
 				B0CFA9961F6BAE2A00FB61D4 /* CICTheme */,
@@ -335,6 +352,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B058645F1F9EF1A100235A2A /* CIComponentKitResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,6 +414,7 @@
 				B0CFA9A21F6BAE2B00FB61D4 /* CICTheme.swift in Sources */,
 				B03977C51F7A08040004C256 /* AutoLayout+CIKit.swift in Sources */,
 				B0CFA99F1F6BAE2B00FB61D4 /* CICUIView.swift in Sources */,
+				B0B80B8A1F9F4170000E13F7 /* CIComponentKitResources.swift in Sources */,
 				B0CFA9A11F6BAE2B00FB61D4 /* CICHUD.swift in Sources */,
 				B0CFA9B01F6BDE9300FB61D4 /* CIComponentKitManager.swift in Sources */,
 				B01003B51F912F5F00847A50 /* CICActivityView.swift in Sources */,
@@ -405,6 +424,7 @@
 				B02CA9A71F98C8CD005764FF /* CICAlertView.swift in Sources */,
 				B058645A1F9DED2700235A2A /* Array+CIKit.swift in Sources */,
 				B0CFA9A41F6BAE2B00FB61D4 /* CICAppearance.swift in Sources */,
+				B05864611F9EFE1000235A2A /* CICNotifierView.swift in Sources */,
 				B0CFA99D1F6BAE2B00FB61D4 /* UIColor+CIKit.swift in Sources */,
 				B0CFA9A91F6BB73400FB61D4 /* UIView+CIKit.swift in Sources */,
 				B0CFA9A31F6BAE2B00FB61D4 /* CICThemeConfig.swift in Sources */,

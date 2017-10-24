@@ -70,7 +70,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 //        CICHUD.show("正在加载~", blurStyle: .extraLight, layoutStyle: .right)
-        
+        CICHUD.showNotifier(title: "哈哈 manoboo爱你哟~")
         CICHUD.showActivityView()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
@@ -115,7 +115,7 @@ class ViewController: UIViewController {
         
         let theme = CIComponentKitTheme.originTheme
         theme.config.textColor = UIColor.cic.random
-        theme.config.mainColor = UIColor.cic.random
+        theme.config.mainColor = UIColor.cic.hex(hex: 0xFAFAFA)
         theme.config.tintColor = UIColor.cic.hex(hex: 0xDF312E)
         theme.config.navigationBarLeftColor = UIColor.cic.hex(hex: 0xe2e2e2)
         theme.config.navigationItemTitleColor = UIColor.cic.random
