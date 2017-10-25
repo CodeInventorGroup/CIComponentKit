@@ -155,3 +155,23 @@ extension UIView {
         return self
     }
 }
+
+extension UIView {
+    struct cic {
+        public static func spring(_ animation: @escaping (()->()),
+                                  duration: TimeInterval = 0.35,
+                                  delay: TimeInterval = 0.0,
+                                  completion: (()->())? = nil) {
+            UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.4, options: .curveEaseInOut, animations: {
+                animation()
+            }, completion: { (finished) in
+                if finished {
+                    if let completion = completion {
+                        completion()
+                    }
+                }
+            })
+        }
+    }
+}
+

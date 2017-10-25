@@ -29,10 +29,16 @@ extension UIImage {
         /// - Returns: 返回图片
         public static func bundle(_ imageNamed: String, ofType: String = "png", inDirectory: String? = "images") -> UIImage? {
             if imageNamed.characters.count > 0 {
-                guard let path = CIComponentKitResources.bundle.path(forResource: imageNamed, ofType: ofType, inDirectory: inDirectory) else {
-                    return nil
+                let imageNames = [imageNamed + "@3x", imageNamed + "@2x", imageNamed]
+                var image: UIImage?
+                for imageName in imageNames {
+                    if let path = CIComponentKitResources.bundle.path(forResource: imageName, ofType: ofType, inDirectory: inDirectory) {
+                        image = UIImage.init(contentsOfFile: path)
+                        // 默认使用 @3x 的图片
+                        break
+                    }
                 }
-                return UIImage.init(contentsOfFile: path)
+                return image
             }
             return nil
         }

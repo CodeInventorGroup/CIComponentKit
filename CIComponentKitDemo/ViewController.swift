@@ -70,9 +70,8 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 //        CICHUD.show("正在加载~", blurStyle: .extraLight, layoutStyle: .right)
-        CICHUD.showNotifier(title: "哈哈 manoboo爱你哟~")
         CICHUD.showActivityView()
-
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             CICHUD.hideActivityView()
         }
@@ -96,6 +95,8 @@ class ViewController: UIViewController {
                         就会成为亲切的回忆。
                     """
         CICHUD.showGuide(title, message: message, animated: true)
+        
+        CICHUD.showNotifier(title: "哈哈 manoboo爱你哟~")
     }
     
     override func viewDidDisappear(_ animated: Bool) {

@@ -13,37 +13,38 @@ import LayoutKit
 public struct CICNotifierViewType: Hashable{
 
     // 提供四种样式
-    public static let error = CICNotifierViewType("")
-    public static let status = CICNotifierViewType("")
-    public static let success = CICNotifierViewType("")
-    public static let warning = CICNotifierViewType("")
+    public static let error = CICNotifierViewType("error_circle", color: UIColor.cic.hex(hex: 0xF85359))
+    public static let status = CICNotifierViewType("status_circle", color: UIColor.cic.hex(hex: 0x1991EB))
+    public static let success = CICNotifierViewType("right_circle", color: UIColor.cic.hex(hex: 0x39B54A))
+    public static let warning = CICNotifierViewType("status_circle", color: UIColor.cic.hex(hex: 0xF7981C))
     
     var image: UIImage?
     var color: UIColor
+    var textColor: UIColor
     fileprivate var imageName: String
     
     
-    init(_ imageNamed: String, color: UIColor = UIColor.cic.hex(hex: 0x39B54A)) {
+    /// CICNotifierViewType init
+    ///
+    /// - Parameters:
+    ///   - imageNamed: 图片名称
+    ///   - color: 背景颜色
+    ///   - textColor: 文字颜色
+    init(_ imageNamed: String, color: UIColor = UIColor.cic.hex(hex: 0x39B54A), textColor: UIColor = .white) {
         self.imageName = imageNamed
         self.color = color
+        self.textColor = textColor
         self.image = UIImage.init(named: imageNamed)
     }
     
     public var hashValue: Int {
-        return imageName.hashValue
+        return (imageName + String.cic.random()).hashValue
     }
     
     public static func ==(lhs: CICNotifierViewType, rhs: CICNotifierViewType) -> Bool {
-        return false
+        return lhs.hashValue == rhs.hashValue
     }
 }
-
-/// CICNotifierView 四种样式的默认Configure
-public var CICNotifierViewConfigure: [CICNotifierViewType: (String, UIColor)]
-    = [.error: ("error_circle", UIColor.cic.hex(hex: 0xF85359)),
-       .status: ("status_circle", UIColor.cic.hex(hex: 0x1991EB)),
-       .success: ("right_circle", UIColor.cic.hex(hex: 0x39B54A)),
-       .warning: ("status_circle", UIColor.cic.hex(hex: 0xF7981C))]
 
 class CICNotifierViewLayout: SizeLayout<View> {
     
@@ -54,25 +55,16 @@ class CICNotifierViewLayout: SizeLayout<View> {
     ///   - title: title
     ///   - isShowClose: 展示关闭按钮
     ///   - autoHide: 是否自动隐藏
-    public init(type: CICNotifierViewType, title: String = "",
+    public init(type: CICNotifierViewType = .status,
+                title: String = "",
                 isShowClose: Bool = true,
-                autoHide: Bool = true,
-                viewReuseId: String = "CICNotifierView_ID") {
+                viewReuseId: String) {
         
-        let imageLayout = SizeLayout<UIImageView>.init(width: 16, height: 16, alignment: .center, viewReuseId: "imageLayout", sublayout: nil) { (imageView) in
+        let imageLayout = SizeLayout<UIImageView>.init(width: 20, height: 20, alignment: .center, viewReuseId: "imageLayout", sublayout: nil) { (imageView) in
             switch (type) {
-                case .error:
-                    imageView.image = UIImage.cic.bundle(CICNotifierViewConfigure[.error]!.0)
-                        break
-                case .status:
-                    imageView.image = UIImage.cic.bundle(CICNotifierViewConfigure[.status]!.0)
-                        break
-                case .success:
-                    imageView.image = UIImage.cic.bundle(CICNotifierViewConfigure[.success]!.0)
-                        break
-                case .warning:
-                    imageView.image = UIImage.cic.bundle(CICNotifierViewConfigure[.warning]!.0)
-                        break
+                case .error, .status, .success, .warning:
+                    imageView.image = UIImage.cic.bundle(type.imageName)
+                    break
             default:
                     imageView.image = type.image
                     break
@@ -80,30 +72,25 @@ class CICNotifierViewLayout: SizeLayout<View> {
         }
         
         let titleLabelLayout = LabelLayout.init(text: title, font: UIFont.cic.preferred(.body), numberOfLines: 0, alignment: .center, viewReuseId: "title") { (label) in
-            
+            label.textColor(type.textColor)
         }
         
-        let stackLayout = StackLayout<View>.init(axis: .horizontal, spacing: 36, alignment: .center, viewReuseId: "content", sublayouts: [imageLayout, titleLabelLayout]) { (view) in
-            
+        let closeButtonLayout = SizeLayout<UIButton>.init(width: 20, height: 20, alignment: .center, viewReuseId: "closeButton", sublayout: nil) { (button) in
+            button.contentEdgeInsets = UIEdgeInsetsMake(6, 6, 6, 6)
+            button.setImage(UIImage.cic.bundle("close_notifier"), for: .normal)
+            button.addHandler(for: .touchUpInside, handler: { (_) in
+                CICHUD.toast("点击了X", blurStyle: .extraLight)
+            })
         }
-        super.init(minWidth: CGFloat.screenWidth - 20, maxWidth: CGFloat.screenWidth - 20, minHeight: 36, maxHeight: 100, alignment: .center, viewReuseId: viewReuseId, sublayout: stackLayout) { (view) in
-            switch (type) {
-            case .error:
-                view.backgroundColor(CICNotifierViewConfigure[.error]!.1)
-                break
-            case .status:
-                view.backgroundColor(CICNotifierViewConfigure[.status]!.1)
-                break
-            case .success:
-                view.backgroundColor(CICNotifierViewConfigure[.success]!.1)
-                break
-            case .warning:
-                view.backgroundColor(CICNotifierViewConfigure[.warning]!.1)
-                break
-            default:
-                view.backgroundColor(type.color)
-                break
-            }
+        
+        let infoLayout = StackLayout<View>.init(axis: .horizontal, spacing: 20, alignment: .center, viewReuseId: "content", sublayouts: [imageLayout, titleLabelLayout])
+        
+        let contentLayout = StackLayout<View>.init(axis: .horizontal, spacing: 20.0, distribution: StackLayoutDistribution.fillEqualSpacing, alignment: Alignment.center, viewReuseId: "content", sublayouts: [infoLayout, closeButtonLayout])
+        
+        super.init(minWidth: CGFloat.screenWidth - 20, maxWidth: CGFloat.screenWidth - 20, minHeight: 44, maxHeight: 100, alignment: .center, viewReuseId: viewReuseId, sublayout: contentLayout) { (view) in
+            view.backgroundColor(type.color)
+            view.layer.shadowColor = type.color.cgColor
+            view.layer.cornerRadius = 8.0
         }
     }
 }
@@ -111,16 +98,45 @@ class CICNotifierViewLayout: SizeLayout<View> {
 extension CICHUD {
     
     
+    /// 弹出一个通知窗体
+    ///
+    /// - Parameters:
+    ///   - type: CICNotifierViewType, 可自定义 CICNotifierViewType.init(<#T##imageNamed: String##String#>, color: <#T##UIColor#>, textColor: <#T##UIColor#>)
+    ///   - title: 展示的文本
+    ///   - isShowClose: 是否展示右侧关闭按钮
+    ///   - autoHide: 是否自动隐藏
+    ///   - duration: autoHide为true时,弹出和隐藏的动画时间
     public class func showNotifier(_ type: CICNotifierViewType = .status,
                             title: String,
                             isShowClose: Bool = true,
-                            autoHide: Bool = true) {
+                            autoHide: Bool = true,
+                            duration: TimeInterval = 2.0) {
         
         guard let keyWindow = UIApplication.shared.keyWindow else {
             return
         }
         
-        let notifierLayout = CICNotifierViewLayout.init(type: type, title: title, isShowClose: isShowClose, autoHide: autoHide, viewReuseId: "CICNotifierView_ID")
-        notifierLayout.arrangement(origin: CGPoint.init(x: 10, y: 20), width: CGFloat.screenWidth - 20, height: nil).makeViews(in: keyWindow)
+        let randomid = String.cic.random()
+        let notifierLayout = CICNotifierViewLayout.init(type: type,
+                                                        title: title,
+                                                        isShowClose: isShowClose,
+                                                        viewReuseId: randomid)
+        notifierLayout.arrangement(origin: CGPoint.init(x: 10, y: -50), width: CGFloat.screenWidth - 20, height: nil).makeViews(in: keyWindow)
+        
+        let displayAnimation = notifierLayout.arrangement(origin: CGPoint.init(x: 10, y: 20), width: CGFloat.screenWidth - 20, height: nil).prepareAnimation(for: keyWindow)
+        UIView.cic.spring({
+            displayAnimation.apply()
+        })
+        
+        if autoHide {
+            DispatchQueue.main.asyncAfter(deadline: .now() + duration, execute: {
+                let hideAnimation = notifierLayout.arrangement(origin: CGPoint.init(x: 10, y: -50), width: CGFloat.screenWidth - 20, height: nil).prepareAnimation(for: keyWindow)
+                UIView.cic.spring({
+                    hideAnimation.apply()
+                }){
+                    SizeLayout<View>.init(viewReuseId: randomid).arrangement().makeViews(in: keyWindow)
+                }
+            })
+        }
     }
 }
