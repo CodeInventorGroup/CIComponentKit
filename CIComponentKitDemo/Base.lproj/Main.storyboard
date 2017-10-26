@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -32,8 +32,7 @@
         <!--First-->
         <scene sceneID="WEC-MN-3mf">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6XM-GJ-B1A" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController title="First" id="vJn-a0-eHx" customClass="ViewController" customModule="CIComponentKitDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="First" extendedLayoutIncludesOpaqueBars="YES" id="vJn-a0-eHx" customClass="ViewController" customModule="CIComponentKitDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="20x-um-OCo"/>
                         <viewControllerLayoutGuide type="bottom" id="aam-ix-Dj4"/>
@@ -47,6 +46,7 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="424-BS-Sex"/>
                     </navigationItem>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6XM-GJ-B1A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1033" y="338"/>
         </scene>
@@ -63,9 +63,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.43215310569999998" green="0.8369415402" blue="0.68626081940000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="item1-normal" selectedImage="item1-selected" id="fIs-c1-EFG">
-                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-10"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="" image="item1-normal" selectedImage="item1-selected" id="fIs-c1-EFG"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btI-mC-XHy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -89,7 +87,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="vJn-a0-eHx" kind="show" id="Fbd-JI-Mdq"/>
+                                    <segue destination="vJn-a0-eHx" kind="show" id="Jd7-oI-nlh"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -100,7 +98,6 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="item2-normal" selectedImage="item2-selected" id="JUw-ye-NrW">
-                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-10"/>
                         <inset key="largeContentSizeImageInsets" minX="1" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </tabBarItem>
                 </viewController>

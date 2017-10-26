@@ -19,7 +19,7 @@ extension CICHUD {
         
         public var statusTitle: String = CICHUD_NetWorkStatusDefaultTip {
             didSet {
-                statusLabel.text(statusTitle).sizeTo(layout: UIView.CICLayoutType.maxWidth(CGFloat.screenWidth - 80))
+                statusLabel.text(statusTitle).sizeTo(layout: .maxWidth(CGFloat.screenWidth - 80))
             }
         }
         

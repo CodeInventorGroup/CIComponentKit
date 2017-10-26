@@ -26,6 +26,14 @@ extension CIComponentKit where Base: UIView {
         return base.bounds.height
     }
     
+    public var right: CGFloat {
+        return base.frame.maxX
+    }
+    
+    public var bottom: CGFloat {
+        return base.frame.maxY
+    }
+    
     public var centerX: CGFloat {
         return base.center.x
     }
@@ -47,18 +55,32 @@ extension CIComponentKit where Base: UIView {
     }
 }
 
+public enum CICLayoutMaker {
+    
+    case value(CGFloat)
+    case offSet(CGFloat)
+    case mutiplier(CGFloat)
+    
+    case none
+}
+
+public enum CICLayoutType {
+    case x(CGFloat)
+    case y(CGFloat)
+    case width(CGFloat)
+    case height(CGFloat)
+    
+    case maxWidth(CGFloat)
+    case maxHeight(CGFloat)
+    
+    case right(CGFloat)
+    case bottom(CGFloat)
+    
+    case none
+}
+
 extension UIView {
-    
-    public enum CICLayoutType {
-        case x(CGFloat)
-        case y(CGFloat)
-        case width(CGFloat)
-        case maxWidth(CGFloat)
-        case height(CGFloat)
-        case maxHeight(CGFloat)
-        case none
-    }
-    
+
     @discardableResult
     public func x(_ originX: CGFloat = 0.0) -> Self {
         self.frame.origin.x = originX
@@ -66,8 +88,8 @@ extension UIView {
     }
     
     @discardableResult
-    public func x(equalTo view: UIView) -> Self {
-        self.frame.origin.x = view.frame.origin.x
+    public func x(_ view: UIView, offSet: CGFloat = 0.0, mutiplier: CGFloat = 1.0) -> Self {
+        self.frame.origin.x = (view.frame.origin.x + offSet) * mutiplier
         return self
     }
     
@@ -78,8 +100,8 @@ extension UIView {
     }
     
     @discardableResult
-    public func y(equalTo view: UIView) -> Self {
-        self.frame.origin.y = view.frame.origin.y
+    public func y(_ view: UIView, offSet: CGFloat = 0.0, mutiplier: CGFloat = 1.0) -> Self {
+        self.frame.origin.y = (view.frame.origin.y + offSet) * mutiplier
         return self
     }
     
@@ -90,8 +112,8 @@ extension UIView {
     }
     
     @discardableResult
-    public func width(equalTo view: UIView) -> Self {
-        self.frame.size.width = view.bounds.width
+    public func width(_ view: UIView, offSet: CGFloat = 0.0, mutiplier: CGFloat = 1.0) -> Self {
+        self.frame.size.width = (view.bounds.width + offSet) * mutiplier
         return self
     }
     
@@ -102,8 +124,8 @@ extension UIView {
     }
     
     @discardableResult
-    public func height(equalTo view: UIView) -> Self {
-        self.frame.size.height = view.bounds.width
+    public func height(_ view: UIView, offSet: CGFloat = 0.0, mutiplier: CGFloat = 1.0) -> Self {
+        self.frame.size.height = (view.bounds.height + offSet) * mutiplier
         return self
     }
 
@@ -114,13 +136,19 @@ extension UIView {
     }
     
     @discardableResult
+    public func size(_ view: UIView, offSet: CGSize = .zero, mutiplier: CGFloat = 1.0) -> Self {
+        self.frame.size = view.frame.size.add(offSet).mutiplier(mutiplier)
+        return self
+    }
+    
+    @discardableResult
     public func center(_ center: CGPoint = .zero) -> Self {
         self.center = center
         return self
     }
     
     @discardableResult
-    public func center(equalTo view: UIView) -> Self {
+    public func center(_ view: UIView) -> Self {
         self.center = view.center
         return self
     }
@@ -140,6 +168,12 @@ extension UIView {
     @discardableResult
     public func frame(_ rect: CGRect) -> Self {
         self.frame = rect
+        return self
+    }
+    
+    @discardableResult
+    public func frame(_ view: UIView, _ offSet: UIEdgeInsets = .zero, mutiplier: CGFloat = 1.0) -> Self {
+        self.frame = CGRect.init(x: view.cic.x + offSet.left, y: view.cic.y + offSet.top, width: view.cic.width + offSet.left + offSet.right, height: view.cic.height + offSet.top + offSet.bottom)
         return self
     }
     

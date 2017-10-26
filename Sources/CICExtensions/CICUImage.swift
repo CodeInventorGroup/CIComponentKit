@@ -17,6 +17,14 @@ extension CGSize {
         }
         return false
     }
+    
+    func add(_ size: CGSize) -> CGSize {
+        return CGSize(width: self.width + size.width, height: self.height + size.height)
+    }
+    
+    func mutiplier(_ mutiplier: CGFloat) -> CGSize {
+        return CGSize(width: self.width * mutiplier, height: self.height * mutiplier)
+    }
 }
 
 extension CGFloat {

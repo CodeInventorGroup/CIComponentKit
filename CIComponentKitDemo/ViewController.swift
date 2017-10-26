@@ -24,7 +24,8 @@ class ViewController: UIViewController {
         }
         
         let label = UILabel.cic.appearance
-        label.frame(CGRect.init(x: 0, y: 0, width: view.bounds.width, height: 200))
+        label.y(64)
+            .width(CGFloat.screenWidth).height(200)
             .line(0)
             .text(String.LoremIpsum)
             .font(UIFont.preferredFont(forTextStyle: .body))
@@ -38,11 +39,11 @@ class ViewController: UIViewController {
                 CICHUD.showAlert(content: "主题更换成功")
         }
         self.view.addSubview(label)
-
+        
         let toggleThemeBtn = UIButton()
         toggleThemeBtn.y(view.bounds.maxY-64)
             .height(64)
-            .width(equalTo: view)
+            .width(view)
             .backgroundColor(UIColor.cic.hex(hex: 0x06e2c9))
         toggleThemeBtn.titleLabel?.font(UIFont.cic.preferred(.body))
         toggleThemeBtn.setTitle("Toggle theme", for: .normal)
@@ -53,14 +54,13 @@ class ViewController: UIViewController {
         jumpBtn
             .y(toggleThemeBtn.frame.minY - 64)
             .height(64)
-            .width(equalTo: view)
+            .width(view)
             .backgroundColor(UIColor.cic.hex(hex: 0x22a9e8))
         jumpBtn.titleLabel?.font(UIFont.cic.preferred(.headline))
         jumpBtn.setTitle("JUMP TO CICUIViewController", for: .normal)
         jumpBtn.addTarget(self, action: #selector(jump), for: .touchUpInside)
         view.addSubview(jumpBtn)
 
-        changeTheme()
     }
 
     override func viewWillAppear(_ animated: Bool) {
