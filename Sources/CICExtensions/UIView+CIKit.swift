@@ -100,6 +100,18 @@ extension UIView {
     }
     
     @discardableResult
+    public func bottom(_ value: CGFloat, view: UIView? = nil) -> Self {
+        if let toView = view {
+            self.y(toView.cic.bottom - value - self.cic.height)
+        }else {
+            if let superView = self.superview {
+                self.y(superView.cic.bottom - value - self.cic.height)
+            }
+        }
+        return self
+    }
+    
+    @discardableResult
     public func y(_ view: UIView, offSet: CGFloat = 0.0, mutiplier: CGFloat = 1.0) -> Self {
         self.frame.origin.y = (view.frame.origin.y + offSet) * mutiplier
         return self
