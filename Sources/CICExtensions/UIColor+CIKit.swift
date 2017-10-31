@@ -95,6 +95,28 @@ public extension UIColor {
     }
 }
 
+/// Flat UI color configure
+extension UIColor {
+    public struct flat {
+        public static var orange: UIColor { return UIColor.cic.hex(hex: 0xF85359) }
+        public static var blue: UIColor { return UIColor.cic.hex(hex: 0x1991EB) }
+        public static var dark: UIColor { return UIColor.cic.hex(hex: 0x273142) }
+        public static var extraDark: UIColor { return UIColor.cic.hex(hex: 0x333F52) }
+        public static var base: UIColor { return UIColor.cic.hex(hex: 0xE2E7EE) }
+        public static var green: UIColor { return UIColor.cic.hex(hex: 0x39B54A) }
+        public static var green1: UIColor { return UIColor.cic.hex(hex: 0x36AE46) }
+        public static var grey: UIColor { return UIColor.cic.hex(hex: 0x516173) }
+        public static var lightGrey: UIColor { return UIColor.cic.hex(hex: 0xA8AAB7) }
+        public static var iconColor: UIColor { return UIColor.cic.hex(hex: 0xC5D0DE) }
+        public static var lightBlue: UIColor { return UIColor.cic.hex(hex: 0xF1F4F8) }
+        public static var red: UIColor { return UIColor.cic.hex(hex: 0xF85359) }
+        public static var violet: UIColor { return UIColor.cic.hex(hex: 0x6B47DB) }
+        public static var white: UIColor { return UIColor.cic.hex(hex: 0xFFFFFF) }
+        public static var white1: UIColor { return UIColor.cic.hex(hex: 0xF8F9FB) }
+        public static var black: UIColor { return UIColor.cic.hex(hex: 0x445363) }
+    }
+}
+
 
 extension CGFloat {
     

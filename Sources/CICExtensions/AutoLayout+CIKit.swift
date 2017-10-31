@@ -17,6 +17,12 @@ extension CGFloat {
     }
 }
 
+extension CGSize {
+    public static var screenSize: CGSize {
+        return UIScreen.main.bounds.size
+    }
+}
+
 public enum CICLayoutAttribute {
     
     case left(Any, CGFloat)

@@ -28,3 +28,18 @@ public extension String {
     }
 }
 
+extension String {
+    
+    public func cicHeight(_ maxWidth: CGFloat = .screenWidth, font: UIFont = UIFont.cic.systemFont) -> CGFloat {
+        
+        let str = NSString.init(string: self)
+        return str.boundingRect(with: CGSize.init(width: maxWidth, height: CGFloat(MAXFLOAT)), options:.usesLineFragmentOrigin, attributes: [.font: font], context: nil).height
+    }
+    
+    public func cicWidth(_ maxHeight: CGFloat = UIFont.systemFontSize, font: UIFont = UIFont.cic.systemFont) -> CGFloat {
+        let str = NSString.init(string: self)
+        return str.boundingRect(with: CGSize.init(width: CGFloat(MAXFLOAT), height: maxHeight), options:.usesLineFragmentOrigin, attributes: [.font: font], context: nil).width
+    }
+}
+
+

@@ -13,7 +13,17 @@ import LayoutKit
 
 class RootViewController: UIViewController {
     
-    let scrollView = UIScrollView(frame: .zero)
+    private let scrollView = UIScrollView(frame: .zero)
+    
+    private let cardScrollView = UIScrollView(frame: .zero)
+    
+    let cardDatas = [("弹窗HUD", "CICHUD"), ("CICLabel", "自定义Label"), ("弹窗HUD", "CICHUD"), ("弹窗HUD", "CICHUD")]
+    let animationColors = [UIColor.flat.orange,
+                           UIColor.flat.blue,
+                           UIColor.flat.grey,
+                           UIColor.flat.base
+                           ]
+    private var cachedFeedLayout: Layout?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,91 +40,93 @@ class RootViewController: UIViewController {
         
         edgesForExtendedLayout = []
         self.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        initSubviews()
+        self.automaticallyAdjustsScrollViewInsets = false
         
-//        let label = UILabel.cic.appearance
-//        label.y(64)
-//            .width(CGFloat.screenWidth).height(100)
-//            .line(0)
-//            .text(String.LoremIpsum)
-//            .font(UIFont.preferredFont(forTextStyle: .body))
-//            .textAlignment(.center)
-//            .textColor(CIComponentKitThemeCurrentConfig.textColor)
-//            .backgroundColor(UIColor.cic.hex(hex:  0xf2f2f2))
-//            .longPressAction(.copy)
-//            .copyRange(NSMakeRange(0, 5))
-//        label.copySuccessClousure = {
-//            CICHUD.showNetWorkStatusChange()
-//            CICHUD.showAlert(content: "主题更换成功")
-//        }
-//        self.view.addSubview(label)
+        view.addSubview(scrollView)
         
-        let toggleThemeBtn = UIButton()
-        toggleThemeBtn.height(64)
-            .bottom(0, view: view)
-            .width(view)
-            .backgroundColor(UIColor.cic.hex(hex: 0x06e2c9))
-        toggleThemeBtn.titleLabel?.font(UIFont.cic.preferred(.body))
-        toggleThemeBtn.setTitle("Toggle theme", for: .normal)
-        toggleThemeBtn.addTarget(self, action: #selector(changeTheme), for: .touchUpInside)
-        view.addSubview(toggleThemeBtn)
-
-        let jumpBtn = UIButton()
-        jumpBtn
-            .y(toggleThemeBtn.frame.minY - 64)
-            .height(64)
-            .width(view)
-            .backgroundColor(UIColor.cic.hex(hex: 0x22a9e8))
-        jumpBtn.titleLabel?.font(UIFont.cic.preferred(.headline))
-        jumpBtn.setTitle("JUMP TO CICUIViewController", for: .normal)
-        jumpBtn.addTarget(self, action: #selector(jump), for: .touchUpInside)
-        view.addSubview(jumpBtn)
-        
+        layout()
     }
     
-    func initSubviews() {
-        scrollView.y(0).width(view).height(.screenHeight * 0.5)
-        scrollView.isPagingEnabled = true
-        view.addSubview(scrollView)
-        self.automaticallyAdjustsScrollViewInsets = false
-        let dataFields = [("弹窗HUD", "CICHUD"), ("CICLabel", "自定义Label"), ("弹窗HUD", "CICHUD")]
-//        for (index, (title, subtitle)) in dataFields.enumerated() {
-//            let originX = CGFloat(index) * CGFloat.screenWidth + 20
-//            let card = RootCard.init(title, subtitle: subtitle)
-//                .frame(CGRect(x: originX, y: 10, width: scrollView.cic.width - 40, height: scrollView.cic.height - 20))
-//            scrollView.addSubview(card)
-//        }
-        
+    func layout(_ size: CGSize = .screenSize) {
+        scrollView.size(size)
+        let start = CFAbsoluteTimeGetCurrent()
         DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
-            var cardItems = [Layout]()
-            for (_, (title, subtitle)) in dataFields.enumerated() {
-                let viewReuseId = String.cic.random(10)
-                let size = CGSize.init(width: .screenWidth - 40, height: self.scrollView.cic.height)
-                print("viewReuseId: \(viewReuseId)")
-                let rootCarLayout = RootCardLayout.init(title, subtitle: subtitle, info: String.LoremIpsum, size: size, action: {
-                    print("....")
-                })
-
-                cardItems.append(rootCarLayout)
-            }
-            
-            
-            let feedLayout =  InsetLayout.init(insets: UIEdgeInsetsMake(0, 20, 0, 20),
-                                               sublayout: StackLayout(
-                                                    axis: .horizontal,
-                                                    spacing: 40,
-                                                    distribution: .leading,
-                                                    sublayouts: cardItems
-                                                )
-            )
-            let arrangement = feedLayout.arrangement(height: self.scrollView.cic.height)
+            let arrangement = self.getLayout(size.width).arrangement(width: size.width)
             DispatchQueue.main.async {
-                self.scrollView.contentSize = arrangement.frame.size
+                var size = arrangement.frame.size
+                size.height += 64
+                self.scrollView.contentSize = size
                 arrangement.makeViews(in: self.scrollView)
+                let end = CFAbsoluteTimeGetCurrent()
+                print(" layout time: \(end - start).ms")
             }
         }
         
-        scrollView.delegate = self
+    }
+        
+    func getLayout(_ width: CGFloat) -> Layout {
+        
+        if let cachedFeedLayout = cachedFeedLayout {
+            return cachedFeedLayout
+        }
+        
+        var cardItems = [Layout]()
+        for (index, (title, subtitle)) in self.cardDatas.enumerated() {
+            let size = CGSize.init(width: width - 40, height: 500)
+            let rootCarLayout = RootCardLayout.init(title, subtitle: subtitle, info: String.LoremIpsum, size: size, action: {
+                print("\(index) card has been clicked")
+            })
+            cardItems.append(rootCarLayout)
+        }
+        
+        let cards = InsetLayout.init(insets: UIEdgeInsetsMake(20, 20, 20, 20),
+                                           sublayout: StackLayout(
+                                            axis: .horizontal,
+                                            spacing: 40,
+                                            distribution: .leading,
+                                            sublayouts: cardItems
+                                           )
+        )
+        
+        let cardsArrangement = cards.arrangement()
+        
+        let cardsLayout = SizeLayout<UIScrollView>.init(width: width,
+                                      height: cardsArrangement.frame.height,
+                                      sublayout: nil
+                                      ) { (cardView) in
+                                        DispatchQueue.main.async {
+                                            cardsArrangement.makeViews(in: cardView)
+                                            cardView.isPagingEnabled = true
+                                            cardView.delegate = self
+                                            cardView.contentSize = CGSize(width: cardsArrangement.frame.width, height: 0)
+                                        }
+        }
+        
+        
+        let toggleButtonLayout = SizeLayout<UIButton>.init(width: width, height: 64) { (toggle) in
+            toggle.backgroundColor(UIColor.cic.hex(hex: 0x06e2c9))
+                .setTitle("Toggle theme", for: .normal)
+            toggle.addHandler(for: .touchUpInside, handler: { (_) in
+                self.changeTheme()
+            })
+        }
+        
+        let jumpButtonLayout = SizeLayout<UIButton>.init(width: width, height: 64) { (jump) in
+            jump.backgroundColor(UIColor.cic.hex(hex: 0x22a9e8))
+                .setTitle("JUMP TO CICUIViewController", for: .normal)
+            jump.addHandler(for: .touchUpInside, handler: { (_) in
+                self.jump()
+            })
+        }
+        
+        let stackLayout = StackLayout<UIView>.init(axis: Axis.vertical,
+                                                   spacing: 100.0,
+                                                   sublayouts: [cardsLayout, toggleButtonLayout, jumpButtonLayout]) { (_) in
+            
+        }
+        
+//        cachedFeedLayout = stackLayout
+        return stackLayout
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -176,12 +188,19 @@ class RootViewController: UIViewController {
     }
 }
 
+extension RootViewController {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        layout(size)
+    }
+}
+
 extension RootViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
-        let index = scrollView.contentOffset.x / CGFloat.screenWidth
+        let index = Int(scrollView.contentOffset.x / CGFloat.screenWidth)
         UIView.animate(withDuration: 0.5) {
-            self.view.backgroundColor(UIColor.cic.random)
+            self.scrollView.backgroundColor(self.animationColors[index])
         }
     }
 }

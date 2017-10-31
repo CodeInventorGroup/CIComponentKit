@@ -65,7 +65,7 @@ class RootCard: UIView {
 }
 
 class RootCardLayout: SizeLayout<View> {
-    init(_ title: String, subtitle: String, info: String, size: CGSize = CGSize(width: .screenWidth, height: 200), action: @escaping (() -> ())) {
+    init(_ title: String, subtitle: String, info: String, size: CGSize, action: @escaping (() -> ())) {
         
         let titleLayout = LabelLayout.init(text: title, font: UIFont.cic.systemFont, numberOfLines: 1, viewReuseId: "title") { (label) in
             
@@ -75,9 +75,24 @@ class RootCardLayout: SizeLayout<View> {
             
         }
         
-        let infoLayout = LabelLayout.init(text: info, font: UIFont.cic.preferred(.body), numberOfLines: 0, viewReuseId: "info") { (label) in
-            
+    
+        let infoHeight = info.cicHeight(size.width, font: UIFont.cic.preferred(.body))
+        let infoLayout = SizeLayout<CICLabel>.init(height: infoHeight) { (label) in
+            label.line(0)
+                .text(info)
+                .font(UIFont.preferredFont(forTextStyle: .body))
+                .sizeTo(layout: .maxWidth(.screenWidth))
+                .textColor(CIComponentKitThemeCurrentConfig.textColor)
+                .longPressAction(.copy)
+                .copyRange(NSMakeRange(0, 5))
+            label.copySuccessClousure = {
+                CICHUD.showAlert(content: "主题更换成功")
+            }
         }
+        
+//        let infoLayout = LabelLayout.init(text: info, font: UIFont.cic.preferred(.body), numberOfLines: 0, viewReuseId: "info") { (label) in
+//
+//        }
         
     
         let stackLayout = StackLayout<UIControl>.init(axis: .vertical,
@@ -90,8 +105,15 @@ class RootCardLayout: SizeLayout<View> {
         }
         
 
-        super.init(minWidth: size.width, maxWidth: size.width, minHeight: size.height, alignment: .center, sublayout: stackLayout) { (view) in
+        super.init(minWidth: size.width,
+                   maxWidth: size.width,
+                   maxHeight: size.height,
+                   alignment: .center,
+                   sublayout: InsetLayout.init(insets: UIEdgeInsetsMake(5, 5, 5, 5), sublayout: stackLayout)) { (view) in
             view.layer.cornerRadius = 6.0
+            view.layer.masksToBounds = true
+            view.layer.shadowColor = UIColor.white.cgColor
+            view.backgroundColor(.white)
 //            view.effect = UIBlurEffect.init(style: .extraLight)
         }
     }
