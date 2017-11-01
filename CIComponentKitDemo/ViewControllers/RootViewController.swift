@@ -29,7 +29,7 @@ class RootViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "CIComponentKit"
-        self.view.backgroundColor(.white)
+        self.view.backgroundColor(CIComponentKitThemeCurrentConfig.mainColor)
         // Do any additional setup after loading the view, typically from a nib.
         if #available(iOS 11.0, *) {
 //            self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -120,7 +120,7 @@ class RootViewController: UIViewController {
         }
         
         let stackLayout = StackLayout<UIView>.init(axis: Axis.vertical,
-                                                   spacing: 100.0,
+                                                   spacing: 70.0,
                                                    sublayouts: [cardsLayout, toggleButtonLayout, jumpButtonLayout]) { (_) in
             
         }
