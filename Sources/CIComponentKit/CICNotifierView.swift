@@ -87,7 +87,13 @@ class CICNotifierViewLayout: SizeLayout<View> {
         
         let contentLayout = StackLayout<View>.init(axis: .horizontal, spacing: 20.0, distribution: StackLayoutDistribution.fillEqualSpacing, alignment: Alignment.center, viewReuseId: "content", sublayouts: [infoLayout, closeButtonLayout])
         
-        super.init(minWidth: CGFloat.screenWidth - 20, maxWidth: CGFloat.screenWidth - 20, minHeight: 44, maxHeight: 100, alignment: .center, viewReuseId: viewReuseId, sublayout: contentLayout) { (view) in
+        super.init(minWidth: CGFloat.screenWidth - 20,
+                   maxWidth: CGFloat.screenWidth - 20,
+                   minHeight: 44,
+                   maxHeight: 100,
+                   alignment: .center,
+                   viewReuseId: viewReuseId,
+                   sublayout: contentLayout) { (view) in
             view.backgroundColor(type.color)
             view.layer.shadowColor = type.color.cgColor
             view.layer.cornerRadius = 8.0

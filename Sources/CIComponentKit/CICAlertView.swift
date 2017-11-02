@@ -51,7 +51,12 @@ public class CICAlertViewLayout: SizeLayout<UIView> {
         // 初始化buttons
         var actionlayouts = [Layout]()
         for (index, actionTitle) in actionTitles.enumerated() {
-            let actionLayout = ButtonLayout.init(type: .custom, title: actionTitle, font: UIFont.systemFont(ofSize: 20.0), contentEdgeInsets: UIEdgeInsetsMake(6, 10, 6, 10), viewReuseId: actionTitle, config: { control in
+            let actionLayout = ButtonLayout.init(type: .custom,
+                                                 title: actionTitle,
+                                                 font: UIFont.systemFont(ofSize: 20.0),
+                                                 contentEdgeInsets: UIEdgeInsetsMake(6, 10, 6, 10),
+                                                 viewReuseId: actionTitle,
+                                                 config: { control in
                 if let titleColor = actionStyles?.safeElement(at: index) {
                     control.setTitleColor(titleColor, for: .normal)
                 }else {
@@ -65,8 +70,12 @@ public class CICAlertViewLayout: SizeLayout<UIView> {
             actionlayouts.append(actionLayout)
         }
         if actionlayouts.count > 0 {
-            let spacing: CGFloat = actionlayouts.count < 3 ? 100.0 : 50.0
-            let actionStackLayout = StackLayout.init(axis: .horizontal, spacing: spacing, distribution: StackLayoutDistribution.center, alignment: Alignment.fill, viewReuseId: "actionStack", sublayouts: actionlayouts, config: { view in
+            let spacing: CGFloat = actionlayouts.count < 3 ? 80 : 40.0
+            let actionStackLayout = StackLayout.init(axis: .horizontal,
+                                                     spacing: spacing,
+                                                     distribution: .center,
+                                                     viewReuseId: "actionStack",
+                                                     sublayouts: actionlayouts, config: { view in
                 view.backgroundColor(.white)
             })
             layouts.append(actionStackLayout)
