@@ -9,6 +9,11 @@
 import UIKit
 
 extension CGFloat {
+    
+    public static let screenScale: CGFloat =  {
+        return UIScreen.main.scale
+    }()
+    
     public static var screenHeight: CGFloat {
         return UIScreen.main.bounds.height
     }
@@ -18,8 +23,24 @@ extension CGFloat {
 }
 
 extension CGSize {
+    
     public static var screenSize: CGSize {
         return UIScreen.main.bounds.size
+    }
+    
+    func valid() -> Bool {
+        if width > 0 && height > 0 {
+            return true
+        }
+        return false
+    }
+    
+    func add(_ size: CGSize) -> CGSize {
+        return CGSize(width: self.width + size.width, height: self.height + size.height)
+    }
+    
+    public func multiply(_ mutiplier: CGFloat) -> CGSize {
+        return CGSize.init(width: width * mutiplier, height: height * mutiplier)
     }
 }
 

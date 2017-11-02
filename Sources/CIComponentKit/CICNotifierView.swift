@@ -121,22 +121,40 @@ extension CICHUD {
                                                         title: title,
                                                         isShowClose: isShowClose,
                                                         viewReuseId: randomid)
-        notifierLayout.arrangement(origin: CGPoint.init(x: 10, y: -50), width: CGFloat.screenWidth - 20, height: nil).makeViews(in: keyWindow)
+//        notifierLayout.arrangement(origin: CGPoint.init(x: 10, y: -50), width: CGFloat.screenWidth - 20, height: nil).makeViews(in: keyWindow)
+//        let displayAnimation = notifierLayout.arrangement(origin: CGPoint.init(x: 10, y: 20), width: CGFloat.screenWidth - 20, height: nil).prepareAnimation(for: keyWindow)
         
-        let displayAnimation = notifierLayout.arrangement(origin: CGPoint.init(x: 10, y: 20), width: CGFloat.screenWidth - 20, height: nil).prepareAnimation(for: keyWindow)
-        UIView.cic.spring({
-            displayAnimation.apply()
+        let top = keyWindow.layoutMargins.top
+        let height = notifierLayout.arrangement(width: CGFloat.screenWidth - 20).frame.height
+        let notifier = notifierLayout.arrangement(origin: CGPoint.init(x: 10, y: -height), width: CGFloat.screenWidth - 20, height: nil).makeViews()
+        keyWindow.addSubview(notifier)
+        
+        UIView.cic.spring ({
+            notifier.y(top)
         })
-        
         if autoHide {
             DispatchQueue.main.asyncAfter(deadline: .now() + duration, execute: {
-                let hideAnimation = notifierLayout.arrangement(origin: CGPoint.init(x: 10, y: -50), width: CGFloat.screenWidth - 20, height: nil).prepareAnimation(for: keyWindow)
                 UIView.cic.spring({
-                    hideAnimation.apply()
-                }){
-                    SizeLayout<View>.init(viewReuseId: randomid).arrangement().makeViews(in: keyWindow)
+                    notifier.y(-notifier.cic.height)
+                }) {
+                    notifier.removeFromSuperview()
                 }
             })
         }
+        
+//        UIView.cic.spring({
+//            displayAnimation.apply()
+//        })
+//
+//        if autoHide {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + duration, execute: {
+//                let hideAnimation = notifierLayout.arrangement(origin: CGPoint.init(x: 10, y: -50), width: CGFloat.screenWidth - 20, height: nil).prepareAnimation(for: keyWindow)
+//                UIView.cic.spring({
+//                    hideAnimation.apply()
+//                }){
+//                    SizeLayout<View>.init(viewReuseId: randomid).arrangement().makeViews(in: keyWindow)
+//                }
+//            })
+//        }
     }
 }

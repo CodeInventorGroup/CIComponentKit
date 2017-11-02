@@ -98,16 +98,16 @@ extension CICHUD {
                                 confirmAction: @escaping CICAlertViewLayout.CICAlertViewAction = {_ in}) {
         if let keyWindow = UIApplication.shared.keyWindow {
         
+            var alertMaskView = UIView()
             let actionTitles = ["取消", "确定"]
             let actions: [CICAlertViewLayout.CICAlertViewAction] = [{ (control) in
                     print("cancel")
                     cancelAction(control)
-                    SizeLayout<UIView>.init(viewReuseId: "alert_blackMask").arrangement().makeViews(in: keyWindow)
-                
+                    alertMaskView.removeFromSuperview()
                 }, { control in
                     print("confirm")
                     confirmAction(control)
-                    SizeLayout<UIView>.init(viewReuseId: "alert_blackMask").arrangement().makeViews(in: keyWindow)
+                    alertMaskView.removeFromSuperview()
                 }]
             let actionStyles = [CIComponentKitThemeCurrentConfig.cancelColor, CIComponentKitThemeCurrentConfig.confirmColor]
             
@@ -119,8 +119,8 @@ extension CICHUD {
             let blackMaskLayout = SizeLayout<UIView>.init(size: keyWindow.bounds.size, alignment: Alignment.center, viewReuseId: "alert_blackMask", sublayout: alertLayout, config: { (view) in
                 view.backgroundColor(UIColor.cic.hex(hex: 0x000000, alpha: 0.7))
             })
-            
-            blackMaskLayout.arrangement().makeViews(in: keyWindow)
+            alertMaskView = blackMaskLayout.arrangement().makeViews()
+            keyWindow.addSubview(alertMaskView)
         }
         
     }

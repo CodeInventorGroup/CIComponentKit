@@ -10,28 +10,6 @@
 import UIKit
 import ImageIO
 
-extension CGSize {
-    func valid() -> Bool {
-        if width > 0 && height > 0 {
-            return true
-        }
-        return false
-    }
-    
-    func add(_ size: CGSize) -> CGSize {
-        return CGSize(width: self.width + size.width, height: self.height + size.height)
-    }
-    
-    func mutiplier(_ mutiplier: CGFloat) -> CGSize {
-        return CGSize(width: self.width * mutiplier, height: self.height * mutiplier)
-    }
-}
-
-extension CGFloat {
-    public static let screenScale: CGFloat =  {
-        return UIScreen.main.scale
-    }()
-}
 
 fileprivate func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
     switch (lhs, rhs) {

@@ -86,18 +86,13 @@ class RootCardLayout: SizeLayout<View> {
                 .longPressAction(.copy)
                 .copyRange(NSMakeRange(0, 5))
             label.copySuccessClousure = {
-                CICHUD.showAlert(content: "主题更换成功")
+                CICHUD.showAlert("ManoBoo温馨提示", content: "爱酱今天要元气慢慢哦~\nManoBoo祝你天天开心")
+                CICHUD.showNotifier(title: "爱酱今天要元气慢慢哦~")
             }
         }
-        
-//        let infoLayout = LabelLayout.init(text: info, font: UIFont.cic.preferred(.body), numberOfLines: 0, viewReuseId: "info") { (label) in
-//
-//        }
-        
     
         let stackLayout = StackLayout<UIControl>.init(axis: .vertical,
                                                       spacing: 30,
-                                                      viewReuseId: "control",
                                                       sublayouts: [titleLayout, subtitleLayout, infoLayout]) { (control) in
                                                         control.addHandler(for: .touchUpInside, handler: { (_) in
                                                             action()

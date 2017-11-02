@@ -17,7 +17,7 @@ class RootViewController: UIViewController {
     
     private let cardScrollView = UIScrollView(frame: .zero)
     
-    let cardDatas = [("弹窗HUD", "CICHUD"), ("CICLabel", "自定义Label"), ("弹窗HUD", "CICHUD"), ("弹窗HUD", "CICHUD")]
+    let cardDatas = [("弹窗HUD", "CICHUD"), ("CICLabel", "自定义Label(长按复制下方文字)"), ("弹窗HUD", "CICHUD"), ("弹窗HUD", "CICHUD")]
     let animationColors = [UIColor.flat.orange,
                            UIColor.flat.blue,
                            UIColor.flat.grey,
@@ -49,19 +49,25 @@ class RootViewController: UIViewController {
     
     func layout(_ size: CGSize = .screenSize) {
         scrollView.size(size)
-        let start = CFAbsoluteTimeGetCurrent()
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
-            let arrangement = self.getLayout(size.width).arrangement(width: size.width)
-            DispatchQueue.main.async {
-                var size = arrangement.frame.size
-                size.height += 64
-                self.scrollView.contentSize = size
-                arrangement.makeViews(in: self.scrollView)
-                let end = CFAbsoluteTimeGetCurrent()
-                print(" layout time: \(end - start).ms")
-            }
-        }
+        let arrangement = self.getLayout(size.width).arrangement(width: size.width)
         
+            var size = arrangement.frame.size
+            size.height += 64
+            self.scrollView.contentSize = size
+            arrangement.makeViews(in: self.scrollView)
+    
+//        let start = CFAbsoluteTimeGetCurrent()
+//        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
+//            let arrangement = self.getLayout(size.width).arrangement(width: size.width)
+//            DispatchQueue.main.async {
+//                var size = arrangement.frame.size
+//                size.height += 64
+//                self.scrollView.contentSize = size
+//                arrangement.makeViews(in: self.scrollView)
+//                let end = CFAbsoluteTimeGetCurrent()
+//                print(" layout time: \(end - start).ms")
+//            }
+//        }
     }
         
     func getLayout(_ width: CGFloat) -> Layout {

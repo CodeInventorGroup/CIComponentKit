@@ -149,7 +149,7 @@ extension UIView {
     
     @discardableResult
     public func size(_ view: UIView, offSet: CGSize = .zero, mutiplier: CGFloat = 1.0) -> Self {
-        self.frame.size = view.frame.size.add(offSet).mutiplier(mutiplier)
+        self.frame.size = view.frame.size.add(offSet).multiply(mutiplier)
         return self
     }
     
