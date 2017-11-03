@@ -28,7 +28,7 @@ extension UIImage {
         ///   - inDirectory: 在哪个文件夹下面,默认为 `images` 目录下
         /// - Returns: 返回图片
         public static func bundle(_ imageNamed: String, ofType: String = "png", inDirectory: String? = "images") -> UIImage? {
-            if imageNamed.characters.count > 0 {
+            if imageNamed.count > 0 {
                 let imageNames = [imageNamed + "@3x", imageNamed + "@2x", imageNamed]
                 var image: UIImage?
                 for imageName in imageNames {

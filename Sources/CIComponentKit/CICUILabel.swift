@@ -151,7 +151,7 @@ public class CICLabel: UILabel {
     override public var text: String? {
         didSet {
             super.text = text
-            if let lengh = text?.characters.count,copyRange == nil {
+            if let lengh = text?.count,copyRange == nil {
                 // 默认copy整个字符串
                 copyRange = NSMakeRange(0, lengh)
             }
@@ -161,7 +161,7 @@ public class CICLabel: UILabel {
     public override var attributedText: NSAttributedString? {
         didSet {
             super.attributedText = attributedText
-            if let length = attributedText?.string.characters.count, copyRange == nil {
+            if let length = attributedText?.string.count, copyRange == nil {
                 copyRange = NSMakeRange(0, length)
             }
         }

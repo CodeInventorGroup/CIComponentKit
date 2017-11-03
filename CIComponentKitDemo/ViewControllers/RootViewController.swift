@@ -50,12 +50,13 @@ class RootViewController: UIViewController {
     func layout(_ size: CGSize = .screenSize) {
         scrollView.size(size)
         let arrangement = self.getLayout(size.width).arrangement(width: size.width)
-        
-            var size = arrangement.frame.size
-            size.height += 64
+        var size = arrangement.frame.size
+        size.height += 64
+        DispatchQueue.main.async {
             self.scrollView.contentSize = size
             arrangement.makeViews(in: self.scrollView)
-    
+        }
+        
 //        let start = CFAbsoluteTimeGetCurrent()
 //        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
 //            let arrangement = self.getLayout(size.width).arrangement(width: size.width)
@@ -138,12 +139,6 @@ class RootViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //        CICHUD.show("正在加载~", blurStyle: .extraLight, layoutStyle: .right)
-//        CICHUD.showActivityView()
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-//            CICHUD.hideActivityView()
-//        }
-        
         
         let title = """
                         ManoBoo & NEWWORLD
@@ -188,7 +183,7 @@ class RootViewController: UIViewController {
         theme.config.tintColor = UIColor.cic.hex(hex: 0xDF312E)
         theme.config.navigationBarLeftColor = UIColor.cic.hex(hex: 0xe2e2e2)
         theme.config.navigationItemTitleColor = UIColor.cic.random
-        theme.config.navigationBarBackgroundColor = UIColor.cic.random
+        theme.config.navigationBarBackgroundColor = UIColor.flat.orange
         theme.config.alertMessageColor = UIColor.cic.random
         theme.renderTheme()
     }

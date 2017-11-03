@@ -16,7 +16,13 @@ public class CICAlertViewLayout: SizeLayout<UIView> {
     
     public typealias CICAlertViewAction = ((UIControl) -> ())
     
-    public init(contentView: UIView? = nil, title:String = "提示", content:String = "", actionTitles: [String] = [], actions: [CICAlertViewAction]? = [], actionStyles: [UIColor]? = nil) {
+    public init(contentView: UIView? = nil,
+                title:String = "提示",
+                content:String = "",
+                actionTitles: [String] = [],
+                actions: [CICAlertViewAction]? = [],
+                actionStyles: [UIColor]? = nil,
+                maxHeight: CGFloat = .screenHeight - 100) {
         
         let titleLabeLayout = InsetLayout<UIView>.init(insets: UIEdgeInsetsMake(8, 0, 8, 0),
                                  alignment: .center,
@@ -93,7 +99,13 @@ public class CICAlertViewLayout: SizeLayout<UIView> {
             background.backgroundColor(CIComponentKitThemeCurrentConfig.mainColor)
         }
         
-        super.init(minWidth: 250, maxWidth: CGFloat.screenWidth - 40, minHeight: 100, maxHeight: CGFloat.screenHeight - 100, alignment: Alignment.center, viewReuseId: "CICAlert_", sublayout: backgroundLayout) { (view) in
+        super.init(minWidth: 250,
+                   maxWidth: CGFloat.screenWidth - 40,
+                   minHeight: 100,
+                   maxHeight: maxHeight,
+                   alignment: Alignment.center,
+                   viewReuseId: "CICAlert_",
+                   sublayout: backgroundLayout) { (view) in
             view.layer.cornerRadius = 8.0
             view.layer.masksToBounds = true
         }
@@ -103,6 +115,7 @@ public class CICAlertViewLayout: SizeLayout<UIView> {
 extension CICHUD {
     public class func showAlert(_ title: String = "提示",
                                 content: String = "",
+                                actionTitles: [String] = ["取消", "确定"],
                                 cancelAction: @escaping CICAlertViewLayout.CICAlertViewAction = {_ in },
                                 confirmAction: @escaping CICAlertViewLayout.CICAlertViewAction = {_ in}) {
         if let keyWindow = UIApplication.shared.keyWindow {
@@ -120,7 +133,7 @@ extension CICHUD {
                 }]
             let actionStyles = [CIComponentKitThemeCurrentConfig.cancelColor, CIComponentKitThemeCurrentConfig.confirmColor]
             
-            let alertLayout = CICAlertViewLayout.init(title: "提示",
+            let alertLayout = CICAlertViewLayout.init(title: title,
                                                       content: content,
                                                       actionTitles: actionTitles,
                                                       actions: actions,
@@ -128,8 +141,10 @@ extension CICHUD {
             let blackMaskLayout = SizeLayout<UIView>.init(size: keyWindow.bounds.size, alignment: Alignment.center, viewReuseId: "alert_blackMask", sublayout: alertLayout, config: { (view) in
                 view.backgroundColor(UIColor.cic.hex(hex: 0x000000, alpha: 0.7))
             })
-            alertMaskView = blackMaskLayout.arrangement().makeViews()
-            keyWindow.addSubview(alertMaskView)
+            DispatchQueue.main.async {
+                alertMaskView = blackMaskLayout.arrangement().makeViews()
+                keyWindow.addSubview(alertMaskView)
+            }
         }
         
     }

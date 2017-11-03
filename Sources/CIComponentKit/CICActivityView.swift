@@ -76,9 +76,10 @@ extension CICHUD {
             return
         }
         CICActivityView.hud.removeFromSuperview()
-        let hud = CICActivityView.hud.size(CGSize(width: 100, height: 100))
+        let a: CGFloat = 100.0
+        let hud = CICActivityView.hud.size(a.makeSize)
             .center(superView.cic.internalCenter)
-        CICActivityView.default.frame(CGRect.init(x: 0, y: 0, width: 60, height: 60)).center(hud.cic.internalCenter)
+        CICActivityView.default.frame(60.0.makeRect).center(hud.cic.internalCenter)
         superView.addSubview(hud)
         CICActivityView.default.startAnimation()
     }

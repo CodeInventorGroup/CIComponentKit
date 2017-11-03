@@ -109,11 +109,13 @@ extension CICHUD {
     /// - Parameters:
     ///   - type: CICNotifierViewType, 可自定义 CICNotifierViewType.init(<#T##imageNamed: String##String#>, color: <#T##UIColor#>, textColor: <#T##UIColor#>)
     ///   - title: 展示的文本
+    ///   - offSet: 距离屏幕上方的offSet
     ///   - isShowClose: 是否展示右侧关闭按钮
     ///   - autoHide: 是否自动隐藏
     ///   - duration: autoHide为true时,弹出和隐藏的动画时间
     public class func showNotifier(_ type: CICNotifierViewType = .status,
                             title: String,
+                            offSet: CGFloat? = nil,
                             isShowClose: Bool = true,
                             autoHide: Bool = true,
                             duration: TimeInterval = 2.0) {
@@ -130,7 +132,7 @@ extension CICHUD {
 //        notifierLayout.arrangement(origin: CGPoint.init(x: 10, y: -50), width: CGFloat.screenWidth - 20, height: nil).makeViews(in: keyWindow)
 //        let displayAnimation = notifierLayout.arrangement(origin: CGPoint.init(x: 10, y: 20), width: CGFloat.screenWidth - 20, height: nil).prepareAnimation(for: keyWindow)
         
-        let top = keyWindow.layoutMargins.top
+        let top = offSet ?? CGFloat.maximum(keyWindow.layoutMargins.top, 20)
         let height = notifierLayout.arrangement(width: CGFloat.screenWidth - 20).frame.height
         let notifier = notifierLayout.arrangement(origin: CGPoint.init(x: 10, y: -height), width: CGFloat.screenWidth - 20, height: nil).makeViews()
         keyWindow.addSubview(notifier)
