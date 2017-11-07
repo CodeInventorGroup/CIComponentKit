@@ -48,7 +48,7 @@ extension CICHUD {
             
             imageView.image = image
             imageView.x(24)
-                .size(CGSize.init(width: 20, height: 20))
+                .size(20.makeSize)
                 .centerY(12)
             
             imageView.addSubview(activityView)
@@ -56,7 +56,7 @@ extension CICHUD {
             statusLabel.text(statusTitle)
                 .font(UIFont.cic.systemFont)
                 .textColor(CIComponentKitThemeCurrentConfig.textColor)
-            statusLabel.line()
+                .line()
                 .x(imageView.frame.maxX + 15)
                 .height(20)
                 .centerY(12)

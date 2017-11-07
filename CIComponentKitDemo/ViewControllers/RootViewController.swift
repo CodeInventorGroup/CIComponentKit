@@ -11,17 +11,37 @@ import UIKit
 import CIComponentKit
 import LayoutKit
 
-class RootViewController: UIViewController {
+enum CardActions: Int {
+    case Alert = 0
+    case CICLabel = 1
+    case Loading = 2
+    case Notifier = 3
+    case Guide = 4
+    case NetworkStatus = 5
+    case ActivityView = 6
+}
+
+class RootViewController: CICUIViewController {
     
     private let scrollView = UIScrollView(frame: .zero)
     
     private let cardScrollView = UIScrollView(frame: .zero)
     
-    let cardDatas = [("弹窗HUD", "CICHUD"), ("CICLabel", "自定义Label(长按复制下方文字)"), ("弹窗HUD", "CICHUD"), ("弹窗HUD", "CICHUD")]
-    let animationColors = [UIColor.flat.orange,
+    let cardDatas = [("Alert", "CICHUD.showAlert"),
+                     ("CICLabel", "UILabel.cic.appearance"),
+                     ("Loaing", "CICHUD.show"),
+                     ("Notifier", "CICHUD.showNotifier"),
+                     ("Guide", "CICHUD.showGuide"),
+                     ("NetworkStatus", "CICHUD.showNetworkStaus"),
+                     ("ActivityView", "CICHUD.showActivityView")]
+    let animationColors = [
+                           UIColor.flat.orange,
                            UIColor.flat.blue,
                            UIColor.flat.grey,
-                           UIColor.flat.base
+                           UIColor.flat.base,
+                           UIColor.flat.extraDark,
+                           UIColor.flat.black,
+                           UIColor.flat.green
                            ]
     private var cachedFeedLayout: Layout?
     
@@ -30,10 +50,10 @@ class RootViewController: UIViewController {
         
         self.title = "CIComponentKit"
         self.view.backgroundColor(CIComponentKitThemeCurrentConfig.mainColor)
-        // Do any additional setup after loading the view, typically from a nib.
+
         if #available(iOS 11.0, *) {
-//            self.navigationController?.navigationBar.prefersLargeTitles = true
-//            self.navigationItem.largeTitleDisplayMode = .automatic
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+            self.navigationItem.largeTitleDisplayMode = .automatic
         } else {
             // Fallback on earlier versions
         }
@@ -56,19 +76,6 @@ class RootViewController: UIViewController {
             self.scrollView.contentSize = size
             arrangement.makeViews(in: self.scrollView)
         }
-        
-//        let start = CFAbsoluteTimeGetCurrent()
-//        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
-//            let arrangement = self.getLayout(size.width).arrangement(width: size.width)
-//            DispatchQueue.main.async {
-//                var size = arrangement.frame.size
-//                size.height += 64
-//                self.scrollView.contentSize = size
-//                arrangement.makeViews(in: self.scrollView)
-//                let end = CFAbsoluteTimeGetCurrent()
-//                print(" layout time: \(end - start).ms")
-//            }
-//        }
     }
         
     func getLayout(_ width: CGFloat) -> Layout {
@@ -80,8 +87,12 @@ class RootViewController: UIViewController {
         var cardItems = [Layout]()
         for (index, (title, subtitle)) in self.cardDatas.enumerated() {
             let size = CGSize.init(width: width - 40, height: 500)
-            let rootCarLayout = RootCardLayout.init(title, subtitle: subtitle, info: String.LoremIpsum, size: size, action: {
-                print("\(index) card has been clicked")
+            let rootCarLayout = RootCardLayout.init(title,
+                                                    subtitle: subtitle,
+                                                    info: String.LoremIpsum,
+                                                    size: size,
+                                                    action: {
+                self.cardActionClicked(index)
             })
             cardItems.append(rootCarLayout)
         }
@@ -136,30 +147,60 @@ class RootViewController: UIViewController {
         return stackLayout
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        //        CICHUD.show("正在加载~", blurStyle: .extraLight, layoutStyle: .right)
-        
-        let title = """
-                        ManoBoo & NEWWORLD
-                        新的开源组件库,你喜欢吗😄😄😄
-                        哈哈,这是一段测试文字
-                    """
-        let message = """
-                        假如生活欺骗了你
-                        不要悲伤，不要心急！
-                        忧郁的日子里需要镇静：
-                        相信吧，快乐的日子将会来临。
-                        心儿永远向往着未来，
-                        现在却常是忧郁；
-                        一切都是瞬息，
-                        一切都将会过去，
-                        而那过去了的，
-                        就会成为亲切的回忆。
-                    """
-//        CICHUD.showGuide(title, message: message, animated: true)
-        
-//        CICHUD.showNotifier(title: "哈哈 manoboo爱你哟~")
+
+    // card的点击事件
+    func cardActionClicked(_ index: Int) {
+        guard let cardAction = CardActions.init(rawValue: index) else {
+            CICHUD.toast("CardAction 寻找失败", blurStyle: .extraLight)
+            return
+        }
+        switch cardAction {
+        case .Alert:
+            let tips = """
+                            嫉妒使我高斯模糊
+                            嫉妒使我氧化分解
+                            嫉妒使我增减反同
+                            嫉妒使我奇变偶不变符号看象限
+                            嫉妒使我基因突变
+                            嫉妒使我质壁分离
+                            嫉妒使我泰拳警告
+
+                            嫉妒使我弥散性血管内凝血
+                           """
+            CICHUD.showAlert("羡慕使我嫉妒", content: tips, cancelAction: { (_) in
+                CICHUD.showNotifier(title: "爱酱今天要元气满满哦~")
+            }, confirmAction: { (_) in
+                CICHUD.showNotifier(title: "我一点都不嫉妒~")
+            })
+            break
+        case .CICLabel:
+            CICHUD.toast("长按下方文字进行复制", blurStyle: .extraLight)
+            break
+        case .Loading:
+            CICHUD.show("正在加载~", blurStyle: .extraLight)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+                CICHUD.hide()
+            })
+            break
+        case .Notifier:
+            CICHUD.showNotifier(title: "我一点都不嫉妒~")
+            break
+        case .Guide:
+            CICHUD.showGuide(.poemTitle, message: .poem, animated: true)
+            break
+        case .NetworkStatus:
+            CICHUD.showNetWorkStatusChange("失去网络连接")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+                CICHUD.hideNetWorkStatusChange()
+            })
+            break
+        default:
+            CICHUD.showActivityView()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+                CICHUD.hideActivityView()
+            })
+            break
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -203,6 +244,8 @@ extension RootViewController: UIScrollViewDelegate {
         UIView.animate(withDuration: 0.5) {
             self.scrollView.backgroundColor(self.animationColors[index])
         }
+        
+        state = .loaded(data: "加载数据咯 - \(index)")
     }
 }
 

@@ -65,7 +65,11 @@ class RootCard: UIView {
 }
 
 class RootCardLayout: SizeLayout<VisualEffectView> {
-    init(_ title: String, subtitle: String, info: String, size: CGSize, action: @escaping (() -> ())) {
+    init(_ title: String,
+         subtitle: String,
+         info: String,
+         size: CGSize,
+         action: @escaping (() -> ())) {
         
         let titleLayout = LabelLayout.init(text: title, font: UIFont.cic.systemFont, numberOfLines: 1, viewReuseId: "title") { (label) in
             

@@ -41,7 +41,49 @@ public extension UIViewController {
     }
 }
 
-open class CICUIViewController: UIViewController, CICAppearance {
+public enum ControllerState<T> {
+    case loading
+    case loaded(data: T)
+    case error(message: String)
+}
+
+
+public protocol CICViewControllerStateProtocol {
+    associatedtype DataModel
+    var state: ControllerState<DataModel> {get set}
+    var loadingView: UIView { get }
+    var errorView: UIView { get }
+    
+    func stateDidChanged()
+}
+
+extension CICViewControllerStateProtocol where Self: CICUIViewController {
+//    public typealias DataModel = String
+}
+
+open class CICUIViewController: UIViewController, CICAppearance{
+    
+    public var loadingView = UIView()
+    public var errorView = UIView()
+    public var state: ControllerState<String> = .loading {
+        didSet {
+            stateDidChanged()
+        }
+    }
+    
+    public func stateDidChanged() {
+        switch state {
+        case .loading:
+            print("正在加载")
+        case .loaded(let str):
+            print("data loaded: \(str)")
+        case .error(let errorMessage):
+            print("data loaded error: \(errorMessage)")
+        default:
+            break
+        }
+    }
+    
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
@@ -72,8 +114,6 @@ open class CICUIViewController: UIViewController, CICAppearance {
     //MARK: - 屏幕旋转
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        
-        
     }
     
     //MARK: - 
