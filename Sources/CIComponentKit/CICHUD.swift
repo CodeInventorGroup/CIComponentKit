@@ -62,7 +62,6 @@ public class CICHUD: UIView {
     }
     var layoutStyle: CICHUDLayoutStyle = .top
 
-    
     // loading弹出时的动画
     public enum CICHUDAnimation {
         case none
@@ -71,15 +70,14 @@ public class CICHUD: UIView {
     }
     var showAnimation:CICHUDAnimation = .none
     var hideAnimation:CICHUDAnimation = .none
-    
+
     // tip's title  提示文字
     var title: String? = "加载中~"
     
     // tip's infomation
     var attributeTitle: NSMutableString? = NSMutableString(string: "")
 
-    
-    //MARK: - init && deinit
+    // MARK: - init && deinit
     public static let `default` = CICHUD.init("加载中", blurStyle: .light, layoutStyle: .left)
     
     public init(_ title: String?,
@@ -104,7 +102,7 @@ public class CICHUD: UIView {
         backgroundView.effect = UIBlurEffect.init(style: blurStyle)
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(backgroundView)
-        
+
         let contentView = backgroundView.contentView
         
         titleLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
@@ -113,10 +111,10 @@ public class CICHUD: UIView {
         
         animationImgView.contentMode = .center
         animationImgView.addSubview(activityView)
-        
+
         contentView.addSubview(animationImgView)
     }
-    
+
     deinit {
         print("CICHUD deinit")
     }
@@ -125,7 +123,7 @@ public class CICHUD: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - build ui
+    // MARK: - build ui
     var backgroundView = UIVisualEffectView()
     var titleLabel = UILabel()
     var animationImgView = UIImageView()
@@ -135,7 +133,7 @@ public class CICHUD: UIView {
         activity.color = CICHUD.appearance().tintColor
         return activity
     }()
-    
+
     func renderAfterUIDeviceOrientationDidChange(notification: Notification) -> Swift.Void {
         
         UIView.animate(withDuration: 0.35) { [unowned self] in
@@ -144,7 +142,7 @@ public class CICHUD: UIView {
             }
         }
     }
-    
+
     func resizeLayout() -> Swift.Void {
 //        let marginsGuide = self.layoutMarginsGuide
         
@@ -222,8 +220,7 @@ public class CICHUD: UIView {
         }
     }
     
-    //MARK: - show && hide
-    
+    // MARK: - show && hide
     public func show(_ title: String?,
                      blurStyle: UIBlurEffectStyle = .dark,
                      layoutStyle: CICHUDLayoutStyle = .left,

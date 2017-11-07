@@ -23,19 +23,21 @@ public class CICUIView: UIView, CICAppearance {
     // CICAppearance  主题支持
     
     func initMethod() {
-        NotificationCenter.default.addObserver(self, selector: #selector(CICAppearance.willToggleTheme), name: Notification.Name.cic.themeWillToggle, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(CICAppearance.didToggleTheme), name: Notification.Name.cic.themeDidToggle, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(CICAppearance.willToggleTheme),
+                                               name: Notification.Name.cic.themeWillToggle,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(CICAppearance.didToggleTheme),
+                                               name: Notification.Name.cic.themeDidToggle,
+                                               object: nil)
     }
-    
+
     public func willToggleTheme() {
-        
+
     }
-    
+
     public func didToggleTheme() {
         self.backgroundColor(CIComponentKitThemeCurrentConfig.mainColor)
     }
-    
-    
 }
-
-

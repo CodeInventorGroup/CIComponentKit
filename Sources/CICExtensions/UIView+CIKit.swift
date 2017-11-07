@@ -75,7 +75,7 @@ public enum CICLayoutType {
     
     case right(CGFloat)
     case bottom(CGFloat)
-    
+
     case none
 }
 
@@ -103,7 +103,7 @@ extension UIView {
     public func bottom(_ value: CGFloat, view: UIView? = nil) -> Self {
         if let toView = view {
             self.y(toView.cic.bottom - value - self.cic.height)
-        }else {
+        } else {
             if let superView = self.superview {
                 self.y(superView.cic.bottom - value - self.cic.height)
             }

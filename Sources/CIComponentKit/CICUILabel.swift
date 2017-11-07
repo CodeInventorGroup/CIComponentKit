@@ -17,8 +17,6 @@ import UIKit
  
  ********************************************* this is a demo ******************************/
 
-
-
 // 为了让用户用最少的修改即可动态换主题，又减少操作，采取了折中方法
 public extension UILabel {
     struct cic {
@@ -45,7 +43,6 @@ extension CICLabel: CICAppearance {
     }
 }
 
-
 /********************************************* CILabel ******************************/
 /// CILabel 自定义UILabel,支持 长按复制
 public class CICLabel: UILabel {
@@ -57,7 +54,7 @@ public class CICLabel: UILabel {
         self.addGestureRecognizer(g)
         return g
     }()
-    
+
     convenience init() {
         self.init(frame: .zero)
     }
@@ -66,15 +63,21 @@ public class CICLabel: UILabel {
         super.init(frame: frame)
         initMethod()
     }
-    
+
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     func initMethod() -> Swift.Void {
         // receive the notification of togglling theme
-        NotificationCenter.default.addObserver(self, selector: #selector(CICAppearance.willToggleTheme), name: Notification.Name.cic.themeWillToggle, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(CICAppearance.didToggleTheme), name: Notification.Name.cic.themeDidToggle, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(CICAppearance.willToggleTheme),
+                                               name: Notification.Name.cic.themeWillToggle,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(CICAppearance.didToggleTheme),
+                                               name: Notification.Name.cic.themeDidToggle,
+                                               object: nil)
     }
     
     deinit {
@@ -85,7 +88,7 @@ public class CICLabel: UILabel {
         return super.drawText(in: UIEdgeInsetsInsetRect(rect, contentEdgeInset))
     }
     
-    //MARK: - 扩展属性
+    // MARK: - 扩展属性
     
     // - 文字距离上下左右的边距
     public var contentEdgeInset: UIEdgeInsets = .zero {
@@ -93,7 +96,7 @@ public class CICLabel: UILabel {
             setNeedsDisplay()
         }
     }
-    
+
     // - 提供长按操作时的高亮背景颜色
     public var highlightedBackgroundColor: UIColor = CIComponentKitThemeCurrentConfig.highlightedBackgroundColor {
         didSet {
@@ -118,26 +121,28 @@ public class CICLabel: UILabel {
         }
         return false
     }
-    
+
     /// - CICLabel长按的type
     public enum LongPressAction {
         case none
         case copy
         case Touch3D // building
     }
-    
+
     // - copy完成之后的回调
-    public var copySuccessClousure: (() -> ())?
-    
+    public var copySuccessClousure: (() -> Void)?
+
     // - 长按操作
     public var longPressAction: LongPressAction = .none {
         didSet {
             if longPressAction == .copy {
                 isUserInteractionEnabled = true
                 longPressGesture.isEnabled = true
-                NotificationCenter.default.addObserver(self, selector: #selector(handleMenuHideEvent(_:)), name: .UIMenuControllerWillHideMenu, object: nil)
-                
-            }else {
+                NotificationCenter.default.addObserver(self,
+                                                       selector: #selector(handleMenuHideEvent(_:)),
+                                                       name: .UIMenuControllerWillHideMenu,
+                                                       object: nil)
+            } else {
                 self.isUserInteractionEnabled = false
                 longPressGesture.isEnabled = false
                 NotificationCenter.default.removeObserver(self, name: .UIMenuControllerWillHideMenu, object: nil)
@@ -146,14 +151,14 @@ public class CICLabel: UILabel {
     }
     
     // - longPressAction == .copy 时,copy的范围
-    public var copyRange: NSRange? = nil
-    
+    public var copyRange: NSRange?
+
     override public var text: String? {
         didSet {
             super.text = text
-            if let lengh = text?.count,copyRange == nil {
+            if let length = text?.count,copyRange == nil {
                 // 默认copy整个字符串
-                copyRange = NSMakeRange(0, lengh)
+                copyRange = NSRange(location: 0, length: length)
             }
         }
     }
@@ -162,15 +167,15 @@ public class CICLabel: UILabel {
         didSet {
             super.attributedText = attributedText
             if let length = attributedText?.string.count, copyRange == nil {
-                copyRange = NSMakeRange(0, length)
+                copyRange = NSRange(location: 0, length: length)
             }
         }
     }
-    
-    //MARK: - Event
-    
+
+    // MARK: - Event
+
     @objc func copyEvent() -> Swift.Void {
-        guard let string = (self.attributedText?.string ?? self.text), string.isEmpty == false else{
+        guard let string = (self.attributedText?.string ?? self.text), string.isEmpty == false else {
             print("\(self) copy text should not be nil ")
             return
         }
@@ -182,7 +187,7 @@ public class CICLabel: UILabel {
             }
         }
     }
-    
+
     @objc func handleLongPressEvent(_ longPressGesture: UILongPressGestureRecognizer) -> Swift.Void {
         if longPressAction != .copy {
             return
@@ -193,12 +198,12 @@ public class CICLabel: UILabel {
             menuController.menuItems = [UIMenuItem.init(title: "复制", action: #selector(copyEvent))]
             menuController.setTargetRect(self.frame, in: self.superview!)
             menuController.setMenuVisible(true, animated: true)
-            
+
             tempBackgroundColor = backgroundColor
             isHighlighted = true
         }
     }
-    
+
     @objc func handleMenuHideEvent(_ notifier: NSNotification) -> Swift.Void {
         if longPressAction != .copy {
             return
@@ -209,16 +214,15 @@ public class CICLabel: UILabel {
     }
 }
 
-
 // MARK: - CILabel
 extension CICLabel {
-    
+
     @discardableResult
     public func contentEdgeInset(_ contentEdgeInset: UIEdgeInsets = .zero) -> Self {
         self.contentEdgeInset = contentEdgeInset
         return self
     }
-    
+
     @discardableResult
     public func longPressAction(_ longPressAction: LongPressAction = .none) -> Self {
         self.longPressAction = longPressAction
@@ -230,11 +234,10 @@ extension CICLabel {
         self.highlightedBackgroundColor = highlightedBackgroundColor
         return self
     }
-    
+
     @discardableResult
     public func copyRange(_ copyRange: NSRange) -> Self {
         self.copyRange = copyRange
         return self
     }
 }
-

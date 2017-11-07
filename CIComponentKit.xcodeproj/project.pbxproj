@@ -309,7 +309,8 @@
 				B0E30C091F55520200DBD08C /* Frameworks */,
 				B0E30C0A1F55520200DBD08C /* Resources */,
 				B03FB7B21F57052F008A356C /* CopyFiles */,
-				B0CFA4BD1F8CD9D000A2B7A9 /* ShellScript */,
+				B0CFA4BD1F8CD9D000A2B7A9 /* Carthage Support */,
+				B0D35DCE1FB1B1ED0056A806 /* Swift lint */,
 			);
 			buildRules = (
 			);
@@ -399,7 +400,7 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
-		B0CFA4BD1F8CD9D000A2B7A9 /* ShellScript */ = {
+		B0CFA4BD1F8CD9D000A2B7A9 /* Carthage Support */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -407,11 +408,26 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/LayoutKit.framework",
 			);
+			name = "Carthage Support";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		B0D35DCE1FB1B1ED0056A806 /* Swift lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Swift lint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 

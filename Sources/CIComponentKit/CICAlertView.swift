@@ -75,7 +75,7 @@ public class CICAlertViewLayout: SizeLayout<UIView> {
             })
             actionlayouts.append(actionLayout)
         }
-        if actionlayouts.count > 0 {
+        if !(actionlayouts.isEmpty) {
             let spacing: CGFloat = actionlayouts.count < 3 ? 80 : 40.0
             let actionStackLayout = StackLayout.init(axis: .horizontal,
                                                      spacing: spacing,
@@ -149,5 +149,3 @@ extension CICHUD {
         
     }
 }
-
-

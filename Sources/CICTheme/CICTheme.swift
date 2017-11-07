@@ -33,9 +33,7 @@ public class CIComponentKitTheme {
     
     // the resource of theme, 主题的来源
     public enum CIComponentKitThemeSource {
-        
         case plist(URL)
-        
         case theme(CIComponentKitTheme)
     }
     
@@ -43,31 +41,22 @@ public class CIComponentKitTheme {
     public static func switchTheme(_ themeSource: CIComponentKitThemeSource) -> Swift.Void {
         switch themeSource {
         case .theme(let theme):
-            
             CIComponentKitTheme.currentTheme = theme
-            
-            break
         case .plist(let themeUrl):
             print(themeUrl)
-            break
         }
     }
     
     /// 主题的详细配置
     public var config = CIComponentKitThemeConfig()
-    
-    
+
     let blurView = UIVisualEffectView.init(effect: UIBlurEffect.init(style: .light))
 }
 
-
-
 // MARK: - CIComponentKitTheme Source 主题来源
 public extension CIComponentKitTheme {
-    
 
 }
-
 
 // MARK: - 切换主题 toggle theme
 public extension CIComponentKitTheme {
@@ -76,7 +65,7 @@ public extension CIComponentKitTheme {
     public enum CIComponentKitThemeTransition {
         case None
         case blur(UIBlurEffectStyle)
-        case progress(() -> ())
+        case progress(() -> Void)
     }
     
     public enum CIComponentKitSourceError: Error {
@@ -84,8 +73,7 @@ public extension CIComponentKitTheme {
         case other
     }
     
-    
-    
+    // showAnimation
     public func showAnimation(_ animation: CIComponentKitThemeTransition) {
         if blurView.superview == nil {
             if let keyWindow = UIApplication.shared.keyWindow {
@@ -95,12 +83,11 @@ public extension CIComponentKitTheme {
             }
         }
         switch animation {
-            case .blur(let style):
-                blurView.effect = UIBlurEffect.init(style: style)
-                blurView.isHidden = false
-                break
-            default:
-                break
+        case .blur(let style):
+            blurView.effect = UIBlurEffect.init(style: style)
+            blurView.isHidden = false
+        default:
+            break
         }
     }
     
@@ -109,7 +96,6 @@ public extension CIComponentKitTheme {
     }
     
     public func renderTheme(_ animation: CIComponentKitThemeTransition = .None) {
-        
         // post a notification
         NotificationCenter.default.post(name: Notification.Name.cic.themeWillToggle, object: self, userInfo: nil)
         
@@ -136,29 +122,24 @@ public extension CIComponentKitTheme {
                 navigationController.navigationBar.barTintColor = CIComponentKitThemeCurrentConfig.navigationBarBackgroundColor
                 navigationController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: config.navigationItemTitleColor, NSAttributedStringKey.font: UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(24)))]
             }
-            
-            
+
             currentViewController.endAppearanceTransition()
         }
-        
-        
+
         UIView.appearance().tintColor = config.tintColor
         UIWindow.appearance().backgroundColor = config.windowColor
         UINavigationBar.appearance().barTintColor = config.navigationBarBackgroundColor
         UIActivityIndicatorView.appearance().color = config.activityIndicatorColor
-        
-        
+
         NotificationCenter.default.post(name: Notification.Name.cic.themeDidToggle, object: self, userInfo: nil)
         
         hideAnimation(animation)
     }
-    
-    
+
     public static func renderTheme(_ animation: CIComponentKitThemeTransition, _ theme: CIComponentKitTheme = CIComponentKitTheme.originTheme) throws -> Swift.Void {
         
         theme.renderTheme()
-        
-        
+
         throw CIComponentKitSourceError.neterror(URLResponse())
     }
 }

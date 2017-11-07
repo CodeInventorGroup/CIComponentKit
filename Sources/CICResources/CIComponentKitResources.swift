@@ -27,12 +27,16 @@ extension UIImage {
         ///   - ofType: 图片后缀,默认为 `png`
         ///   - inDirectory: 在哪个文件夹下面,默认为 `images` 目录下
         /// - Returns: 返回图片
-        public static func bundle(_ imageNamed: String, ofType: String = "png", inDirectory: String? = "images") -> UIImage? {
-            if imageNamed.count > 0 {
+        public static func bundle(_ imageNamed: String,
+                                  ofType: String = "png",
+                                  inDirectory: String? = "images") -> UIImage? {
+            if !(imageNamed.isEmpty) {
                 let imageNames = [imageNamed + "@3x", imageNamed + "@2x", imageNamed]
                 var image: UIImage?
                 for imageName in imageNames {
-                    if let path = CIComponentKitResources.bundle.path(forResource: imageName, ofType: ofType, inDirectory: inDirectory) {
+                    if let path = CIComponentKitResources.bundle.path(forResource: imageName,
+                                                                      ofType: ofType,
+                                                                      inDirectory: inDirectory) {
                         image = UIImage.init(contentsOfFile: path)
                         // 默认使用 @3x 的图片
                         break
@@ -44,4 +48,3 @@ extension UIImage {
         }
     }
 }
-
