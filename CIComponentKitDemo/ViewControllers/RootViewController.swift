@@ -55,13 +55,10 @@ class RootViewController: CICUIViewController {
             self.navigationController?.navigationBar.prefersLargeTitles = true
             self.navigationItem.largeTitleDisplayMode = .automatic
         } else {
-            // Fallback on earlier versions
+
         }
-        
-        edgesForExtendedLayout = []
         self.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        self.automaticallyAdjustsScrollViewInsets = false
-        
+
         view.addSubview(scrollView)
         
         layout()
@@ -70,10 +67,8 @@ class RootViewController: CICUIViewController {
     func layout(_ size: CGSize = .screenSize) {
         scrollView.size(size)
         let arrangement = self.getLayout(size.width).arrangement(width: size.width)
-        var size = arrangement.frame.size
-        size.height += 64
         DispatchQueue.main.async {
-            self.scrollView.contentSize = size
+            self.scrollView.contentSize = arrangement.frame.size
             arrangement.makeViews(in: self.scrollView)
         }
     }

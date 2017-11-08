@@ -110,13 +110,13 @@ extension UIView {
         }
         return self
     }
-    
+
     @discardableResult
     public func y(_ view: UIView, offSet: CGFloat = 0.0, mutiplier: CGFloat = 1.0) -> Self {
         self.frame.origin.y = (view.frame.origin.y + offSet) * mutiplier
         return self
     }
-    
+
     @discardableResult
     public func width(_ width: CGFloat = 0.0) -> Self {
         self.frame.size.width = width
@@ -128,13 +128,13 @@ extension UIView {
         self.frame.size.width = (view.bounds.width + offSet) * mutiplier
         return self
     }
-    
+
     @discardableResult
     public func height(_ height: CGFloat = 0.0) -> Self {
         self.frame.size.height = height
         return self
     }
-    
+
     @discardableResult
     public func height(_ view: UIView, offSet: CGFloat = 0.0, mutiplier: CGFloat = 1.0) -> Self {
         self.frame.size.height = (view.bounds.height + offSet) * mutiplier
@@ -152,49 +152,52 @@ extension UIView {
         self.frame.size = view.frame.size.add(offSet).multiply(mutiplier)
         return self
     }
-    
+
     @discardableResult
     public func center(_ center: CGPoint = .zero) -> Self {
         self.center = center
         return self
     }
-    
+
     @discardableResult
     public func center(_ view: UIView) -> Self {
         self.center = view.center
         return self
     }
-    
+
     @discardableResult
     public func centerX(_ centerX: CGFloat = 0.0) -> Self {
         self.center.x = centerX
         return self
     }
-    
+
     @discardableResult
     public func centerY(_ centerY: CGFloat = 0.0) -> Self {
         self.center.y = centerY
         return self
     }
-    
+
     @discardableResult
     public func frame(_ rect: CGRect) -> Self {
         self.frame = rect
         return self
     }
-    
+
     @discardableResult
     public func frame(_ view: UIView, _ offSet: UIEdgeInsets = .zero, mutiplier: CGFloat = 1.0) -> Self {
-        self.frame = CGRect.init(x: view.cic.x + offSet.left, y: view.cic.y + offSet.top, width: view.cic.width + offSet.left + offSet.right, height: view.cic.height + offSet.top + offSet.bottom)
+        self.frame = CGRect.init(x: view.cic.x + offSet.left,
+                                 y: view.cic.y + offSet.top,
+                                 width: view.cic.width + offSet.left + offSet.right,
+                                 height: view.cic.height + offSet.top + offSet.bottom)
         return self
     }
-    
+
     @discardableResult
     public func backgroundColor(_ color: UIColor = .clear) -> Self {
         self.backgroundColor = color
         return self
     }
-    
+
     @discardableResult
     public func userInteractionEnabled(_ isUserInteractionEnabled: Bool = true ) -> Self {
         self.isUserInteractionEnabled = isUserInteractionEnabled
@@ -204,11 +207,16 @@ extension UIView {
 
 extension UIView {
     struct cic {
-        public static func spring(_ animation: @escaping (()->()),
+        public static func spring(_ animation: @escaping (() -> Void),
                                   duration: TimeInterval = 0.35,
                                   delay: TimeInterval = 0.0,
                                   completion: (()->())? = nil) {
-            UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.4, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: duration,
+                           delay: delay,
+                           usingSpringWithDamping: 0.7,
+                           initialSpringVelocity: 0.4,
+                           options: .curveEaseInOut,
+                           animations: {
                 animation()
             }, completion: { (finished) in
                 if finished {
@@ -220,4 +228,3 @@ extension UIView {
         }
     }
 }
-
