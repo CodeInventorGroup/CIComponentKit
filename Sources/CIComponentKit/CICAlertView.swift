@@ -22,7 +22,7 @@ public class CICAlertViewLayout: SizeLayout<UIView> {
                 actionTitles: [String] = [],
                 actions: [CICAlertViewAction]? = [],
                 actionStyles: [UIColor]? = nil,
-                maxHeight: CGFloat = .screenHeight - 100) {
+                maxHeight: CGFloat = .screenHeight - 2 * UIEdgeInsets.layoutMargins.top) {
         
         let titleLabeLayout = InsetLayout<UIView>.init(insets: UIEdgeInsetsMake(8, 0, 8, 0),
                                  alignment: .center,
@@ -33,7 +33,7 @@ public class CICAlertViewLayout: SizeLayout<UIView> {
                                                              viewReuseId: "title") {titleLabel in
                                     titleLabel.textColor(CIComponentKitThemeCurrentConfig.alertMessageColor)
                                     titleLabel.textAlignment = .center
-        }) { (view) in
+        }) { (_) in
             
         }
     
@@ -46,7 +46,7 @@ public class CICAlertViewLayout: SizeLayout<UIView> {
                                                                                      alignment: .center,
                                                                                      viewReuseId: "contentInfo") { (label) in
                                                             label.textColor(CIComponentKitThemeCurrentConfig.textColor)
-        }) { (view) in
+        }) { (_) in
             
         }
         
@@ -63,13 +63,9 @@ public class CICAlertViewLayout: SizeLayout<UIView> {
                                                  contentEdgeInsets: UIEdgeInsetsMake(6, 10, 6, 10),
                                                  viewReuseId: actionTitle,
                                                  config: { control in
-                if let titleColor = actionStyles?.safeElement(at: index) {
-                    control.setTitleColor(titleColor, for: .normal)
-                }else {
-                    // 默认提供一个字体
-                    control.setTitleColor(CIComponentKitThemeCurrentConfig.confirmColor, for: .normal)
-                }
-                if let action = actions?.safeElement(at: index){
+                control.setTitleColor(actionStyles?.safeElement(at: index) ?? CIComponentKitThemeCurrentConfig.confirmColor,
+                                      for: .normal)
+                if let action = actions?.safeElement(at: index) {
                     control.addHandler(for: .touchUpInside, handler: action)
                 }
             })
@@ -88,19 +84,19 @@ public class CICAlertViewLayout: SizeLayout<UIView> {
         }
         
         let backgroundLayout = InsetLayout<UIView>.init(insets: .zero,
-                                                                   viewReuseId: "background",
-                                                                   sublayout: StackLayout<UIView>.init(axis: .vertical,
-                                                                                                       spacing: 20,
-                                                                                                       viewReuseId: "background",
-                                                                                                       sublayouts: layouts,
-                                                                                                       config: { (background) in
+                                                        viewReuseId: "background",
+                                                        sublayout: StackLayout<UIView>.init(axis: .vertical,
+                                                                                           spacing: 20,
+                                                                                           viewReuseId: "background",
+                                                                                           sublayouts: layouts,
+                                                                                           config: { (background) in
                                                                                                         
                                                                    })) { (background) in
             background.backgroundColor(CIComponentKitThemeCurrentConfig.mainColor)
         }
         
         super.init(minWidth: 250,
-                   maxWidth: CGFloat.screenWidth - 40,
+                   maxWidth: CGFloat.screenWidth - 2 * UIEdgeInsets.layoutMargins.left,
                    minHeight: 100,
                    maxHeight: maxHeight,
                    alignment: Alignment.center,
@@ -138,7 +134,11 @@ extension CICHUD {
                                                       actionTitles: actionTitles,
                                                       actions: actions,
                                                       actionStyles: actionStyles)
-            let blackMaskLayout = SizeLayout<UIView>.init(size: keyWindow.bounds.size, alignment: Alignment.center, viewReuseId: "alert_blackMask", sublayout: alertLayout, config: { (view) in
+            let blackMaskLayout = SizeLayout<UIView>.init(size: keyWindow.bounds.size,
+                                                          alignment: Alignment.center,
+                                                          viewReuseId: "alert_blackMask",
+                                                          sublayout: alertLayout,
+                                                          config: { (view) in
                 view.backgroundColor(UIColor.cic.hex(hex: 0x000000, alpha: 0.7))
             })
             DispatchQueue.main.async {

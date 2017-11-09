@@ -82,6 +82,12 @@ extension CGSize {
     }
 }
 
+extension UIEdgeInsets {
+    public static var layoutMargins: UIEdgeInsets {
+        return UIWindow().layoutMargins
+    }
+}
+
 public enum CICLayoutAttribute {
     
     case left(Any, CGFloat)

@@ -17,7 +17,7 @@ extension CICHUD {
         public var contentInsets = UIEdgeInsets.init(top: 22, left: 20, bottom: 20, right: 20)
         
         /// 展示内容外部边距,top无效
-        public var contentMargins = UIEdgeInsets.init(top: 0, left: 12, bottom: 12, right: 12)
+        public var contentMargins = UIEdgeInsets.layoutMargins
         
         public var title = "提示"
         public let titleLabel = UILabel()
