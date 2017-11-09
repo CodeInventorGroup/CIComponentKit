@@ -16,6 +16,8 @@ struct CIComponentKitResources {
         let path = frameBundle.path(forResource: "CIComponentKitResources", ofType: "bundle")!
         return Bundle.init(path: path)!
     }
+    
+    public static var aBundle
 }
 
 extension UIImage {
