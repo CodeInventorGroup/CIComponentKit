@@ -9,29 +9,26 @@
 import UIKit
 
 public extension CIComponentKit where Base: UIViewController {
-    
+
     var visibleViewController: UIViewController? {
         
         if let presentVC = base.presentedViewController {
             return presentVC.cic.visibleViewController
         }
         
-        if base is UITabBarController  {
-            return (base as! UITabBarController).selectedViewController?.cic.visibleViewController
+        if let base = base as? UITabBarController {
+            return base.selectedViewController?.cic.visibleViewController
+        } else if let base = base as? UINavigationController {
+            return base.visibleViewController?.cic.visibleViewController
         }
-        if base is UINavigationController {
-            return (base as! UINavigationController).visibleViewController?.cic.visibleViewController
-        }
-        
         if base.isViewLoaded && (base.view.window != nil) {
             return base
-        }else {
+        } else {
             print("UIViewController \(base)")
         }
         return nil
     }
 }
-
 
 public extension UIViewController {
     struct cic {
@@ -47,7 +44,6 @@ public enum ControllerState<T> {
     case error(message: String)
 }
 
-
 public protocol CICViewControllerStateProtocol {
     associatedtype DataModel
     var state: ControllerState<DataModel> {get set}
@@ -61,7 +57,7 @@ extension CICViewControllerStateProtocol where Self: CICUIViewController {
 //    public typealias DataModel = String
 }
 
-open class CICUIViewController: UIViewController, CICAppearance{
+open class CICUIViewController: UIViewController, CICAppearance {
     
     public var loadingView = UIView()
     public var errorView = UIView()
@@ -70,7 +66,7 @@ open class CICUIViewController: UIViewController, CICAppearance{
             stateDidChanged()
         }
     }
-    
+
     public func stateDidChanged() {
         switch state {
         case .loading:
@@ -79,17 +75,20 @@ open class CICUIViewController: UIViewController, CICAppearance{
             print("data loaded: \(str)")
         case .error(let errorMessage):
             print("data loaded error: \(errorMessage)")
-        default:
-            break
         }
     }
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(CICAppearance.willToggleTheme), name: NSNotification.Name.cic.themeWillToggle, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(CICAppearance.didToggleTheme), name: NSNotification.Name.cic.themeWillToggle, object: nil)
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(CICAppearance.willToggleTheme),
+                                               name: NSNotification.Name.cic.themeWillToggle,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(CICAppearance.didToggleTheme),
+                                               name: NSNotification.Name.cic.themeWillToggle,
+                                               object: nil)
         
         self.extendedLayoutIncludesOpaqueBars = true
     }
@@ -97,29 +96,27 @@ open class CICUIViewController: UIViewController, CICAppearance{
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
-    //MARK: - 主题支持
+    // MARK: - 主题支持
     open func willToggleTheme() {
         print("CICUIViewController willToggleTheme")
     }
-    
+
     open func didToggleTheme() {
         print("CICUIViewController didToggleTheme")
     }
 
-    //MARK: - 屏幕旋转
+    // MARK: - 屏幕旋转
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
     }
     
-    //MARK: - 
-    
+    // MARK: -
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
     }
 }

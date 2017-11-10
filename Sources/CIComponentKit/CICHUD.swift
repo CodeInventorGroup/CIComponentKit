@@ -19,18 +19,28 @@ public extension CIComponentKit where Base: UIView {
     }
 }
 
-/// - DdefaultConfig
-var CICHUDLoadingRect = {CGRect.init(origin: .zero, size: CGSize.init(width: CGFloat.screenWidth - 100, height: 120))}()
-var CICHUDToastRect = {CGRect.init(origin: .zero, size: CGSize.init(width: CGFloat.screenWidth - 180, height: 60))}()
-var CICHUDInsets = UIEdgeInsetsMake(20, 20, 20, 20)
-var CICHUDAutoResize = false   // 是否自适应大小
+
 
 public typealias CICHUDClousure =  ((Bool) -> Swift.Void)
 
-///MARK: - CICHUD
-public class CICHUD: UIView {
+/// MARK: - CICHUD
+public class CICHUD: CICUIView {
 
-    //MARK: Property
+    /// - DdefaultConfig
+
+    static var CICHUDLoadingRect = CGRect.init(origin: .zero,
+                                               size: CGSize(width: CGFloat.screenWidth - 100, height: 120))
+
+    static var CICHUDToastRect = CGRect.init(origin: .zero,
+                                             size: CGSize(width: CGFloat.screenWidth - 180, height: 60))
+
+    // 内部边距
+    var CICHUDInsets = 20.makeEdgeInsets
+
+    // 是否自适应大小
+    var CICHUDAutoResize = false
+
+    // MARK: Property
     
     public enum Style {
         case loading
@@ -38,10 +48,10 @@ public class CICHUD: UIView {
     }
     
     var style: Style = .loading
-    
+
     // default blurEffect = .extraLight 默认模糊效果
     var blurStyle: UIBlurEffectStyle = .extraLight
-    
+
     // loading's style
     public enum CICHUDLoadingStyle {
         case original   // 系统自带的 UIActivityIndicatorView 指示器
@@ -51,7 +61,7 @@ public class CICHUD: UIView {
         case style4
         case style5
     }
-    
+
     var loadingStyle: CICHUDLoadingStyle = .original
     
     public enum CICHUDLayoutStyle {
@@ -73,13 +83,13 @@ public class CICHUD: UIView {
 
     // tip's title  提示文字
     var title: String? = "加载中~"
-    
+
     // tip's infomation
     var attributeTitle: NSMutableString? = NSMutableString(string: "")
 
     // MARK: - init && deinit
     public static let `default` = CICHUD.init("加载中", blurStyle: .light, layoutStyle: .left)
-    
+
     public init(_ title: String?,
                 style: CICHUD.Style = .loading,
                 blurStyle: UIBlurEffectStyle = .extraLight,
@@ -90,7 +100,6 @@ public class CICHUD: UIView {
         super.init(frame: .zero)
         self.layer.cornerRadius = 3.0
         self.layer.masksToBounds = true
-        
         self.title = title
         self.style = style
         self.blurStyle = blurStyle
@@ -104,11 +113,11 @@ public class CICHUD: UIView {
         self.addSubview(backgroundView)
 
         let contentView = backgroundView.contentView
-        
+
         titleLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
         titleLabel.tintColor = CICHUD.appearance().tintColor
         contentView.addSubview(titleLabel)
-        
+
         animationImgView.contentMode = .center
         animationImgView.addSubview(activityView)
 
@@ -122,7 +131,7 @@ public class CICHUD: UIView {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - build ui
     var backgroundView = UIVisualEffectView()
     var titleLabel = UILabel()
@@ -134,101 +143,92 @@ public class CICHUD: UIView {
         return activity
     }()
 
-    func renderAfterUIDeviceOrientationDidChange(notification: Notification) -> Swift.Void {
-        
-        UIView.animate(withDuration: 0.35) { [unowned self] in
-            if let superView = self.superview {
-                self.center(superView.cic.internalCenter)
-            }
-        }
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        resizeLayout()
     }
 
-    func resizeLayout() -> Swift.Void {
-//        let marginsGuide = self.layoutMarginsGuide
-        
+    func resizeLayout() {
         backgroundView.effect = UIBlurEffect.init(style: blurStyle)
         backgroundView.frame(self.bounds)
-        
+
         animationImgView.size(CGSize(width: 64, height: 64))
         activityView.isHidden = (style == .toast)
-        
+
         titleLabel.text(title).textAlignment(.center).sizeToFit()
         if style == .toast {
             animationImgView.isHidden = true
             titleLabel.centerX(backgroundView.cic.internalCenterX)
                 .centerY(backgroundView.cic.internalCenterY)
-        }else {
+        } else {
             animationImgView.isHidden = false
             activityView.centerX(animationImgView.cic.internalCenterX)
                 .centerY(animationImgView.cic.internalCenterY)
 
             switch layoutStyle {
-                case .top:
+            case .top:
                     animationImgView.y(CICHUDInsets.top).centerX(self.cic.internalCenterX)
                     titleLabel.y(animationImgView.frame.maxY + 30)
                         .centerX(self.cic.internalCenterX)
-                    break
-                case .right:
+            case .right:
                     titleLabel.x(backgroundView.cic.x + CICHUDInsets.left)
                         .centerY(self.cic.internalCenterY)
                     animationImgView.x(titleLabel.frame.maxX + 20)
                         .centerY(self.cic.internalCenterY)
-                    break
-                case .bottom:
+            case .bottom:
                     titleLabel.y(CICHUDInsets.top)
                         .centerX(backgroundView.cic.internalCenterX)
                     animationImgView.y(titleLabel.frame.maxY + 30)
                         .centerX(backgroundView.cic.internalCenterX)
-                    break
-                default:
+            default:
                     animationImgView.x(CICHUDInsets.left)
                         .centerY(backgroundView.cic.internalCenterY)
                     titleLabel.x(animationImgView.frame.maxX + 20)
                         .centerY(backgroundView.cic.internalCenterY)
-                    break
             }
 
-            if CICHUDAutoResize {
-                self.width((animationImgView.frame.maxX < titleLabel.frame.maxX ? animationImgView.cic.width : titleLabel.cic.width) + 2 * CICHUDInsets.right)
-                self.height((animationImgView.frame.maxY < titleLabel.frame.maxY ? animationImgView.cic.height : titleLabel.cic.height) + 2 * CICHUDInsets.bottom)
-                backgroundView.frame(self.bounds)
-                if layoutStyle == .top || layoutStyle == .bottom {
-                    titleLabel.centerX(backgroundView.cic.internalCenterX)
-                    animationImgView.centerX(backgroundView.cic.internalCenterX)
-                }else {
-                    titleLabel.centerY(backgroundView.cic.internalCenterY)
-                    animationImgView.centerY(backgroundView.cic.internalCenterY)
-                }
-            }
-            
+            autoResize()
             if loadingStyle == .original {
                 activityView.startAnimating()
                 if blurStyle == .dark {
+                    // 防止文字与背景
                     activityView.color = UIColor.white
                     titleLabel.textColor(UIColor.white)
                 }
             }
         }
     }
-    
-    /// 计算Loading布局 calculate loading hud's layout
-    ///
-    /// - Returns: Void
-    func render() -> Swift.Void {
-        if let _ = self.superview {
-            resizeLayout()
+
+    func autoResize() {
+        if CICHUDAutoResize {
+//            self.width(CGFloat.maximum(animationImgView.cic.width, titleLabel.cic.width) + 2 * CICHUDInsets.right)
+//            self.height(CGFloat.maximum(animationImgView.cic.height, titleLabel.cic.height) + 2 * CICHUDInsets.bottom)
+            self.width((animationImgView.frame.maxX < titleLabel.frame.maxX ? animationImgView.cic.width : titleLabel.cic.width) + 2 * CICHUDInsets.right)
+            self.height((animationImgView.frame.maxY < titleLabel.frame.maxY ? animationImgView.cic.height : titleLabel.cic.height) + 2 * CICHUDInsets.bottom)
+            backgroundView.frame(self.bounds)
+            if layoutStyle == .top || layoutStyle == .bottom {
+                titleLabel.centerX(backgroundView.cic.internalCenterX)
+                animationImgView.centerX(backgroundView.cic.internalCenterX)
+            } else {
+                titleLabel.centerY(backgroundView.cic.internalCenterY)
+                animationImgView.centerY(backgroundView.cic.internalCenterY)
+            }
         }
     }
-    
-    // MARK: - show && hide
-    public func show(_ title: String?,
-                     blurStyle: UIBlurEffectStyle = .dark,
-                     layoutStyle: CICHUDLayoutStyle = .left,
-                     delay: TimeInterval? = 0.0) {
-        let hud = CICHUD.init(title, blurStyle: blurStyle, layoutStyle: layoutStyle)
-        hud.render()
+
+    // MARK: - CICAppearance
+    public override func deviceOrientationDidChange() {
+        super.deviceOrientationDidChange()
+        guard let superview = self.superview else {
+            return
+        }
+
+        self.frame( style == .loading ? CICHUD.CICHUDLoadingRect: CICHUD.CICHUDToastRect)
+            .center(superview)
     }
-    
+
+    // MARK: - Pulic Method
+
     public class func show(_ title: String?,
                            blurStyle: UIBlurEffectStyle = .dark,
                            layoutStyle: CICHUDLayoutStyle = .left,
@@ -242,40 +242,35 @@ public class CICHUD: UIView {
             CICHUD.default.frame(CICHUDLoadingRect)
             keyWindow.addSubview(CICHUD.default)
             keyWindow.bringSubview(toFront: CICHUD.default)
-            CICHUD.default.render()
             CICHUD.default.center(keyWindow.cic.internalCenter)
         }
-        
     }
-    
+
     public class func toast(_ title: String?,
                             blurStyle: UIBlurEffectStyle = .dark,
-                            delay: TimeInterval? = 0.0, duration: TimeInterval = 1.25) {
-        
+                            delay: TimeInterval? = 0.0,
+                            duration: TimeInterval = 1.25) {
         let hud = CICHUD.init("", blurStyle: .light, layoutStyle: .left)
         hud.style = .toast
         hud.title = title
         hud.blurStyle = blurStyle
-        
+
         if let keyWindow = UIApplication.shared.keyWindow {
             keyWindow.addSubview(hud)
             keyWindow.bringSubview(toFront: hud)
-            hud.frame(CICHUDToastRect).center(keyWindow.cic.internalCenter)
-            hud.render()
-            hud.center(keyWindow.cic.internalCenter)
+            hud.frame(CICHUDToastRect)
+                .center(keyWindow.cic.internalCenter)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
             hud.hide()
         }
     }
 
-    
     public func hide(_ complete: CICHUDClousure = {_ in }) {
         self.removeFromSuperview()
     }
-    
+
     public class func hide(_ complete: CICHUDClousure = {_ in }) {
         CICHUD.default.hide(complete)
     }
 }
-

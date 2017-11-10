@@ -9,16 +9,16 @@
 import UIKit
 
 public class CICActivityView: UIView {
-    
+
     static let `default` = CICActivityView.init(frame: .zero)
-    
+
     var strokeColor = UIColor.cic.hex(hex: 0x808080).cgColor
     var fillColor = UIColor.clear {
         didSet {
             self.backgroundColor = fillColor
         }
     }
-    
+
     static let hud: UIVisualEffectView = {
         let hud = UIVisualEffectView.init(effect: UIBlurEffect.init(style: .extraLight))
             .backgroundColor(.white)
@@ -27,19 +27,23 @@ public class CICActivityView: UIView {
         hud.contentView.addSubview(CICActivityView.default)
         return hud
     }()
-    
+
     /// 动画停止是是否隐藏,和系统UIActivityView保持一致
     var isHideWhenStopped = true
-    
+
     let shape = CAShapeLayer.init()
-    
-    fileprivate let animationKey = "CICActivityView_animationKey"
-    
+
+    private let animationKey = "CICActivityView_animationKey"
+
     override public func draw(_ rect: CGRect) {
         super.draw(rect)
         let center = CGPoint.init(x: rect.width/2, y: rect.height/2)
         let half = CGFloat.maximum(rect.width, rect.height) / 2.0
-        let path = UIBezierPath.init(arcCenter: center, radius: half * 0.94, startAngle: 0.0, endAngle: CGFloat.pi * 2.0, clockwise: false)
+        let path = UIBezierPath.init(arcCenter: center,
+                                     radius: half * 0.94,
+                                     startAngle: 0.0,
+                                     endAngle: CGFloat.pi * 2.0,
+                                     clockwise: false)
         shape.strokeColor = strokeColor
         shape.fillColor = UIColor.clear.cgColor
         shape.strokeStart = 0
@@ -50,7 +54,7 @@ public class CICActivityView: UIView {
         shape.lineCap = kCALineCapRound
         self.layer.addSublayer(shape)
     }
-    
+
     public func startAnimation() {
         self.backgroundColor = fillColor
         self.isHidden = false
@@ -61,7 +65,7 @@ public class CICActivityView: UIView {
         animation1.repeatCount = HUGE
         self.layer.add(animation1, forKey: animationKey)
     }
-    
+
     public func stopAnimation() {
         self.layer.removeAnimation(forKey: animationKey)
         self.isHidden = isHideWhenStopped
@@ -69,7 +73,7 @@ public class CICActivityView: UIView {
 }
 
 extension CICHUD {
-    
+
     /// 类似于MBProgressHUB 一样的加载框
     public class func showActivityView(superView: UIView? = UIApplication.shared.keyWindow) {
         guard let superView = superView else {
@@ -88,4 +92,3 @@ extension CICHUD {
         CICActivityView.hud.removeFromSuperview()
     }
 }
-

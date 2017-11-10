@@ -27,10 +27,10 @@ public class CIComponentKitTheme {
     
     // 当前主题
     public static var currentTheme = CIComponentKitTheme()
-    
+
     // system colors
     public static var originTheme = CIComponentKitTheme()
-    
+
     // the resource of theme, 主题的来源
     public enum CIComponentKitThemeSource {
         case plist(URL)
@@ -60,7 +60,7 @@ public extension CIComponentKitTheme {
 
 // MARK: - 切换主题 toggle theme
 public extension CIComponentKitTheme {
-    
+
     // the transition of toggling theme , 切换主题的过度动画
     public enum CIComponentKitThemeTransition {
         case None
@@ -72,7 +72,7 @@ public extension CIComponentKitTheme {
         case neterror(URLResponse)
         case other
     }
-    
+
     // showAnimation
     public func showAnimation(_ animation: CIComponentKitThemeTransition) {
         if blurView.superview == nil {
@@ -98,7 +98,7 @@ public extension CIComponentKitTheme {
     public func renderTheme(_ animation: CIComponentKitThemeTransition = .None) {
         // post a notification
         NotificationCenter.default.post(name: Notification.Name.cic.themeWillToggle, object: self, userInfo: nil)
-        
+
         showAnimation(animation)
         
         CIComponentKitThemeCurrentConfig = config
@@ -109,11 +109,11 @@ public extension CIComponentKitTheme {
             print("*********************************************************************************")
             
             currentViewController.beginAppearanceTransition(true, animated: true)
-            
+
             UIApplication.shared.keyWindow?.tintColor = config.tintColor
             currentViewController.navigationController?.navigationBar.tintColor = config.tintColor
-            currentViewController.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: config.navigationBarLeftColor], for: .
-                normal)
+            currentViewController.navigationItem.leftBarButtonItem?.setTitleTextAttributes([
+                .foregroundColor: config.navigationBarLeftColor],for: .normal)
             
             if let navigationController = currentViewController.navigationController {
 //                var navigationBarSize = navigationController.navigationBar.bounds.size
@@ -132,14 +132,13 @@ public extension CIComponentKitTheme {
         UIActivityIndicatorView.appearance().color = config.activityIndicatorColor
 
         NotificationCenter.default.post(name: Notification.Name.cic.themeDidToggle, object: self, userInfo: nil)
-        
         hideAnimation(animation)
     }
 
-    public static func renderTheme(_ animation: CIComponentKitThemeTransition, _ theme: CIComponentKitTheme = CIComponentKitTheme.originTheme) throws -> Swift.Void {
+    public static func renderTheme(_ animation: CIComponentKitThemeTransition,
+                                   _ theme: CIComponentKitTheme = CIComponentKitTheme.originTheme) throws -> Swift.Void {
         
         theme.renderTheme()
-
         throw CIComponentKitSourceError.neterror(URLResponse())
     }
 }

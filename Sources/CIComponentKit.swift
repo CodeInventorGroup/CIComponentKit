@@ -6,8 +6,7 @@
 //  Copyright © 2017年 CodeInventor. All rights reserved.
 //
 
-import UIKit
-
+import Foundation
 
 public protocol CIComponentKitProtocol {
     associatedtype type
@@ -28,13 +27,9 @@ public final class CIComponentKit<Base> {
 
 extension CIComponentKitProtocol {
     public var cic: CIComponentKit<Self> {
-        get {
-            return CIComponentKit(self)
-        }
+        return CIComponentKit(self)
     }
 }
 
-
 extension UIView: CIComponentKitProtocol {}
 extension UIViewController: CIComponentKitProtocol {}
-

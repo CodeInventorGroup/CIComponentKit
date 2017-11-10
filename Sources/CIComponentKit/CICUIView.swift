@@ -12,16 +12,18 @@ public class CICUIView: UIView, CICAppearance {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        
         initMethod()
     }
-    
+
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     // CICAppearance  主题支持
-    
     func initMethod() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(CICAppearance.willToggleTheme),
@@ -31,7 +33,13 @@ public class CICUIView: UIView, CICAppearance {
                                                selector: #selector(CICAppearance.didToggleTheme),
                                                name: Notification.Name.cic.themeDidToggle,
                                                object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(CICAppearance.deviceOrientationDidChange),
+                                               name: Notification.Name.UIDeviceOrientationDidChange,
+                                               object: nil)
     }
+
+    // MARK: - CICAppearance Protocol
 
     public func willToggleTheme() {
 
@@ -39,5 +47,9 @@ public class CICUIView: UIView, CICAppearance {
 
     public func didToggleTheme() {
         self.backgroundColor(CIComponentKitThemeCurrentConfig.mainColor)
+    }
+
+    public func deviceOrientationDidChange() {
+
     }
 }

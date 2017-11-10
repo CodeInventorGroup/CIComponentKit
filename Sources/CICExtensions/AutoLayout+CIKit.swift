@@ -9,7 +9,6 @@
 import UIKit
 import Foundation
 
-
 public protocol CICLayoutPropertyProtocol {
     associatedtype type
     var base: type {get}
@@ -23,13 +22,20 @@ public protocol CICLayoutPropertyProtocol {
 
     // eg: 50.makeRect == CGRect.init(origin: .zero, size: CGSize.init(width: 50, height: 50))
     var makeRect: CGRect { get }
+
+    // eg 20.makeEdgeInsets = UIEdgeInsets.init(top: 20, left: 20, bottom: 20, right: 20)
+    var makeEdgeInsets: UIEdgeInsets { get }
 }
 
 extension CICLayoutPropertyProtocol {
     public static var screenScale: CGFloat { return UIScreen.main.scale }
+
     public static var screenSize: CGSize { return UIScreen.main.bounds.size }
+
     public static var screenHeight: CGFloat { return UIScreen.main.bounds.height }
+
     public static  var screenWidth: CGFloat { return UIScreen.main.bounds.width }
+
     public var makeSize: CGSize {
         if base is CGFloat {
             return CGSize.init(width: (base as! CGFloat), height: (base as! CGFloat))
@@ -42,6 +48,13 @@ extension CICLayoutPropertyProtocol {
     }
     public var makeRect: CGRect {
         return CGRect.init(origin: .zero, size: self.makeSize)
+    }
+
+    public var makeEdgeInsets: UIEdgeInsets {
+        if let base = base as? CGFloat {
+            return UIEdgeInsets.init(top: base, left: base, bottom: base, right: base)
+        }
+        return UIEdgeInsets.zero
     }
 }
 

@@ -149,7 +149,7 @@ public class CICLabel: UILabel {
             }
         }
     }
-    
+
     // - longPressAction == .copy 时,copy的范围
     public var copyRange: NSRange?
 
@@ -162,7 +162,7 @@ public class CICLabel: UILabel {
             }
         }
     }
-    
+
     public override var attributedText: NSAttributedString? {
         didSet {
             super.attributedText = attributedText
@@ -228,7 +228,7 @@ extension CICLabel {
         self.longPressAction = longPressAction
         return self
     }
-    
+
     @discardableResult
     public func highlightedBackgroundColor(_ highlightedBackgroundColor: UIColor = CIComponentKitThemeCurrentConfig.highlightedBackgroundColor) -> Self {
         self.highlightedBackgroundColor = highlightedBackgroundColor

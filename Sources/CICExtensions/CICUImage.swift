@@ -23,42 +23,42 @@ private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 
 extension UIImage {
-    
+
     /// create image with UIColor
     public class func image(color: UIColor = UIColor.cic.clear, size: CGSize, cornerRadius: CGFloat = 0.0) -> UIImage? {
         var image: UIImage? = nil
-        
+
         if size.valid() {
             
         }
-        
+
         guard size.valid() else {
             return nil
         }
-        
+
         let opaque = cornerRadius == 0.0
         UIGraphicsBeginImageContextWithOptions(size, opaque, CGFloat.screenScale)
-        
+
         if let context = UIGraphicsGetCurrentContext() {
             context.setFillColor(color.cgColor)
             
             if cornerRadius > 0.0 {
-                let path = UIBezierPath.init(roundedRect: CGRect.init(origin: .zero, size: size), cornerRadius: cornerRadius)
+                let path = UIBezierPath.init(roundedRect: CGRect.init(origin: .zero, size: size),
+                                             cornerRadius: cornerRadius)
                 path.addClip()
                 path.fill()
-            }else {
+            } else {
                 context.fill(CGRect(origin: .zero, size: size))
             }
         }
-        
+
         image = UIGraphicsGetImageFromCurrentImageContext()
         
         UIGraphicsEndImageContext()
-        
+
         return image
     }
-    
-    
+
     /// gifImage with `Data`
     public class func gifImage(data: Data) -> UIImage? {
         guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
@@ -112,7 +112,7 @@ extension UIImage {
                                                              Unmanaged.passUnretained(kCGImagePropertyGIFDelayTime).toOpaque()),
                                         to: AnyObject.self)
         }
-        
+
         delay = delayObject as! Double
 
         if delay < 0.1 {

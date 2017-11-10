@@ -11,12 +11,7 @@ public extension UIColor {
     struct cic {
         
         private typealias CIComponentColor = cic
-        
-        enum ColorFormatter {
-            case hex(UInt32)
-            case string(String)
-        }
-        
+
         // MARK: Random Color
         public static var random: UIColor {
             let red = Int(arc4random_uniform(256))
@@ -39,7 +34,6 @@ public extension UIColor {
             assert(red >= 0 && red <= 255, "red输入无效")
             assert(green >= 0 && green <= 255, "green输入无效")
             assert(blue >= 0 && blue <= 255, "blue输入无效")
-            
             return UIColor(red : CGFloat(red) / 255.0,
                            green : CGFloat(green) / 255.0,
                            blue : CGFloat(red) / 255.0,
@@ -50,12 +44,12 @@ public extension UIColor {
         public static func sRgb(red: Int, green: Int, blue: Int) -> UIColor {
             return CIComponentColor.sRgb(red: red, green: green, blue: blue, alpha: 1.0)
         }
-        
+
         public static func sRgb(red: Int, green: Int, blue: Int, alpha: CGFloat) -> UIColor {
             assert(red >= 0 && red <= 255, "red输入无效")
             assert(green >= 0 && green <= 255, "green输入无效")
             assert(blue >= 0 && blue <= 255, "blue输入无效")
-            
+
             if #available(iOS 10.0, *) {
                 return UIColor(displayP3Red: CGFloat(red) / 255.0,
                                green: CGFloat(green) / 255.0,
@@ -69,7 +63,7 @@ public extension UIColor {
                                alpha: alpha)
             }
         }
-        
+
         // MARK: Hex Color
         public static func hex(hex : UInt32) -> UIColor {
             return self.hex(hex: hex, alpha: 1.0)

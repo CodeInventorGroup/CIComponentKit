@@ -173,7 +173,7 @@ class RootViewController: CICUIViewController {
             break
         case .Loading:
             CICHUD.show("正在加载~", blurStyle: .extraLight)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
                 CICHUD.hide()
             })
             break
@@ -185,7 +185,7 @@ class RootViewController: CICUIViewController {
             break
         case .NetworkStatus:
             CICHUD.showNetWorkStatusChange("失去网络连接")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
                 CICHUD.hideNetWorkStatusChange()
             })
             break

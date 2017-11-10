@@ -13,8 +13,8 @@ public class CICAlertViewLayout: SizeLayout<UIView> {
     deinit {
         print("CICAlertViewLayout deinit")
     }
-    
-    public typealias CICAlertViewAction = ((UIControl) -> ())
+
+    public typealias CICAlertViewAction = ((UIControl) -> Void)
     
     public init(contentView: UIView? = nil,
                 title:String = "提示",
@@ -23,7 +23,7 @@ public class CICAlertViewLayout: SizeLayout<UIView> {
                 actions: [CICAlertViewAction]? = [],
                 actionStyles: [UIColor]? = nil,
                 maxHeight: CGFloat = .screenHeight - 2 * UIEdgeInsets.layoutMargins.top) {
-        
+
         let titleLabeLayout = InsetLayout<UIView>.init(insets: UIEdgeInsetsMake(8, 0, 8, 0),
                                  alignment: .center,
                                  viewReuseId: "titleLayout",
@@ -33,10 +33,9 @@ public class CICAlertViewLayout: SizeLayout<UIView> {
                                                              viewReuseId: "title") {titleLabel in
                                     titleLabel.textColor(CIComponentKitThemeCurrentConfig.alertMessageColor)
                                     titleLabel.textAlignment = .center
-        }) { (_) in
-            
+                                 }) { (_) in
+
         }
-    
         let contentInfoLayout = InsetLayout<UIView>.init(insets: UIEdgeInsetsMake(0, 15, 0, 15),
                                                          alignment: .center,
                                                          viewReuseId: "content",
@@ -44,23 +43,23 @@ public class CICAlertViewLayout: SizeLayout<UIView> {
                                                                                      font: UIFont.cic.preferred(.body),
                                                                                      numberOfLines: 0,
                                                                                      alignment: .center,
-                                                                                     viewReuseId: "contentInfo") { (label) in
+                                                                                     viewReuseId: "contentInfo") { label in
                                                             label.textColor(CIComponentKitThemeCurrentConfig.textColor)
         }) { (_) in
-            
+
         }
         
         var layouts = [Layout]()
         layouts.append(titleLabeLayout)
         layouts.append(contentInfoLayout)
-        
+
         // 初始化buttons
         var actionlayouts = [Layout]()
         for (index, actionTitle) in actionTitles.enumerated() {
             let actionLayout = ButtonLayout.init(type: .custom,
                                                  title: actionTitle,
                                                  font: UIFont.systemFont(ofSize: 20.0),
-                                                 contentEdgeInsets: UIEdgeInsetsMake(6, 10, 6, 10),
+                                                 contentEdgeInsets: UIEdgeInsets.init(top: 6, left: 10, bottom: 6, right: 10),
                                                  viewReuseId: actionTitle,
                                                  config: { control in
                 control.setTitleColor(actionStyles?.safeElement(at: index) ?? CIComponentKitThemeCurrentConfig.confirmColor,
@@ -82,14 +81,13 @@ public class CICAlertViewLayout: SizeLayout<UIView> {
             })
             layouts.append(actionStackLayout)
         }
-        
         let backgroundLayout = InsetLayout<UIView>.init(insets: .zero,
                                                         viewReuseId: "background",
                                                         sublayout: StackLayout<UIView>.init(axis: .vertical,
                                                                                            spacing: 20,
                                                                                            viewReuseId: "background",
                                                                                            sublayouts: layouts,
-                                                                                           config: { (background) in
+                                                                                           config: { _ in
                                                                                                         
                                                                    })) { (background) in
             background.backgroundColor(CIComponentKitThemeCurrentConfig.mainColor)
@@ -115,20 +113,20 @@ extension CICHUD {
                                 cancelAction: @escaping CICAlertViewLayout.CICAlertViewAction = {_ in },
                                 confirmAction: @escaping CICAlertViewLayout.CICAlertViewAction = {_ in}) {
         if let keyWindow = UIApplication.shared.keyWindow {
-        
+
             var alertMaskView = UIView()
             let actionTitles = ["取消", "确定"]
-            let actions: [CICAlertViewLayout.CICAlertViewAction] = [{ (control) in
-                    print("cancel")
-                    cancelAction(control)
-                    alertMaskView.removeFromSuperview()
-                }, { control in
-                    print("confirm")
-                    confirmAction(control)
-                    alertMaskView.removeFromSuperview()
-                }]
-            let actionStyles = [CIComponentKitThemeCurrentConfig.cancelColor, CIComponentKitThemeCurrentConfig.confirmColor]
-            
+            let actions: [CICAlertViewLayout.CICAlertViewAction] = [ { control in
+                                                                        print("cancel")
+                                                                        cancelAction(control)
+                                                                        alertMaskView.removeFromSuperview()
+                                                                    }, { control in
+                                                                        print("confirm")
+                                                                        confirmAction(control)
+                                                                        alertMaskView.removeFromSuperview()
+                                                                    } ]
+            let actionStyles = [CIComponentKitThemeCurrentConfig.cancelColor,
+                                CIComponentKitThemeCurrentConfig.confirmColor]
             let alertLayout = CICAlertViewLayout.init(title: title,
                                                       content: content,
                                                       actionTitles: actionTitles,
@@ -146,6 +144,5 @@ extension CICHUD {
                 keyWindow.addSubview(alertMaskView)
             }
         }
-        
     }
 }

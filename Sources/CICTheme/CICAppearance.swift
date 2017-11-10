@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 //  this is a demo  , begin
 
 /**********************************************
@@ -39,22 +37,22 @@ import UIKit
 
 // this is a demo  , end
 
-
 // 如果想要自定义控件支持主题替换,请遵循CIComponentKitAppearance协议
 /// custom component callback when current theme  (will toggle) / (toggled)
 @objc public protocol CICAppearance {
 
-    
     /// 主题即将切换
     ///
     /// - Returns: s
     func willToggleTheme() -> Swift.Void
-    
-    
+
     /// 主题切换完毕
     ///
     /// - Returns: s
     func didToggleTheme() -> Swift.Void
-    
-}
 
+    /// 设备旋转完毕
+    ///
+    /// - Returns: Void
+    @objc optional func deviceOrientationDidChange() -> Swift.Void
+}

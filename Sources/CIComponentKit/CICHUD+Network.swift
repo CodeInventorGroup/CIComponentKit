@@ -8,27 +8,30 @@
 
 import UIKit
 
-public var CICHUD_NetWorkStatusDefaultTip = "您已失去网络连接"
-public var CICHUD_NetWorkStatusDefaultOffset: CGFloat = 64
-public var CICHUD_NetWorkStatusAnimationDurationInterval = 0.75
-
 extension CICHUD {
-    public class NetWorkStatusView: UIView {
+    public class NetWorkStatusView: CICUIView {
         
         static let `default` = NetWorkStatusView.init(frame: .zero)
-        
-        public var statusTitle: String = CICHUD_NetWorkStatusDefaultTip {
+
+        // MARK: - Config
+        public static var defaultTip: String = "您已失去网络连接"
+        public static var defaultOffset: CGFloat = CGFloat.maximum(UIEdgeInsets.layoutMargins.top, 20)
+        public static var defaultAnimationDuration: TimeInterval = 0.75
+
+        public var statusTitle: String = NetWorkStatusView.defaultTip {
             didSet {
-                statusLabel.text(statusTitle).sizeTo(layout: .maxWidth(CGFloat.screenWidth - 80))
+                statusLabel.text(statusTitle)
+                    .sizeTo(layout: .maxWidth(CGFloat.screenWidth - 4 * UIEdgeInsets.layoutMargins.left))
+                    .centerY(12)
             }
         }
-        
+
         public var image: UIImage? = nil {
             didSet {
                 if image == nil {
                     activityView.size(imageView.bounds.size)
                     activityView.startAnimating()
-                }else {
+                } else {
                     activityView.stopAnimating()
                     imageView.image = image
                 }
@@ -38,66 +41,74 @@ extension CICHUD {
         let imageView = UIImageView()
         let statusLabel = UILabel()
         let activityView: UIActivityIndicatorView = UIActivityIndicatorView()
-        
+
         public override init(frame: CGRect) {
             super.init(frame: .zero)
-            self.backgroundColor = CIComponentKitThemeCurrentConfig.mainColor
             self.clipsToBounds = true
             self.addSubview(imageView)
             self.addSubview(statusLabel)
-            
+            imageView.addSubview(activityView)
+            render()
+        }
+
+        func render() {
             imageView.image = image
             imageView.x(24)
                 .size(20.makeSize)
                 .centerY(12)
-            
-            imageView.addSubview(activityView)
-            
             statusLabel.text(statusTitle)
                 .font(UIFont.cic.systemFont)
                 .textColor(CIComponentKitThemeCurrentConfig.textColor)
                 .line()
                 .x(imageView.frame.maxX + 15)
                 .height(20)
-                .centerY(12)
-        }
-        
-        func render() {
             self.backgroundColor(CIComponentKitThemeCurrentConfig.mainColor)
-            statusLabel.textColor(CIComponentKitThemeCurrentConfig.tintColor)
             activityView.color = CIComponentKitThemeCurrentConfig.tintColor
         }
-        
+
         required public init?(coder aDecoder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
+        }
+
+        public override func deviceOrientationDidChange() {
+            super.deviceOrientationDidChange()
+            if self == NetWorkStatusView.default {
+                self.x(UIEdgeInsets.layoutMargins.left)
+                    .width(CGFloat.screenWidth - 2 * UIEdgeInsets.layoutMargins.left)
+                    .height(24)
+            }
+            render()
         }
     }
 }
 
 extension CICHUD {
-    public class func showNetWorkStatusChange(_ title: String = CICHUD_NetWorkStatusDefaultTip, _ image: UIImage? = nil) {
+    public class func showNetWorkStatusChange(_ title: String = NetWorkStatusView.defaultTip,
+                                              image: UIImage? = nil) {
         NetWorkStatusView.default.removeFromSuperview()
         NetWorkStatusView.default.statusTitle = title
         NetWorkStatusView.default.image = image
         NetWorkStatusView.default.render()
-        if let keyWindow = UIApplication.shared.keyWindow {
-            keyWindow.addSubview(NetWorkStatusView.default)
-            NetWorkStatusView.default.y(CICHUD_NetWorkStatusDefaultOffset).width(CGFloat.screenWidth).height(0)
-            UIView.animate(withDuration: CICHUD_NetWorkStatusAnimationDurationInterval, animations: {
-                NetWorkStatusView.default.height(24)
-            }, completion: {finished in
-            })
+        guard let keyWindow = UIApplication.shared.keyWindow else {
+            return
         }
+        keyWindow.addSubview(NetWorkStatusView.default)
+        NetWorkStatusView.default.y(NetWorkStatusView.defaultOffset)
+            .width(CGFloat.screenWidth - 2 * UIEdgeInsets.layoutMargins.left)
+            .height(0)
+            .centerX(keyWindow.cic.internalCenterX)
+        UIView.animate(withDuration: NetWorkStatusView.defaultAnimationDuration, animations: {
+            NetWorkStatusView.default.height(24)
+        })
     }
-    
+
     public class func hideNetWorkStatusChange() {
-        UIView.animate(withDuration: CICHUD_NetWorkStatusAnimationDurationInterval, animations: {
+        UIView.animate(withDuration: NetWorkStatusView.defaultAnimationDuration, animations: {
             NetWorkStatusView.default.height(0)
-        }) { (finished) in
+        }, completion: { finished in
             if finished {
                 NetWorkStatusView.default.removeFromSuperview()
             }
-        }
+        })
     }
 }
-

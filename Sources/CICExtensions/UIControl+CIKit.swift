@@ -11,7 +11,7 @@ import UIKit
 private var controlHandlerKey: Int8 = 0
 
 extension UIControl {
-    public func addHandler(for controlEvents: UIControlEvents, handler: @escaping (UIControl) -> ()) {
+    public func addHandler(for controlEvents: UIControlEvents, handler: @escaping (UIControl) -> Void) {
         if let oldTarget = objc_getAssociatedObject(self, &controlHandlerKey) as? CIComponentKitTarget<UIControl> {
             self.removeTarget(oldTarget, action: #selector(oldTarget.sendNext), for: controlEvents)
         }
@@ -24,12 +24,12 @@ extension UIControl {
 }
 
 internal final class CIComponentKitTarget<Value>: NSObject {
-    private let action: (Value) -> ()
+    private let action: (Value) -> Void
     
-    internal init(_ action: @escaping (Value) -> ()) {
+    internal init(_ action: @escaping (Value) -> Void) {
         self.action = action
     }
-    
+
     @objc
     internal func sendNext(_ receiver: Any?) {
         action(receiver as! Value)
