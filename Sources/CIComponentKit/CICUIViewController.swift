@@ -11,11 +11,9 @@ import UIKit
 public extension CIComponentKit where Base: UIViewController {
 
     var visibleViewController: UIViewController? {
-        
         if let presentVC = base.presentedViewController {
             return presentVC.cic.visibleViewController
         }
-        
         if let base = base as? UITabBarController {
             return base.selectedViewController?.cic.visibleViewController
         } else if let base = base as? UINavigationController {
@@ -49,7 +47,7 @@ public protocol CICViewControllerStateProtocol {
     var state: ControllerState<DataModel> {get set}
     var loadingView: UIView { get }
     var errorView: UIView { get }
-    
+
     func stateDidChanged()
 }
 
@@ -58,7 +56,7 @@ extension CICViewControllerStateProtocol where Self: CICUIViewController {
 }
 
 open class CICUIViewController: UIViewController, CICAppearance {
-    
+
     public var loadingView = UIView()
     public var errorView = UIView()
     public var state: ControllerState<String> = .loading {
@@ -77,7 +75,7 @@ open class CICUIViewController: UIViewController, CICAppearance {
             print("data loaded error: \(errorMessage)")
         }
     }
-    
+
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
@@ -89,7 +87,6 @@ open class CICUIViewController: UIViewController, CICAppearance {
                                                selector: #selector(CICAppearance.didToggleTheme),
                                                name: NSNotification.Name.cic.themeWillToggle,
                                                object: nil)
-        
         self.extendedLayoutIncludesOpaqueBars = true
     }
 
@@ -100,7 +97,7 @@ open class CICUIViewController: UIViewController, CICAppearance {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     // MARK: - 主题支持
     open func willToggleTheme() {
         print("CICUIViewController willToggleTheme")
@@ -114,7 +111,7 @@ open class CICUIViewController: UIViewController, CICAppearance {
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
     }
-    
+
     // MARK: -
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

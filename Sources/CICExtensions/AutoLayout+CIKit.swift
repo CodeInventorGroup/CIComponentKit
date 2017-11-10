@@ -12,7 +12,7 @@ import Foundation
 public protocol CICLayoutPropertyProtocol {
     associatedtype type
     var base: type {get}
-    
+
     static var screenScale: CGFloat { get }
     static var screenHeight: CGFloat { get }
     static var screenSize: CGSize { get }
@@ -37,8 +37,8 @@ extension CICLayoutPropertyProtocol {
     public static  var screenWidth: CGFloat { return UIScreen.main.bounds.width }
 
     public var makeSize: CGSize {
-        if base is CGFloat {
-            return CGSize.init(width: (base as! CGFloat), height: (base as! CGFloat))
+        if let base = base as? CGFloat {
+            return CGSize.init(width: base, height: base)
         } else if let base = base as? Double {
             return CGSize.init(width: base, height: base)
         } else if let base = base as? Int {
@@ -85,7 +85,7 @@ extension CGSize {
         }
         return false
     }
-    
+
     func add(_ size: CGSize) -> CGSize {
         return CGSize(width: self.width + size.width, height: self.height + size.height)
     }
@@ -99,58 +99,4 @@ extension UIEdgeInsets {
     public static var layoutMargins: UIEdgeInsets {
         return UIWindow().layoutMargins
     }
-}
-
-public enum CICLayoutAttribute {
-    
-    case left(Any, CGFloat)
-
-    case right(Any, CGFloat)
-
-    case top(Any, CGFloat)
-
-    case bottom(Any, CGFloat)
-
-    case leading(Any, CGFloat)
-
-    case trailing(Any, CGFloat)
-
-    case width(Any, CGFloat)
-
-    case height(Any, CGFloat)
-
-    case centerX(Any, CGFloat)
-    
-    case centerY(Any, CGFloat)
-
-    case lastBaseline(Any, CGFloat)
-
-    @available(iOS 8.0, *)
-    case firstBaseline(Any, CGFloat)
-
-    @available(iOS 8.0, *)
-    case leftMargin(Any, CGFloat)
-
-    @available(iOS 8.0, *)
-    case rightMargin(Any, CGFloat)
-
-    @available(iOS 8.0, *)
-    case topMargin(Any, CGFloat)
-
-    @available(iOS 8.0, *)
-    case bottomMargin(Any, CGFloat)
-
-    @available(iOS 8.0, *)
-    case leadingMargin(Any, CGFloat)
-
-    @available(iOS 8.0, *)
-    case trailingMargin(Any, CGFloat)
-
-    @available(iOS 8.0, *)
-    case centerXWithinMargins(Any, CGFloat)
-
-    @available(iOS 8.0, *)
-    case centerYWithinMargins(Any, CGFloat)
-
-    case notAnAttribute
 }

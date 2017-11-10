@@ -40,7 +40,7 @@ public class CIComponentKitThemeConfig {
 
         // alertView、alertViewController confirm button color
          public var confirmColor = UIColor.cic.hex(hex: 0x5CC9F5)
-    
+
         // alertView、alertViewController cancel button color
          public var cancelColor = UIColor.cic.rgb(red: 175, green: 174, blue: 169)
 
@@ -60,10 +60,10 @@ public class CIComponentKitThemeConfig {
          public var highlightedBackgroundColor = UIColor.cic.hex(hex: 0xF7F6F6, alpha: 0.8)
 
     // MARK: - fonts -------------------------------------------------------------------------------------
-    
+
         // 默认字体大小， 这里和系统保持一致，一般产品中都使用的字体大小为14
          public var defaultFontSize = UIFont.systemFontSize
-    
+
         // 默认字体
          public var defaultFont = UIFont.cic.systemFont
 }

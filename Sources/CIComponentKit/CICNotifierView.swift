@@ -9,15 +9,14 @@
 import UIKit
 import LayoutKit
 
-
-public struct CICNotifierViewType: Hashable{
+public struct CICNotifierViewType: Hashable {
 
     // 提供四种样式
     public static let error = CICNotifierViewType("error_circle", color: UIColor.cic.hex(hex: 0xF85359))
     public static let status = CICNotifierViewType("status_circle", color: UIColor.cic.hex(hex: 0x1991EB))
     public static let success = CICNotifierViewType("right_circle", color: UIColor.cic.hex(hex: 0x39B54A))
     public static let warning = CICNotifierViewType("status_circle", color: UIColor.cic.hex(hex: 0xF7981C))
-    
+
     var image: UIImage?
     var color: UIColor
     var textColor: UIColor
@@ -35,7 +34,7 @@ public struct CICNotifierViewType: Hashable{
         self.textColor = textColor
         self.image = UIImage.init(named: imageNamed)
     }
-    
+
     public var hashValue: Int {
         return (imageName + String.cic.random()).hashValue
     }
@@ -46,7 +45,7 @@ public struct CICNotifierViewType: Hashable{
 }
 
 class CICNotifierViewLayout: SizeLayout<View> {
-    
+
     ///
     ///
     /// - Parameters:
@@ -71,7 +70,6 @@ class CICNotifierViewLayout: SizeLayout<View> {
                 imageView.image = type.image
             }
         }
-
         let titleLabelLayout = LabelLayout.init(text: title,
                                                 font: UIFont.cic.preferred(.body),
                                                 numberOfLines: 0,
@@ -79,7 +77,6 @@ class CICNotifierViewLayout: SizeLayout<View> {
                                                 viewReuseId: "title") { (label) in
             label.textColor(type.textColor)
         }
-
         let closeButtonLayout = SizeLayout<UIButton>.init(width: 20,
                                                           height: 20,
                                                           alignment: .center,

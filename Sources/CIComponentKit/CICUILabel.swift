@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 /********************************************* this is a demo ******************************
  
  let label = UILabel.cic.appearance
@@ -28,7 +27,7 @@ public extension UILabel {
 
 // 为调用了 ci.appearance 方法的UILabel实例 添加 CIComponentAppearance 协议支持
 extension CICLabel: CICAppearance {
-    
+
     public func didToggleTheme() {
         if self.textColor != CIComponentKitThemeCurrentConfig.textColor {
             self.textColor = CIComponentKitThemeCurrentConfig.textColor
@@ -37,16 +36,16 @@ extension CICLabel: CICAppearance {
             self.font = CIComponentKitThemeCurrentConfig.defaultFont
         }
     }
-    
+
     public func willToggleTheme() {
-        
+
     }
 }
 
 /********************************************* CILabel ******************************/
 /// CILabel 自定义UILabel,支持 长按复制
 public class CICLabel: UILabel {
-    
+
     private var tempBackgroundColor: UIColor?
     
     private lazy var longPressGesture: UILongPressGestureRecognizer = {
@@ -58,7 +57,7 @@ public class CICLabel: UILabel {
     convenience init() {
         self.init(frame: .zero)
     }
-    
+
     public override init(frame: CGRect) {
         super.init(frame: frame)
         initMethod()
@@ -67,7 +66,7 @@ public class CICLabel: UILabel {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func initMethod() -> Swift.Void {
         // receive the notification of togglling theme
         NotificationCenter.default.addObserver(self,
@@ -79,17 +78,17 @@ public class CICLabel: UILabel {
                                                name: Notification.Name.cic.themeDidToggle,
                                                object: nil)
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     public override func drawText(in rect: CGRect) {
         return super.drawText(in: UIEdgeInsetsInsetRect(rect, contentEdgeInset))
     }
-    
+
     // MARK: - 扩展属性
-    
+
     // - 文字距离上下左右的边距
     public var contentEdgeInset: UIEdgeInsets = .zero {
         didSet {
@@ -103,18 +102,18 @@ public class CICLabel: UILabel {
             tempBackgroundColor = backgroundColor
         }
     }
-    
+
     override public var isHighlighted: Bool {
         didSet {
             super.isHighlighted = isHighlighted
             backgroundColor = isHighlighted ? highlightedBackgroundColor : tempBackgroundColor
         }
     }
-    
+
     public override var canBecomeFirstResponder: Bool {
         return longPressAction == .copy
     }
-    
+
     public override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         if longPressAction == .copy {
             return action == #selector(copyEvent)
@@ -230,8 +229,9 @@ extension CICLabel {
     }
 
     @discardableResult
-    public func highlightedBackgroundColor(_ highlightedBackgroundColor: UIColor = CIComponentKitThemeCurrentConfig.highlightedBackgroundColor) -> Self {
-        self.highlightedBackgroundColor = highlightedBackgroundColor
+    public func highlightedBackgroundColor(_ color: UIColor =
+        CIComponentKitThemeCurrentConfig.highlightedBackgroundColor) -> Self {
+        self.highlightedBackgroundColor = color
         return self
     }
 

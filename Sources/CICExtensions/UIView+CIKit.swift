@@ -13,7 +13,7 @@ extension CIComponentKit where Base: UIView {
     public var x: CGFloat {
         return base.frame.origin.x
     }
-    
+
     public var y: CGFloat {
         return base.frame.origin.y
     }
@@ -21,7 +21,7 @@ extension CIComponentKit where Base: UIView {
     public var width: CGFloat {
         return base.bounds.width
     }
-    
+
     public var height: CGFloat {
         return base.bounds.height
     }
@@ -45,22 +45,20 @@ extension CIComponentKit where Base: UIView {
     public var internalCenterX: CGFloat {
         return base.bounds.width * 0.5
     }
-    
+
     public var internalCenterY: CGFloat {
         return base.bounds.height * 0.5
     }
-    
+
     public var internalCenter: CGPoint {
         return CGPoint.init(x: internalCenterX, y: internalCenterY)
     }
 }
 
 public enum CICLayoutMaker {
-    
     case value(CGFloat)
     case offSet(CGFloat)
     case mutiplier(CGFloat)
-    
     case none
 }
 
@@ -69,10 +67,10 @@ public enum CICLayoutType {
     case y(CGFloat)
     case width(CGFloat)
     case height(CGFloat)
-    
+
     case maxWidth(CGFloat)
     case maxHeight(CGFloat)
-    
+
     case right(CGFloat)
     case bottom(CGFloat)
 
@@ -86,7 +84,7 @@ extension UIView {
         self.frame.origin.x = originX
         return self
     }
-    
+
     @discardableResult
     public func x(_ view: UIView, offSet: CGFloat = 0.0, mutiplier: CGFloat = 1.0) -> Self {
         self.frame.origin.x = (view.frame.origin.x + offSet) * mutiplier
@@ -98,7 +96,7 @@ extension UIView {
         self.frame.origin.y = originY
         return self
     }
-    
+
     @discardableResult
     public func bottom(_ value: CGFloat, view: UIView? = nil) -> Self {
         if let toView = view {
@@ -122,7 +120,7 @@ extension UIView {
         self.frame.size.width = width
         return self
     }
-    
+
     @discardableResult
     public func width(_ view: UIView, offSet: CGFloat = 0.0, mutiplier: CGFloat = 1.0) -> Self {
         self.frame.size.width = (view.bounds.width + offSet) * mutiplier
@@ -146,7 +144,7 @@ extension UIView {
         self.frame.size = size
         return self
     }
-    
+
     @discardableResult
     public func size(_ view: UIView, offSet: CGSize = .zero, mutiplier: CGFloat = 1.0) -> Self {
         self.frame.size = view.frame.size.add(offSet).multiply(mutiplier)
@@ -210,7 +208,7 @@ extension UIView {
         public static func spring(_ animation: @escaping (() -> Void),
                                   duration: TimeInterval = 0.35,
                                   delay: TimeInterval = 0.0,
-                                  completion: (()->())? = nil) {
+                                  completion: (() -> Void)? = nil) {
             UIView.animate(withDuration: duration,
                            delay: delay,
                            usingSpringWithDamping: 0.7,

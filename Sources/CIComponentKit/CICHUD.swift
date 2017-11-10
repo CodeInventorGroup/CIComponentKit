@@ -19,8 +19,6 @@ public extension CIComponentKit where Base: UIView {
     }
 }
 
-
-
 public typealias CICHUDClousure =  ((Bool) -> Swift.Void)
 
 /// MARK: - CICHUD
@@ -41,12 +39,11 @@ public class CICHUD: CICUIView {
     var CICHUDAutoResize = false
 
     // MARK: Property
-    
     public enum Style {
         case loading
         case toast
     }
-    
+
     var style: Style = .loading
 
     // default blurEffect = .extraLight 默认模糊效果
@@ -63,7 +60,7 @@ public class CICHUD: CICUIView {
     }
 
     var loadingStyle: CICHUDLoadingStyle = .original
-    
+
     public enum CICHUDLayoutStyle {
         case left // title is left
         case top
@@ -107,7 +104,6 @@ public class CICHUD: CICUIView {
         self.loadingStyle = loadingStyle
         self.showAnimation = showAnimation
         self.hideAnimation = hideAnimation
-        
         backgroundView.effect = UIBlurEffect.init(style: blurStyle)
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(backgroundView)

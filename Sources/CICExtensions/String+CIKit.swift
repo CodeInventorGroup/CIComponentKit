@@ -29,10 +29,9 @@ public extension String {
 }
 
 extension String {
-    
+
     public func cicHeight(_ maxWidth: CGFloat = .screenWidth,
                           font: UIFont = UIFont.cic.systemFont) -> CGFloat {
-        
         let str = NSString.init(string: self)
         return str.boundingRect(with: CGSize.init(width: maxWidth, height: CGFloat(MAXFLOAT)),
                                 options:.usesLineFragmentOrigin,

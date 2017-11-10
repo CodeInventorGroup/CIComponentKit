@@ -9,7 +9,6 @@
 import Foundation
 
 extension Array {
-    
     func safeElement(at: Int) -> Element? {
         if at >= 0 && at < self.count {
             return self[at]
