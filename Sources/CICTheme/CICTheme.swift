@@ -14,7 +14,7 @@ extension Notification.Name {
         
         // 切换通知时发出这个通知，post notification when switching theme
         static let themeWillToggle = NSNotification.Name.init("CIComponentKitThemeWillToggleNotifier")
-        
+
         // 切换主题完成之后，post notification When the switching theme is complete
         static let themeDidToggle = NSNotification.Name.init("CIComponentKitThemeDidToggleNotifier")
         
@@ -24,7 +24,7 @@ extension Notification.Name {
 }
 
 public class CIComponentKitTheme {
-    
+
     // 当前主题
     public static var currentTheme = CIComponentKitTheme()
 
@@ -38,7 +38,7 @@ public class CIComponentKitTheme {
     }
     
     // switch theme from theme's source
-    public static func switchTheme(_ themeSource: CIComponentKitThemeSource) -> Swift.Void {
+    public static func switchTheme(_ themeSource: CIComponentKitThemeSource) {
         switch themeSource {
         case .theme(let theme):
             CIComponentKitTheme.currentTheme = theme
@@ -46,7 +46,7 @@ public class CIComponentKitTheme {
             print(themeUrl)
         }
     }
-    
+
     /// 主题的详细配置
     public var config = CIComponentKitThemeConfig()
 
@@ -94,15 +94,15 @@ public extension CIComponentKitTheme {
     public func hideAnimation(_ animation: CIComponentKitThemeTransition) {
         blurView.removeFromSuperview()
     }
-    
+
     public func renderTheme(_ animation: CIComponentKitThemeTransition = .None) {
         // post a notification
         NotificationCenter.default.post(name: Notification.Name.cic.themeWillToggle, object: self, userInfo: nil)
 
         showAnimation(animation)
-        
+
         CIComponentKitThemeCurrentConfig = config
-        
+
         if let currentViewController = UIApplication.shared.keyWindow?.rootViewController?.cic.visibleViewController {
             print("*********************************************************************************")
             print("----------------toggle theme, identifier: \(config.identifier)------------------")

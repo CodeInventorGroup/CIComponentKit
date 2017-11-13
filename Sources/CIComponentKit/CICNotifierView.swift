@@ -38,7 +38,7 @@ public struct CICNotifierViewType: Hashable {
     public var hashValue: Int {
         return (imageName + String.cic.random()).hashValue
     }
-    
+
     public static func == (lhs: CICNotifierViewType, rhs: CICNotifierViewType) -> Bool {
         return lhs.hashValue == rhs.hashValue
     }
@@ -57,7 +57,6 @@ class CICNotifierViewLayout: SizeLayout<View> {
                 title: String = "",
                 isShowClose: Bool = true,
                 viewReuseId: String) {
-        
         let imageLayout = SizeLayout<UIImageView>.init(width: 20,
                                                        height: 20,
                                                        alignment: .center,

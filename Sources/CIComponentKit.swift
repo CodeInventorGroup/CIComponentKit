@@ -19,10 +19,6 @@ public final class CIComponentKit<Base> {
     public init(_ base: Base) {
         self.base = base
     }
-    
-    deinit {
-
-    }
 }
 
 extension CIComponentKitProtocol {

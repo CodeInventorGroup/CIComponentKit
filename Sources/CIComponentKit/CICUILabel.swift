@@ -47,7 +47,7 @@ extension CICLabel: CICAppearance {
 public class CICLabel: UILabel {
 
     private var tempBackgroundColor: UIColor?
-    
+
     private lazy var longPressGesture: UILongPressGestureRecognizer = {
         let g = UILongPressGestureRecognizer.init(target: self, action: #selector(handleLongPressEvent(_:)))
         self.addGestureRecognizer(g)

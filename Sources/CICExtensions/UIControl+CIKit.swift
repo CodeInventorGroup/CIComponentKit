@@ -20,12 +20,11 @@ extension UIControl {
         objc_setAssociatedObject(self, &controlHandlerKey, target, .OBJC_ASSOCIATION_RETAIN)
         self.addTarget(target, action: #selector(target.sendNext), for: controlEvents)
     }
-    
 }
 
 internal final class CIComponentKitTarget<Value>: NSObject {
     private let action: (Value) -> Void
-    
+
     internal init(_ action: @escaping (Value) -> Void) {
         self.action = action
     }
