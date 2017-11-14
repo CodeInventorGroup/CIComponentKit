@@ -166,6 +166,12 @@ class RootViewController: CICUIViewController {
                 CICHUD.showNotifier(title: "爱酱今天要元气满满哦~")
             }, confirmAction: { (_) in
                 CICHUD.showNotifier(title: "我一点都不嫉妒~")
+                let scrollLabel = CICScrollLabel.init(CGRect(x: 0, y: 200, width: .screenWidth, height: 100),
+                                                      axis: .vertical(maxWidth: .screenWidth))
+                scrollLabel.label.text(tips).textColor(UIColor.flat.white)
+                scrollLabel.backgroundColor(.black)
+                    .layout()
+                self.view.addSubview(scrollLabel)
             })
             break
         case .CICLabel:

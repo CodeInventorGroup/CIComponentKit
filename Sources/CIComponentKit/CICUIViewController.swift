@@ -87,7 +87,6 @@ open class CICUIViewController: UIViewController, CICAppearance {
                                                selector: #selector(CICAppearance.didToggleTheme),
                                                name: NSNotification.Name.cic.themeWillToggle,
                                                object: nil)
-        self.extendedLayoutIncludesOpaqueBars = true
     }
 
     required public init?(coder aDecoder: NSCoder) {

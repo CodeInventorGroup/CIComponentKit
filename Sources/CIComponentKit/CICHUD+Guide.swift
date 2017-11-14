@@ -14,7 +14,7 @@ extension CICHUD {
 
         /// 展示内容内部边距
         public var contentInsets = UIEdgeInsets.init(top: 22, left: 20, bottom: 20, right: 20)
-        
+
         /// 展示内容外部边距,top无效
         public var contentMargins: UIEdgeInsets {
             return UIEdgeInsets.layoutMargins
@@ -24,7 +24,7 @@ extension CICHUD {
         public let titleLabel = UILabel()
 
         public var message: String?
-        public let messageLabel = UILabel()
+        public let messageLabel = CICScrollLabel.init(frame: .zero)
 
         /// 是否需要黑色蒙板
         public var isDisplayBlackMask = false {
@@ -75,7 +75,7 @@ extension CICHUD {
             self.addSubview(contentView)
             titleLabel.textColor(CIComponentKitThemeCurrentConfig.tintColor).line(0)
             contentView.contentView.addSubview(titleLabel)
-            messageLabel.textColor(CIComponentKitThemeCurrentConfig.alertMessageColor).line(0)
+            messageLabel.label.textColor(CIComponentKitThemeCurrentConfig.alertMessageColor)
             contentView.contentView.addSubview(messageLabel)
         }
 
@@ -91,15 +91,19 @@ extension CICHUD {
                 .y(contentInsets.top)
                 .width(contentView.cic.width - contentInsets.left - contentInsets.right)
                 .sizeTo(layout: .width(titleLabel.cic.width))
-            messageLabel.text(message)
+
+            // calculate message height
+            messageLabel.axis = .vertical(maxWidth: titleLabel.cic.width)
+            messageLabel.label.text(message)
                 .font(UIFont.cic.preferred(.body))
                 .textColor(CIComponentKitThemeCurrentConfig.alertMessageColor)
-                .x(titleLabel.cic.x)
+                .width(titleLabel.cic.width)
+            let messageHeight = (message ?? "").cicHeight(titleLabel.cic.width, font: UIFont.cic.preferred(.body))
+            messageLabel.x(titleLabel.cic.x)
                 .y(titleLabel.frame.maxY + 15)
                 .width(titleLabel.cic.width)
-                .height(UIFont.systemFontSize)
-                .width(titleLabel.cic.width)
-                .sizeTo(layout: .maxHeight(self.cic.height * 0.7))
+                .height(.minimum(messageHeight, self.cic.height * 0.7))
+                .layout()
             contentView.height(messageLabel.frame.maxY + contentInsets.bottom)
                 .y(self.cic.height - contentView.cic.height - contentMargins.bottom)
         }

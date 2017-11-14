@@ -8,7 +8,8 @@
 
 import UIKit
 
-public class CICUIView: UIView, CICAppearance {
+public class CICUIView: UIView {
+    var isSyncCurrentTheme: Bool = true
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,15 +39,19 @@ public class CICUIView: UIView, CICAppearance {
                                                name: Notification.Name.UIDeviceOrientationDidChange,
                                                object: nil)
     }
+}
 
-    // MARK: - CICAppearance Protocol
-
+// CICAppearance Support
+extension CICUIView: CICAppearance {
     public func willToggleTheme() {
 
     }
 
     public func didToggleTheme() {
-        self.backgroundColor(CIComponentKitThemeCurrentConfig.mainColor)
+        if isSyncCurrentTheme {
+            self.backgroundColor(CIComponentKitThemeCurrentConfig.mainColor)
+            self.setNeedsLayout()
+        }
     }
 
     public func deviceOrientationDidChange() {
