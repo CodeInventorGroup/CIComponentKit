@@ -81,6 +81,7 @@ class CICNotifierViewLayout: SizeLayout<View> {
                                                           alignment: .center,
                                                           viewReuseId: "closeButton",
                                                           sublayout: nil) { (button) in
+            button.isHidden = isShowClose
             button.contentEdgeInsets = 6.makeEdgeInsets
             button.setImage(UIImage.cic.bundle("close_notifier"), for: .normal)
             button.addHandler(for: .touchUpInside, handler: { (_) in
