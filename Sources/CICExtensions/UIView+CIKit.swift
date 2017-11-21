@@ -93,6 +93,18 @@ extension UIView {
     }
 
     @discardableResult
+    public func right(_ value: CGFloat, view: UIView? = nil) -> Self {
+        if let toView = view {
+            self.x(toView.cic.right - value - self.cic.width)
+        } else {
+            if let superView = self.superview {
+                self.x(superView.cic.width - value - self.cic.width)
+            }
+        }
+        return self
+    }
+
+    @discardableResult
     public func y(_ originY: CGFloat = 0.0) -> Self {
         self.frame.origin.y = originY
         return self
