@@ -29,13 +29,13 @@ github "CodeInventorGroup/CIComponentKit"
 ### CICHUD
 `CICHUD`:
 
-* ```CICHUD.showNotifier```
-	`* `CICHUD.showAlert`
+* `CICHUD.showNotifier`
+* `CICHUD.showAlert\`
 * `CICHUD.showActivityView`
 * `CICHUD.showNetworkStatus`
 * `CICHUD.toast("long press to copy~", blurStyle: .extraLight)`
 * `CICHUD.show("loading~", blurStyle: .extraLight)`
-*  and you can show a guide page like this
+* and you can show a guide page like this
 
 ```
 let poem = """
