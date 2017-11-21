@@ -28,7 +28,7 @@ public struct CICNotifierViewType: Hashable {
     ///   - imageNamed: 图片名称
     ///   - color: 背景颜色
     ///   - textColor: 文字颜色
-    init(_ imageNamed: String, color: UIColor = UIColor.cic.hex(hex: 0x39B54A), textColor: UIColor = .white) {
+    public init(_ imageNamed: String, color: UIColor = UIColor.cic.hex(hex: 0x39B54A), textColor: UIColor = .white) {
         self.imageName = imageNamed
         self.color = color
         self.textColor = textColor
@@ -127,6 +127,7 @@ extension CICHUD {
     public class func showNotifier(_ type: CICNotifierViewType = .status,
                                    title: String,
                                    offSet: CGFloat? = nil,
+                                   leftOffSet: CGFloat = 10,
                                    isShowClose: Bool = true,
                                    autoHide: Bool = true,
                                    duration: TimeInterval = 2.0) {
@@ -140,8 +141,8 @@ extension CICHUD {
                                                         viewReuseId: randomid)
         let top = offSet ?? CGFloat.maximum(keyWindow.layoutMargins.top, 20)
         let height = notifierLayout.arrangement(width: CGFloat.screenWidth - 20).frame.height
-        let notifier = notifierLayout.arrangement(origin: CGPoint.init(x: 10, y: -height),
-                                                  width: CGFloat.screenWidth - 20,
+        let notifier = notifierLayout.arrangement(origin: CGPoint.init(x: leftOffSet, y: -height),
+                                                  width: CGFloat.screenWidth - 2 * leftOffSet,
                                                   height: nil).makeViews()
         keyWindow.addSubview(notifier)
         UIView.cic.spring ({

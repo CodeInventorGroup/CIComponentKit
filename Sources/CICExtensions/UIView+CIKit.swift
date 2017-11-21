@@ -77,6 +77,7 @@ public enum CICLayoutType {
     case none
 }
 
+// MARK: - UIView layout chain syntax
 extension UIView {
 
     @discardableResult
@@ -90,7 +91,17 @@ extension UIView {
         self.frame.origin.x = (view.frame.origin.x + offSet) * mutiplier
         return self
     }
-    
+
+    @discardableResult
+    public func left(_ view: UIView?, _ offSet: CGFloat) -> Self {
+        if let toView = view {
+            self.x(toView.cic.x + offSet)
+        } else {
+            self.x(offSet)
+        }
+        return self
+    }
+
     @discardableResult
     public func y(_ originY: CGFloat = 0.0) -> Self {
         self.frame.origin.y = originY

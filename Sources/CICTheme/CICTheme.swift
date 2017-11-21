@@ -107,14 +107,14 @@ public extension CIComponentKitTheme {
             print("*********************************************************************************")
             print("----------------toggle theme, identifier: \(config.identifier)------------------")
             print("*********************************************************************************")
-            
+
             currentViewController.beginAppearanceTransition(true, animated: true)
 
             UIApplication.shared.keyWindow?.tintColor = config.tintColor
             currentViewController.navigationController?.navigationBar.tintColor = config.tintColor
             currentViewController.navigationItem.leftBarButtonItem?.setTitleTextAttributes([
                 .foregroundColor: config.navigationBarLeftColor],for: .normal)
-            
+
             if let navigationController = currentViewController.navigationController {
 //                var navigationBarSize = navigationController.navigationBar.bounds.size
 //                navigationBarSize.height += 20
