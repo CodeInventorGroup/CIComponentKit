@@ -249,7 +249,3 @@ extension RootViewController: UIScrollViewDelegate {
         state = .loaded(data: "加载数据咯 - \(index)")
     }
 }
-
-
-
-
