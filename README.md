@@ -1,9 +1,10 @@
 
 
-# CIKit ![][image-1] ![][image-2] ![][image-3] [![Carthage compatible][image-4]][1] ![][image-5] ![][image-6]
+![](http://olvgkynut.bkt.clouddn.com/CIComponentKit_introduce.png)
 
-CIComponentKit 
+# CIComponentKit ![][image-1] ![][image-2] ![][image-3] [![Carthage compatible][image-4]][1] ![][image-5] ![][image-6]
 
+ 
 Building...
 
 
