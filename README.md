@@ -1,4 +1,7 @@
+
+
 # CIKit ![][image-1] ![][image-2] ![][image-3] [![Carthage compatible][image-4]][1] ![][image-5] ![][image-6]
+
 CIComponentKit 
 
 Building...
@@ -29,15 +32,15 @@ github "CodeInventorGroup/CIComponentKit"
 ### CICHUD
 `CICHUD`:
 
-* `CICHUD.showNotifier`
-* `CICHUD.showAlert\`
-* `CICHUD.showActivityView`
-* `CICHUD.showNetworkStatus`
-* `CICHUD.toast("long press to copy~", blurStyle: .extraLight)`
-* `CICHUD.show("loading~", blurStyle: .extraLight)`
+* `CICHUD.showNotifier`. ![](https://github.com/CodeInventorGroup/CIComponentKit/blob/master/docs/CICHUD_notifier.png)
+* `CICHUD.showAlert\` ![](https://github.com/CodeInventorGroup/CIComponentKit/blob/master/docs/CICHU_alert.png)
+* `CICHUD.showActivityView` ![](https://github.com/CodeInventorGroup/CIComponentKit/blob/master/docs/CICHUD_showActivityView.png)
+* `CICHUD.showNetworkStatus` ![](https://github.com/CodeInventorGroup/CIComponentKit/blob/master/docs/CICHUD_showNetWorkStatus.png)
+* `CICHUD.toast("long press to copy~", blurStyle: .extraLight)` ![](https://github.com/CodeInventorGroup/CIComponentKit/blob/master/docs/CICHUD_toast.png)
+* `CICHUD.show("loading~", blurStyle: .extraLight)` ![](https://github.com/CodeInventorGroup/CIComponentKit/blob/master/docs/CICHUD_loading.png)
 * and you can show a guide page like this
 
-```
+```swift
 let poem = """
             If by life you were deceived, 
             Don't be dismal, don't be wild! 
@@ -50,6 +53,8 @@ let poem = """
           """
 CICHUD.showGuide("If by life you were deceived", message: poem, animated: true)
 ```
+![](https://github.com/CodeInventorGroup/CIComponentKit/blob/master/docs/CICHUD_showGuide.png)
+
 
 [1]:	https://github.com/Carthage/Carthage
 
