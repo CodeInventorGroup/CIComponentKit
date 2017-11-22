@@ -1,6 +1,6 @@
 
 
-![](http://olvgkynut.bkt.clouddn.com/CIComponentKit_introduce.png?imageMogr2/thumbnail/640x640/interlace/1/blur/1x0/quality/100)
+![](http://olvgkynut.bkt.clouddn.com/CIComponentKit_introduce.png?imageMogr2/thumbnail/1280x1280/interlace/1/blur/1x0/quality/100)
 
 # CIComponentKit ![][image-1] ![][image-2] ![][image-3] [![Carthage compatible][image-4]][1] ![][image-5] ![][image-6]
 
