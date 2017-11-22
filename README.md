@@ -32,12 +32,12 @@ github "CodeInventorGroup/CIComponentKit"
 ### CICHUD
 `CICHUD`:
 
-* `CICHUD.showNotifier`. ![](http://olvgkynut.bkt.clouddn.com/CICHUD_notifier@2x.png?imageMogr2/thumbnail/640x640/interlace/1/blur/1x0/quality/75)
-* `CICHUD.showAlert` ![](http://olvgkynut.bkt.clouddn.com/CICHU_alert@2x.png?imageMogr2/thumbnail/640x640/interlace/1/blur/1x0/quality/75)
-* `CICHUD.showActivityView` ![](http://olvgkynut.bkt.clouddn.com/CICHUD_showActivityView@2x.png?imageMogr2/thumbnail/640x640/interlace/1/blur/1x0/quality/75)
-* `CICHUD.showNetworkStatus` ![](http://olvgkynut.bkt.clouddn.com/CICHUD_showNetWorkStatus@2x.png?imageMogr2/thumbnail/640x640/interlace/1/blur/1x0/quality/75)
-* `CICHUD.toast("long press to copy~", blurStyle: .extraLight)` ![](http://olvgkynut.bkt.clouddn.com/CICHUD_toast@2x.png?imageMogr2/thumbnail/640x640/interlace/1/blur/1x0/quality/75)
-* `CICHUD.show("loading~", blurStyle: .extraLight)` ![](http://olvgkynut.bkt.clouddn.com/CICHUD_loading@2x.png?imageMogr2/thumbnail/640x640/interlace/1/blur/1x0/quality/75)
+* `CICHUD.showNotifier`. ![](http://olvgkynut.bkt.clouddn.com/CICHUD_notifier@2x.png?imageMogr2/thumbnail/640x640/interlace/1/blur/1x0/quality/100)
+* `CICHUD.showAlert` ![](http://olvgkynut.bkt.clouddn.com/CICHU_alert@2x.png?imageMogr2/thumbnail/640x640/interlace/1/blur/1x0/quality/100)
+* `CICHUD.showActivityView` ![](http://olvgkynut.bkt.clouddn.com/CICHUD_showActivityView@2x.png?imageMogr2/thumbnail/640x640/interlace/1/blur/1x0/quality/100)
+* `CICHUD.showNetworkStatus` ![](http://olvgkynut.bkt.clouddn.com/CICHUD_showNetWorkStatus@2x.png?imageMogr2/thumbnail/640x640/interlace/1/blur/1x0/quality/100)
+* `CICHUD.toast("long press to copy~", blurStyle: .extraLight)` ![](http://olvgkynut.bkt.clouddn.com/CICHUD_toast@2x.png?imageMogr2/thumbnail/640x640/interlace/1/blur/1x0/quality/100)
+* `CICHUD.show("loading~", blurStyle: .extraLight)` ![](http://olvgkynut.bkt.clouddn.com/CICHUD_loading@2x.png?imageMogr2/thumbnail/640x640/interlace/1/blur/1x0/quality/100)
 * and you can show a guide page like this
 
 ```swift
@@ -53,7 +53,7 @@ let poem = """
           """
 CICHUD.showGuide("If by life you were deceived", message: poem, animated: true)
 ```
-![](http://olvgkynut.bkt.clouddn.com/CICHUD_showGuide@2x.png?imageMogr2/thumbnail/640x640/interlace/1/blur/1x0/quality/75)
+![](http://olvgkynut.bkt.clouddn.com/CICHUD_showGuide@2x.png?imageMogr2/thumbnail/640x640/interlace/1/blur/1x0/quality/100)
 
 
 [1]:	https://github.com/Carthage/Carthage
