@@ -33,7 +33,7 @@ github "CodeInventorGroup/CIComponentKit"
 `CICHUD`:
 
 * `CICHUD.showNotifier`. ![](https://github.com/CodeInventorGroup/CIComponentKit/blob/master/docs/CICHUD_notifier.png)
-* `CICHUD.showAlert\` ![](https://github.com/CodeInventorGroup/CIComponentKit/blob/master/docs/CICHU_alert.png)
+* `CICHUD.showAlert` ![](https://github.com/CodeInventorGroup/CIComponentKit/blob/master/docs/CICHU_alert.png)
 * `CICHUD.showActivityView` ![](https://github.com/CodeInventorGroup/CIComponentKit/blob/master/docs/CICHUD_showActivityView.png)
 * `CICHUD.showNetworkStatus` ![](https://github.com/CodeInventorGroup/CIComponentKit/blob/master/docs/CICHUD_showNetWorkStatus.png)
 * `CICHUD.toast("long press to copy~", blurStyle: .extraLight)` ![](https://github.com/CodeInventorGroup/CIComponentKit/blob/master/docs/CICHUD_toast.png)
