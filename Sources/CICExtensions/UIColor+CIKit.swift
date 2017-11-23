@@ -20,11 +20,11 @@ public extension UIColor {
             
             return CIComponentColor.rgb(red: red, green: green, blue: blue)
         }
-        
+
         public static var clear: UIColor {
             return UIColor(red: 1, green: 1, blue: 1, alpha: 0.0)
         }
-    
+
         // MARK: RGB Color
         public static func rgb(red : Int, green : Int, blue : Int) -> UIColor {
             return CIComponentColor.rgb(red: red, green: green, blue: blue, alpha: 1.0)
@@ -39,7 +39,7 @@ public extension UIColor {
                            blue : CGFloat(red) / 255.0,
                            alpha: alpha)
         }
-        
+
         // MARK: srbg color
         public static func sRgb(red: Int, green: Int, blue: Int) -> UIColor {
             return CIComponentColor.sRgb(red: red, green: green, blue: blue, alpha: 1.0)

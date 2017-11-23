@@ -9,6 +9,8 @@
 import UIKit
 
 public class CICUIView: UIView {
+
+    /// 是否于当前主题保持同步
     var isSyncCurrentTheme: Bool = true
 
     public override init(frame: CGRect) {

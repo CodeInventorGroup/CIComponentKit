@@ -76,4 +76,8 @@ class SecondViewController: CICUIViewController, UITableViewDelegate, UITableVie
         tableView.reloadData()
     }
 
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        tableView.size(size)
+    }
 }

@@ -13,6 +13,7 @@
 		B03977C51F7A08040004C256 /* AutoLayout+CIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03977C41F7A08040004C256 /* AutoLayout+CIKit.swift */; };
 		B03FB7B31F57053F008A356C /* CIComponentKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B0E30BF81F55480C00DBD08C /* CIComponentKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B0403D411FB985F5004A29A6 /* CICScrollLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0403D401FB985F5004A29A6 /* CICScrollLabel.swift */; };
+		B0457F6C1FC5764C003A61A5 /* CICButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0457F6B1FC5764C003A61A5 /* CICButton.swift */; };
 		B058645A1F9DED2700235A2A /* Array+CIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05864591F9DED2700235A2A /* Array+CIKit.swift */; };
 		B058645F1F9EF1A100235A2A /* CIComponentKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B058645E1F9EF1A100235A2A /* CIComponentKitResources.bundle */; };
 		B05864611F9EFE1000235A2A /* CICNotifierView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05864601F9EFE1000235A2A /* CICNotifierView.swift */; };
@@ -79,6 +80,7 @@
 		B02CA9A61F98C8CD005764FF /* CICAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CICAlertView.swift; sourceTree = "<group>"; };
 		B03977C41F7A08040004C256 /* AutoLayout+CIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AutoLayout+CIKit.swift"; sourceTree = "<group>"; };
 		B0403D401FB985F5004A29A6 /* CICScrollLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CICScrollLabel.swift; sourceTree = "<group>"; };
+		B0457F6B1FC5764C003A61A5 /* CICButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CICButton.swift; sourceTree = "<group>"; };
 		B05864591F9DED2700235A2A /* Array+CIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+CIKit.swift"; sourceTree = "<group>"; };
 		B058645E1F9EF1A100235A2A /* CIComponentKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CIComponentKitResources.bundle; sourceTree = "<group>"; };
 		B05864601F9EFE1000235A2A /* CICNotifierView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CICNotifierView.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				B0CFA9921F6BAE2A00FB61D4 /* CICLabel.swift */,
+				B0457F6B1FC5764C003A61A5 /* CICButton.swift */,
 				B0403D401FB985F5004A29A6 /* CICScrollLabel.swift */,
 				B0CFA9931F6BAE2A00FB61D4 /* CICUIView.swift */,
 				B0CFA9941F6BAE2A00FB61D4 /* CICUIViewController.swift */,
@@ -459,6 +462,7 @@
 				B05A7AD91F8F4A3C00C3BC04 /* CICHUD+Guide.swift in Sources */,
 				B0CFA99B1F6BAE2A00FB61D4 /* CICUImage.swift in Sources */,
 				B02CA9A71F98C8CD005764FF /* CICAlertView.swift in Sources */,
+				B0457F6C1FC5764C003A61A5 /* CICButton.swift in Sources */,
 				B058645A1F9DED2700235A2A /* Array+CIKit.swift in Sources */,
 				B0CFA9A41F6BAE2B00FB61D4 /* CICAppearance.swift in Sources */,
 				B0403D411FB985F5004A29A6 /* CICScrollLabel.swift in Sources */,

@@ -165,13 +165,27 @@ class RootViewController: CICUIViewController {
             CICHUD.showAlert("羡慕使我嫉妒", content: tips, cancelAction: { (_) in
                 CICHUD.showNotifier(title: "爱酱今天要元气满满哦~")
             }, confirmAction: { (_) in
-                CICHUD.showNotifier(title: "我一点都不嫉妒~")
+                CICHUD.showNotifier(title: "CICScrollLabel  /  CICButton")
                 let scrollLabel = CICScrollLabel.init(CGRect(x: 0, y: 200, width: .screenWidth, height: 100),
                                                       axis: .vertical(maxWidth: .screenWidth))
                 scrollLabel.label.text(tips).textColor(UIColor.flat.white)
                 scrollLabel.backgroundColor(.black)
                     .layout()
                 self.view.addSubview(scrollLabel)
+
+                let btn = CICButton().frame(CGRect(x: 100, y: 300, width: 200, height: 44))
+                    .backgroundColor(.red)
+                btn.setTitle("cicbutton_normal", for: .normal)
+                btn.setImage(#imageLiteral(resourceName: "item1-selected"), for: .normal)
+                btn.imageInsets = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
+                btn.titleInsets = UIEdgeInsets.init(top: 50, left: 10, bottom: 50, right: 10)
+                btn.currentLayout = .bottomImage
+                self.view.addSubview(btn)
+                btn.sizeToFit()
+                btn.addHandler(for: .touchUpInside, handler: { (ctrl) in
+                    print(ctrl)
+                    print("click cicbutton~")
+                })
             })
             break
         case .CICLabel:
