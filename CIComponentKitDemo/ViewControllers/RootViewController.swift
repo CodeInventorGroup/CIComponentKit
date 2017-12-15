@@ -152,16 +152,16 @@ class RootViewController: CICUIViewController {
         switch cardAction {
         case .Alert:
             let tips = """
-                            嫉妒使我高斯模糊
-                            嫉妒使我氧化分解
-                            嫉妒使我增减反同
-                            嫉妒使我奇变偶不变符号看象限
-                            嫉妒使我基因突变
-                            嫉妒使我质壁分离
-                            嫉妒使我泰拳警告
+                        嫉妒使我高斯模糊
+                        嫉妒使我氧化分解
+                        嫉妒使我增减反同
+                        嫉妒使我奇变偶不变符号看象限
+                        嫉妒使我基因突变
+                        嫉妒使我质壁分离
+                        嫉妒使我泰拳警告
 
-                            嫉妒使我弥散性血管内凝血
-                           """
+                        嫉妒使我弥散性血管内凝血
+                       """
             CICHUD.showAlert("羡慕使我嫉妒", content: tips, cancelAction: { (_) in
                 CICHUD.showNotifier(title: "爱酱今天要元气满满哦~")
             }, confirmAction: { (_) in
@@ -175,16 +175,22 @@ class RootViewController: CICUIViewController {
 
                 let btn = CICButton().frame(CGRect(x: 100, y: 300, width: 200, height: 44))
                     .backgroundColor(.red)
-                btn.setTitle("cicbutton_normal", for: .normal)
+                btn.setAttributedTitle(NSAttributedString.init(string: "manoboo_normal", attributes: [.font: UIFont.systemFont(ofSize: 20.0), .foregroundColor: UIColor.white]), for: .normal)
+                btn.setAttributedTitle(NSAttributedString.init(string: "manoboo_selected", attributes: [.font: UIFont.systemFont(ofSize: 12.0), .foregroundColor: UIColor.green]), for: .selected)
                 btn.setImage(#imageLiteral(resourceName: "item1-selected"), for: .normal)
+                btn.setImage(#imageLiteral(resourceName: "item1-selected"), for: .selected)
                 btn.imageInsets = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
                 btn.titleInsets = UIEdgeInsets.init(top: 50, left: 10, bottom: 50, right: 10)
-                btn.currentLayout = .bottomImage
+                btn.currentLayout = .leftImage
                 self.view.addSubview(btn)
                 btn.sizeToFit()
                 btn.addHandler(for: .touchUpInside, handler: { (ctrl) in
                     print(ctrl)
                     print("click cicbutton~")
+                    btn.state = (btn.isSelected) ? .normal : .selected
+                    UIView.animate(withDuration: 0.35, animations: {
+                        btn.sizeToFit()
+                    })
                 })
             })
             break

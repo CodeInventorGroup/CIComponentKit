@@ -195,7 +195,6 @@
 				B0ECA3491FB591FB00022545 /* CICHUD+BlackMask.swift */,
 				B0ED57D11F7F4808001D1DCD /* CICHUD+Network.swift */,
 				B05A7AD81F8F4A3C00C3BC04 /* CICHUD+Guide.swift */,
-				B0CFA9AF1F6BDE9300FB61D4 /* CIComponentKitManager.swift */,
 				B01003B41F912F5F00847A50 /* CICActivityView.swift */,
 				B02CA9A61F98C8CD005764FF /* CICAlertView.swift */,
 				B05864601F9EFE1000235A2A /* CICNotifierView.swift */,
@@ -206,6 +205,7 @@
 		B0CFA9961F6BAE2A00FB61D4 /* CICTheme */ = {
 			isa = PBXGroup;
 			children = (
+				B0CFA9AF1F6BDE9300FB61D4 /* CIComponentKitManager.swift */,
 				B0CFA9971F6BAE2A00FB61D4 /* CICTheme.swift */,
 				B0CFA9981F6BAE2A00FB61D4 /* CICThemeConfig.swift */,
 				B0CFA9991F6BAE2A00FB61D4 /* CICAppearance.swift */,

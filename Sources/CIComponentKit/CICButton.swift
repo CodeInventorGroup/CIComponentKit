@@ -54,6 +54,11 @@ public class CICButton: CICUIView {
         }
     }
 
+    /// 是否被选中
+    open var isSelected: Bool {
+        return state == .selected
+    }
+
     /// 返回当前的样式及标题等
     open var currentStyle: CICButtonStyle? {
         return stateMapStyle[state]
