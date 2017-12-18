@@ -47,16 +47,28 @@ public class CICScrollLabel: CICUIView {
         switch axis {
         case .horizontal(let maxHeight):
             label.height(maxHeight).sizeToFit()
+            contentView.contentSize = CGSize.init(width: label.cic.width, height: 0)
         case .vertical(let maxWidth):
             label.width(maxWidth).sizeToFit()
+            contentView.contentSize = CGSize.init(width: 0, height: label.cic.height)
         }
-        self.contentView.contentSize = label.bounds.size
     }
 
     // adjust size
     public override func layoutSubviews() {
         super.layoutSubviews()
 
-        self.layout()
+        layout()
+    }
+
+    public override func sizeThatFits(_ size: CGSize) -> CGSize {
+        switch axis {
+        case .horizontal(let maxHeight):
+            label.sizeTo(layout: .maxHeight(size.height))
+        case .vertical(let maxWidth):
+            label.sizeTo(layout: .maxWidth(size.width))
+        }
+
+        return label.bounds.size
     }
 }

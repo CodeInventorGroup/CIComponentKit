@@ -4,7 +4,7 @@
 //
 //  Created by ManoBoo on 2017/9/26.
 //  Copyright © 2017年 club.codeinventor. All rights reserved.
-//
+//  NOTICE
 
 import UIKit
 import Foundation
@@ -14,6 +14,7 @@ public protocol CICLayoutPropertyProtocol {
     var base: type {get}
 
     static var screenScale: CGFloat { get }
+    static var screenWidth: CGFloat { get }
     static var screenHeight: CGFloat { get }
     static var screenSize: CGSize { get }
 
@@ -34,7 +35,7 @@ extension CICLayoutPropertyProtocol {
 
     public static var screenHeight: CGFloat { return UIScreen.main.bounds.height }
 
-    public static  var screenWidth: CGFloat { return UIScreen.main.bounds.width }
+    public static var screenWidth: CGFloat { return UIScreen.main.bounds.width }
 
     public var makeSize: CGSize {
         if let base = base as? CGFloat {

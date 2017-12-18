@@ -36,7 +36,7 @@ public class CIComponentKitThemeConfig {
          public var tintColor = UIColor.init(red: 0, green: 0.478431, blue: 1.0, alpha: 1.0)
 
         // `UIActivityIndicator`.color
-        public var activityIndicatorColor = UIColor.gray
+         public var activityIndicatorColor = UIColor.gray
 
         // alertView、alertViewController confirm button color
          public var confirmColor = UIColor.cic.hex(hex: 0x5CC9F5)

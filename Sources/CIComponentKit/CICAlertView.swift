@@ -9,6 +9,132 @@
 import UIKit
 import LayoutKit
 
+public typealias CICAlertViewAction = ((UIControl) -> Void)
+
+public class CICAlertView: CICUIView {
+
+    var title: String = "提示"
+    var content: String = ""
+    var actionTitles: [String]?
+    var actions: [CICAlertViewAction]?
+    var actionStyles: [UIColor]?
+
+    private var maxHeight: CGFloat {
+        return .screenHeight - 2 * (UIEdgeInsets.layoutMargins.top + UIEdgeInsets.layoutMargins.bottom)
+    }
+
+    private var maxWidth: CGFloat {
+        return .screenWidth - 2 * (UIEdgeInsets.layoutMargins.left + UIEdgeInsets.layoutMargins.right)
+    }
+
+    private var marginH: CGFloat = 10
+    private var marginV: CGFloat = 10
+
+    fileprivate let titleLabel = UILabel()
+    fileprivate let contentLabel = CICScrollLabel.init(.zero, axis: CICScrollLabel.LayoutAxis.vertical(maxWidth: 250))
+    var contentView: UIView?
+    fileprivate let cancelButton = UIButton()
+    fileprivate let confirmButton = UIButton()
+    fileprivate var buttons: [UIButton]?
+
+    deinit {
+        print("CICAlertView deinit")
+    }
+
+    public init(contentView: UIView? = nil,
+                title:String = "提示",
+                content:String = "",
+                actionTitles: [String] = ["取消", "确定"],
+                actions: [CICAlertViewAction]? = [],
+                actionStyles: [UIColor]? = [CIComponentKitThemeCurrentConfig.cancelColor, CIComponentKitThemeCurrentConfig.confirmColor]) {
+        super.init(frame: .zero)
+        self.layer.cornerRadius = 6.0
+        self.contentView = contentView
+        self.title = title
+        self.content = content
+        self.actionTitles = actionTitles
+        self.actions = actions
+        self.actionStyles = actionStyles
+
+        initSubviews()
+    }
+
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func initSubviews() {
+        titleLabel.font(UIFont.systemFont(ofSize: 20.0)).line(0)
+            .textColor(CIComponentKitThemeCurrentConfig.alertMessageColor).textAlignment(.center)
+        addSubview(titleLabel)
+
+        contentLabel.label.line(0).font(UIFont.cic.preferred(.body))
+            .textColor(CIComponentKitThemeCurrentConfig.textColor)
+        addSubview(contentLabel)
+        cancelButton.titleLabel?.font(UIFont.cic.systemFont)
+        cancelButton.setTitleColor(CIComponentKitThemeCurrentConfig.cancelColor, for: .normal)
+        addSubview(cancelButton)
+        confirmButton.titleLabel?.font(UIFont.cic.systemFont)
+        confirmButton.setTitleColor(CIComponentKitThemeCurrentConfig.confirmColor, for: .normal)
+        addSubview(confirmButton)
+    }
+
+    @discardableResult
+    func render() -> CGSize {
+        if isSyncCurrentTheme {
+            self.backgroundColor(CIComponentKitThemeCurrentConfig.mainColor)
+        }
+        let contentMaxWidth = maxWidth - 2 * marginH
+
+        titleLabel.y(marginV).width(contentMaxWidth)
+            .text(title).sizeTo(layout: .width(contentMaxWidth))
+        if let contentView = contentView {
+            contentLabel.isHidden = true
+            contentView.centerX(self.cic.internalCenterX).y(titleLabel.cic.bottom)
+        } else {
+            contentLabel.isHidden = false
+            contentLabel.axis = .vertical(maxWidth: contentMaxWidth)
+            contentLabel.label.text(content)
+            contentLabel.y(titleLabel.cic.bottom + marginV).width(contentMaxWidth).sizeToFit()
+            contentLabel.layout()
+        }
+
+        cancelButton.x(marginH).height(44.0).width(44.0).y((contentView ?? contentLabel).cic.bottom + marginV)
+        confirmButton.x(marginH).width(44.0).y((contentView ?? contentLabel).cic.bottom + marginV)
+
+        let autoSizeHeight = (buttons ?? [cancelButton, confirmButton]).map{ $0.cic.bottom + marginV}.max() ?? maxHeight
+        if autoSizeHeight > maxHeight {
+            contentLabel.height(maxHeight - marginV - cancelButton.cic.height - titleLabel.cic.bottom - marginV)
+            contentLabel.layout()
+            _ = [cancelButton, confirmButton].map{ $0.y(contentLabel.cic.bottom + marginV) }
+        }
+        titleLabel.centerX(maxWidth/2)
+        contentLabel.centerX(maxWidth/2).backgroundColor(.green)
+        return CGSize.init(width: maxWidth, height: min(maxHeight, maxHeight))
+    }
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+
+        render()
+    }
+
+    public override func deviceOrientationDidChange() {
+        self.size(render())
+        if let superView = self.superview {
+            self.center(superView.cic.internalCenter)
+        }
+    }
+
+    public override func sizeThatFits(_ size: CGSize) -> CGSize {
+        return render()
+    }
+
+    func addAction(_ action: CICAlertViewAction) {
+
+    }
+}
+
 public class CICAlertViewLayout: SizeLayout<UIView> {
     deinit {
         print("CICAlertViewLayout deinit")

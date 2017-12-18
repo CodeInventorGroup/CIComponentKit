@@ -265,7 +265,16 @@ extension RootViewController: UIScrollViewDelegate {
         UIView.animate(withDuration: 0.5) {
             self.scrollView.backgroundColor(self.animationColors[index])
         }
-        
+
+        let alertView = CICAlertView.init(contentView: nil,
+                                          title: String.poemTitle,
+                                          content: String.poem + String.poem,
+                                          actions: nil,
+                                          actionStyles: nil)
+        alertView.sizeToFit()
+        UIApplication.shared.keyWindow?.addSubview(alertView)
+        alertView.center(alertView.superview!.cic.internalCenter)
+
         state = .loaded(data: "加载数据咯 - \(index)")
     }
 }

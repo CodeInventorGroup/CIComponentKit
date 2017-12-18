@@ -13,6 +13,10 @@ public class CICUIView: UIView {
     /// 是否于当前主题保持同步
     var isSyncCurrentTheme: Bool = true
 
+    convenience init() {
+        self.init(frame: .zero)
+    }
+
     public override init(frame: CGRect) {
         super.init(frame: frame)
         initMethod()
