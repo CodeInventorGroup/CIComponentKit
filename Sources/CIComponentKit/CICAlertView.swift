@@ -69,12 +69,16 @@ public class CICAlertView: CICUIView {
     fileprivate let contentLabel = CICScrollLabel.init(.zero, axis: CICScrollLabel.LayoutAxis.vertical(maxWidth: 250))
     var contentView: UIView?
     
-    fileprivate let cancelButton = CICAlertAction.init("取消") { (label) in
+    fileprivate let cancelButton = CICAlertAction.init("取消", { (label) in
         label.textColor(CIComponentKitThemeCurrentConfig.cancelColor)
+    }) { (_) in
+        
     }
     
-    fileprivate let confirmButton = CICAlertAction.init("确定") { (label) in
+    fileprivate let confirmButton = CICAlertAction.init("确定", { (label) in
         label.textColor(CIComponentKitThemeCurrentConfig.confirmColor)
+    }) { (_) in
+        
     }
 
     deinit {
