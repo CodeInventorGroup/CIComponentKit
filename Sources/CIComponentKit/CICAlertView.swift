@@ -16,7 +16,7 @@ public class CICAlertAction: UIControl {
     let titleLabel = UILabel()
     var title = ""
     var contentOffSet = UIEdgeInsets.init(top: 2, left: 8, bottom: 2, right: 8)
-    convenience init(_ title: String, _ configure: ((UILabel) -> ())?) {
+    convenience init(_ title: String, _ configure: ((UILabel) -> ())? = nil, handler: ((CICAlertAction) -> ())? = nil) {
         self.init(frame: .zero)
         self.title = title
         titleLabel.text(title)
@@ -150,21 +150,20 @@ public class CICAlertView: CICUIView {
 
     public override func layoutSubviews() {
         super.layoutSubviews()
-
+        
         render()
     }
 
+    public override func sizeThatFits(_ size: CGSize) -> CGSize {
+        return render()
+    }
+    
     public override func deviceOrientationDidChange() {
         self.size(render())
         if let superView = self.superview {
             self.center(superView.cic.internalCenter)
         }
     }
-
-    public override func sizeThatFits(_ size: CGSize) -> CGSize {
-        return render()
-    }
-
     
     /// 类似于UIAlertController addAlertAction
     ///
