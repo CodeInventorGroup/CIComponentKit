@@ -71,16 +71,16 @@ public class CICAlertView: CICUIView {
     
     fileprivate let cancelButton = CICAlertAction.init("取消", { (label) in
         label.textColor(CIComponentKitThemeCurrentConfig.cancelColor)
-    }) { (_) in
+    }, handler: { (_) in
         
-    }
+    })
     
     fileprivate let confirmButton = CICAlertAction.init("确定", { (label) in
         label.textColor(CIComponentKitThemeCurrentConfig.confirmColor)
-    }) { (_) in
+    }, handler: { (_) in
         
-    }
-
+    })
+    
     deinit {
         print("CICAlertView deinit")
     }
@@ -141,15 +141,16 @@ public class CICAlertView: CICUIView {
                 .centerX(maxWidth * 0.75).y((contentView ?? contentLabel).cic.bottom + marginV)
         }
     
-        let autoSizeHeight = (actions ?? [cancelButton, confirmButton]).map{ $0.cic.bottom + marginV}.max() ?? maxHeight
+        var autoSizeHeight = (actions ?? [cancelButton, confirmButton]).map{ $0.cic.bottom + marginV}.max()!
         if autoSizeHeight > maxHeight {
-            contentLabel.height(maxHeight - marginV - cancelButton.cic.height - titleLabel.cic.bottom - marginV)
+            contentLabel.height(maxHeight - marginV - cancelButton.cic.height - marginV - titleLabel.cic.bottom - marginV)
             contentLabel.layout()
             _ = [cancelButton, confirmButton].map{ $0.y(contentLabel.cic.bottom + marginV) }
+            autoSizeHeight = (actions ?? [cancelButton, confirmButton]).map{ $0.cic.bottom + marginV}.max()!
         }
         titleLabel.centerX(maxWidth/2)
         contentLabel.centerX(maxWidth/2).backgroundColor(.green)
-        return CGSize.init(width: maxWidth, height: min(autoSizeHeight, maxHeight))
+        return CGSize.init(width: maxWidth, height: autoSizeHeight)
     }
 
     public override func layoutSubviews() {
