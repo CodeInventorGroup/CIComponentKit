@@ -12,16 +12,19 @@ import LayoutKit
 public typealias CICAlertViewAction = ((UIControl) -> Void)
 
 public class CICAlertAction: UIControl {
-    
+
     let titleLabel = UILabel()
     var title = ""
     var contentOffSet = UIEdgeInsets.init(top: 2, left: 8, bottom: 2, right: 8)
-    convenience init(_ title: String, _ configure: ((UILabel) -> ())? = nil, handler: ((CICAlertAction) -> ())? = nil) {
+    convenience init(_ title: String, _ configure: ((UILabel) -> ())? = nil, handler: ((UIControl) -> ())? = nil) {
         self.init(frame: .zero)
         self.title = title
         titleLabel.text(title)
         configure?(titleLabel)
         self.backgroundColor(UIColor.cic.random)
+        if let handler = handler {
+            self.addHandler(for: .touchUpInside, handler: handler)
+        }
     }
     
     public override init(frame: CGRect) {
@@ -69,17 +72,9 @@ public class CICAlertView: CICUIView {
     fileprivate let contentLabel = CICScrollLabel.init(.zero, axis: CICScrollLabel.LayoutAxis.vertical(maxWidth: 250))
     var contentView: UIView?
     
-    fileprivate let cancelButton = CICAlertAction.init("取消", { (label) in
-        label.textColor(CIComponentKitThemeCurrentConfig.cancelColor)
-    }, handler: { (_) in
-        
-    })
+    fileprivate var cancelButton: CICAlertAction!
     
-    fileprivate let confirmButton = CICAlertAction.init("确定", { (label) in
-        label.textColor(CIComponentKitThemeCurrentConfig.confirmColor)
-    }, handler: { (_) in
-        
-    })
+    fileprivate var confirmButton: CICAlertAction!
     
     deinit {
         print("CICAlertView deinit")
@@ -109,7 +104,17 @@ public class CICAlertView: CICUIView {
         contentLabel.label.line(0).font(UIFont.cic.preferred(.body))
             .textColor(CIComponentKitThemeCurrentConfig.textColor)
         addSubview(contentLabel)
+        cancelButton = CICAlertAction.init("取消", { (label) in
+            label.textColor(CIComponentKitThemeCurrentConfig.cancelColor)
+        }, handler: { [weak self] (_) in
+            self?.removeFromSuperview()
+        })
         addSubview(cancelButton)
+        confirmButton = CICAlertAction.init("确定", { (label) in
+            label.textColor(CIComponentKitThemeCurrentConfig.confirmColor)
+        }, handler: { [weak self] (_) in
+            self?.removeFromSuperview()
+        })
         addSubview(confirmButton)
     }
 
@@ -163,8 +168,13 @@ public class CICAlertView: CICUIView {
         return render()
     }
     
+    public override func didToggleTheme() {
+        super.didToggleTheme()
+        deviceOrientationDidChange()
+    }
+    
     public override func deviceOrientationDidChange() {
-        self.size(render())
+        self.sizeToFit()
         if let superView = self.superview {
             self.center(superView.cic.internalCenter)
         }

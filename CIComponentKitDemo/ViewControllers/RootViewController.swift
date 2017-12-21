@@ -240,6 +240,7 @@ class RootViewController: CICUIViewController {
     @objc func changeTheme() -> Swift.Void {
         
         let theme = CIComponentKitTheme.originTheme
+        theme.config.defaultFont = UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(15)) + 10.0)
         theme.config.textColor = UIColor.cic.random
         theme.config.mainColor = UIColor.cic.hex(hex: 0xFAFAFA)
         theme.config.tintColor = UIColor.cic.hex(hex: 0xDF312E)
