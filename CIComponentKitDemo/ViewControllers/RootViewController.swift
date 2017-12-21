@@ -268,7 +268,7 @@ extension RootViewController: UIScrollViewDelegate {
 
         let alertView = CICAlertView.init(contentView: nil,
                                           title: String.poemTitle,
-                                          content: String.poem)
+                                          content: String.poem + String.poem)
         alertView.sizeToFit()
         UIApplication.shared.keyWindow?.addSubview(alertView)
         alertView.center(alertView.superview!.cic.internalCenter)
