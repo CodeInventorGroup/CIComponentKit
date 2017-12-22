@@ -58,11 +58,11 @@ public class CICAlertView: CICUIView {
     var actions: [CICAlertAction]?
 
     private var maxHeight: CGFloat {
-        return .screenHeight - 2 * (UIEdgeInsets.layoutMargins.top + UIEdgeInsets.layoutMargins.bottom)
+        return .screenHeight - 3 * (UIEdgeInsets.layoutMargins.top + UIEdgeInsets.layoutMargins.bottom)
     }
 
     private var maxWidth: CGFloat {
-        return .screenWidth - 2 * (UIEdgeInsets.layoutMargins.left + UIEdgeInsets.layoutMargins.right)
+        return .screenWidth - 3 * (UIEdgeInsets.layoutMargins.left + UIEdgeInsets.layoutMargins.right)
     }
 
     private var marginH: CGFloat = 10
@@ -88,7 +88,7 @@ public class CICAlertView: CICUIView {
         self.contentView = contentView
         self.title = title
         self.content = content
-    
+
         initSubviews()
     }
 
@@ -145,13 +145,16 @@ public class CICAlertView: CICUIView {
             confirmButton.height(44.0).width(contentMaxWidth/2)
                 .centerX(maxWidth * 0.75).y((contentView ?? contentLabel).cic.bottom + marginV)
         }
-    
-        var autoSizeHeight = (actions ?? [cancelButton, confirmButton]).map{ $0.cic.bottom + marginV}.max()!
+        var autoSizeHeight = (actions ?? [cancelButton, confirmButton]).map {
+                $0.cic.bottom + marginV
+            }.max() ?? maxHeight
         if autoSizeHeight > maxHeight {
-            contentLabel.height(maxHeight - marginV - cancelButton.cic.height - marginV - titleLabel.cic.bottom - marginV)
+            contentLabel.height(maxHeight - 2 * marginV - cancelButton.cic.height - marginV - contentLabel.cic.y)
             contentLabel.layout()
-            _ = [cancelButton, confirmButton].map{ $0.y(contentLabel.cic.bottom + marginV) }
-            autoSizeHeight = (actions ?? [cancelButton, confirmButton]).map{ $0.cic.bottom + marginV}.max()!
+            autoSizeHeight = (actions ?? [cancelButton, confirmButton]).map {
+                $0.y(contentLabel.cic.bottom + marginV)
+                return $0.cic.bottom + marginV
+            }.max()!
         }
         titleLabel.centerX(maxWidth/2)
         contentLabel.centerX(maxWidth/2).backgroundColor(.green)
@@ -160,26 +163,26 @@ public class CICAlertView: CICUIView {
 
     public override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         render()
     }
 
     public override func sizeThatFits(_ size: CGSize) -> CGSize {
         return render()
     }
-    
+
     public override func didToggleTheme() {
         super.didToggleTheme()
         deviceOrientationDidChange()
     }
-    
+
     public override func deviceOrientationDidChange() {
         self.sizeToFit()
         if let superView = self.superview {
             self.center(superView.cic.internalCenter)
         }
     }
-    
+
     /// 类似于UIAlertController addAlertAction
     ///
     /// - Parameter actions: CICAlertAction
