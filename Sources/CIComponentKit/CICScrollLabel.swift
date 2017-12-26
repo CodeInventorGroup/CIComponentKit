@@ -63,9 +63,9 @@ public class CICScrollLabel: CICUIView {
 
     public override func sizeThatFits(_ size: CGSize) -> CGSize {
         switch axis {
-        case .horizontal(_):
+        case .horizontal:
             label.height(size.height).sizeTo(layout: .maxHeight(size.height))
-        case .vertical(_):
+        case .vertical:
             label.width(size.width).sizeTo(layout: .maxWidth(size.width))
         }
 

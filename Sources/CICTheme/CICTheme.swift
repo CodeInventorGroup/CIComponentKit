@@ -17,7 +17,7 @@ extension Notification.Name {
 
         // 切换主题完成之后，post notification When the switching theme is complete
         static let themeDidToggle = NSNotification.Name.init("CIComponentKitThemeDidToggleNotifier")
-        
+
         // 屏幕发生旋转时发出通知
         static let screenDidRotated = NSNotification.Name.init("CIComponentKitThemeDidScreenRotated")
     }
@@ -36,7 +36,7 @@ public class CIComponentKitTheme {
         case plist(URL)
         case theme(CIComponentKitTheme)
     }
-    
+
     // switch theme from theme's source
     public static func switchTheme(_ themeSource: CIComponentKitThemeSource) {
         switch themeSource {
@@ -67,7 +67,7 @@ public extension CIComponentKitTheme {
         case blur(UIBlurEffectStyle)
         case progress(() -> Void)
     }
-    
+
     public enum CIComponentKitSourceError: Error {
         case neterror(URLResponse)
         case other
@@ -90,7 +90,7 @@ public extension CIComponentKitTheme {
             break
         }
     }
-    
+
     public func hideAnimation(_ animation: CIComponentKitThemeTransition) {
         blurView.removeFromSuperview()
     }
@@ -120,7 +120,8 @@ public extension CIComponentKitTheme {
 //                navigationBarSize.height += 20
 //                currentViewController.navigationController?.navigationBar.setBackgroundImage(UIImage.image(color: config.navigationBarBackgroundColor, size: navigationBarSize), for: .default)
                 navigationController.navigationBar.barTintColor = CIComponentKitThemeCurrentConfig.navigationBarBackgroundColor
-                navigationController.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: config.navigationItemTitleColor, NSAttributedStringKey.font: UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(24)))]
+                navigationController.navigationBar.titleTextAttributes = [.foregroundColor: config.navigationItemTitleColor,
+                                                                          .font: UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(24)))]
             }
 
             currentViewController.endAppearanceTransition()
@@ -136,7 +137,7 @@ public extension CIComponentKitTheme {
     }
 
     public static func renderTheme(_ animation: CIComponentKitThemeTransition,
-                                   _ theme: CIComponentKitTheme = CIComponentKitTheme.originTheme) throws -> Swift.Void {
+                                   _ theme: CIComponentKitTheme = CIComponentKitTheme.originTheme) throws {
         
         theme.renderTheme()
         throw CIComponentKitSourceError.neterror(URLResponse())

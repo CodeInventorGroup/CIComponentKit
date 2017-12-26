@@ -14,7 +14,7 @@ public var CIComponentKitThemeCurrentConfig = CIComponentKitTheme.currentTheme.c
 
 // ThemeColorList    一份默认的主题配置
 public class CIComponentKitThemeConfig {
-    
+
     // theme's id
      public var identifier = "Default"
 
@@ -44,11 +44,14 @@ public class CIComponentKitThemeConfig {
         // alertView、alertViewController cancel button color
          public var cancelColor = UIColor.cic.rgb(red: 175, green: 174, blue: 169)
 
+        // alertView、alertViewController separator line color
+         public var alertSeparatorColor = UIColor.cic.hex(hex: 0x3F3F3F, alpha: 0.3)
+
         // UIAlertController - message 's color
          public var alertMessageColor = UIColor.cic.hex(hex: 0x7A7A7A)
 
          public var navigationBarBackgroundColor = UIColor.cic.rgb(red: 209, green: 211, blue: 138)
-    
+
          public var navigationBarLeftColor = UIColor.cic.rgb(red: 209, green: 211, blue: 138)
 
          public var navigationBarRightColor = UIColor.init(red: 0, green: 0.478431, blue: 1.0, alpha: 1.0)

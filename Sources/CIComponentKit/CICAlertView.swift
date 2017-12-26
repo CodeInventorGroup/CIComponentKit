@@ -13,40 +13,73 @@ public typealias CICAlertViewAction = ((UIControl) -> Void)
 
 public class CICAlertAction: UIControl {
 
-    let titleLabel = UILabel()
     var title = ""
     var contentOffSet = UIEdgeInsets.init(top: 2, left: 8, bottom: 2, right: 8)
-    convenience init(_ title: String, _ configure: ((UILabel) -> ())? = nil, handler: ((UIControl) -> ())? = nil) {
+    fileprivate weak var delegate: CICAlertView?
+
+    var isShowTopLine = false {
+        didSet {
+            topLine.isHidden = !isShowTopLine
+        }
+    }
+    let topLine = UIView()
+
+    let titleLabel = UILabel()
+
+    var isShowBottomLine = false {
+        didSet {
+            bottomLine.isHidden = !isShowBottomLine
+        }
+    }
+    let bottomLine = UIView()
+
+    public convenience init(_ title: String,
+                            configure: ((UILabel) -> Void)? = nil,
+                            handler: ((UIControl) -> Void)? = nil) {
         self.init(frame: .zero)
         self.title = title
         titleLabel.text(title)
         configure?(titleLabel)
-        self.backgroundColor(UIColor.cic.random)
+//        self.backgroundColor(UIColor.cic.random)
+
         if let handler = handler {
-            self.addHandler(for: .touchUpInside, handler: handler)
+            self.addHandler(for: .touchUpInside, handler: { (ctrl) in
+                handler(ctrl)
+                self.delegate?.hide()
+            })
         }
+        addSubview(topLine)
+        isShowTopLine = false
+        topLine.backgroundColor(CIComponentKitThemeCurrentConfig.alertSeparatorColor).height(0.5)
+        addSubview(bottomLine)
+        isShowBottomLine = false
+        bottomLine.backgroundColor(CIComponentKitThemeCurrentConfig.alertSeparatorColor).height(0.5)
+
     }
-    
+
     public override init(frame: CGRect) {
         super.init(frame: frame)
         initSubview()
     }
-    
+
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func initSubview() {
-        titleLabel.font(UIFont.cic.systemFont).textColor(CIComponentKitThemeCurrentConfig.textColor)
+        titleLabel.font(UIFont.cic.preferred(.body)).textColor(CIComponentKitThemeCurrentConfig.textColor)
         addSubview(titleLabel)
     }
     public override func layoutSubviews() {
         super.layoutSubviews()
         titleLabel.sizeTo(layout: .maxHeight(self.cic.height)).center(self.cic.internalCenter)
+        topLine.width(self)
+        bottomLine.width(self).y(self.cic.width - 1.0)
     }
-    
+
     public override func sizeThatFits(_ size: CGSize) -> CGSize {
-        let titleWidth = title.cicHeight(size.width - contentOffSet.left - contentOffSet.right, font: UIFont.cic.systemFont)
+        let titleWidth = title.cicHeight(size.width - contentOffSet.left - contentOffSet.right,
+                                         font: UIFont.cic.systemFont)
         return CGSize.init(width: titleWidth + contentOffSet.left + contentOffSet.right, height: size.height)
     }
 }
@@ -55,6 +88,8 @@ public class CICAlertView: CICUIView {
 
     var title: String = "提示"
     var content: String = ""
+
+    /// CICAlertView 的actions, 超过三个为竖排,与原生 UIAlertController 效果保持一致
     var actions: [CICAlertAction]?
 
     private var maxHeight: CGFloat {
@@ -62,7 +97,7 @@ public class CICAlertView: CICUIView {
     }
 
     private var maxWidth: CGFloat {
-        return .screenWidth - 3 * (UIEdgeInsets.layoutMargins.left + UIEdgeInsets.layoutMargins.right)
+        return .screenWidth - 2 * (UIEdgeInsets.layoutMargins.left + UIEdgeInsets.layoutMargins.right)
     }
 
     private var marginH: CGFloat = 10
@@ -71,20 +106,18 @@ public class CICAlertView: CICUIView {
     fileprivate let titleLabel = UILabel()
     fileprivate let contentLabel = CICScrollLabel.init(.zero, axis: CICScrollLabel.LayoutAxis.vertical(maxWidth: 250))
     var contentView: UIView?
-    
+
     fileprivate var cancelButton: CICAlertAction!
-    
     fileprivate var confirmButton: CICAlertAction!
-    
-    deinit {
-        print("CICAlertView deinit")
-    }
+
+    fileprivate func hide() { self.removeFromSuperview() }
 
     public init(contentView: UIView? = nil,
                 title:String = "提示",
                 content:String = "") {
         super.init(frame: .zero)
-        self.layer.cornerRadius = 6.0
+        self.layer.cornerRadius = 8.0
+        self.layer.masksToBounds = true
         self.contentView = contentView
         self.title = title
         self.content = content
@@ -96,6 +129,14 @@ public class CICAlertView: CICUIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    public func show() {
+        sizeToFit()
+        if let keyWindow = UIApplication.shared.keyWindow {
+            keyWindow.addSubview(self)
+            self.center(keyWindow.cic.internalCenter)
+        }
+    }
+
     func initSubviews() {
         titleLabel.font(UIFont.systemFont(ofSize: 20.0)).line(0)
             .textColor(CIComponentKitThemeCurrentConfig.alertMessageColor).textAlignment(.center)
@@ -104,18 +145,55 @@ public class CICAlertView: CICUIView {
         contentLabel.label.line(0).font(UIFont.cic.preferred(.body))
             .textColor(CIComponentKitThemeCurrentConfig.textColor)
         addSubview(contentLabel)
-        cancelButton = CICAlertAction.init("取消", { (label) in
+        cancelButton = CICAlertAction.init("取消", configure: { (label) in
             label.textColor(CIComponentKitThemeCurrentConfig.cancelColor)
         }, handler: { [weak self] (_) in
-            self?.removeFromSuperview()
+            print(self)
+//            self?.removeFromSuperview()
         })
+        cancelButton.delegate = self
         addSubview(cancelButton)
-        confirmButton = CICAlertAction.init("确定", { (label) in
+        confirmButton = CICAlertAction.init("确定", configure: { (label) in
             label.textColor(CIComponentKitThemeCurrentConfig.confirmColor)
         }, handler: { [weak self] (_) in
-            self?.removeFromSuperview()
+            print(self)
+//            self?.removeFromSuperview()
         })
+        confirmButton.delegate = self
         addSubview(confirmButton)
+    }
+
+    @discardableResult
+    func renderActions() -> CGFloat {
+        let contentMaxWidth = maxWidth - 2 * marginH
+        if let actions = actions {
+            cancelButton.isHidden = true
+            confirmButton.isHidden = true
+            if actions.count > 2 {
+                for (index, action) in actions.enumerated() {
+                    action.height(44.0).width(self).x(0)
+                        .y( (contentView ?? contentLabel).cic.bottom + marginV + CGFloat(index) * 44.0 )
+                }
+            } else {
+                if let action = actions.first {
+                    action.x(marginH).width(contentMaxWidth)
+                        .y((contentView ?? contentLabel).cic.bottom + marginV).height(44.0)
+                }
+            }
+            return actions.map { $0.cic.bottom }.max()!
+        } else {
+            cancelButton.isHidden = false
+            confirmButton.isHidden = false
+            cancelButton.height(44.0).width(contentMaxWidth/2)
+                .centerX(maxWidth * 0.25).y((contentView ?? contentLabel).cic.bottom + marginV)
+            confirmButton.height(44.0).width(contentMaxWidth/2)
+                .centerX(maxWidth * 0.75).y((contentView ?? contentLabel).cic.bottom + marginV)
+
+            return [cancelButton, confirmButton].map {
+                $0?.y( (contentView ?? contentLabel).cic.bottom + marginV)
+                return $0!.cic.bottom + marginV
+            }.max()!
+        }
     }
 
     @discardableResult
@@ -137,24 +215,13 @@ public class CICAlertView: CICUIView {
             contentLabel.y(titleLabel.cic.bottom + marginV).width(contentMaxWidth).sizeToFit()
             contentLabel.layout()
         }
-        if let actions = actions {
-            print(actions)
-        } else {
-            cancelButton.height(44.0).width(contentMaxWidth/2)
-                .centerX(maxWidth * 0.25).y((contentView ?? contentLabel).cic.bottom + marginV)
-            confirmButton.height(44.0).width(contentMaxWidth/2)
-                .centerX(maxWidth * 0.75).y((contentView ?? contentLabel).cic.bottom + marginV)
-        }
-        var autoSizeHeight = (actions ?? [cancelButton, confirmButton]).map {
-                $0.cic.bottom + marginV
-            }.max() ?? maxHeight
+
+        var autoSizeHeight = renderActions()
         if autoSizeHeight > maxHeight {
-            contentLabel.height(maxHeight - 2 * marginV - cancelButton.cic.height - marginV - contentLabel.cic.y)
+            let actionsHeight = CGFloat(actions?.count ?? 1) * 44 + (actions != nil ? 0.00 : marginV)
+            contentLabel.height(maxHeight - contentLabel.cic.y - marginV - actionsHeight)
             contentLabel.layout()
-            autoSizeHeight = (actions ?? [cancelButton, confirmButton]).map {
-                $0.y(contentLabel.cic.bottom + marginV)
-                return $0.cic.bottom + marginV
-            }.max()!
+            autoSizeHeight = renderActions()
         }
         titleLabel.centerX(maxWidth/2)
         contentLabel.centerX(maxWidth/2).backgroundColor(.green)
@@ -186,8 +253,20 @@ public class CICAlertView: CICUIView {
     /// 类似于UIAlertController addAlertAction
     ///
     /// - Parameter actions: CICAlertAction
-    func addAction(_ actions: CICAlertAction...) {
+    public func addAction(_ actions: CICAlertAction...) {
+        _ = actions.map { $0.delegate = self}
+        if self.actions == nil {
+            self.actions = []
+        }
         self.actions?.append(contentsOf: actions)
+        _ = self.actions?.map { [weak self] (action)  in
+            action.isShowBottomLine = true
+            if action.superview == nil {
+                self?.addSubview(action)
+            }
+        }
+        self.actions?.first?.isShowTopLine = true
+        self.actions?.last?.isShowBottomLine = false
     }
 }
 

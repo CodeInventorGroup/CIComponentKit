@@ -240,7 +240,7 @@ class RootViewController: CICUIViewController {
     @objc func changeTheme() -> Swift.Void {
         
         let theme = CIComponentKitTheme.originTheme
-        theme.config.defaultFont = UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(15)) + 10.0)
+        theme.config.defaultFont = UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(15)) + 5.0)
         theme.config.textColor = UIColor.cic.random
         theme.config.mainColor = UIColor.cic.hex(hex: 0xFAFAFA)
         theme.config.tintColor = UIColor.cic.hex(hex: 0xDF312E)
@@ -267,12 +267,28 @@ extension RootViewController: UIScrollViewDelegate {
             self.scrollView.backgroundColor(self.animationColors[index])
         }
 
+//        let alertViewController = UIAlertController.init(title: "asdasds", message: "asdasdas\nasdasdas\nasdas", preferredStyle: .alert)
+//        alertViewController.addAction(UIAlertAction.init(title: "hehehe", style: .default, handler: nil))
+//        alertViewController.addAction(UIAlertAction.init(title: "hehehe1", style: .cancel, handler: nil))
+//        alertViewController.addAction(UIAlertAction.init(title: "hehehe2", style: .destructive, handler: nil))
+//        self.present(alertViewController, animated: true, completion: nil)
+//        return
+
+        
         let alertView = CICAlertView.init(contentView: nil,
                                           title: String.poemTitle,
-                                          content: String.poem + String.poem)
-        alertView.sizeToFit()
-        UIApplication.shared.keyWindow?.addSubview(alertView)
-        alertView.center(alertView.superview!.cic.internalCenter)
+                                          content: String.funnyTip + String.poem)
+        let action1 = CICAlertAction.init("喜欢ManoBoo") { (_) in
+            print("action1")
+        }
+        let action2 = CICAlertAction.init("喜欢ZRFlower") { (_) in
+            print("action2")
+        }
+        let action3 = CICAlertAction.init("站在此地别走动") { (_) in
+            print("action3")
+        }
+        alertView.addAction(action1, action2, action3)
+        alertView.show()
 
         state = .loaded(data: "加载数据咯 - \(index)")
     }
