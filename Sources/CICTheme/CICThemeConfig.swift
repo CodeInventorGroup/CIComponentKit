@@ -45,7 +45,7 @@ public class CIComponentKitThemeConfig {
          public var cancelColor = UIColor.cic.rgb(red: 175, green: 174, blue: 169)
 
         // alertView、alertViewController separator line color
-         public var alertSeparatorColor = UIColor.cic.hex(hex: 0x3F3F3F, alpha: 0.3)
+         public var alertSeparatorColor = UIColor.cic.hex(hex: 0x3F3F3F, alpha: 0.2)
 
         // UIAlertController - message 's color
          public var alertMessageColor = UIColor.cic.hex(hex: 0x7A7A7A)

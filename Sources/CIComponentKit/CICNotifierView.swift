@@ -44,6 +44,69 @@ public struct CICNotifierViewType: Hashable {
     }
 }
 
+class CICNotifierView: CICUIView {
+    
+    private let imageView = UIImageView().size(20.0.makeSize)
+    private let titleLabel = CICLabel().font(UIFont.cic.preferred(.body)).line(0)
+    private let closeBtn = UIButton().size(20.0.makeSize)
+    
+    convenience init(type: CICNotifierViewType = .status,
+                     title: String = "",
+                     isShowClose: Bool = true,
+                     closeHandler: ((UIControl) -> Void)? = nil) {
+        self.init(frame: .zero)
+        self.backgroundColor(type.color)
+        self.layer.shadowColor = type.color.cgColor
+        self.layer.cornerRadius = 10.0
+        initSubviews()
+        
+        switch (type) {
+        case .error, .status, .success, .warning:
+            imageView.image = UIImage.cic.bundle(type.imageName)
+        default:
+            imageView.image = type.image
+        }
+        titleLabel.textColor(type.textColor).text(title)
+        closeBtn.isHidden = !(isShowClose)
+        closeBtn.contentEdgeInsets = 6.makeEdgeInsets
+        closeBtn.setImage(UIImage.cic.bundle("close_notifier"), for: .normal)
+        if let closeHandler = closeHandler {
+            closeBtn.addHandler(for: .touchUpInside, handler: closeHandler)
+        }
+    }
+    
+    func initSubviews() {
+        addSubview(imageView)
+        addSubview(titleLabel)
+        addSubview(closeBtn)
+    }
+    
+    func render() {
+        imageView.x(20).centerY(self.cic.internalCenterY)
+        closeBtn.right(20.0).centerY(self.cic.internalCenterY)
+        let maxTitleWidth = self.cic.width - imageView.cic.right - closeBtn.cic.x - 20
+        titleLabel.x(imageView.cic.right + 20).width(maxTitleWidth).sizeTo(layout: .maxWidth(maxTitleWidth))
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        render()
+    }
+    
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        self.width(size.width)
+        render()
+        return CGSize.init(width: size.width, height: titleLabel.cic.height + 22)
+    }
+    
+    override func deviceOrientationDidChange() {
+        super.deviceOrientationDidChange()
+        
+        sizeToFit()
+    }
+}
+
 class CICNotifierViewLayout: SizeLayout<View> {
 
     ///

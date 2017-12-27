@@ -116,7 +116,7 @@ public class CICAlertView: CICUIView {
                 title:String = "提示",
                 content:String = "") {
         super.init(frame: .zero)
-        self.layer.cornerRadius = 8.0
+        self.layer.cornerRadius = 10.0
         self.layer.masksToBounds = true
         self.contentView = contentView
         self.title = title

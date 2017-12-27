@@ -287,7 +287,10 @@ extension RootViewController: UIScrollViewDelegate {
         let action3 = CICAlertAction.init("站在此地别走动") { (_) in
             print("action3")
         }
-        alertView.addAction(action1, action2, action3)
+        let action4 = CICAlertAction.init("我去给你买颗橘子树") { (_) in
+            print("action4")
+        }
+        alertView.addAction(action1, action2, action3, action4)
         alertView.show()
 
         state = .loaded(data: "加载数据咯 - \(index)")
