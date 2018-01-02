@@ -86,7 +86,9 @@ class CICNotifierView: CICUIView {
         closeBtn.right(20.0).centerY(self.cic.internalCenterY)
         let maxTitleWidth = closeBtn.cic.x - imageView.cic.right - 20
         titleLabel.x(imageView.cic.right + 20).width(maxTitleWidth)
-            .sizeTo(layout: .maxWidth(maxTitleWidth)).centerY(self.cic.internalCenterY)
+            .sizeTo(layout: .maxWidth(maxTitleWidth))
+            .centerY(self.cic.internalCenterY)
+            .width(maxTitleWidth)
     }
 
     override func layoutSubviews() {
