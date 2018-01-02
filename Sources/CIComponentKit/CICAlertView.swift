@@ -147,17 +147,11 @@ public class CICAlertView: CICUIView {
         addSubview(contentLabel)
         cancelButton = CICAlertAction.init("取消", configure: { (label) in
             label.textColor(CIComponentKitThemeCurrentConfig.cancelColor)
-        }, handler: { [weak self] (_) in
-            print(self)
-//            self?.removeFromSuperview()
         })
         cancelButton.delegate = self
         addSubview(cancelButton)
         confirmButton = CICAlertAction.init("确定", configure: { (label) in
             label.textColor(CIComponentKitThemeCurrentConfig.confirmColor)
-        }, handler: { [weak self] (_) in
-            print(self)
-//            self?.removeFromSuperview()
         })
         confirmButton.delegate = self
         addSubview(confirmButton)

@@ -15,7 +15,7 @@ extension UIControl {
         if let oldTarget = objc_getAssociatedObject(self, &controlHandlerKey) as? CIComponentKitTarget<UIControl> {
             self.removeTarget(oldTarget, action: #selector(oldTarget.sendNext), for: controlEvents)
         }
-        
+
         let target = CIComponentKitTarget<UIControl>(handler)
         objc_setAssociatedObject(self, &controlHandlerKey, target, .OBJC_ASSOCIATION_RETAIN)
         self.addTarget(target, action: #selector(target.sendNext), for: controlEvents)
@@ -31,6 +31,8 @@ internal final class CIComponentKitTarget<Value>: NSObject {
 
     @objc
     internal func sendNext(_ receiver: Any?) {
-        action(receiver as! Value)
+        if let receiver = receiver as? Value {
+            action(receiver)
+        }
     }
 }
