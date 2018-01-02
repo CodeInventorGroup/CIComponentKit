@@ -66,7 +66,7 @@ class CICNotifierView: CICUIView {
         default:
             imageView.image = type.image
         }
-        titleLabel.textColor(type.textColor).text(title)
+        titleLabel.textColor(type.textColor).text(title).textAlignment(.center)
         closeBtn.isHidden = !(isShowClose)
         closeBtn.contentEdgeInsets = 6.makeEdgeInsets
         closeBtn.setImage(UIImage.cic.bundle("close_notifier"), for: .normal)
