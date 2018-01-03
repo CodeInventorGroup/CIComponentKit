@@ -70,7 +70,7 @@ extension CICHUD {
             backgroungView.addGestureRecognizer(tapGesture)
             self.addSubview(backgroungView)
 
-            contentView.layer.cornerRadius = 6.0
+            contentView.layer.cornerRadius = 10.0
             contentView.layer.masksToBounds = true
             self.addSubview(contentView)
             titleLabel.textColor(CIComponentKitThemeCurrentConfig.tintColor).line(0)

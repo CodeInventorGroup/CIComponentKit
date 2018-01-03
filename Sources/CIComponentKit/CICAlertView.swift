@@ -115,11 +115,13 @@ public class CICAlertView: CICUIView {
     var actions: [CICAlertAction]?
 
     private var maxHeight: CGFloat {
-        return .screenHeight - 3 * (UIEdgeInsets.layoutMargins.top + UIEdgeInsets.layoutMargins.bottom)
+//        return .screenHeight - 3 * (UIEdgeInsets.layoutMargins.top + UIEdgeInsets.layoutMargins.bottom)
+        return .screenHeight - 2 * 50
     }
 
     private var maxWidth: CGFloat {
-        return .screenWidth - 2 * (UIEdgeInsets.layoutMargins.left + UIEdgeInsets.layoutMargins.right)
+//        return .screenWidth - 2 * (UIEdgeInsets.layoutMargins.left + UIEdgeInsets.layoutMargins.right)
+        return .screenWidth - 2 * 15
     }
 
     private var marginH: CGFloat = 10
@@ -132,7 +134,10 @@ public class CICAlertView: CICUIView {
     fileprivate var cancelButton: CICAlertAction!
     fileprivate var confirmButton: CICAlertAction!
 
-    fileprivate func hide() { self.removeFromSuperview() }
+    fileprivate func hide() {
+        self.removeFromSuperview()
+        UIViewController.cic.setVisibleUserInteractionEnabled(true)
+    }
 
     public init(contentView: UIView? = nil,
                 title:String = "提示",
@@ -156,6 +161,7 @@ public class CICAlertView: CICUIView {
         if let keyWindow = UIApplication.shared.keyWindow {
             keyWindow.addSubview(self)
             self.center(keyWindow.cic.internalCenter)
+            UIViewController.cic.setVisibleUserInteractionEnabled(false)
         }
     }
 
