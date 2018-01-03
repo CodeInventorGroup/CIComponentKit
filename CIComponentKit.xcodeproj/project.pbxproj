@@ -22,7 +22,6 @@
 		B0B631411F698BAB00712C1D /* DemonstrationResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B631401F698BAB00712C1D /* DemonstrationResources.swift */; };
 		B0B80B8A1F9F4170000E13F7 /* CIComponentKitResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B80B891F9F4170000E13F7 /* CIComponentKitResources.swift */; };
 		B0B80B8D1FA2E7C4000E13F7 /* RootCardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B80B8C1FA2E7C4000E13F7 /* RootCardLayout.swift */; };
-		B0CFA4AB1F8CD3D600A2B7A9 /* LayoutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CFA4AA1F8CD3D600A2B7A9 /* LayoutKit.framework */; };
 		B0CFA4BC1F8CD8FE00A2B7A9 /* LayoutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CFA4AA1F8CD3D600A2B7A9 /* LayoutKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B0CFA99B1F6BAE2A00FB61D4 /* CICUImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA98E1F6BAE2A00FB61D4 /* CICUImage.swift */; };
 		B0CFA99C1F6BAE2B00FB61D4 /* CICUIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA98F1F6BAE2A00FB61D4 /* CICUIFont.swift */; };
@@ -124,7 +123,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0CFA4AB1F8CD3D600A2B7A9 /* LayoutKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,7 +297,6 @@
 				B0E30BF41F55480C00DBD08C /* Frameworks */,
 				B0E30BF51F55480C00DBD08C /* Headers */,
 				B0E30BF61F55480C00DBD08C /* Resources */,
-				B00C1D121F8C687400D5D86C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -394,21 +391,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		B00C1D121F8C687400D5D86C /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/LayoutKit.framework",
-			);
-			outputPaths = (
-				"",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
 		B0CFA4BD1F8CD9D000A2B7A9 /* Carthage Support */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

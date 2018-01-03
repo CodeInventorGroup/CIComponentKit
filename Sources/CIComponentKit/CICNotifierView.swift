@@ -7,7 +7,6 @@
 //  类似于iOS原生顶部通知
 
 import UIKit
-import LayoutKit
 
 public struct CICNotifierViewType: Hashable {
 

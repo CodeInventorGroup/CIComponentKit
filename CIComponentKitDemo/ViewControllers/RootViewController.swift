@@ -151,48 +151,25 @@ class RootViewController: CICUIViewController {
         }
         switch cardAction {
         case .Alert:
-            let tips = """
-                        嫉妒使我高斯模糊
-                        嫉妒使我氧化分解
-                        嫉妒使我增减反同
-                        嫉妒使我奇变偶不变符号看象限
-                        嫉妒使我基因突变
-                        嫉妒使我质壁分离
-                        嫉妒使我泰拳警告
-
-                        嫉妒使我弥散性血管内凝血
-                       """
-            CICHUD.showAlert("羡慕使我嫉妒", content: tips, cancelAction: { (_) in
+            let alertView = CICAlertView.init(contentView: nil,
+                                              title: "羡慕使我嫉妒",
+                                              content: String.funnyTip + String.poem)
+            let action1 = CICAlertAction.init("喜欢ManoBoo") { (_) in
                 CICHUD.showNotifier(title: "爱酱今天要元气满满哦~")
-            }, confirmAction: { (_) in
-                CICHUD.showNotifier(title: "CICScrollLabel  /  CICButton")
-                let scrollLabel = CICScrollLabel.init(CGRect(x: 0, y: 200, width: .screenWidth, height: 100),
-                                                      axis: .vertical(maxWidth: .screenWidth))
-                scrollLabel.label.text(tips).textColor(UIColor.flat.white)
-                scrollLabel.backgroundColor(.black)
-                    .layout()
-                self.view.addSubview(scrollLabel)
+            }
+            let action2 = CICAlertAction.init("喜欢ZRFlower") { (_) in
+                print("action2")
+            }
+            let action3 = CICAlertAction.init("站在此地别走动") { (_) in
+                print("action3")
+            }
+            let action4 = CICAlertAction.init("我去给你买颗橘子树") { (_) in
+                print("action4")
+                self.scrollLabelOrCustomButton()
+            }
+            alertView.addAction(action1, action2, action3, action4)
+            alertView.show()
 
-                let btn = CICButton().frame(CGRect(x: 100, y: 300, width: 200, height: 44))
-                    .backgroundColor(.red)
-                btn.setAttributedTitle(NSAttributedString.init(string: "manoboo_normal", attributes: [.font: UIFont.systemFont(ofSize: 20.0), .foregroundColor: UIColor.white]), for: .normal)
-                btn.setAttributedTitle(NSAttributedString.init(string: "manoboo_selected", attributes: [.font: UIFont.systemFont(ofSize: 12.0), .foregroundColor: UIColor.green]), for: .selected)
-                btn.setImage(#imageLiteral(resourceName: "item1-selected"), for: .normal)
-                btn.setImage(#imageLiteral(resourceName: "item1-selected"), for: .selected)
-                btn.imageInsets = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
-                btn.titleInsets = UIEdgeInsets.init(top: 50, left: 10, bottom: 50, right: 10)
-                btn.currentLayout = .leftImage
-                self.view.addSubview(btn)
-                btn.sizeToFit()
-                btn.addHandler(for: .touchUpInside, handler: { (ctrl) in
-                    print(ctrl)
-                    print("click cicbutton~")
-                    btn.state = (btn.isSelected) ? .normal : .selected
-                    UIView.animate(withDuration: 0.35, animations: {
-                        btn.sizeToFit()
-                    })
-                })
-            })
             break
         case .CICLabel:
             CICHUD.toast("长按下方文字进行复制", blurStyle: .extraLight)
@@ -222,6 +199,36 @@ class RootViewController: CICUIViewController {
             })
             break
         }
+    }
+
+    func scrollLabelOrCustomButton() {
+        CICHUD.showNotifier(title: "CICScrollLabel  /  CICButton")
+        let scrollLabel = CICScrollLabel.init(CGRect(x: 0, y: 200, width: .screenWidth, height: 100),
+                                              axis: .vertical(maxWidth: .screenWidth))
+        scrollLabel.label.text(String.funnyTip).textColor(UIColor.flat.white)
+        scrollLabel.backgroundColor(.black)
+            .layout()
+        self.view.addSubview(scrollLabel)
+
+        let btn = CICButton().frame(CGRect(x: 100, y: 300, width: 200, height: 44))
+            .backgroundColor(.red)
+        btn.setAttributedTitle(NSAttributedString.init(string: "manoboo_normal", attributes: [.font: UIFont.systemFont(ofSize: 20.0), .foregroundColor: UIColor.white]), for: .normal)
+        btn.setAttributedTitle(NSAttributedString.init(string: "manoboo_selected", attributes: [.font: UIFont.systemFont(ofSize: 12.0), .foregroundColor: UIColor.green]), for: .selected)
+        btn.setImage(#imageLiteral(resourceName: "item1-selected"), for: .normal)
+        btn.setImage(#imageLiteral(resourceName: "item1-selected"), for: .selected)
+        btn.imageInsets = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
+        btn.titleInsets = UIEdgeInsets.init(top: 50, left: 10, bottom: 50, right: 10)
+        btn.currentLayout = .leftImage
+        self.view.addSubview(btn)
+        btn.sizeToFit()
+        btn.addHandler(for: .touchUpInside, handler: { (ctrl) in
+            print(ctrl)
+            print("click cicbutton~")
+            btn.state = (btn.isSelected) ? .normal : .selected
+            UIView.animate(withDuration: 0.35, animations: {
+                btn.sizeToFit()
+            })
+        })
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -266,32 +273,6 @@ extension RootViewController: UIScrollViewDelegate {
         UIView.animate(withDuration: 0.5) {
             self.scrollView.backgroundColor(self.animationColors[index])
         }
-
-//        let alertViewController = UIAlertController.init(title: "asdasds", message: "asdasdas\nasdasdas\nasdas", preferredStyle: .alert)
-//        alertViewController.addAction(UIAlertAction.init(title: "hehehe", style: .default, handler: nil))
-//        alertViewController.addAction(UIAlertAction.init(title: "hehehe1", style: .cancel, handler: nil))
-//        alertViewController.addAction(UIAlertAction.init(title: "hehehe2", style: .destructive, handler: nil))
-//        self.present(alertViewController, animated: true, completion: nil)
-//        return
-
-        
-        let alertView = CICAlertView.init(contentView: nil,
-                                          title: String.poemTitle,
-                                          content: String.funnyTip + String.poem)
-        let action1 = CICAlertAction.init("喜欢ManoBoo") { (_) in
-            print("action1")
-        }
-        let action2 = CICAlertAction.init("喜欢ZRFlower") { (_) in
-            print("action2")
-        }
-        let action3 = CICAlertAction.init("站在此地别走动") { (_) in
-            print("action3")
-        }
-        let action4 = CICAlertAction.init("我去给你买颗橘子树") { (_) in
-            print("action4")
-        }
-        alertView.addAction(action1, action2, action3, action4)
-        alertView.show()
 
         state = .loaded(data: "加载数据咯 - \(index)")
     }

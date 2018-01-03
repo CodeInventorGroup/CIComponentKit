@@ -90,31 +90,7 @@ class RootCardLayout: SizeLayout<VisualEffectView> {
                 .longPressAction(.copy)
                 .copyRange(NSMakeRange(0, info.count))
             label.copySuccessClousure = {
-                let tips = """
-                            嫉妒使我高斯模糊
-
-                            嫉妒使我氧化分解
-
-                            嫉妒使我增减反同
-
-                            嫉妒使我奇变偶不变符号看象限
-
-                            嫉妒使我基因突变
-
-                            嫉妒使我质壁分离
-
-                            嫉妒使我泰拳警告
-
-                            嫉妒使我弥散性血管内凝血
-                           """
-                CICHUD.showAlert("羡慕使我嫉妒", content: tips, cancelAction: { (_) in
-                    CICHUD.showNotifier(title: "爱酱今天要元气满满哦~")
-                }, confirmAction: { (_) in
-                        CICHUD.showActivityView()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                            CICHUD.hideActivityView()
-                        }
-                })
+                CICHUD.showNotifier(title: "文字拷贝成功~")
             }
         }
     
