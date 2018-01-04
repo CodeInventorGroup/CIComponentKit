@@ -62,7 +62,10 @@ extension AppDelegate {
             theme.config.alertMessageColor = UIColor.flat.orange
             theme.config.alertSeparatorColor = UIColor.flat.white
             theme.config.alertBackgroundColor = UIColor.flat.blue
-            theme.renderTheme()
+            
+            UIView.animate(withDuration: 0.35, animations: {
+                theme.renderTheme()
+            })
         }
     }
 }

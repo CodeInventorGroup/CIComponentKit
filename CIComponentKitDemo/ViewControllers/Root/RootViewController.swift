@@ -48,8 +48,8 @@ class RootViewController: CICUIViewController {
         self.view.backgroundColor(CIComponentKitThemeCurrentConfig.mainColor)
 
         if #available(iOS 11.0, *) {
-//            self.navigationController?.navigationBar.prefersLargeTitles = true
-//            self.navigationItem.largeTitleDisplayMode = .always
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+            self.navigationItem.largeTitleDisplayMode = .always
         } else {
 
         }
@@ -177,18 +177,17 @@ extension RootViewController: UITableViewDelegate, UITableViewDataSource {
             let alertView = CICAlertView.init(contentView: nil,
                                               title: "羡慕使我嫉妒",
                                               content: String.funnyTip)
-            let action1 = CICAlertAction.init("喜欢ManoBoo") { (_) in
-                CICHUD.showNotifier(title: "爱酱今天要元气满满哦~")
+            let action1 = CICAlertAction.init("ManoBoo") { (_) in
+                CICHUD.showNotifier(.error, title: "爱酱今天要元气满满哦~")
             }
-            let action2 = CICAlertAction.init("喜欢ZRFlower") { (_) in
-                print("action2")
+            let action2 = CICAlertAction.init("ZRFlower") { (_) in
+                CICHUD.showNotifier(.success, title: "ZRFlower")
             }
             let action3 = CICAlertAction.init("站在此地别走动") { (_) in
-                print("action3")
+                CICHUD.showNotifier(.status, title: "站在此地别走动")
             }
             let action4 = CICAlertAction.init("我去给你买颗橘子树") { (_) in
-                print("action4")
-//                self.scrollLabelOrCustomButton()
+                CICHUD.showNotifier(.warning, title: "我去给你买颗橘子树")
             }
             _ = [action1, action2, action3, action4].map { $0.backgroundColor(UIColor.cic.hex(hex: 0x1B1C1E)) }
             alertView.addAction(action1, action2, action3, action4)
@@ -198,19 +197,19 @@ extension RootViewController: UITableViewDelegate, UITableViewDataSource {
             CICHUD.toast("长按下方文字进行复制", blurStyle: .extraLight)
             break
         case .Loading:
-            CICHUD.show("正在加载~", blurStyle: .extraLight)
+            CICHUD.show("小二正在拼命加载", blurStyle: .extraLight)
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
                 CICHUD.hide()
             })
             break
         case .Notifier:
-            CICHUD.showNotifier(title: "我一点都不嫉妒~")
+            CICHUD.showNotifier(title: "不要998，不要98，现在只要购买只要￥9.8，你还在犹豫什么？")
             break
         case .Guide:
             CICHUD.showGuide(.poemTitle, message: .poem, animated: true)
             break
         case .NetworkStatus:
-            CICHUD.showNetWorkStatusChange("失去网络连接")
+            CICHUD.showNetWorkStatusChange("您已失去网络连接")
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
                 CICHUD.hideNetWorkStatusChange()
             })
