@@ -19,6 +19,8 @@
 		B05864611F9EFE1000235A2A /* CICNotifierView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05864601F9EFE1000235A2A /* CICNotifierView.swift */; };
 		B05A7AD91F8F4A3C00C3BC04 /* CICHUD+Guide.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05A7AD81F8F4A3C00C3BC04 /* CICHUD+Guide.swift */; };
 		B06263621F6ACF4E00371DCB /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06263611F6ACF4E00371DCB /* SecondViewController.swift */; };
+		B0A766511FFDCC3400A42C9F /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A766501FFDCC3300A42C9F /* RootViewController.swift */; };
+		B0A766531FFDCCA900A42C9F /* RootTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A766521FFDCCA900A42C9F /* RootTableViewCell.swift */; };
 		B0B631411F698BAB00712C1D /* DemonstrationResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B631401F698BAB00712C1D /* DemonstrationResources.swift */; };
 		B0B80B8A1F9F4170000E13F7 /* CIComponentKitResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B80B891F9F4170000E13F7 /* CIComponentKitResources.swift */; };
 		B0B80B8D1FA2E7C4000E13F7 /* RootCardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B80B8C1FA2E7C4000E13F7 /* RootCardLayout.swift */; };
@@ -44,7 +46,6 @@
 		B0E30C161F55520200DBD08C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0E30C151F55520200DBD08C /* Assets.xcassets */; };
 		B0E30C191F55520200DBD08C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0E30C171F55520200DBD08C /* LaunchScreen.storyboard */; };
 		B0E30C211F5555F000DBD08C /* CIComponentKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0E30BF81F55480C00DBD08C /* CIComponentKit.framework */; };
-		B0E8681B1FA23ABD00A786B9 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E8681A1FA23ABD00A786B9 /* RootViewController.swift */; };
 		B0ECA34A1FB591FB00022545 /* CICHUD+BlackMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0ECA3491FB591FB00022545 /* CICHUD+BlackMask.swift */; };
 		B0ED57D21F7F4808001D1DCD /* CICHUD+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0ED57D11F7F4808001D1DCD /* CICHUD+Network.swift */; };
 /* End PBXBuildFile section */
@@ -85,6 +86,8 @@
 		B05864601F9EFE1000235A2A /* CICNotifierView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CICNotifierView.swift; sourceTree = "<group>"; };
 		B05A7AD81F8F4A3C00C3BC04 /* CICHUD+Guide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CICHUD+Guide.swift"; sourceTree = "<group>"; };
 		B06263611F6ACF4E00371DCB /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		B0A766501FFDCC3300A42C9F /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		B0A766521FFDCCA900A42C9F /* RootTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTableViewCell.swift; sourceTree = "<group>"; };
 		B0B631401F698BAB00712C1D /* DemonstrationResources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemonstrationResources.swift; sourceTree = "<group>"; };
 		B0B80B891F9F4170000E13F7 /* CIComponentKitResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIComponentKitResources.swift; sourceTree = "<group>"; };
 		B0B80B8C1FA2E7C4000E13F7 /* RootCardLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCardLayout.swift; sourceTree = "<group>"; };
@@ -113,7 +116,6 @@
 		B0E30C151F55520200DBD08C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B0E30C181F55520200DBD08C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B0E30C1A1F55520300DBD08C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B0E8681A1FA23ABD00A786B9 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		B0ECA3491FB591FB00022545 /* CICHUD+BlackMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CICHUD+BlackMask.swift"; sourceTree = "<group>"; };
 		B0ED57D11F7F4808001D1DCD /* CICHUD+Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CICHUD+Network.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,10 +158,19 @@
 			path = CICResources;
 			sourceTree = "<group>";
 		};
+		B0A7664F1FFDCC3300A42C9F /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				B0A766501FFDCC3300A42C9F /* RootViewController.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
 		B0B80B8B1FA2E7AB000E13F7 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				B0B80B8C1FA2E7C4000E13F7 /* RootCardLayout.swift */,
+				B0A766521FFDCCA900A42C9F /* RootTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -269,8 +280,8 @@
 		B0E868191FA23A4C00A786B9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				B0A7664F1FFDCC3300A42C9F /* Root */,
 				B06263611F6ACF4E00371DCB /* SecondViewController.swift */,
-				B0E8681A1FA23ABD00A786B9 /* RootViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -462,9 +473,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0A766511FFDCC3400A42C9F /* RootViewController.swift in Sources */,
 				B0B80B8D1FA2E7C4000E13F7 /* RootCardLayout.swift in Sources */,
-				B0E8681B1FA23ABD00A786B9 /* RootViewController.swift in Sources */,
 				B06263621F6ACF4E00371DCB /* SecondViewController.swift in Sources */,
+				B0A766531FFDCCA900A42C9F /* RootTableViewCell.swift in Sources */,
 				B0B631411F698BAB00712C1D /* DemonstrationResources.swift in Sources */,
 				B0E30C0F1F55520200DBD08C /* AppDelegate.swift in Sources */,
 			);
@@ -675,7 +687,7 @@
 				INFOPLIST_FILE = CIComponentKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.manoboo.group.CIComponentKitDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.manoboo.CIComponentKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -697,7 +709,7 @@
 				INFOPLIST_FILE = CIComponentKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.manoboo.group.CIComponentKitDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.manoboo.CIComponentKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;

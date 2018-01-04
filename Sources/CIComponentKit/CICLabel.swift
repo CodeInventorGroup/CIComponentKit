@@ -118,7 +118,7 @@ public class CICLabel: UILabel {
         if longPressAction == .copy {
             return action == #selector(copyEvent)
         }
-        return false
+        return super.canPerformAction(action, withSender: sender)
     }
 
     /// - CICLabel长按的type

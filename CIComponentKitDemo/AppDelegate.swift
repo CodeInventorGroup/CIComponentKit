@@ -22,34 +22,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let rootVC = RootViewController()
         let nav = UINavigationController.init(rootViewController: rootVC)
+        nav.navigationBar.isTranslucent = false
         window?.rootViewController = nav
         window?.makeKeyAndVisible()
+
+        configBlackTheme()
         
         return true
     }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-
-
 }
 
+extension AppDelegate {
+    func configTheme() {
+        let theme = CIComponentKitTheme.originTheme
+        theme.config.defaultFont = UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(15)) + 5.0)
+        theme.config.textColor = UIColor.cic.hex(hex: 0x323232)
+        theme.config.mainColor = UIColor.cic.hex(hex: 0xFAFAFA)
+        theme.config.tintColor = UIColor.cic.hex(hex: 0xDF312E)
+        theme.config.navigationBarLeftColor = UIColor.cic.hex(hex: 0xe2e2e2)
+        theme.config.navigationItemTitleColor = UIColor.cic.random
+        theme.config.navigationBarBackgroundColor = UIColor.flat.orange
+        theme.config.alertMessageColor = UIColor.cic.random
+        theme.config.alertSeparatorColor = UIColor.flat.white
+        theme.config.alertBackgroundColor = UIColor.flat.blue
+        theme.renderTheme()
+    }
+
+    func configBlackTheme() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            let theme = CIComponentKitTheme.originTheme
+            theme.config.defaultFont = UIFont.cic.systemFont
+            theme.config.textColor = UIColor.cic.hex(hex: 0xFFFFFF)
+            theme.config.mainColor = UIColor.black
+            theme.config.tintColor = UIColor.cic.hex(hex: 0xDF312E)
+            theme.config.navigationBarLeftColor = UIColor.cic.hex(hex: 0xe2e2e2)
+            theme.config.navigationItemTitleColor = UIColor.cic.hex(hex: 0xF2F2F2)
+            theme.config.navigationBarItemFont = UIFont.cic.preferred(UIFontTextStyle.body)
+            theme.config.navigationBarBackgroundColor = UIColor.black
+            theme.config.alertMessageColor = UIColor.flat.orange
+            theme.config.alertSeparatorColor = UIColor.flat.white
+            theme.config.alertBackgroundColor = UIColor.flat.blue
+            theme.renderTheme()
+        }
+    }
+}

@@ -50,6 +50,8 @@ public class CIComponentKitThemeConfig {
         // UIAlertController - message 's color
          public var alertMessageColor = UIColor.cic.hex(hex: 0x7A7A7A)
 
+         public var alertBackgroundColor = UIColor.flat.lightGrey
+
          public var navigationBarBackgroundColor = UIColor.cic.rgb(red: 209, green: 211, blue: 138)
 
          public var navigationBarLeftColor = UIColor.cic.rgb(red: 209, green: 211, blue: 138)
@@ -69,4 +71,9 @@ public class CIComponentKitThemeConfig {
 
         // 默认字体
          public var defaultFont = UIFont.cic.systemFont
+
+        // 导航栏title字体
+         public var navigationBarItemFont = UIFont.cic.preferred(.headline)
+
+         public var navigationBarLargeItemFont = UIFont.systemFont(ofSize: 28.0)
 }

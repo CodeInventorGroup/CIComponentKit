@@ -10,16 +10,16 @@ import UIKit
 import Foundation
 
 extension Notification.Name {
-    struct cic {
+    public struct cic {
         
         // 切换通知时发出这个通知，post notification when switching theme
-        static let themeWillToggle = NSNotification.Name.init("CIComponentKitThemeWillToggleNotifier")
+        public static let themeWillToggle = NSNotification.Name.init("CIComponentKitThemeWillToggleNotifier")
 
         // 切换主题完成之后，post notification When the switching theme is complete
-        static let themeDidToggle = NSNotification.Name.init("CIComponentKitThemeDidToggleNotifier")
+        public static let themeDidToggle = NSNotification.Name.init("CIComponentKitThemeDidToggleNotifier")
 
         // 屏幕发生旋转时发出通知
-        static let screenDidRotated = NSNotification.Name.init("CIComponentKitThemeDidScreenRotated")
+        public static let screenDidRotated = NSNotification.Name.init("CIComponentKitThemeDidScreenRotated")
     }
 }
 
@@ -116,12 +116,14 @@ public extension CIComponentKitTheme {
                 .foregroundColor: config.navigationBarLeftColor],for: .normal)
 
             if let navigationController = currentViewController.navigationController {
-//                var navigationBarSize = navigationController.navigationBar.bounds.size
-//                navigationBarSize.height += 20
-//                currentViewController.navigationController?.navigationBar.setBackgroundImage(UIImage.image(color: config.navigationBarBackgroundColor, size: navigationBarSize), for: .default)
-                navigationController.navigationBar.barTintColor = CIComponentKitThemeCurrentConfig.navigationBarBackgroundColor
-                navigationController.navigationBar.titleTextAttributes = [.foregroundColor: config.navigationItemTitleColor,
-                                                                          .font: UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(24)))]
+                navigationController.navigationBar.barTintColor = config.navigationBarBackgroundColor
+                var titleTextAttributes: [NSAttributedStringKey : Any] = [.foregroundColor: config.navigationItemTitleColor,
+                                                                          .font: config.navigationBarItemFont]
+                if #available(iOS 11.0, *) {
+                    titleTextAttributes[.font] = config.navigationBarLargeItemFont
+                    navigationController.navigationBar.largeTitleTextAttributes = titleTextAttributes
+                }
+                navigationController.navigationBar.titleTextAttributes = titleTextAttributes
             }
 
             currentViewController.endAppearanceTransition()
@@ -138,7 +140,6 @@ public extension CIComponentKitTheme {
 
     public static func renderTheme(_ animation: CIComponentKitThemeTransition,
                                    _ theme: CIComponentKitTheme = CIComponentKitTheme.originTheme) throws {
-        
         theme.renderTheme()
         throw CIComponentKitSourceError.neterror(URLResponse())
     }

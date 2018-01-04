@@ -8,6 +8,23 @@
 
 public extension UIColor {
 
+    public func isLight() -> Bool
+    {
+        guard let components = self.cgColor.components else {
+            return false
+        }
+        let brightness = ((components[0] * 299) + (components[1] * 587) + (components[2] * 114)) / 1000
+
+        if brightness < 0.5
+        {
+            return false
+        }
+        else
+        {
+            return true
+        }
+    }
+
     struct cic {
         
         private typealias CIComponentColor = cic
@@ -68,7 +85,7 @@ public extension UIColor {
         public static func hex(hex : UInt32) -> UIColor {
             return self.hex(hex: hex, alpha: 1.0)
         }
-        
+
         public static func hex(hex : UInt32, alpha : CGFloat) -> UIColor {
             return UIColor(red:CGFloat((hex & 0xFF0000) >> 16) / 255.0,
                            green: CGFloat((hex & 0x00FF00) >> 8) / 255.0,
@@ -92,7 +109,7 @@ public extension UIColor {
 
             var rgbValue : UInt32 = 0
             Scanner(string: cString).scanHexInt32(&rgbValue)
-            
+
             return UIColor(red:CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
                            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
                            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,

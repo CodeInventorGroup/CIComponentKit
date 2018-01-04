@@ -23,7 +23,7 @@ public class CICAlertAction: UIControl {
     }
     let topLine = UIView()
 
-    let titleLabel = UILabel()
+    let titleLabel = CICLabel()
 
     var isShowBottomLine = false {
         didSet {
@@ -40,19 +40,19 @@ public class CICAlertAction: UIControl {
         titleLabel.text(title)
         configure?(titleLabel)
 
-        if let handler = handler {
-            self.addHandler(for: .touchUpInside, handler: { (ctrl) in
+        self.addHandler(for: .touchUpInside, handler: { (ctrl) in
+            if let handler = handler {
                 handler(ctrl)
-                self.delegate?.hide()
-            })
-        }
+            }
+            self.delegate?.hide()
+        })
+
         addSubview(topLine)
         isShowTopLine = false
         topLine.backgroundColor(CIComponentKitThemeCurrentConfig.alertSeparatorColor).height(0.5)
         addSubview(bottomLine)
         isShowBottomLine = false
         bottomLine.backgroundColor(CIComponentKitThemeCurrentConfig.alertSeparatorColor).height(0.5)
-
     }
 
     public override init(frame: CGRect) {
@@ -81,8 +81,6 @@ public class CICAlertAction: UIControl {
         return CGSize.init(width: titleWidth + contentOffSet.left + contentOffSet.right, height: size.height)
     }
 }
-
-
 
 /// 与系统 `UIAlertController` 效果一致
 
@@ -121,7 +119,7 @@ public class CICAlertView: CICUIView {
 
     private var maxWidth: CGFloat {
 //        return .screenWidth - 2 * (UIEdgeInsets.layoutMargins.left + UIEdgeInsets.layoutMargins.right)
-        return .screenWidth - 2 * 15
+        return .screenWidth - 2 * 15 - (UIEdgeInsets.layoutMargins.left + UIEdgeInsets.layoutMargins.right)
     }
 
     private var marginH: CGFloat = 10
@@ -143,8 +141,12 @@ public class CICAlertView: CICUIView {
                 title:String = "提示",
                 content:String = "") {
         super.init(frame: .zero)
-        self.layer.cornerRadius = 10.0
-        self.layer.masksToBounds = true
+        layer.cornerRadius = 10.0
+        layer.masksToBounds = true
+        layer.shadowOffset = 3.makeSize
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowRadius = 3.0
+        layer.shadowOpacity = 0.8
         self.contentView = contentView
         self.title = title
         self.content = content
@@ -166,6 +168,7 @@ public class CICAlertView: CICUIView {
     }
 
     func initSubviews() {
+        self.backgroundColor(CIComponentKitThemeCurrentConfig.alertBackgroundColor)
         titleLabel.font(UIFont.systemFont(ofSize: 20.0)).line(0)
             .textColor(CIComponentKitThemeCurrentConfig.alertMessageColor).textAlignment(.center)
         addSubview(titleLabel)
@@ -206,6 +209,8 @@ public class CICAlertView: CICUIView {
         } else {
             cancelButton.isHidden = false
             confirmButton.isHidden = false
+            cancelButton.isShowTopLine = false
+            confirmButton.isShowTopLine = false
             cancelButton.height(44.0).width(contentMaxWidth/2)
                 .centerX(maxWidth * 0.25).y((contentView ?? contentLabel).cic.bottom + marginV)
             confirmButton.height(44.0).width(contentMaxWidth/2)
@@ -221,7 +226,7 @@ public class CICAlertView: CICUIView {
     @discardableResult
     func render() -> CGSize {
         if isSyncCurrentTheme {
-            self.backgroundColor(CIComponentKitThemeCurrentConfig.mainColor)
+            self.backgroundColor(CIComponentKitThemeCurrentConfig.alertBackgroundColor)
         }
         let contentMaxWidth = maxWidth - 2 * marginH
 
@@ -246,7 +251,7 @@ public class CICAlertView: CICUIView {
             autoSizeHeight = renderActions()
         }
         titleLabel.centerX(maxWidth/2)
-        contentLabel.centerX(maxWidth/2).backgroundColor(.green)
+        contentLabel.centerX(maxWidth/2)
         return CGSize.init(width: maxWidth, height: autoSizeHeight)
     }
 
@@ -262,6 +267,7 @@ public class CICAlertView: CICUIView {
 
     public override func didToggleTheme() {
         super.didToggleTheme()
+
         deviceOrientationDidChange()
     }
 

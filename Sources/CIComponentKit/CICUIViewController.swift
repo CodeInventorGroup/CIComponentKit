@@ -33,9 +33,10 @@ public extension UIViewController {
         public static var appearance: CICUIViewController {
             return CICUIViewController()
         }
-        
+
         public static func setVisibleUserInteractionEnabled(_ userInteractionEnabled: Bool) {
-            if let currentViewController = UIApplication.shared.keyWindow?.rootViewController?.cic.visibleViewController {
+            if let keyWindow = UIApplication.shared.keyWindow?.rootViewController,
+                let currentViewController = keyWindow.cic.visibleViewController {
                 currentViewController.view.isUserInteractionEnabled = userInteractionEnabled
             }
         }
