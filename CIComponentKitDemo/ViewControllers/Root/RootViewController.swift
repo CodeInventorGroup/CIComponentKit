@@ -59,6 +59,7 @@ class RootViewController: CICUIViewController {
         tableView.frame(view.bounds)
         tableView.register(RootTableViewCell.self, forCellReuseIdentifier: "RootTableViewCell")
         tableView.tableFooterView = UIView()
+        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.backgroundColor(CIComponentKitThemeCurrentConfig.mainColor)
         view.addSubview(tableView)
     }

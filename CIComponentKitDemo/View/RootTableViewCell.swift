@@ -16,7 +16,7 @@ class RootTableViewCell: UITableViewCell {
     private let containerView = UIView()
 
     private let titleLabel = UILabel().font(UIFont.cic.preferred(.headline))
-    private let subtitleLabel = UILabel().font(UIFont.cic.preferred(.headline)).line(0)
+    private let subtitleLabel = UILabel().font(UIFont.init(name: "GillSans-SemiBold", size: 16.0)!).line(0)
     private let infoLabel = CICLabel().font(UIFont.cic.preferred(.body)).line(0)
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
