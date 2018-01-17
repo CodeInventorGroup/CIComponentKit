@@ -50,16 +50,13 @@ class RootViewController: CICUIViewController {
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true
             self.navigationItem.largeTitleDisplayMode = .always
-        } else {
-
         }
-
         tableView.delegate = self
         tableView.dataSource = self
         tableView.frame(view.bounds)
         tableView.register(RootTableViewCell.self, forCellReuseIdentifier: "RootTableViewCell")
         tableView.tableFooterView = UIView()
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 44.0
         tableView.backgroundColor(CIComponentKitThemeCurrentConfig.mainColor)
         view.addSubview(tableView)
     }
