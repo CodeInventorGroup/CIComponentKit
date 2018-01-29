@@ -15,16 +15,39 @@ import UIKit
 /// - highlighted: 高亮
 /// - disabled: 不可用
 /// - loading: 加载中(常见于网络请求)
-public enum CICButtonState: Int {
-    case normal = 0
+//public enum CICButtonState: Int {
+//    case normal = 0
+//
+//    case selected
+//
+//    case highlighted
+//
+//    case disabled
+//
+//    case loading
+//}
 
-    case selected
-
-    case highlighted
-
-    case disabled
-
-    case loading
+//UIControlState
+public struct CICButtonState: OptionSet, Hashable {
+    public var rawValue: Int
+    public init(rawValue: Int) {
+        self.rawValue = rawValue
+    }
+    
+    public var hashValue: Int {
+        return rawValue.hashValue
+    }
+    
+    public static func ==(lhs: CICButtonState, rhs: CICButtonState) -> Bool {
+        return lhs.rawValue == rhs.rawValue
+    }
+    
+    
+    public static let normal = CICButtonState.init(rawValue: 1)
+    public static let selected = CICButtonState.init(rawValue: 2)
+    public static let highlighted = CICButtonState.init(rawValue: 4)
+    public static let disabled = CICButtonState.init(rawValue: 8)
+    public static let loading = CICButtonState.init(rawValue: 32)
 }
 
 /// 默认提供的image title布局位置

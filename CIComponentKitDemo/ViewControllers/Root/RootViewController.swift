@@ -133,17 +133,6 @@ class RootViewController: CICUIViewController {
     }
 }
 
-extension RootViewController: UIScrollViewDelegate {
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let index = Int(scrollView.contentOffset.x / CGFloat.screenWidth)
-        UIView.animate(withDuration: 0.5) {
-//            scrollView.backgroundColor(self.animationColors[index])
-        }
-
-        state = .loaded(data: "加载数据咯 - \(index)")
-    }
-}
-
 extension RootViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -187,8 +176,12 @@ extension RootViewController: UITableViewDelegate, UITableViewDataSource {
             let action4 = CICAlertAction.init("我去给你买颗橘子树") { (_) in
                 CICHUD.showNotifier(.warning, title: "我去给你买颗橘子树")
             }
-            _ = [action1, action2, action3, action4].map { $0.backgroundColor(UIColor.cic.hex(hex: 0x1B1C1E)) }
-            alertView.addAction(action1, action2, action3, action4)
+            let action5 = CICAlertAction.init("一些自定义控件", configure: { $0.textColor(UIColor.flat.orange) }) { (_) in
+                self.scrollLabelOrCustomButton()
+            }
+            
+            _ = [action1, action2, action3, action4, action5].map { $0.backgroundColor(UIColor.cic.hex(hex: 0x1B1C1E)) }
+            alertView.addAction(action1, action2, action3, action4, action5)
             alertView.show()
             break
         case .CICLabel:
