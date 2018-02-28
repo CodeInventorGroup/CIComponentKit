@@ -70,6 +70,7 @@ public class CICAlertAction: UIControl {
     }
     public override func layoutSubviews() {
         super.layoutSubviews()
+        
         titleLabel.sizeTo(layout: .maxHeight(self.cic.height)).center(self.cic.internalCenter)
         topLine.width(self)
         bottomLine.width(self).y(self.cic.width - 1.0)
@@ -142,11 +143,11 @@ public class CICAlertView: CICUIView {
                 content:String = "") {
         super.init(frame: .zero)
         layer.cornerRadius = 10.0
-        layer.masksToBounds = true
-        layer.shadowOffset = 3.makeSize
+        layer.masksToBounds = false
+        layer.shouldRasterize = true
+        layer.shadowOffset = CGSize.init(width: 0, height: 3)
         layer.shadowColor = UIColor.black.cgColor
-        layer.shadowRadius = 3.0
-        layer.shadowOpacity = 0.8
+        layer.shadowOpacity = 0.25
         self.contentView = contentView
         self.title = title
         self.content = content
@@ -258,6 +259,12 @@ public class CICAlertView: CICUIView {
     public override func layoutSubviews() {
         super.layoutSubviews()
 
+        layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: 10).cgPath
+        if let bColor = self.backgroundColor?.cgColor {
+            self.backgroundColor = nil
+            layer.backgroundColor = bColor
+        }
+        
         render()
     }
 

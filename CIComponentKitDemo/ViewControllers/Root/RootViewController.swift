@@ -22,7 +22,7 @@ enum CardActions: Int {
 
 class RootViewController: CICUIViewController {
 
-    private let tableView = UITableView.init(frame: .zero, style: .plain)
+    private let tableView = UITableView.init(frame: .zero, style: .grouped)
 
     let data = [(title: "CICAlertView", subtitle: "CICHUD.showAlert", info: "与系统的UIAlertController调用方式基本一致"),
                 (title: "CICLabel", subtitle: "UILabel.cic.appearance", info: "一个自定义Label, 长按可以复制文本, 可以设置内外边距"),
@@ -135,11 +135,11 @@ class RootViewController: CICUIViewController {
 
 extension RootViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return data.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return 1
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -148,14 +148,14 @@ extension RootViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RootTableViewCell") as! RootTableViewCell
-        if let cellData = data.safeElement(at: indexPath.row) {
+        if let cellData = data.safeElement(at: indexPath.section) {
             cell.data = cellData
         }
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cardAction = CardActions.init(rawValue: indexPath.row) else {
+        guard let cardAction = CardActions.init(rawValue: indexPath.section) else {
             CICHUD.toast("未找到动作", blurStyle: .extraLight)
             return
         }

@@ -13,7 +13,7 @@ class RootTableViewCell: UITableViewCell {
 
     var data: (title: String, subtitle: String, info: String) = ("", "", "")
 
-    private let containerView = UIView()
+    private let containerView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
 
     private let titleLabel = UILabel().font(UIFont.cic.preferred(.headline))
     private let subtitleLabel = UILabel().font(UIFont.init(name: "GillSans-SemiBold", size: 16.0)!).line(0)
@@ -36,9 +36,9 @@ class RootTableViewCell: UITableViewCell {
     func initSubviews() {
         selectionStyle = .none
         contentView.addSubview(containerView)
-        containerView.addSubview(titleLabel)
-        containerView.addSubview(subtitleLabel)
-        containerView.addSubview(infoLabel)
+        containerView.contentView.addSubview(titleLabel)
+        containerView.contentView.addSubview(subtitleLabel)
+        containerView.contentView.addSubview(infoLabel)
         infoLabel.longPressAction(.copy)
         infoLabel.copySuccessClousure = { [weak self] in
             guard let `self` = self else { return }
@@ -84,7 +84,7 @@ extension RootTableViewCell: CICAppearance {
 
     func didToggleTheme() {
         let config = CIComponentKitThemeCurrentConfig
-        containerView.backgroundColor(config.mainColor)
+//        containerView.backgroundColor(config.mainColor)
         self.backgroundColor(config.mainColor)
         UIView.animate(withDuration: 0.35) {
             self.titleLabel.textColor(config.tintColor)

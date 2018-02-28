@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = nav
         window?.makeKeyAndVisible()
 
-        configBlackTheme()
+        configOtherTheme()
         
         return true
     }
@@ -37,7 +37,7 @@ extension AppDelegate {
         let theme = CIComponentKitTheme.originTheme
         theme.config.defaultFont = UIFont.systemFont(ofSize: CGFloat(arc4random_uniform(15)) + 5.0)
         theme.config.textColor = UIColor.cic.hex(hex: 0x323232)
-        theme.config.mainColor = UIColor.cic.hex(hex: 0xFAFAFA)
+        theme.config.mainColor = UIColor.flat.orange
         theme.config.tintColor = UIColor.cic.hex(hex: 0xDF312E)
         theme.config.navigationBarLeftColor = UIColor.cic.hex(hex: 0xe2e2e2)
         theme.config.navigationItemTitleColor = UIColor.cic.random
@@ -48,17 +48,17 @@ extension AppDelegate {
         theme.renderTheme()
     }
 
-    func configBlackTheme() {
+    func configOtherTheme() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             let theme = CIComponentKitTheme.originTheme
             theme.config.defaultFont = UIFont.cic.systemFont
-            theme.config.textColor = UIColor.cic.hex(hex: 0xFFFFFF)
-            theme.config.mainColor = UIColor.black
-            theme.config.tintColor = UIColor.cic.hex(hex: 0xDF312E)
+            theme.config.textColor = UIColor.cic.hex(hex: 0xFA6400)
+            theme.config.mainColor = UIColor.flat.blue
+            theme.config.tintColor = UIColor.flat.violet
             theme.config.navigationBarLeftColor = UIColor.cic.hex(hex: 0xe2e2e2)
             theme.config.navigationItemTitleColor = UIColor.cic.hex(hex: 0xF2F2F2)
             theme.config.navigationBarItemFont = UIFont.cic.preferred(UIFontTextStyle.body)
-            theme.config.navigationBarBackgroundColor = UIColor.black
+            theme.config.navigationBarBackgroundColor = UIColor.flat.blue
             theme.config.alertMessageColor = UIColor.flat.orange
             theme.config.alertSeparatorColor = UIColor.flat.white
             theme.config.alertBackgroundColor = UIColor.flat.blue
