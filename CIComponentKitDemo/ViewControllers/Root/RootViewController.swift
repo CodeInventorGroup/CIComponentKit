@@ -49,7 +49,7 @@ class RootViewController: CICUIViewController {
 
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true
-            self.navigationItem.largeTitleDisplayMode = .always
+            self.navigationItem.largeTitleDisplayMode = .automatic
         }
         tableView.delegate = self
         tableView.dataSource = self
