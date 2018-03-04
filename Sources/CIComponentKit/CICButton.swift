@@ -29,25 +29,23 @@ import UIKit
 
 //UIControlState
 public struct CICButtonState: OptionSet, Hashable {
-    public var rawValue: Int
-    public init(rawValue: Int) {
-        self.rawValue = rawValue
-    }
-    
-    public var hashValue: Int {
-        return rawValue.hashValue
-    }
-    
-    public static func ==(lhs: CICButtonState, rhs: CICButtonState) -> Bool {
-        return lhs.rawValue == rhs.rawValue
-    }
-    
     
     public static let normal = CICButtonState.init(rawValue: 1)
     public static let selected = CICButtonState.init(rawValue: 2)
     public static let highlighted = CICButtonState.init(rawValue: 4)
     public static let disabled = CICButtonState.init(rawValue: 8)
     public static let loading = CICButtonState.init(rawValue: 32)
+    
+    public var rawValue: Int
+    public init(rawValue: Int) {
+        self.rawValue = rawValue
+    }
+    public var hashValue: Int {
+        return rawValue.hashValue
+    }
+    public static func == (lhs: CICButtonState, rhs: CICButtonState) -> Bool {
+        return lhs.rawValue == rhs.rawValue
+    }
 }
 
 /// 默认提供的image title布局位置
