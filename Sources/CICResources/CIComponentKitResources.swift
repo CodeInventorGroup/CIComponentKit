@@ -30,15 +30,16 @@ extension UIImage {
         public static func bundle(_ imageNamed: String,
                                   ofType: String = "png",
                                   inDirectory: String? = "images") -> UIImage? {
+            let scale = Int(UIScreen.main.scale)
+            let fileExtension = scale > 0 ? "@\(scale)x" : ""
             if !(imageNamed.isEmpty) {
-                let imageNames = [imageNamed + "@3x", imageNamed + "@2x", imageNamed]
+                let imageNames = [imageNamed + fileExtension, imageNamed + "@3x", imageNamed + "@2x", imageNamed]
                 var image: UIImage?
                 for imageName in imageNames {
                     if let path = CIComponentKitResources.bundle.path(forResource: imageName,
                                                                       ofType: ofType,
                                                                       inDirectory: inDirectory) {
                         image = UIImage.init(contentsOfFile: path)
-                        // 默认使用 @3x 的图片
                         break
                     }
                 }
