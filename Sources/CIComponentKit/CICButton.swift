@@ -101,8 +101,8 @@ public class CICButton: CICUIView {
 
     var control: UIControl = UIControl()
     var backgroundImageView = UIImageView()
-    var imageView = UIImageView()
-    var titleLabel = UILabel()
+    open var imageView = UIImageView()
+    open var titleLabel = UILabel()
     var activityView = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
 
     init() {
