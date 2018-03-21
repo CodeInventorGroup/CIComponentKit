@@ -23,8 +23,6 @@
 		B0A766531FFDCCA900A42C9F /* RootTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A766521FFDCCA900A42C9F /* RootTableViewCell.swift */; };
 		B0B631411F698BAB00712C1D /* DemonstrationResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B631401F698BAB00712C1D /* DemonstrationResources.swift */; };
 		B0B80B8A1F9F4170000E13F7 /* CIComponentKitResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B80B891F9F4170000E13F7 /* CIComponentKitResources.swift */; };
-		B0B80B8D1FA2E7C4000E13F7 /* RootCardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B80B8C1FA2E7C4000E13F7 /* RootCardLayout.swift */; };
-		B0CFA4BC1F8CD8FE00A2B7A9 /* LayoutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CFA4AA1F8CD3D600A2B7A9 /* LayoutKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B0CFA99B1F6BAE2A00FB61D4 /* CICUImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA98E1F6BAE2A00FB61D4 /* CICUImage.swift */; };
 		B0CFA99C1F6BAE2B00FB61D4 /* CICUIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA98F1F6BAE2A00FB61D4 /* CICUIFont.swift */; };
 		B0CFA99D1F6BAE2B00FB61D4 /* UIColor+CIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CFA9901F6BAE2A00FB61D4 /* UIColor+CIKit.swift */; };
@@ -90,7 +88,6 @@
 		B0A766521FFDCCA900A42C9F /* RootTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTableViewCell.swift; sourceTree = "<group>"; };
 		B0B631401F698BAB00712C1D /* DemonstrationResources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemonstrationResources.swift; sourceTree = "<group>"; };
 		B0B80B891F9F4170000E13F7 /* CIComponentKitResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIComponentKitResources.swift; sourceTree = "<group>"; };
-		B0B80B8C1FA2E7C4000E13F7 /* RootCardLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCardLayout.swift; sourceTree = "<group>"; };
 		B0CFA4AA1F8CD3D600A2B7A9 /* LayoutKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LayoutKit.framework; path = Carthage/Build/iOS/LayoutKit.framework; sourceTree = "<group>"; };
 		B0CFA98E1F6BAE2A00FB61D4 /* CICUImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICUImage.swift; sourceTree = "<group>"; };
 		B0CFA98F1F6BAE2A00FB61D4 /* CICUIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CICUIFont.swift; sourceTree = "<group>"; };
@@ -132,7 +129,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0CFA4BC1F8CD8FE00A2B7A9 /* LayoutKit.framework in Frameworks */,
 				B0E30C211F5555F000DBD08C /* CIComponentKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -169,7 +165,6 @@
 		B0B80B8B1FA2E7AB000E13F7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B0B80B8C1FA2E7C4000E13F7 /* RootCardLayout.swift */,
 				B0A766521FFDCCA900A42C9F /* RootTableViewCell.swift */,
 			);
 			path = View;
@@ -326,7 +321,6 @@
 				B0E30C091F55520200DBD08C /* Frameworks */,
 				B0E30C0A1F55520200DBD08C /* Resources */,
 				B03FB7B21F57052F008A356C /* CopyFiles */,
-				B0CFA4BD1F8CD9D000A2B7A9 /* Carthage Support */,
 				B0D35DCE1FB1B1ED0056A806 /* Swift lint */,
 			);
 			buildRules = (
@@ -402,21 +396,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		B0CFA4BD1F8CD9D000A2B7A9 /* Carthage Support */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/LayoutKit.framework",
-			);
-			name = "Carthage Support";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
 		B0D35DCE1FB1B1ED0056A806 /* Swift lint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -474,7 +453,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0A766511FFDCC3400A42C9F /* RootViewController.swift in Sources */,
-				B0B80B8D1FA2E7C4000E13F7 /* RootCardLayout.swift in Sources */,
 				B06263621F6ACF4E00371DCB /* SecondViewController.swift in Sources */,
 				B0A766531FFDCCA900A42C9F /* RootTableViewCell.swift in Sources */,
 				B0B631411F698BAB00712C1D /* DemonstrationResources.swift in Sources */,
