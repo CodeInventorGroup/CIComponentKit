@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CIComponentKit"
-  s.version      = "0.0.6"
+  s.version      = "0.0.7"
   s.summary      = "CIComponentKit, a component kit made by ManoBoo & NEWWORLD"
 
   # This description is used to generate tags and improve search results.
@@ -91,7 +91,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "Sources/*.swift", "Sources/**/*.swift", "Sources/**/*.bundle"
+  s.source_files  = "Sources/*.swift", "Sources/**/*.swift"
   # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "CIComponentKit/CIComponentKit.h"
@@ -105,7 +105,7 @@ Pod::Spec.new do |s|
   #  non-essential files like tests, examples and documentation.
   #
 
-  # s.resource  = "Sources/CICResources/CIComponentKitResources.bundle"
+  s.resource  = "Sources/CICResources/CIComponentKitResources.bundle"
   # s.resources = "Resources/*.png"
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
