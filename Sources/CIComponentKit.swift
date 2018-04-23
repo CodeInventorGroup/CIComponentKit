@@ -14,7 +14,7 @@ public protocol CIComponentKitProtocol {
 }
 
 public final class CIComponentKit<Base> {
-    let base: Base
+    public let base: Base
     
     public init(_ base: Base) {
         self.base = base
