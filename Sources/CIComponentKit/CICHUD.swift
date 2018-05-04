@@ -30,7 +30,7 @@ public class CICHUD: CICUIView {
                                                size: CGSize(width: CGFloat.screenWidth - 100, height: 120))
 
     static var CICHUDToastRect = CGRect.init(origin: .zero,
-                                             size: CGSize(width: CGFloat.screenWidth - 180, height: 60))
+                                             size: CGSize(width: CGFloat.screenWidth * 0.8, height: 60))
 
     // 内部边距
     var CICHUDInsets = 20.makeEdgeInsets
@@ -110,7 +110,7 @@ public class CICHUD: CICUIView {
 
         let contentView = backgroundView.contentView
 
-        titleLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
+        titleLabel.font = UIFont.cic.systemFont
         titleLabel.tintColor = CICHUD.appearance().tintColor
         contentView.addSubview(titleLabel)
 
@@ -130,7 +130,7 @@ public class CICHUD: CICUIView {
 
     // MARK: - build ui
     var backgroundView = UIVisualEffectView()
-    var titleLabel = UILabel()
+    var titleLabel = UILabel().line(0)
     var animationImgView = UIImageView()
     // CILoadingStyle.original  原生的加载指示器
     lazy var activityView: UIActivityIndicatorView = {
@@ -254,8 +254,14 @@ public class CICHUD: CICUIView {
         if let keyWindow = UIApplication.shared.keyWindow {
             keyWindow.addSubview(hud)
             keyWindow.bringSubview(toFront: hud)
-            hud.frame(CICHUDToastRect)
-                .center(keyWindow.cic.internalCenter)
+            if let title = title {
+                let hudWidth = CGFloat.minimum(title.cicWidth(.greatestFiniteMagnitude, font: UIFont.cic.systemFont) + 20, CICHUDToastRect.width)
+                let hudHeight = title.cicHeight(hudWidth, font: UIFont.cic.systemFont)
+                hud.width(hudWidth).height(hudHeight).center(keyWindow.cic.internalCenter)
+            } else {
+                hud.frame(CICHUDToastRect)
+                    .center(keyWindow.cic.internalCenter)
+            }
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
             hud.hide()
