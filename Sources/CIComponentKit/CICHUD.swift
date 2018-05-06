@@ -34,10 +34,7 @@ public class CICHUD: CICUIView {
 
     // 内部边距
     var CICHUDInsets = 20.makeEdgeInsets
-
-    // 是否自适应大小
-    var CICHUDAutoResize = false
-
+    
     // MARK: Property
     public enum Style {
         case loading
@@ -154,6 +151,7 @@ public class CICHUD: CICUIView {
         titleLabel.text(title).textAlignment(.center).sizeToFit()
         if style == .toast {
             animationImgView.isHidden = true
+            titleLabel.width(backgroundView.cic.width * 0.8).sizeToFit()
             titleLabel.centerX(backgroundView.cic.internalCenterX)
                 .centerY(backgroundView.cic.internalCenterY)
         } else {
@@ -183,31 +181,13 @@ public class CICHUD: CICUIView {
                         .centerY(backgroundView.cic.internalCenterY)
             }
 
-            autoResize()
             if loadingStyle == .original {
                 activityView.startAnimating()
                 if blurStyle == .dark {
-                    // 防止文字与背景
+                    // 防止文字与背景颜色相近
                     activityView.color = UIColor.white
                     titleLabel.textColor(UIColor.white)
                 }
-            }
-        }
-    }
-
-    func autoResize() {
-        if CICHUDAutoResize {
-//            self.width(CGFloat.maximum(animationImgView.cic.width, titleLabel.cic.width) + 2 * CICHUDInsets.right)
-//            self.height(CGFloat.maximum(animationImgView.cic.height, titleLabel.cic.height) + 2 * CICHUDInsets.bottom)
-            self.width((animationImgView.frame.maxX < titleLabel.frame.maxX ? animationImgView.cic.width : titleLabel.cic.width) + 2 * CICHUDInsets.right)
-            self.height((animationImgView.frame.maxY < titleLabel.frame.maxY ? animationImgView.cic.height : titleLabel.cic.height) + 2 * CICHUDInsets.bottom)
-            backgroundView.frame(self.bounds)
-            if layoutStyle == .top || layoutStyle == .bottom {
-                titleLabel.centerX(backgroundView.cic.internalCenterX)
-                animationImgView.centerX(backgroundView.cic.internalCenterX)
-            } else {
-                titleLabel.centerY(backgroundView.cic.internalCenterY)
-                animationImgView.centerY(backgroundView.cic.internalCenterY)
             }
         }
     }
@@ -255,8 +235,10 @@ public class CICHUD: CICUIView {
             keyWindow.addSubview(hud)
             keyWindow.bringSubview(toFront: hud)
             if let title = title {
-                let hudWidth = CGFloat.minimum(title.cicWidth(.greatestFiniteMagnitude, font: UIFont.cic.systemFont) + 20, CICHUDToastRect.width)
-                let hudHeight = title.cicHeight(hudWidth, font: UIFont.cic.systemFont)
+                let hudWidth = CGFloat.minimum(title.cicWidth(.greatestFiniteMagnitude, font: UIFont.cic.systemFont) * 1.2,
+                                               CICHUDToastRect.width)
+                let hudHeight = CGFloat.maximum(title.cicHeight(hudWidth, font: UIFont.cic.systemFont),
+                                                CICHUDToastRect.height)
                 hud.width(hudWidth).height(hudHeight).center(keyWindow.cic.internalCenter)
             } else {
                 hud.frame(CICHUDToastRect)

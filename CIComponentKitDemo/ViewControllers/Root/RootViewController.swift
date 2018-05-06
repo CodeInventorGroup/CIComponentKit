@@ -185,7 +185,7 @@ extension RootViewController: UITableViewDelegate, UITableViewDataSource {
             alertView.show()
             break
         case .CICLabel:
-            CICHUD.toast("长按下方文字进行复制", blurStyle: .extraLight)
+            CICHUD.toast("长按下方文字进行复制长按下方文字进行复制长按下方文字进行复制", blurStyle: .extraLight)
             break
         case .Loading:
             CICHUD.show("小二正在拼命加载", blurStyle: .extraLight)
