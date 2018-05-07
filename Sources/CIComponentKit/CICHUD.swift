@@ -138,10 +138,10 @@ public class CICHUD: CICUIView {
 
     public override func layoutSubviews() {
         super.layoutSubviews()
-        resizeLayout()
+        render()
     }
-
-    func resizeLayout() {
+    
+    func render() {
         backgroundView.effect = UIBlurEffect.init(style: blurStyle)
         backgroundView.frame(self.bounds)
 
@@ -151,7 +151,7 @@ public class CICHUD: CICUIView {
         titleLabel.text(title).textAlignment(.center).sizeToFit()
         if style == .toast {
             animationImgView.isHidden = true
-            titleLabel.width(backgroundView.cic.width * 0.8).sizeToFit()
+            titleLabel.width(backgroundView.cic.width - 40).sizeToFit()
             titleLabel.centerX(backgroundView.cic.internalCenterX)
                 .centerY(backgroundView.cic.internalCenterY)
         } else {
@@ -235,7 +235,7 @@ public class CICHUD: CICUIView {
             keyWindow.addSubview(hud)
             keyWindow.bringSubview(toFront: hud)
             if let title = title {
-                let hudWidth = CGFloat.minimum(title.cicWidth(.greatestFiniteMagnitude, font: UIFont.cic.systemFont) * 1.2,
+                let hudWidth = CGFloat.minimum(title.cicWidth(.greatestFiniteMagnitude, font: UIFont.cic.systemFont) + 40,
                                                CICHUDToastRect.width)
                 let hudHeight = CGFloat.maximum(title.cicHeight(hudWidth, font: UIFont.cic.systemFont),
                                                 CICHUDToastRect.height)
