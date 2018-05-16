@@ -18,7 +18,7 @@ public class CICActivityView: UIView {
             self.backgroundColor = fillColor
         }
     }
-    var lineWidth: CGFloat = 5.0
+    var lineWidth: CGFloat = 4.0
 
     static let hud: UIVisualEffectView = {
         let hud = UIVisualEffectView.init(effect: UIBlurEffect.init(style: .extraLight))
