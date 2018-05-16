@@ -18,6 +18,7 @@ public class CICActivityView: UIView {
             self.backgroundColor = fillColor
         }
     }
+    var lineWidth: CGFloat = 5.0
 
     static let hud: UIVisualEffectView = {
         let hud = UIVisualEffectView.init(effect: UIBlurEffect.init(style: .extraLight))
@@ -40,7 +41,7 @@ public class CICActivityView: UIView {
         let center = CGPoint.init(x: rect.width/2, y: rect.height/2)
         let half = CGFloat.maximum(rect.width, rect.height) / 2.0
         let path = UIBezierPath.init(arcCenter: center,
-                                     radius: half * 0.94,
+                                     radius: half * 0.9,
                                      startAngle: 0.0,
                                      endAngle: CGFloat.pi * 2.0,
                                      clockwise: false)
@@ -49,7 +50,7 @@ public class CICActivityView: UIView {
         shape.strokeStart = 0
         shape.strokeEnd = 0.8
         shape.path = path.cgPath
-        shape.lineWidth = half * 0.06
+        shape.lineWidth = lineWidth
         shape.lineJoin = kCALineJoinRound
         shape.lineCap = kCALineCapRound
         self.layer.addSublayer(shape)
@@ -75,15 +76,16 @@ public class CICActivityView: UIView {
 extension CICHUD {
 
     /// 类似于MBProgressHUB 一样的加载框
-    public class func showActivityView(superView: UIView? = UIApplication.shared.keyWindow) {
+    public class func showActivityView(superView: UIView? = UIApplication.shared.keyWindow,
+                                       backgroundSize: CGSize = 100.makeSize,
+                                       hudSize: CGSize = 60.makeSize) {
         guard let superView = superView else {
             return
         }
         CICActivityView.hud.removeFromSuperview()
-        let a: CGFloat = 100.0
-        let hud = CICActivityView.hud.size(a.makeSize)
+        let hud = CICActivityView.hud.size(backgroundSize)
             .center(superView.cic.internalCenter)
-        CICActivityView.default.size(60.0.makeSize)
+        CICActivityView.default.size(hudSize)
             .center(hud.cic.internalCenter)
         superView.addSubview(hud)
         CICActivityView.default.startAnimation()

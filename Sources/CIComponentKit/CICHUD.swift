@@ -250,7 +250,7 @@ public class CICHUD: CICUIView {
         hud.style = .toast
         hud.title = title
         hud.blurStyle = blurStyle
-
+        
         if let keyWindow = UIApplication.shared.keyWindow {
             keyWindow.addSubview(hud)
             keyWindow.bringSubview(toFront: hud)
