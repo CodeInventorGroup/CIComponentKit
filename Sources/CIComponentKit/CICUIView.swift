@@ -42,7 +42,7 @@ public class CICUIView: UIView {
                                                object: nil)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(CICAppearance.deviceOrientationDidChange),
-                                               name: Notification.Name.UIDeviceOrientationDidChange,
+                                               name: UIDevice.orientationDidChangeNotification,
                                                object: nil)
     }
 }

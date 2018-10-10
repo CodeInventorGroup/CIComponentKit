@@ -18,7 +18,7 @@ class CIComponentKitManager: NSObject {
         // 监听设备旋转方向变化
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(handleOrientationChangeNotification(_:)),
-                                               name: NSNotification.Name.UIDeviceOrientationDidChange,
+                                               name: UIDevice.orientationDidChangeNotification,
                                                object: nil)
     }
 

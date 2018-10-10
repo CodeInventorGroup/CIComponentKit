@@ -84,7 +84,7 @@ public class CICLabel: UILabel {
     }
 
     public override func drawText(in rect: CGRect) {
-        return super.drawText(in: UIEdgeInsetsInsetRect(rect, contentEdgeInset))
+        return super.drawText(in: rect.inset(by: contentEdgeInset))
     }
 
     // MARK: - 扩展属性
@@ -139,12 +139,12 @@ public class CICLabel: UILabel {
                 longPressGesture.isEnabled = true
                 NotificationCenter.default.addObserver(self,
                                                        selector: #selector(handleMenuHideEvent(_:)),
-                                                       name: .UIMenuControllerWillHideMenu,
+                                                       name: UIMenuController.willHideMenuNotification,
                                                        object: nil)
             } else {
                 self.isUserInteractionEnabled = false
                 longPressGesture.isEnabled = false
-                NotificationCenter.default.removeObserver(self, name: .UIMenuControllerWillHideMenu, object: nil)
+                NotificationCenter.default.removeObserver(self, name: UIMenuController.willHideMenuNotification, object: nil)
             }
         }
     }

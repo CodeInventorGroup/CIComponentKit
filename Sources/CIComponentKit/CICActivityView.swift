@@ -51,8 +51,8 @@ public class CICActivityView: UIView {
         shape.strokeEnd = 0.8
         shape.path = path.cgPath
         shape.lineWidth = lineWidth
-        shape.lineJoin = kCALineJoinRound
-        shape.lineCap = kCALineCapRound
+        shape.lineJoin = CAShapeLayerLineJoin.round
+        shape.lineCap = CAShapeLayerLineCap.round
         self.layer.addSublayer(shape)
     }
 

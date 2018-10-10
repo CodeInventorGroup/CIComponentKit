@@ -103,7 +103,7 @@ public class CICButton: CICUIView {
     var backgroundImageView = UIImageView()
     open var imageView = UIImageView()
     open var titleLabel = UILabel()
-    var activityView = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
+    var activityView = UIActivityIndicatorView.init(style: UIActivityIndicatorView.Style.white)
 
     init() {
         super.init(frame: .zero)
@@ -269,7 +269,7 @@ extension CICButton {
 }
 
 extension CICButton {
-    public func addHandler(for event: UIControlEvents, handler: @escaping ((UIControl) -> Void)) {
+    public func addHandler(for event: UIControl.Event, handler: @escaping ((UIControl) -> Void)) {
         control.addHandler(for: event, handler: handler)
     }
 }

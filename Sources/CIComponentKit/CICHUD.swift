@@ -44,7 +44,7 @@ public class CICHUD: CICUIView {
     var style: Style = .loading
 
     // default blurEffect = .extraLight 默认模糊效果
-    var blurStyle: UIBlurEffectStyle = .extraLight
+    var blurStyle: UIBlurEffect.Style = .extraLight
 
     // loading's style
     public enum CICHUDLoadingStyle {
@@ -86,7 +86,7 @@ public class CICHUD: CICUIView {
 
     public init(_ title: String?,
                 style: CICHUD.Style = .loading,
-                blurStyle: UIBlurEffectStyle = .extraLight,
+                blurStyle: UIBlurEffect.Style = .extraLight,
                 layoutStyle: CICHUDLayoutStyle = .left,
                 loadingStyle: CICHUDLoadingStyle = .original,
                 showAnimation: CICHUDAnimation = .none,
@@ -131,7 +131,7 @@ public class CICHUD: CICUIView {
     var animationImgView = UIImageView()
     // CILoadingStyle.original  原生的加载指示器
     lazy var activityView: UIActivityIndicatorView = {
-        let activity = UIActivityIndicatorView.init(activityIndicatorStyle: .gray)
+        let activity = UIActivityIndicatorView.init(style: .gray)
         activity.color = CICHUD.appearance().tintColor
         return activity
     }()
@@ -206,7 +206,7 @@ public class CICHUD: CICUIView {
     // MARK: - Pulic Method
 
     public class func show(_ title: String?,
-                           blurStyle: UIBlurEffectStyle = .dark,
+                           blurStyle: UIBlurEffect.Style = .dark,
                            layoutStyle: CICHUDLayoutStyle = .left,
                            delay: TimeInterval? = 0.0) {
         CICHUD.default.removeFromSuperview()
@@ -217,13 +217,13 @@ public class CICHUD: CICUIView {
         if let keyWindow = UIApplication.shared.keyWindow {
             CICHUD.default.frame(CICHUDLoadingRect)
             keyWindow.addSubview(CICHUD.default)
-            keyWindow.bringSubview(toFront: CICHUD.default)
+            keyWindow.bringSubviewToFront(CICHUD.default)
             CICHUD.default.center(keyWindow.cic.internalCenter)
         }
     }
 
     public class func toast(_ title: String?,
-                            blurStyle: UIBlurEffectStyle = .dark,
+                            blurStyle: UIBlurEffect.Style = .dark,
                             delay: TimeInterval? = 0.0,
                             duration: TimeInterval = 1.25) {
         let hud = CICHUD.init("", blurStyle: .light, layoutStyle: .left)
@@ -233,7 +233,7 @@ public class CICHUD: CICUIView {
         
         if let keyWindow = UIApplication.shared.keyWindow {
             keyWindow.addSubview(hud)
-            keyWindow.bringSubview(toFront: hud)
+            keyWindow.bringSubviewToFront(hud)
             if let title = title {
                 let hudWidth = CGFloat.minimum(title.cicWidth(.greatestFiniteMagnitude, font: UIFont.cic.systemFont) + 40,
                                                CICHUDToastRect.width)

@@ -64,7 +64,7 @@ public extension CIComponentKitTheme {
     // the transition of toggling theme , 切换主题的过度动画
     public enum CIComponentKitThemeTransition {
         case None
-        case blur(UIBlurEffectStyle)
+        case blur(UIBlurEffect.Style)
         case progress(() -> Void)
     }
 
@@ -117,7 +117,7 @@ public extension CIComponentKitTheme {
 
             if let navigationController = currentViewController.navigationController {
                 navigationController.navigationBar.barTintColor = config.navigationBarBackgroundColor
-                var titleTextAttributes: [NSAttributedStringKey : Any] = [.foregroundColor: config.navigationItemTitleColor,
+                var titleTextAttributes: [NSAttributedString.Key : Any] = [.foregroundColor: config.navigationItemTitleColor,
                                                                           .font: config.navigationBarItemFont]
                 if #available(iOS 11.0, *) {
                     titleTextAttributes[.font] = config.navigationBarLargeItemFont

@@ -34,7 +34,7 @@ extension CICHUD {
         }
 
         /// contentView
-        public var contentView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.extraLight))
+        public var contentView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.extraLight))
 
         /// 黑色遮罩
         public var backgroungView = UIView()

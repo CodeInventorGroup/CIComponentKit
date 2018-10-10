@@ -16,7 +16,7 @@ public extension UIFont {
             return UIFont.systemFont(ofSize: UIFont.systemFontSize)
         }
         
-        public static func preferred(_ style: UIFontTextStyle) -> UIFont {
+        public static func preferred(_ style: UIFont.TextStyle) -> UIFont {
             return UIFont.preferredFont(forTextStyle: style)
         }
     }

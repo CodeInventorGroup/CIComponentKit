@@ -11,7 +11,7 @@ import UIKit
 private var controlHandlerKey: Int8 = 0
 
 extension UIControl {
-    public func addHandler(for controlEvents: UIControlEvents, handler: @escaping (UIControl) -> Void) {
+    public func addHandler(for controlEvents: UIControl.Event, handler: @escaping (UIControl) -> Void) {
         if let oldTarget = objc_getAssociatedObject(self, &controlHandlerKey) as? CIComponentKitTarget<UIControl> {
             self.removeTarget(oldTarget, action: #selector(oldTarget.sendNext), for: controlEvents)
         }
